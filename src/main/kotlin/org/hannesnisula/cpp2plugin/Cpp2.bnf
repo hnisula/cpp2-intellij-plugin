@@ -1,0 +1,32 @@
+{
+    parserClass="org.hannesnisula.cpp2plugin.parser.Cpp2Parser"
+    
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+    
+    psiClassPrefix="Cpp2"
+    psiImplClassSuffix="Impl"
+    psiPackage="org.hannesnisula.cpp2plugin.psi"
+    psiImplPackage="org.hannesnisula.cpp2plugin.psi.impl"
+    
+    elementTypeHolderClass="org.hannesnisula.cpp2plugin.psi.Cpp2Types"
+    elementTypeClass="org.hannesnisula.cpp2plugin.psi.Cpp2ElementType"
+    tokenTypeClass="org.hannesnisula.cpp2plugin.psi.Cpp2TokenType"
+    
+    tokens=[
+        COLON               = ':'
+        SEMICOLON           = ';'
+        LEFT_BRACE          = '{'
+        RIGHT_BRACE         = '}'
+        EQ                  = '='
+    ]
+}
+
+File ::= (Statement|COMMENT|Assignment)*
+
+Statement ::= Assignment ";"
+
+Assignment ::= IDENTIFIER ':' IDENTIFIER? ('=' Expression)?
+
+Expression ::= IDENTIFIER | NUMBER_LITERAL | STRING_LITERAL
+
+private Recovery ::= !(IDENTIFIER | NUMBER_LITERAL)
