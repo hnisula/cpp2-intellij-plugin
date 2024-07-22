@@ -5,12 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2ParameterDeclaration extends PsiElement {
-
-  @Nullable
-  Cpp2ParameterKind getParameterKind();
-
-  @NotNull
-  Cpp2VarDeclaration getVarDeclaration();
+public interface Cpp2ParameterKind extends PsiElement {
 
 }

@@ -11,6 +11,6 @@ public interface Cpp2Identifier extends PsiElement {
   Cpp2Expression getExpression();
 
   @Nullable
-  Cpp2TemplateDefinition getTemplateDefinition();
+  Cpp2Scope getScope();
 
 }

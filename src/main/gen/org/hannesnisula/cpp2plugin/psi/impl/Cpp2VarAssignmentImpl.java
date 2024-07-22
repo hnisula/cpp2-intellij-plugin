@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2AnyIdentifierImpl extends ASTWrapperPsiElement implements Cpp2AnyIdentifier {
+public class Cpp2VarAssignmentImpl extends ASTWrapperPsiElement implements Cpp2VarAssignment {
 
-  public Cpp2AnyIdentifierImpl(@NotNull ASTNode node) {
+  public Cpp2VarAssignmentImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitAnyIdentifier(this);
+    visitor.visitVarAssignment(this);
   }
 
   @Override
@@ -28,15 +28,15 @@ public class Cpp2AnyIdentifierImpl extends ASTWrapperPsiElement implements Cpp2A
   }
 
   @Override
-  @Nullable
-  public Cpp2Identifier getIdentifier() {
-    return findChildByClass(Cpp2Identifier.class);
+  @NotNull
+  public Cpp2Expression getExpression() {
+    return findNotNullChildByClass(Cpp2Expression.class);
   }
 
   @Override
-  @Nullable
-  public Cpp2ScopedIdentifier getScopedIdentifier() {
-    return findChildByClass(Cpp2ScopedIdentifier.class);
+  @NotNull
+  public Cpp2Identifier getIdentifier() {
+    return findNotNullChildByClass(Cpp2Identifier.class);
   }
 
 }

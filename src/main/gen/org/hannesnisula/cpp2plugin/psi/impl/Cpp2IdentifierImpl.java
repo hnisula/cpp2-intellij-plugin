@@ -35,8 +35,8 @@ public class Cpp2IdentifierImpl extends ASTWrapperPsiElement implements Cpp2Iden
 
   @Override
   @Nullable
-  public Cpp2TemplateDefinition getTemplateDefinition() {
-    return findChildByClass(Cpp2TemplateDefinition.class);
+  public Cpp2Scope getScope() {
+    return findChildByClass(Cpp2Scope.class);
   }
 
 }

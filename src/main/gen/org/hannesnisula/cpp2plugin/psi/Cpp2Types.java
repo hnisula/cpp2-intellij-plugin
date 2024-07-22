@@ -8,14 +8,15 @@ import org.hannesnisula.cpp2plugin.psi.impl.*;
 
 public interface Cpp2Types {
 
-  IElementType ANY_IDENTIFIER = new Cpp2ElementType("ANY_IDENTIFIER");
+  IElementType ARGUMENT = new Cpp2ElementType("ARGUMENT");
   IElementType EXPRESSION = new Cpp2ElementType("EXPRESSION");
+  IElementType FOR_LOOP = new Cpp2ElementType("FOR_LOOP");
   IElementType FUNCTION_DEFINITION = new Cpp2ElementType("FUNCTION_DEFINITION");
   IElementType IDENTIFIER = new Cpp2ElementType("IDENTIFIER");
   IElementType PARAMETER_DECLARATION = new Cpp2ElementType("PARAMETER_DECLARATION");
+  IElementType PARAMETER_KIND = new Cpp2ElementType("PARAMETER_KIND");
   IElementType RETURN_EXPRESSION = new Cpp2ElementType("RETURN_EXPRESSION");
   IElementType SCOPE = new Cpp2ElementType("SCOPE");
-  IElementType SCOPED_IDENTIFIER = new Cpp2ElementType("SCOPED_IDENTIFIER");
   IElementType STATEMENT = new Cpp2ElementType("STATEMENT");
   IElementType STATEMENT_BLOCK = new Cpp2ElementType("STATEMENT_BLOCK");
   IElementType TEMPLATE_DECLARATION = new Cpp2ElementType("TEMPLATE_DECLARATION");
@@ -23,6 +24,7 @@ public interface Cpp2Types {
   IElementType TEMPLATE_PARAM_DECLARATION = new Cpp2ElementType("TEMPLATE_PARAM_DECLARATION");
   IElementType TYPE_IDENTIFIER = new Cpp2ElementType("TYPE_IDENTIFIER");
   IElementType TYPE_SPECIFIER = new Cpp2ElementType("TYPE_SPECIFIER");
+  IElementType VAR_ASSIGNMENT = new Cpp2ElementType("VAR_ASSIGNMENT");
   IElementType VAR_DECLARATION = new Cpp2ElementType("VAR_DECLARATION");
   IElementType VAR_DEFINITION = new Cpp2ElementType("VAR_DEFINITION");
 
@@ -33,8 +35,10 @@ public interface Cpp2Types {
   IElementType COMMENT = new Cpp2TokenType("COMMENT");
   IElementType CONST = new Cpp2TokenType("const");
   IElementType COPY = new Cpp2TokenType("copy");
+  IElementType DO = new Cpp2TokenType("do");
   IElementType DOTDOTDOT = new Cpp2TokenType("...");
   IElementType EQ = new Cpp2TokenType("=");
+  IElementType FOR = new Cpp2TokenType("for");
   IElementType FORWARD = new Cpp2TokenType("forward");
   IElementType GT = new Cpp2TokenType(">");
   IElementType IDENTIFIER_WORD = new Cpp2TokenType("IDENTIFIER_WORD");
@@ -56,11 +60,14 @@ public interface Cpp2Types {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == ANY_IDENTIFIER) {
-        return new Cpp2AnyIdentifierImpl(node);
+      if (type == ARGUMENT) {
+        return new Cpp2ArgumentImpl(node);
       }
       else if (type == EXPRESSION) {
         return new Cpp2ExpressionImpl(node);
+      }
+      else if (type == FOR_LOOP) {
+        return new Cpp2ForLoopImpl(node);
       }
       else if (type == FUNCTION_DEFINITION) {
         return new Cpp2FunctionDefinitionImpl(node);
@@ -71,14 +78,14 @@ public interface Cpp2Types {
       else if (type == PARAMETER_DECLARATION) {
         return new Cpp2ParameterDeclarationImpl(node);
       }
+      else if (type == PARAMETER_KIND) {
+        return new Cpp2ParameterKindImpl(node);
+      }
       else if (type == RETURN_EXPRESSION) {
         return new Cpp2ReturnExpressionImpl(node);
       }
       else if (type == SCOPE) {
         return new Cpp2ScopeImpl(node);
-      }
-      else if (type == SCOPED_IDENTIFIER) {
-        return new Cpp2ScopedIdentifierImpl(node);
       }
       else if (type == STATEMENT) {
         return new Cpp2StatementImpl(node);
@@ -100,6 +107,9 @@ public interface Cpp2Types {
       }
       else if (type == TYPE_SPECIFIER) {
         return new Cpp2TypeSpecifierImpl(node);
+      }
+      else if (type == VAR_ASSIGNMENT) {
+        return new Cpp2VarAssignmentImpl(node);
       }
       else if (type == VAR_DECLARATION) {
         return new Cpp2VarDeclarationImpl(node);

@@ -42,5 +42,9 @@
                 language="Cpp2"
                 implementationClass="org.hannesnisula.cpp2plugin.Cpp2SyntaxHighlighterFactory"
         />
+        <completion.contributor
+                language="Cpp2"
+                implementationClass="org.hannesnisula.cpp2plugin.Cpp2CompletionContributor"
+        />
     </extensions>
 </idea-plugin>

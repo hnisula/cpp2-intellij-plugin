@@ -29,8 +29,8 @@ public class Cpp2ExpressionImpl extends ASTWrapperPsiElement implements Cpp2Expr
 
   @Override
   @Nullable
-  public Cpp2AnyIdentifier getAnyIdentifier() {
-    return findChildByClass(Cpp2AnyIdentifier.class);
+  public Cpp2Identifier getIdentifier() {
+    return findChildByClass(Cpp2Identifier.class);
   }
 
 }

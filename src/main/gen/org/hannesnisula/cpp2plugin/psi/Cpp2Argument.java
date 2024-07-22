@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2ScopedIdentifier extends PsiElement {
+public interface Cpp2Argument extends PsiElement {
 
   @NotNull
-  List<Cpp2Identifier> getIdentifierList();
+  Cpp2Identifier getIdentifier();
+
+  @Nullable
+  Cpp2ParameterKind getParameterKind();
 
 }

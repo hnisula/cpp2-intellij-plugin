@@ -28,6 +28,12 @@ public class Cpp2ParameterDeclarationImpl extends ASTWrapperPsiElement implement
   }
 
   @Override
+  @Nullable
+  public Cpp2ParameterKind getParameterKind() {
+    return findChildByClass(Cpp2ParameterKind.class);
+  }
+
+  @Override
   @NotNull
   public Cpp2VarDeclaration getVarDeclaration() {
     return findNotNullChildByClass(Cpp2VarDeclaration.class);

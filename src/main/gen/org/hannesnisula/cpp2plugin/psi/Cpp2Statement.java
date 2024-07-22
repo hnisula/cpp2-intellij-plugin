@@ -11,6 +11,9 @@ public interface Cpp2Statement extends PsiElement {
   Cpp2ReturnExpression getReturnExpression();
 
   @Nullable
+  Cpp2VarAssignment getVarAssignment();
+
+  @Nullable
   Cpp2VarDeclaration getVarDeclaration();
 
   @Nullable

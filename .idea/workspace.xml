@@ -5,24 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8ecf5e2-83e2-4d7a-a04e-2c2872d01c79" name="Changes" comment="Initial commit with barely working test parser">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/gen/Cpp2Lexer.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/Cpp2Lexer.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/parser/Cpp2Parser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Assignment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Comment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2AnyIdentifier.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Expression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2FunctionDefinition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Identifier.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2ParameterDeclaration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2ReturnExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Scope.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2ScopedIdentifier.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Statement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2StatementBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2TemplateDeclaration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2TemplateDefinition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2TemplateParamDeclaration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2TypeIdentifier.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2TypeSpecifier.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Types.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2VarDeclaration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2VarDefinition.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Visitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2AssignmentImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2AnyIdentifierImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2ExpressionImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2FunctionDefinitionImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2IdentifierImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2ParameterDeclarationImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2ReturnExpressionImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2ScopeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2ScopedIdentifierImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2StatementBlockImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2StatementImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TemplateDeclarationImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TemplateDefinitionImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TemplateParamDeclarationImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TypeIdentifierImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TypeSpecifierImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2VarDeclarationImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2VarDefinitionImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.flex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2SyntaxHighlighter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2SyntaxHighlighter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/testData/SimpleAssignment.cpp2" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/testData/assignmentBasic.cpp2" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +134,7 @@
     "Gradle.cpp2-plugin [setupDependencies].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "basic-function-parsing",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Hannes/Code/cpp2-plugin",

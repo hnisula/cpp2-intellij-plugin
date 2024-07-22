@@ -35,9 +35,6 @@ COMMENT = "//".*
 
 <YYINITIAL> {
       {COMMENT}             { return Cpp2Types.COMMENT; }
-      {IDENTIFIER_WORD}     { return Cpp2Types.IDENTIFIER_WORD; }
-      {NUMBER_LITERAL}      { return Cpp2Types.NUMBER_LITERAL; }
-      {STRING_LITERAL}      { return Cpp2Types.STRING_LITERAL; }
       
       "->"                  { return Cpp2Types.ARROW; }
       "::"                  { return Cpp2Types.COLONCOLON; }
@@ -55,9 +52,22 @@ COMMENT = "//".*
       "_"                   { return Cpp2Types.UNDERSCORE; }
       "*"                   { return Cpp2Types.ASTERISK; }
       
+      "for"                 { return Cpp2Types.FOR; }
+      "do"                  { return Cpp2Types.DO; }
+      "in"                  { return Cpp2Types.IN; }
+      "copy"                { return Cpp2Types.COPY; }
+      "inout"               { return Cpp2Types.INOUT; }
+      "out"                 { return Cpp2Types.OUT; }
+      "move"                { return Cpp2Types.MOVE; }
+      "forward"             { return Cpp2Types.FORWARD; }
+      
       //"return"              { return Cpp2Types.RETURN; }
       
-     {WHITESPACE}           { return TokenType.WHITE_SPACE; }
+      {WHITESPACE}          { return TokenType.WHITE_SPACE; }
+      
+      {IDENTIFIER_WORD}     { return Cpp2Types.IDENTIFIER_WORD; }
+      {NUMBER_LITERAL}      { return Cpp2Types.NUMBER_LITERAL; }
+      {STRING_LITERAL}      { return Cpp2Types.STRING_LITERAL; }
 }
 
 [^]                         { return TokenType.BAD_CHARACTER; }

@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2Expression extends PsiElement {
 
   @Nullable
-  Cpp2AnyIdentifier getAnyIdentifier();
+  Cpp2Identifier getIdentifier();
 
 }

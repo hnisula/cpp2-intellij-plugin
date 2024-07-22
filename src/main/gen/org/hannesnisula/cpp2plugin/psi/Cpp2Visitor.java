@@ -7,11 +7,15 @@ import com.intellij.psi.PsiElement;
 
 public class Cpp2Visitor extends PsiElementVisitor {
 
-  public void visitAnyIdentifier(@NotNull Cpp2AnyIdentifier o) {
+  public void visitArgument(@NotNull Cpp2Argument o) {
     visitPsiElement(o);
   }
 
   public void visitExpression(@NotNull Cpp2Expression o) {
+    visitPsiElement(o);
+  }
+
+  public void visitForLoop(@NotNull Cpp2ForLoop o) {
     visitPsiElement(o);
   }
 
@@ -27,15 +31,15 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitParameterKind(@NotNull Cpp2ParameterKind o) {
+    visitPsiElement(o);
+  }
+
   public void visitReturnExpression(@NotNull Cpp2ReturnExpression o) {
     visitPsiElement(o);
   }
 
   public void visitScope(@NotNull Cpp2Scope o) {
-    visitPsiElement(o);
-  }
-
-  public void visitScopedIdentifier(@NotNull Cpp2ScopedIdentifier o) {
     visitPsiElement(o);
   }
 
@@ -64,6 +68,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitTypeSpecifier(@NotNull Cpp2TypeSpecifier o) {
+    visitPsiElement(o);
+  }
+
+  public void visitVarAssignment(@NotNull Cpp2VarAssignment o) {
     visitPsiElement(o);
   }
 

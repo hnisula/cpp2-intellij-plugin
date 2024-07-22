@@ -28,36 +28,52 @@
         EQ                  = '='
         UNDERSCORE          = '_'
         ASTERISK            = '*'
+        
+        FOR                 = 'for'
+        DO                  = 'do'
+        IN                  = 'in'
+        COPY                = 'copy'
+        INOUT               = 'inout'
+        OUT                 = 'out'
+        MOVE                = 'move'
+        FORWARD             = 'forward'
     ]
 }
 
-File ::= (Statement | FunctionDefinition | COMMENT)*
+File ::= (Statement | FunctionDefinition | ForLoop | COMMENT)*
+
+ForLoop ::= 'for' Identifier 'do' '(' Argument* ')' (StatementBlock) {
+    pin=1
+}
 
 FunctionDefinition ::= '(' ParameterDeclaration* ')' ('->' ('_' | TypeSpecifier))? '=' (Statement | StatementBlock)
 
 StatementBlock ::= '{' (Statement | COMMENT)* '}'
-Statement ::= (VarDeclaration | VarDefinition | ReturnExpression) ";" {
+Statement ::= (VarDeclaration | VarDefinition | VarAssignment | ReturnExpression) ";" {
     pin=1
 }
 
 ReturnExpression ::= RETURN Expression
 
-ParameterDeclaration ::= (in | copy | inout | out | move | forward)? VarDeclaration
+Argument ::= ParameterKind? Identifier
 
+ParameterDeclaration ::= ParameterKind? VarDeclaration
+ParameterKind ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')
+
+VarAssignment ::= Identifier '=' Expression
 VarDefinition ::= IDENTIFIER_WORD ':' TypeSpecifier? '=' Expression
 VarDeclaration ::= IDENTIFIER_WORD ':' TypeSpecifier !'='
 TypeSpecifier ::= (const | '*')*  Scope? TypeIdentifier
 
-Expression ::= AnyIdentifier | NUMBER_LITERAL | STRING_LITERAL
+Expression ::= Identifier | NUMBER_LITERAL | STRING_LITERAL
 
-AnyIdentifier ::= ScopedIdentifier | Identifier
-ScopedIdentifier ::= (Identifier '::')+ Identifier
+Identifier ::= Scope? IDENTIFIER_WORD ('[' Expression ']')?
+
 Scope ::= (TypeIdentifier '::')+
 TypeIdentifier ::= IDENTIFIER_WORD TemplateDefinition?
-Identifier ::= IDENTIFIER_WORD (TemplateDefinition | '[' Expression ']')?
 
 TemplateDefinition ::= '<' (IDENTIFIER_WORD | NUMBER_LITERAL | STRING_LITERAL)* '>'
 TemplateDeclaration ::= '<' TemplateParamDeclaration+ '>'
 TemplateParamDeclaration ::= IDENTIFIER_WORD '...'? (':' IDENTIFIER_WORD)?
 
-private Recovery ::= !(Identifier | NUMBER_LITERAL)
+//private Recovery ::= !(Identifier | NUMBER_LITERAL)
