@@ -5,15 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2Statement extends PsiElement {
+public interface Cpp2VarDefinition extends PsiElement {
+
+  @NotNull
+  Cpp2Expression getExpression();
 
   @Nullable
-  Cpp2ReturnExpression getReturnExpression();
-
-  @Nullable
-  Cpp2VarDeclaration getVarDeclaration();
-
-  @Nullable
-  Cpp2VarDefinition getVarDefinition();
+  Cpp2TypeSpecifier getTypeSpecifier();
 
 }

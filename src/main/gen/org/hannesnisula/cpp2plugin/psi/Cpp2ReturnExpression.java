@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2Expression extends PsiElement {
+public interface Cpp2ReturnExpression extends PsiElement {
 
-  @Nullable
-  Cpp2AnyIdentifier getAnyIdentifier();
+  @NotNull
+  Cpp2Expression getExpression();
 
 }

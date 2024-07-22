@@ -27,4 +27,10 @@ public class Cpp2ExpressionImpl extends ASTWrapperPsiElement implements Cpp2Expr
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public Cpp2AnyIdentifier getAnyIdentifier() {
+    return findChildByClass(Cpp2AnyIdentifier.class);
+  }
+
 }

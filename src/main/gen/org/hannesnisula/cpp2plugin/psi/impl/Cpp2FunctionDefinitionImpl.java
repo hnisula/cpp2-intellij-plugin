@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2StatementImpl extends ASTWrapperPsiElement implements Cpp2Statement {
+public class Cpp2FunctionDefinitionImpl extends ASTWrapperPsiElement implements Cpp2FunctionDefinition {
 
-  public Cpp2StatementImpl(@NotNull ASTNode node) {
+  public Cpp2FunctionDefinitionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitStatement(this);
+    visitor.visitFunctionDefinition(this);
   }
 
   @Override
@@ -28,21 +28,27 @@ public class Cpp2StatementImpl extends ASTWrapperPsiElement implements Cpp2State
   }
 
   @Override
-  @Nullable
-  public Cpp2ReturnExpression getReturnExpression() {
-    return findChildByClass(Cpp2ReturnExpression.class);
+  @NotNull
+  public List<Cpp2ParameterDeclaration> getParameterDeclarationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ParameterDeclaration.class);
   }
 
   @Override
   @Nullable
-  public Cpp2VarDeclaration getVarDeclaration() {
-    return findChildByClass(Cpp2VarDeclaration.class);
+  public Cpp2Statement getStatement() {
+    return findChildByClass(Cpp2Statement.class);
   }
 
   @Override
   @Nullable
-  public Cpp2VarDefinition getVarDefinition() {
-    return findChildByClass(Cpp2VarDefinition.class);
+  public Cpp2StatementBlock getStatementBlock() {
+    return findChildByClass(Cpp2StatementBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2TypeSpecifier getTypeSpecifier() {
+    return findChildByClass(Cpp2TypeSpecifier.class);
   }
 
 }

@@ -13,20 +13,51 @@
     tokenTypeClass="org.hannesnisula.cpp2plugin.psi.Cpp2TokenType"
     
     tokens=[
+        ARROW               = '->'
+        COLONCOLON          = '::'
+        DOTDOTDOT           = '...'
+        
         COLON               = ':'
         SEMICOLON           = ';'
         LEFT_BRACE          = '{'
         RIGHT_BRACE         = '}'
+        LEFT_PARENTHESIS    = '('
+        RIGHT_PARENTHESIS   = ')'
+        LT                  = '<'
+        GT                  = '>'
         EQ                  = '='
+        UNDERSCORE          = '_'
+        ASTERISK            = '*'
     ]
 }
 
-File ::= (Statement|COMMENT|Assignment)*
+File ::= (Statement | FunctionDefinition | COMMENT)*
 
-Statement ::= Assignment ";"
+FunctionDefinition ::= '(' ParameterDeclaration* ')' ('->' ('_' | TypeSpecifier))? '=' (Statement | StatementBlock)
 
-Assignment ::= IDENTIFIER ':' IDENTIFIER? ('=' Expression)?
+StatementBlock ::= '{' (Statement | COMMENT)* '}'
+Statement ::= (VarDeclaration | VarDefinition | ReturnExpression) ";" {
+    pin=1
+}
 
-Expression ::= IDENTIFIER | NUMBER_LITERAL | STRING_LITERAL
+ReturnExpression ::= RETURN Expression
 
-private Recovery ::= !(IDENTIFIER | NUMBER_LITERAL)
+ParameterDeclaration ::= (in | copy | inout | out | move | forward)? VarDeclaration
+
+VarDefinition ::= IDENTIFIER_WORD ':' TypeSpecifier? '=' Expression
+VarDeclaration ::= IDENTIFIER_WORD ':' TypeSpecifier !'='
+TypeSpecifier ::= (const | '*')*  Scope? TypeIdentifier
+
+Expression ::= AnyIdentifier | NUMBER_LITERAL | STRING_LITERAL
+
+AnyIdentifier ::= ScopedIdentifier | Identifier
+ScopedIdentifier ::= (Identifier '::')+ Identifier
+Scope ::= (TypeIdentifier '::')+
+TypeIdentifier ::= IDENTIFIER_WORD TemplateDefinition?
+Identifier ::= IDENTIFIER_WORD (TemplateDefinition | '[' Expression ']')?
+
+TemplateDefinition ::= '<' (IDENTIFIER_WORD | NUMBER_LITERAL | STRING_LITERAL)* '>'
+TemplateDeclaration ::= '<' TemplateParamDeclaration+ '>'
+TemplateParamDeclaration ::= IDENTIFIER_WORD '...'? (':' IDENTIFIER_WORD)?
+
+private Recovery ::= !(Identifier | NUMBER_LITERAL)

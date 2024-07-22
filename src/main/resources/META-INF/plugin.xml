@@ -38,5 +38,9 @@
                 language="Cpp2"
                 implementationClass="org.hannesnisula.cpp2plugin.Cpp2ParserDefinition"
         />
+        <lang.syntaxHighlighterFactory
+                language="Cpp2"
+                implementationClass="org.hannesnisula.cpp2plugin.Cpp2SyntaxHighlighterFactory"
+        />
     </extensions>
 </idea-plugin>

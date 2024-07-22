@@ -1,6 +1,0 @@
-// Simple assignments
-myvar:=2;
-myvar : = 3 ;
-myvar := 123;
-my_var:int=4;
-my_var: int = 5;

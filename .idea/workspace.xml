@@ -5,53 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8ecf5e2-83e2-4d7a-a04e-2c2872d01c79" name="Changes" comment="Initial commit with barely working test parser">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.run/Run IDE with Plugin.run.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/idea-flex.skeleton" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jflex-1.9.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/Cpp2Lexer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/Cpp2Lexer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/parser/Cpp2Parser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Assignment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Expression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Statement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Types.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Visitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2AssignmentImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2ExpressionImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2StatementImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.flex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2FileType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2Icons.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2Language.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2LexerAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2ParserDefinition.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/psi/Cpp2ElementType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/psi/Cpp2File.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/psi/Cpp2TokenSets.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/psi/Cpp2TokenType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/icons/test-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/icons/test-icon.xcf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/testData/SimpleAssignment.cpp2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/Cpp2Lexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/Cpp2Lexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/parser/Cpp2Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Assignment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Comment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Expression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Statement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Types.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Visitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2AssignmentImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2ExpressionImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2StatementImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.flex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/testData/SimpleAssignment.cpp2" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/testData/assignmentBasic.cpp2" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,8 +61,26 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;hannesnisula&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/hannesnisula/cpp2-intellij-plugin.git&quot;,
+    &quot;accountId&quot;: &quot;ad7baa34-0ab2-410a-baa5-050d729e6a24&quot;
+  }
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -114,30 +103,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Run Plugin.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.cpp2-plugin [setupDependencies].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hannes/Code/cpp2-plugin&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Run Plugin.executor": "Run",
+    "Gradle.cpp2-plugin [setupDependencies].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "basic-function-parsing",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Hannes/Code/cpp2-plugin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.CommitDialog",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;kotlin-gradle-user-dirs&quot;: [
-      &quot;C:\\Users\\Hannes\\.gradle&quot;
+  "keyToStringList": {
+    "kotlin-gradle-user-dirs": [
+      "C:\\Users\\Hannes\\.gradle"
     ]
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -165,14 +154,61 @@
       <workItem from="1721195939542" duration="2201000" />
       <workItem from="1721229731046" duration="2698000" />
       <workItem from="1721284389422" duration="11504000" />
-      <workItem from="1721309750031" duration="2900000" />
+      <workItem from="1721309750031" duration="3468000" />
+      <workItem from="1721326737818" duration="4236000" />
+      <workItem from="1721369329428" duration="14890000" />
+      <workItem from="1721465518940" duration="15664000" />
+      <workItem from="1721574017346" duration="1209000" />
+      <workItem from="1721581980551" duration="4860000" />
+      <workItem from="1721625203048" duration="10090000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit with barely working test parser">
+      <option name="closed" value="true" />
+      <created>1721322721330</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721322721330</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initial commit with barely working test parser">
+      <option name="closed" value="true" />
+      <created>1721322834365</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1721322834365</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Initial commit with barely working test parser" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial commit with barely working test parser" />
   </component>

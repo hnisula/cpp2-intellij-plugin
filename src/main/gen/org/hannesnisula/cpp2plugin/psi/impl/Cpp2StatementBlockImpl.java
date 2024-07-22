@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2AssignmentImpl extends ASTWrapperPsiElement implements Cpp2Assignment {
+public class Cpp2StatementBlockImpl extends ASTWrapperPsiElement implements Cpp2StatementBlock {
 
-  public Cpp2AssignmentImpl(@NotNull ASTNode node) {
+  public Cpp2StatementBlockImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitAssignment(this);
+    visitor.visitStatementBlock(this);
   }
 
   @Override
@@ -28,9 +28,9 @@ public class Cpp2AssignmentImpl extends ASTWrapperPsiElement implements Cpp2Assi
   }
 
   @Override
-  @Nullable
-  public Cpp2Expression getExpression() {
-    return findChildByClass(Cpp2Expression.class);
+  @NotNull
+  public List<Cpp2Statement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Statement.class);
   }
 
 }

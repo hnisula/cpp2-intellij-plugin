@@ -5,9 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2Assignment extends PsiElement {
-
-  @Nullable
-  Cpp2Expression getExpression();
+public interface Cpp2TemplateDefinition extends PsiElement {
 
 }

@@ -65,11 +65,12 @@ class Cpp2Lexer implements FlexLexer {
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
     "\11\0\1\1\1\2\1\3\2\2\22\0\1\1\1\0"+
-    "\1\4\14\0\1\5\1\6\1\7\6\10\2\11\1\12"+
-    "\1\13\1\0\1\14\3\0\6\15\24\16\1\0\1\17"+
-    "\2\0\1\20\1\0\1\15\1\21\4\15\10\16\1\22"+
-    "\6\16\1\23\1\16\1\24\2\16\12\0\1\3\u01a2\0"+
-    "\2\3\326\0\u0100\3";
+    "\1\4\5\0\1\5\1\6\1\7\2\0\1\10\1\11"+
+    "\1\12\1\13\1\14\6\15\2\16\1\17\1\20\1\21"+
+    "\1\22\1\23\2\0\6\24\24\25\1\0\1\26\2\0"+
+    "\1\27\1\0\1\24\1\30\4\24\10\25\1\31\6\25"+
+    "\1\32\1\25\1\33\2\25\1\34\1\0\1\35\7\0"+
+    "\1\3\u01a2\0\2\3\326\0\u0100\3";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[1024];
@@ -96,11 +97,13 @@ class Cpp2Lexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\2\1\2\3\1\4\1\5\1\6"+
-    "\2\7\1\0\1\10\1\0\1\11\3\3\1\10";
+    "\1\0\1\1\1\2\1\1\1\3\1\4\1\5\3\1"+
+    "\2\6\1\7\1\10\1\11\1\12\1\13\2\14\1\15"+
+    "\1\16\1\0\1\17\1\0\1\20\1\0\1\21\3\6"+
+    "\1\22\1\17\1\23";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[20];
+    int [] result = new int[33];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -125,12 +128,14 @@ class Cpp2Lexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\25\0\52\0\77\0\124\0\151\0\176\0\25"+
-    "\0\25\0\25\0\223\0\250\0\77\0\25\0\275\0\322"+
-    "\0\347\0\374\0\u0111\0\77";
+    "\0\0\0\36\0\74\0\132\0\36\0\36\0\36\0\170"+
+    "\0\226\0\264\0\322\0\360\0\u010e\0\36\0\36\0\36"+
+    "\0\36\0\u012c\0\u014a\0\36\0\36\0\132\0\36\0\u0168"+
+    "\0\36\0\u0186\0\u01a4\0\u01c2\0\u01e0\0\u01fe\0\36\0\132"+
+    "\0\36";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[20];
+    int [] result = new int[33];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -153,19 +158,22 @@ class Cpp2Lexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\2\3\1\2\1\4\1\5\1\6\3\7\1\10"+
-    "\1\11\1\12\2\13\1\2\3\13\1\14\1\13\26\0"+
-    "\2\3\20\0\1\3\1\0\4\15\1\16\12\15\1\17"+
-    "\5\15\5\0\1\20\25\0\4\7\6\0\1\7\1\21"+
-    "\1\22\1\0\1\23\6\0\4\7\6\0\1\7\12\0"+
-    "\4\13\3\0\2\13\1\0\5\13\1\0\2\3\3\0"+
-    "\4\13\3\0\2\13\1\0\3\13\1\14\1\13\4\15"+
-    "\1\24\12\15\1\17\5\15\2\20\2\0\21\20\6\0"+
-    "\2\21\10\0\1\21\12\0\3\22\7\0\1\22\12\0"+
-    "\4\23\3\0\1\23\2\0\2\23\3\0";
+    "\1\2\2\3\1\2\1\4\1\5\1\6\1\7\1\10"+
+    "\1\11\1\12\1\13\3\14\1\15\1\16\1\17\1\20"+
+    "\1\21\2\22\1\2\3\22\1\23\1\22\1\24\1\25"+
+    "\37\0\2\3\27\0\1\3\3\0\4\26\1\27\21\26"+
+    "\1\30\7\26\23\0\1\31\23\0\1\32\36\0\1\33"+
+    "\36\0\4\14\10\0\1\14\1\34\1\35\1\0\1\36"+
+    "\15\0\4\14\10\0\1\14\25\0\1\37\31\0\4\22"+
+    "\5\0\2\22\1\0\5\22\3\0\2\3\10\0\4\22"+
+    "\5\0\2\22\1\0\3\22\1\23\1\22\2\0\4\26"+
+    "\1\40\21\26\1\30\7\26\11\0\1\41\24\0\2\33"+
+    "\2\0\32\33\13\0\2\34\12\0\1\34\21\0\3\35"+
+    "\11\0\1\35\21\0\4\36\5\0\1\36\2\0\2\36"+
+    "\5\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[294];
+    int [] result = new int[540];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -203,11 +211,12 @@ class Cpp2Lexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\5\1\3\11\2\1\1\0\1\11\1\0"+
-    "\5\1";
+    "\1\0\1\11\2\1\3\11\6\1\4\11\2\1\2\11"+
+    "\1\0\1\11\1\0\1\11\1\0\4\1\1\11\1\1"+
+    "\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[20];
+    int [] result = new int[33];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -532,47 +541,97 @@ class Cpp2Lexer implements FlexLexer {
             { return TokenType.BAD_CHARACTER;
             }
           // fall through
-          case 10: break;
+          case 20: break;
           case 2:
             { return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 11: break;
+          case 21: break;
           case 3:
+            { return Cpp2Types.LEFT_PARENTHESIS;
+            }
+          // fall through
+          case 22: break;
+          case 4:
+            { return Cpp2Types.RIGHT_PARENTHESIS;
+            }
+          // fall through
+          case 23: break;
+          case 5:
+            { return Cpp2Types.ASTERISK;
+            }
+          // fall through
+          case 24: break;
+          case 6:
             { return Cpp2Types.NUMBER_LITERAL;
             }
           // fall through
-          case 12: break;
-          case 4:
+          case 25: break;
+          case 7:
             { return Cpp2Types.COLON;
             }
           // fall through
-          case 13: break;
-          case 5:
+          case 26: break;
+          case 8:
             { return Cpp2Types.SEMICOLON;
             }
           // fall through
-          case 14: break;
-          case 6:
+          case 27: break;
+          case 9:
+            { return Cpp2Types.LT;
+            }
+          // fall through
+          case 28: break;
+          case 10:
             { return Cpp2Types.EQ;
             }
           // fall through
-          case 15: break;
-          case 7:
-            { return Cpp2Types.IDENTIFIER;
+          case 29: break;
+          case 11:
+            { return Cpp2Types.GT;
             }
           // fall through
-          case 16: break;
-          case 8:
+          case 30: break;
+          case 12:
+            { return Cpp2Types.IDENTIFIER_WORD;
+            }
+          // fall through
+          case 31: break;
+          case 13:
+            { return Cpp2Types.LEFT_BRACE;
+            }
+          // fall through
+          case 32: break;
+          case 14:
+            { return Cpp2Types.RIGHT_BRACE;
+            }
+          // fall through
+          case 33: break;
+          case 15:
             { return Cpp2Types.STRING_LITERAL;
             }
           // fall through
-          case 17: break;
-          case 9:
+          case 34: break;
+          case 16:
+            { return Cpp2Types.ARROW;
+            }
+          // fall through
+          case 35: break;
+          case 17:
             { return Cpp2Types.COMMENT;
             }
           // fall through
-          case 18: break;
+          case 36: break;
+          case 18:
+            { return Cpp2Types.COLONCOLON;
+            }
+          // fall through
+          case 37: break;
+          case 19:
+            { return Cpp2Types.DOTDOTDOT;
+            }
+          // fall through
+          case 38: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

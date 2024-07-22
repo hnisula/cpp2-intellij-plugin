@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2StatementImpl extends ASTWrapperPsiElement implements Cpp2Statement {
+public class Cpp2TypeSpecifierImpl extends ASTWrapperPsiElement implements Cpp2TypeSpecifier {
 
-  public Cpp2StatementImpl(@NotNull ASTNode node) {
+  public Cpp2TypeSpecifierImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitStatement(this);
+    visitor.visitTypeSpecifier(this);
   }
 
   @Override
@@ -29,20 +29,14 @@ public class Cpp2StatementImpl extends ASTWrapperPsiElement implements Cpp2State
 
   @Override
   @Nullable
-  public Cpp2ReturnExpression getReturnExpression() {
-    return findChildByClass(Cpp2ReturnExpression.class);
+  public Cpp2Scope getScope() {
+    return findChildByClass(Cpp2Scope.class);
   }
 
   @Override
-  @Nullable
-  public Cpp2VarDeclaration getVarDeclaration() {
-    return findChildByClass(Cpp2VarDeclaration.class);
-  }
-
-  @Override
-  @Nullable
-  public Cpp2VarDefinition getVarDefinition() {
-    return findChildByClass(Cpp2VarDefinition.class);
+  @NotNull
+  public Cpp2TypeIdentifier getTypeIdentifier() {
+    return findNotNullChildByClass(Cpp2TypeIdentifier.class);
   }
 
 }
