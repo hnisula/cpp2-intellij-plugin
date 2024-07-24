@@ -39,6 +39,16 @@ COMMENT = "//".*
       "->"                  { return Cpp2Types.ARROW; }
       "::"                  { return Cpp2Types.COLONCOLON; }
       "..."                 { return Cpp2Types.DOTDOTDOT; }
+      "++"                  { return Cpp2Types.PLUSPLUS; }
+      "--"                  { return Cpp2Types.MINUSMINUS; }
+      "||"                  { return Cpp2Types.OROR; }
+      "&&"                  { return Cpp2Types.ANDAND; }
+      "=="                  { return Cpp2Types.EQEQ; }
+      "!="                  { return Cpp2Types.NEQ; }
+      "<="                  { return Cpp2Types.LTEQ; }
+      ">="                  { return Cpp2Types.GTEQ; }
+      "<<"                  { return Cpp2Types.LTLT; }
+      ">>"                  { return Cpp2Types.GTGT; }
       
       ":"                   { return Cpp2Types.COLON; }
       ";"                   { return Cpp2Types.SEMICOLON; }
@@ -51,6 +61,13 @@ COMMENT = "//".*
       "="                   { return Cpp2Types.EQ; }
       "_"                   { return Cpp2Types.UNDERSCORE; }
       "*"                   { return Cpp2Types.ASTERISK; }
+      "+"                   { return Cpp2Types.PLUS; }
+      "-"                   { return Cpp2Types.MINUS; }
+      "/"                   { return Cpp2Types.SLASH; }
+      "%"                   { return Cpp2Types.MODULO; }
+      "&"                   { return Cpp2Types.AND; }
+      "|"                   { return Cpp2Types.OR; }
+      "^"                   { return Cpp2Types.EXP; }
       
       "for"                 { return Cpp2Types.FOR; }
       "do"                  { return Cpp2Types.DO; }
@@ -61,7 +78,7 @@ COMMENT = "//".*
       "move"                { return Cpp2Types.MOVE; }
       "forward"             { return Cpp2Types.FORWARD; }
       
-      //"return"              { return Cpp2Types.RETURN; }
+      "return"              { return Cpp2Types.RETURN; }
       
       {WHITESPACE}          { return TokenType.WHITE_SPACE; }
       

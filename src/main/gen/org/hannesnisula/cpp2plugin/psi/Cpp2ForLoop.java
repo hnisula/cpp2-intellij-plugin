@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2ForLoop extends PsiElement {
 
   @NotNull
-  List<Cpp2Argument> getArgumentList();
+  List<Cpp2Arg> getArgList();
 
   @Nullable
-  Cpp2Identifier getIdentifier();
+  Cpp2Id getId();
 
   @Nullable
   Cpp2StatementBlock getStatementBlock();

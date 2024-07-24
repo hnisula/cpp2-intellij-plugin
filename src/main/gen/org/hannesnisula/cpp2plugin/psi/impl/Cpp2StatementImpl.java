@@ -29,26 +29,26 @@ public class Cpp2StatementImpl extends ASTWrapperPsiElement implements Cpp2State
 
   @Override
   @Nullable
-  public Cpp2ReturnExpression getReturnExpression() {
-    return findChildByClass(Cpp2ReturnExpression.class);
+  public Cpp2Expr getExpr() {
+    return findChildByClass(Cpp2Expr.class);
   }
 
   @Override
   @Nullable
-  public Cpp2VarAssignment getVarAssignment() {
-    return findChildByClass(Cpp2VarAssignment.class);
+  public Cpp2VarAssign getVarAssign() {
+    return findChildByClass(Cpp2VarAssign.class);
   }
 
   @Override
   @Nullable
-  public Cpp2VarDeclaration getVarDeclaration() {
-    return findChildByClass(Cpp2VarDeclaration.class);
+  public Cpp2VarDecl getVarDecl() {
+    return findChildByClass(Cpp2VarDecl.class);
   }
 
   @Override
   @Nullable
-  public Cpp2VarDefinition getVarDefinition() {
-    return findChildByClass(Cpp2VarDefinition.class);
+  public Cpp2VarDef getVarDef() {
+    return findChildByClass(Cpp2VarDef.class);
   }
 
 }

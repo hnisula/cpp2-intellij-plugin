@@ -64,15 +64,15 @@ class Cpp2Lexer implements FlexLexer {
   private static final int [] ZZ_CMAP_BLOCKS = zzUnpackcmap_blocks();
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
-    "\11\0\1\1\1\2\1\3\2\2\22\0\1\1\1\0"+
-    "\1\4\5\0\1\5\1\6\1\7\2\0\1\10\1\11"+
-    "\1\12\1\13\1\14\6\15\2\16\1\17\1\20\1\21"+
-    "\1\22\1\23\2\0\6\24\24\25\1\0\1\26\2\0"+
-    "\1\27\1\0\1\30\1\31\1\32\1\33\1\34\1\35"+
-    "\2\25\1\36\3\25\1\37\1\40\1\41\1\42\1\25"+
-    "\1\43\1\25\1\44\1\45\1\46\1\47\1\50\1\51"+
-    "\1\25\1\52\1\0\1\53\7\0\1\3\u01a2\0\2\3"+
-    "\326\0\u0100\3";
+    "\11\0\1\1\1\2\1\3\2\2\22\0\1\1\1\4"+
+    "\1\5\2\0\1\6\1\7\1\0\1\10\1\11\1\12"+
+    "\1\13\1\0\1\14\1\15\1\16\1\17\1\20\6\21"+
+    "\2\22\1\23\1\24\1\25\1\26\1\27\2\0\6\30"+
+    "\24\31\1\0\1\32\1\0\1\33\1\34\1\0\1\35"+
+    "\1\36\1\37\1\40\1\41\1\42\2\31\1\43\3\31"+
+    "\1\44\1\45\1\46\1\47\1\31\1\50\1\31\1\51"+
+    "\1\52\1\53\1\54\1\55\1\56\1\31\1\57\1\60"+
+    "\1\61\7\0\1\3\u01a2\0\2\3\326\0\u0100\3";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[1024];
@@ -99,15 +99,18 @@ class Cpp2Lexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\1\1\3\1\4\1\5\3\1"+
-    "\2\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15"+
-    "\6\14\1\2\1\16\1\17\1\0\1\20\1\0\1\21"+
-    "\1\0\1\22\3\6\1\23\1\14\1\24\1\14\1\25"+
-    "\2\14\1\20\1\26\1\14\1\27\2\14\1\30\1\31"+
-    "\2\14\1\32\1\14\1\33\1\14\1\34";
+    "\1\0\1\1\1\2\2\1\1\3\1\4\1\5\1\6"+
+    "\1\7\1\10\1\11\1\1\1\12\2\13\1\14\1\15"+
+    "\1\16\1\17\1\20\1\21\1\22\1\23\7\21\1\2"+
+    "\1\24\1\25\1\26\1\27\1\0\1\30\1\0\1\31"+
+    "\1\32\1\33\1\34\1\0\1\35\3\13\1\36\1\37"+
+    "\1\40\1\41\1\42\1\43\1\21\1\44\1\21\1\45"+
+    "\3\21\1\46\1\30\1\47\1\21\1\50\2\21\1\51"+
+    "\1\21\1\52\2\21\1\53\2\21\1\54\2\21\1\55"+
+    "\1\56";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[59];
+    int [] result = new int[81];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -132,17 +135,20 @@ class Cpp2Lexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\54\0\130\0\204\0\54\0\54\0\54\0\260"+
-    "\0\334\0\u0108\0\u0134\0\u0160\0\u018c\0\54\0\54\0\54"+
-    "\0\54\0\u01b8\0\u01b8\0\u01e4\0\u0210\0\u023c\0\u0268\0\u0294"+
-    "\0\u02c0\0\u02ec\0\54\0\54\0\204\0\54\0\u0318\0\54"+
-    "\0\u0344\0\u0370\0\u039c\0\u03c8\0\u03f4\0\54\0\u0420\0\u01b8"+
-    "\0\u044c\0\u0478\0\u04a4\0\u04d0\0\204\0\54\0\u04fc\0\u0528"+
-    "\0\u0554\0\u0580\0\u01b8\0\u01b8\0\u05ac\0\u05d8\0\u01b8\0\u0604"+
-    "\0\u01b8\0\u0630\0\u01b8";
+    "\0\0\0\62\0\144\0\226\0\310\0\62\0\372\0\62"+
+    "\0\62\0\62\0\u012c\0\u015e\0\u0190\0\u01c2\0\u01f4\0\u0226"+
+    "\0\u0258\0\62\0\u028a\0\u02bc\0\u02ee\0\u0320\0\62\0\u0320"+
+    "\0\u0352\0\u0384\0\u03b6\0\u03e8\0\u041a\0\u044c\0\u047e\0\u04b0"+
+    "\0\62\0\u04e2\0\62\0\62\0\310\0\62\0\u0514\0\62"+
+    "\0\62\0\62\0\62\0\u0546\0\u0578\0\u05aa\0\u05dc\0\u060e"+
+    "\0\62\0\62\0\62\0\62\0\62\0\62\0\u0640\0\u0320"+
+    "\0\u0672\0\u06a4\0\u06d6\0\u0708\0\u073a\0\62\0\310\0\62"+
+    "\0\u076c\0\u079e\0\u07d0\0\u0802\0\u0320\0\u0834\0\u0320\0\u0866"+
+    "\0\u0898\0\u0320\0\u08ca\0\u08fc\0\u0320\0\u092e\0\u0960\0\u0320"+
+    "\0\u0320";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[59];
+    int [] result = new int[81];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -166,41 +172,49 @@ class Cpp2Lexer implements FlexLexer {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\2\3\1\2\1\4\1\5\1\6\1\7\1\10"+
-    "\1\11\1\12\1\13\3\14\1\15\1\16\1\17\1\20"+
-    "\1\21\2\22\1\2\1\23\2\22\1\24\1\25\1\22"+
-    "\1\26\1\27\1\30\1\22\1\31\4\22\1\32\3\22"+
-    "\1\33\1\34\55\0\2\3\43\0\1\3\5\0\4\35"+
-    "\1\36\21\35\1\37\25\35\23\0\1\40\41\0\1\41"+
-    "\54\0\1\42\54\0\4\14\10\0\1\14\1\0\1\43"+
-    "\7\0\1\44\6\0\1\45\16\0\4\14\10\0\1\14"+
-    "\43\0\1\46\47\0\4\22\5\0\2\22\1\0\23\22"+
-    "\15\0\4\22\5\0\2\22\1\0\12\22\1\47\10\22"+
-    "\15\0\4\22\5\0\2\22\1\0\12\22\1\50\10\22"+
-    "\15\0\4\22\5\0\2\22\1\0\12\22\1\51\10\22"+
-    "\15\0\4\22\5\0\2\22\1\0\11\22\1\52\11\22"+
-    "\15\0\4\22\5\0\2\22\1\0\12\22\1\53\10\22"+
-    "\15\0\4\22\5\0\2\22\1\0\16\22\1\54\4\22"+
-    "\3\0\2\3\10\0\4\22\5\0\2\22\1\0\17\22"+
-    "\1\32\3\22\2\0\4\35\1\55\21\35\1\37\25\35"+
-    "\11\0\1\56\42\0\2\42\2\0\50\42\13\0\2\43"+
-    "\12\0\1\43\37\0\3\44\11\0\1\44\37\0\4\45"+
-    "\5\0\1\45\2\0\7\45\31\0\4\22\5\0\2\22"+
-    "\1\0\13\22\1\57\7\22\15\0\4\22\5\0\2\22"+
-    "\1\0\14\22\1\60\6\22\15\0\4\22\5\0\2\22"+
-    "\1\0\12\22\1\61\10\22\15\0\4\22\5\0\2\22"+
-    "\1\0\17\22\1\62\3\22\15\0\4\22\5\0\2\22"+
-    "\1\0\15\22\1\63\5\22\15\0\4\22\5\0\2\22"+
-    "\1\0\22\22\1\64\15\0\4\22\5\0\2\22\1\0"+
-    "\20\22\1\65\2\22\15\0\4\22\5\0\2\22\1\0"+
-    "\16\22\1\66\4\22\15\0\4\22\5\0\2\22\1\0"+
-    "\5\22\1\67\15\22\15\0\4\22\5\0\2\22\1\0"+
-    "\1\22\1\70\21\22\15\0\4\22\5\0\2\22\1\0"+
-    "\15\22\1\71\5\22\15\0\4\22\5\0\2\22\1\0"+
-    "\14\22\1\72\6\22\15\0\4\22\5\0\2\22\1\0"+
-    "\4\22\1\73\16\22\2\0";
+    "\1\11\1\12\1\13\1\14\1\15\1\16\1\17\3\20"+
+    "\1\21\1\22\1\23\1\24\1\25\2\26\1\2\1\27"+
+    "\1\30\2\26\1\31\1\32\1\26\1\33\1\34\1\35"+
+    "\1\26\1\36\1\26\1\37\2\26\1\40\3\26\1\41"+
+    "\1\42\1\43\63\0\2\3\50\0\1\3\34\0\1\44"+
+    "\33\0\5\45\1\46\24\45\1\47\27\45\7\0\1\50"+
+    "\65\0\1\51\62\0\1\52\12\0\1\53\47\0\1\54"+
+    "\62\0\1\55\62\0\4\20\11\0\1\20\1\0\1\56"+
+    "\7\0\1\57\6\0\1\60\23\0\4\20\11\0\1\20"+
+    "\50\0\1\61\63\0\1\62\1\63\61\0\1\64\61\0"+
+    "\1\65\1\66\51\0\4\26\5\0\2\26\2\0\23\26"+
+    "\22\0\4\26\5\0\2\26\2\0\12\26\1\67\10\26"+
+    "\22\0\4\26\5\0\2\26\2\0\12\26\1\70\10\26"+
+    "\22\0\4\26\5\0\2\26\2\0\12\26\1\71\10\26"+
+    "\22\0\4\26\5\0\2\26\2\0\11\26\1\72\11\26"+
+    "\22\0\4\26\5\0\2\26\2\0\12\26\1\73\10\26"+
+    "\22\0\4\26\5\0\2\26\2\0\16\26\1\74\4\26"+
+    "\22\0\4\26\5\0\2\26\2\0\5\26\1\75\15\26"+
+    "\4\0\2\3\14\0\4\26\5\0\2\26\2\0\17\26"+
+    "\1\40\3\26\63\0\1\76\1\0\5\45\1\77\24\45"+
+    "\1\47\27\45\15\0\1\100\44\0\2\55\2\0\56\55"+
+    "\17\0\2\56\13\0\1\56\44\0\3\57\12\0\1\57"+
+    "\44\0\4\60\5\0\1\60\3\0\7\60\36\0\4\26"+
+    "\5\0\2\26\2\0\13\26\1\101\7\26\22\0\4\26"+
+    "\5\0\2\26\2\0\14\26\1\102\6\26\22\0\4\26"+
+    "\5\0\2\26\2\0\12\26\1\103\10\26\22\0\4\26"+
+    "\5\0\2\26\2\0\17\26\1\104\3\26\22\0\4\26"+
+    "\5\0\2\26\2\0\15\26\1\105\5\26\22\0\4\26"+
+    "\5\0\2\26\2\0\15\26\1\106\5\26\22\0\4\26"+
+    "\5\0\2\26\2\0\22\26\1\107\22\0\4\26\5\0"+
+    "\2\26\2\0\20\26\1\110\2\26\22\0\4\26\5\0"+
+    "\2\26\2\0\16\26\1\111\4\26\22\0\4\26\5\0"+
+    "\2\26\2\0\5\26\1\112\15\26\22\0\4\26\5\0"+
+    "\2\26\2\0\16\26\1\113\4\26\22\0\4\26\5\0"+
+    "\2\26\2\0\1\26\1\114\21\26\22\0\4\26\5\0"+
+    "\2\26\2\0\15\26\1\115\5\26\22\0\4\26\5\0"+
+    "\2\26\2\0\14\26\1\116\6\26\22\0\4\26\5\0"+
+    "\2\26\2\0\14\26\1\117\6\26\22\0\4\26\5\0"+
+    "\2\26\2\0\11\26\1\120\11\26\22\0\4\26\5\0"+
+    "\2\26\2\0\4\26\1\121\16\26\3\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[1628];
+    int [] result = new int[2450];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -238,12 +252,13 @@ class Cpp2Lexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\2\1\3\11\6\1\4\11\11\1\2\11"+
-    "\1\0\1\11\1\0\1\11\1\0\4\1\1\11\7\1"+
-    "\1\11\15\1";
+    "\1\0\1\11\3\1\1\11\1\1\3\11\7\1\1\11"+
+    "\4\1\1\11\11\1\1\11\1\1\2\11\1\0\1\11"+
+    "\1\0\4\11\1\0\4\1\6\11\7\1\1\11\1\1"+
+    "\1\11\21\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[59];
+    int [] result = new int[81];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -568,142 +583,232 @@ class Cpp2Lexer implements FlexLexer {
             { return TokenType.BAD_CHARACTER;
             }
           // fall through
-          case 29: break;
+          case 47: break;
           case 2:
             { return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 30: break;
-          case 3:
-            { return Cpp2Types.LEFT_PARENTHESIS;
-            }
-          // fall through
-          case 31: break;
-          case 4:
-            { return Cpp2Types.RIGHT_PARENTHESIS;
-            }
-          // fall through
-          case 32: break;
-          case 5:
-            { return Cpp2Types.ASTERISK;
-            }
-          // fall through
-          case 33: break;
-          case 6:
-            { return Cpp2Types.NUMBER_LITERAL;
-            }
-          // fall through
-          case 34: break;
-          case 7:
-            { return Cpp2Types.COLON;
-            }
-          // fall through
-          case 35: break;
-          case 8:
-            { return Cpp2Types.SEMICOLON;
-            }
-          // fall through
-          case 36: break;
-          case 9:
-            { return Cpp2Types.LT;
-            }
-          // fall through
-          case 37: break;
-          case 10:
-            { return Cpp2Types.EQ;
-            }
-          // fall through
-          case 38: break;
-          case 11:
-            { return Cpp2Types.GT;
-            }
-          // fall through
-          case 39: break;
-          case 12:
-            { return Cpp2Types.IDENTIFIER_WORD;
-            }
-          // fall through
-          case 40: break;
-          case 13:
-            { return Cpp2Types.UNDERSCORE;
-            }
-          // fall through
-          case 41: break;
-          case 14:
-            { return Cpp2Types.LEFT_BRACE;
-            }
-          // fall through
-          case 42: break;
-          case 15:
-            { return Cpp2Types.RIGHT_BRACE;
-            }
-          // fall through
-          case 43: break;
-          case 16:
-            { return Cpp2Types.STRING_LITERAL;
-            }
-          // fall through
-          case 44: break;
-          case 17:
-            { return Cpp2Types.ARROW;
-            }
-          // fall through
-          case 45: break;
-          case 18:
-            { return Cpp2Types.COMMENT;
-            }
-          // fall through
-          case 46: break;
-          case 19:
-            { return Cpp2Types.COLONCOLON;
-            }
-          // fall through
-          case 47: break;
-          case 20:
-            { return Cpp2Types.DO;
-            }
-          // fall through
           case 48: break;
-          case 21:
-            { return Cpp2Types.IN;
+          case 3:
+            { return Cpp2Types.MODULO;
             }
           // fall through
           case 49: break;
-          case 22:
-            { return Cpp2Types.DOTDOTDOT;
+          case 4:
+            { return Cpp2Types.AND;
             }
           // fall through
           case 50: break;
-          case 23:
-            { return Cpp2Types.FOR;
+          case 5:
+            { return Cpp2Types.LEFT_PARENTHESIS;
             }
           // fall through
           case 51: break;
-          case 24:
-            { return Cpp2Types.OUT;
+          case 6:
+            { return Cpp2Types.RIGHT_PARENTHESIS;
             }
           // fall through
           case 52: break;
-          case 25:
-            { return Cpp2Types.COPY;
+          case 7:
+            { return Cpp2Types.ASTERISK;
             }
           // fall through
           case 53: break;
-          case 26:
-            { return Cpp2Types.MOVE;
+          case 8:
+            { return Cpp2Types.PLUS;
             }
           // fall through
           case 54: break;
-          case 27:
-            { return Cpp2Types.INOUT;
+          case 9:
+            { return Cpp2Types.MINUS;
             }
           // fall through
           case 55: break;
-          case 28:
-            { return Cpp2Types.FORWARD;
+          case 10:
+            { return Cpp2Types.SLASH;
             }
           // fall through
           case 56: break;
+          case 11:
+            { return Cpp2Types.NUMBER_LITERAL;
+            }
+          // fall through
+          case 57: break;
+          case 12:
+            { return Cpp2Types.COLON;
+            }
+          // fall through
+          case 58: break;
+          case 13:
+            { return Cpp2Types.SEMICOLON;
+            }
+          // fall through
+          case 59: break;
+          case 14:
+            { return Cpp2Types.LT;
+            }
+          // fall through
+          case 60: break;
+          case 15:
+            { return Cpp2Types.EQ;
+            }
+          // fall through
+          case 61: break;
+          case 16:
+            { return Cpp2Types.GT;
+            }
+          // fall through
+          case 62: break;
+          case 17:
+            { return Cpp2Types.IDENTIFIER_WORD;
+            }
+          // fall through
+          case 63: break;
+          case 18:
+            { return Cpp2Types.EXP;
+            }
+          // fall through
+          case 64: break;
+          case 19:
+            { return Cpp2Types.UNDERSCORE;
+            }
+          // fall through
+          case 65: break;
+          case 20:
+            { return Cpp2Types.LEFT_BRACE;
+            }
+          // fall through
+          case 66: break;
+          case 21:
+            { return Cpp2Types.OR;
+            }
+          // fall through
+          case 67: break;
+          case 22:
+            { return Cpp2Types.RIGHT_BRACE;
+            }
+          // fall through
+          case 68: break;
+          case 23:
+            { return Cpp2Types.NEQ;
+            }
+          // fall through
+          case 69: break;
+          case 24:
+            { return Cpp2Types.STRING_LITERAL;
+            }
+          // fall through
+          case 70: break;
+          case 25:
+            { return Cpp2Types.ANDAND;
+            }
+          // fall through
+          case 71: break;
+          case 26:
+            { return Cpp2Types.PLUSPLUS;
+            }
+          // fall through
+          case 72: break;
+          case 27:
+            { return Cpp2Types.MINUSMINUS;
+            }
+          // fall through
+          case 73: break;
+          case 28:
+            { return Cpp2Types.ARROW;
+            }
+          // fall through
+          case 74: break;
+          case 29:
+            { return Cpp2Types.COMMENT;
+            }
+          // fall through
+          case 75: break;
+          case 30:
+            { return Cpp2Types.COLONCOLON;
+            }
+          // fall through
+          case 76: break;
+          case 31:
+            { return Cpp2Types.LTLT;
+            }
+          // fall through
+          case 77: break;
+          case 32:
+            { return Cpp2Types.LTEQ;
+            }
+          // fall through
+          case 78: break;
+          case 33:
+            { return Cpp2Types.EQEQ;
+            }
+          // fall through
+          case 79: break;
+          case 34:
+            { return Cpp2Types.GTEQ;
+            }
+          // fall through
+          case 80: break;
+          case 35:
+            { return Cpp2Types.GTGT;
+            }
+          // fall through
+          case 81: break;
+          case 36:
+            { return Cpp2Types.DO;
+            }
+          // fall through
+          case 82: break;
+          case 37:
+            { return Cpp2Types.IN;
+            }
+          // fall through
+          case 83: break;
+          case 38:
+            { return Cpp2Types.OROR;
+            }
+          // fall through
+          case 84: break;
+          case 39:
+            { return Cpp2Types.DOTDOTDOT;
+            }
+          // fall through
+          case 85: break;
+          case 40:
+            { return Cpp2Types.FOR;
+            }
+          // fall through
+          case 86: break;
+          case 41:
+            { return Cpp2Types.OUT;
+            }
+          // fall through
+          case 87: break;
+          case 42:
+            { return Cpp2Types.COPY;
+            }
+          // fall through
+          case 88: break;
+          case 43:
+            { return Cpp2Types.MOVE;
+            }
+          // fall through
+          case 89: break;
+          case 44:
+            { return Cpp2Types.INOUT;
+            }
+          // fall through
+          case 90: break;
+          case 45:
+            { return Cpp2Types.RETURN;
+            }
+          // fall through
+          case 91: break;
+          case 46:
+            { return Cpp2Types.FORWARD;
+            }
+          // fall through
+          case 92: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

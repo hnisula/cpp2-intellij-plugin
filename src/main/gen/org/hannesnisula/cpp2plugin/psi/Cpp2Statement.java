@@ -8,15 +8,15 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2Statement extends PsiElement {
 
   @Nullable
-  Cpp2ReturnExpression getReturnExpression();
+  Cpp2Expr getExpr();
 
   @Nullable
-  Cpp2VarAssignment getVarAssignment();
+  Cpp2VarAssign getVarAssign();
 
   @Nullable
-  Cpp2VarDeclaration getVarDeclaration();
+  Cpp2VarDecl getVarDecl();
 
   @Nullable
-  Cpp2VarDefinition getVarDefinition();
+  Cpp2VarDef getVarDef();
 
 }

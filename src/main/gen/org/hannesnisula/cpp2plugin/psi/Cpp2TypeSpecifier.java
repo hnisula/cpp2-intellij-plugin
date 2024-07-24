@@ -11,6 +11,6 @@ public interface Cpp2TypeSpecifier extends PsiElement {
   Cpp2Scope getScope();
 
   @NotNull
-  Cpp2TypeIdentifier getTypeIdentifier();
+  Cpp2TypeId getTypeId();
 
 }

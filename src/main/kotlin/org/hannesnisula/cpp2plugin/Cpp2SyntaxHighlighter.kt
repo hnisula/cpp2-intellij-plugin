@@ -21,7 +21,8 @@ class Cpp2SyntaxHighlighter : SyntaxHighlighterBase() {
 
     override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> {
         return when (tokenType) {
-            Cpp2Types.FOR -> pack(KEYWORD)
+            Cpp2Types.FOR,
+            Cpp2Types.DO -> pack(KEYWORD)
             Cpp2Types.IDENTIFIER_WORD -> pack(IDENTIFIER)
             Cpp2Types.NUMBER_LITERAL -> pack(NUMBER_LITERAL)
             Cpp2Types.STRING_LITERAL -> pack(STRING_LITERAL)

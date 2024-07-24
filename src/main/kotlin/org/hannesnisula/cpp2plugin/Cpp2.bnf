@@ -12,10 +12,22 @@
     elementTypeClass="org.hannesnisula.cpp2plugin.psi.Cpp2ElementType"
     tokenTypeClass="org.hannesnisula.cpp2plugin.psi.Cpp2TokenType"
     
+    extends(".*expr")=expr
+    
     tokens=[
         ARROW               = '->'
         COLONCOLON          = '::'
         DOTDOTDOT           = '...'
+        PLUSPLUS            = '++'
+        MINUSMINUS          = '--'
+        OROR                = '||'
+        ANDAND              = '&&'
+        EQEQ                = '=='
+        NEQ                 = '!='
+        LTEQ                = '<='
+        GTEQ                = '>='
+        LTLT                = '<<'
+        GTGT                = '>>'
         
         COLON               = ':'
         SEMICOLON           = ';'
@@ -28,6 +40,13 @@
         EQ                  = '='
         UNDERSCORE          = '_'
         ASTERISK            = '*'
+        PLUS                = '+'
+        MINUS               = '-'
+        SLASH               = '/'
+        MODULO              = '%'
+        AND                 = '&'
+        OR                  = '|'
+        EXP                 = '^'
         
         FOR                 = 'for'
         DO                  = 'do'
@@ -37,43 +56,76 @@
         OUT                 = 'out'
         MOVE                = 'move'
         FORWARD             = 'forward'
+        
+        RETURN              = 'return'
     ]
 }
 
-File ::= (Statement | FunctionDefinition | ForLoop | COMMENT)*
+file ::= (statement | func_def | for_loop | COMMENT)*
 
-ForLoop ::= 'for' Identifier 'do' '(' Argument* ')' (StatementBlock) {
+for_loop ::= 'for' id 'do' '(' arg* ')' (statement_block) {
     pin=1
 }
 
-FunctionDefinition ::= '(' ParameterDeclaration* ')' ('->' ('_' | TypeSpecifier))? '=' (Statement | StatementBlock)
+func_def ::= '(' param_decl* ')' ('->' ('_' | type_specifier))? '=' (statement | statement_block)
 
-StatementBlock ::= '{' (Statement | COMMENT)* '}'
-Statement ::= (VarDeclaration | VarDefinition | VarAssignment | ReturnExpression) ";" {
+statement_block ::= '{' (statement | COMMENT)* '}'
+statement ::= (var_decl | var_def | var_assign | return_expr | expr) ";" {
     pin=1
 }
 
-ReturnExpression ::= RETURN Expression
+return_expr ::= RETURN expr
 
-Argument ::= ParameterKind? Identifier
+arg ::= param_kind? id
 
-ParameterDeclaration ::= ParameterKind? VarDeclaration
-ParameterKind ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')
+param_decl ::= param_kind? var_decl
+param_kind ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')
 
-VarAssignment ::= Identifier '=' Expression
-VarDefinition ::= IDENTIFIER_WORD ':' TypeSpecifier? '=' Expression
-VarDeclaration ::= IDENTIFIER_WORD ':' TypeSpecifier !'='
-TypeSpecifier ::= (const | '*')*  Scope? TypeIdentifier
+var_assign ::= id '=' expr {rightAssociative=true}
+var_def ::= IDENTIFIER_WORD ':' type_specifier? '=' expr
+var_decl ::= IDENTIFIER_WORD ':' type_specifier !'='
+type_specifier ::= (const | '*')*  scope? type_id
 
-Expression ::= Identifier | NUMBER_LITERAL | STRING_LITERAL
+expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | id | literal
 
-Identifier ::= Scope? IDENTIFIER_WORD ('[' Expression ']')?
+private group_14_expr   ::= or_expr
+private group_13_expr   ::= and_expr
+private group_12_expr   ::= bit_or_expr
+private group_11_expr   ::= bit_xor_expr
+private group_10_expr   ::= bit_and_expr
+private group_9_expr    ::= eq_expr | neq_expr
+private group_8_expr    ::= lt_expr | gt_expr | lteq_expr | gteq_expr
+private group_7_expr    ::= left_shift_expr | right_shift_expr
+private group_6_expr    ::= add_expr | sub_expr
+private group_5_expr    ::= mul_expr | div_expr | mod_expr
 
-Scope ::= (TypeIdentifier '::')+
-TypeIdentifier ::= IDENTIFIER_WORD TemplateDefinition?
+or_expr             ::= expr '||'   expr {rightAssociative=false}
+and_expr            ::= expr '&&'   expr {rightAssociative=false}
+bit_or_expr         ::= expr '|'    expr {rightAssociative=false}
+bit_xor_expr        ::= expr '^'    expr {rightAssociative=false}
+bit_and_expr        ::= expr '&'    expr {rightAssociative=false}
+eq_expr             ::= expr '=='   expr {rightAssociative=false}
+neq_expr            ::= expr '!='   expr {rightAssociative=false}
+lteq_expr           ::= expr '<='   expr {rightAssociative=false}
+gteq_expr           ::= expr '>='   expr {rightAssociative=false}
+lt_expr             ::= expr '<'    expr {rightAssociative=false}
+gt_expr             ::= expr '>'    expr {rightAssociative=false}
+right_shift_expr    ::= expr '>>'   expr {rightAssociative=false}
+left_shift_expr     ::= expr '<<'   expr {rightAssociative=false}
+add_expr            ::= expr '+'    expr {rightAssociative=false}
+sub_expr            ::= expr '-'    expr {rightAssociative=false}
+mul_expr            ::= expr '*'    expr {rightAssociative=false}
+div_expr            ::= expr '/'    expr {rightAssociative=false}
+mod_expr            ::= expr '%'    expr {rightAssociative=false}
 
-TemplateDefinition ::= '<' (IDENTIFIER_WORD | NUMBER_LITERAL | STRING_LITERAL)* '>'
-TemplateDeclaration ::= '<' TemplateParamDeclaration+ '>'
-TemplateParamDeclaration ::= IDENTIFIER_WORD '...'? (':' IDENTIFIER_WORD)?
+id ::= scope? IDENTIFIER_WORD ('[' expr ']')? {extends=expr}
+literal ::= NUMBER_LITERAL | STRING_LITERAL {extends=expr}
+
+scope ::= (type_id '::')+
+type_id ::= IDENTIFIER_WORD template_def?
+
+template_def ::= '<' (IDENTIFIER_WORD | NUMBER_LITERAL | STRING_LITERAL)* '>'
+template_decl ::= '<' template_param_decl+ '>'
+template_param_decl ::= IDENTIFIER_WORD '...'? (':' IDENTIFIER_WORD)?
 
 //private Recovery ::= !(Identifier | NUMBER_LITERAL)

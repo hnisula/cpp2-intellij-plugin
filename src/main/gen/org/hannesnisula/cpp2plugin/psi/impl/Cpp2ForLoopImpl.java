@@ -29,14 +29,14 @@ public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop
 
   @Override
   @NotNull
-  public List<Cpp2Argument> getArgumentList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Argument.class);
+  public List<Cpp2Arg> getArgList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Arg.class);
   }
 
   @Override
   @Nullable
-  public Cpp2Identifier getIdentifier() {
-    return findChildByClass(Cpp2Identifier.class);
+  public Cpp2Id getId() {
+    return findChildByClass(Cpp2Id.class);
   }
 
   @Override
