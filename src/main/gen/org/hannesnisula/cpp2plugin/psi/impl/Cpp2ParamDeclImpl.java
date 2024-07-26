@@ -33,10 +33,4 @@ public class Cpp2ParamDeclImpl extends ASTWrapperPsiElement implements Cpp2Param
     return findChildByClass(Cpp2ParamKind.class);
   }
 
-  @Override
-  @NotNull
-  public Cpp2VarDecl getVarDecl() {
-    return findNotNullChildByClass(Cpp2VarDecl.class);
-  }
-
 }

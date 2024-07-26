@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2TypeSpecifier extends PsiElement {
+public interface Cpp2Assign extends PsiElement {
 
   @NotNull
-  Cpp2TypeIdScoped getTypeIdScoped();
+  List<Cpp2Expr> getExprList();
 
 }

@@ -11,14 +11,20 @@ public interface Cpp2Types {
   IElementType ADD_EXPR = new Cpp2ElementType("ADD_EXPR");
   IElementType AND_EXPR = new Cpp2ElementType("AND_EXPR");
   IElementType ARG = new Cpp2ElementType("ARG");
+  IElementType ASSIGN = new Cpp2ElementType("ASSIGN");
   IElementType BIT_AND_EXPR = new Cpp2ElementType("BIT_AND_EXPR");
   IElementType BIT_OR_EXPR = new Cpp2ElementType("BIT_OR_EXPR");
   IElementType BIT_XOR_EXPR = new Cpp2ElementType("BIT_XOR_EXPR");
+  IElementType DECL = new Cpp2ElementType("DECL");
   IElementType DIV_EXPR = new Cpp2ElementType("DIV_EXPR");
   IElementType EQ_EXPR = new Cpp2ElementType("EQ_EXPR");
   IElementType EXPR = new Cpp2ElementType("EXPR");
   IElementType FOR_LOOP = new Cpp2ElementType("FOR_LOOP");
-  IElementType FUNC_DEF = new Cpp2ElementType("FUNC_DEF");
+  IElementType FUNC_CALL = new Cpp2ElementType("FUNC_CALL");
+  IElementType FUNC_DECL = new Cpp2ElementType("FUNC_DECL");
+  IElementType FUNC_EXPR = new Cpp2ElementType("FUNC_EXPR");
+  IElementType FUNC_PARAMS = new Cpp2ElementType("FUNC_PARAMS");
+  IElementType FUNC_SIGNATURE = new Cpp2ElementType("FUNC_SIGNATURE");
   IElementType GTEQ_EXPR = new Cpp2ElementType("GTEQ_EXPR");
   IElementType GT_EXPR = new Cpp2ElementType("GT_EXPR");
   IElementType ID = new Cpp2ElementType("ID");
@@ -28,6 +34,7 @@ public interface Cpp2Types {
   IElementType LT_EXPR = new Cpp2ElementType("LT_EXPR");
   IElementType MOD_EXPR = new Cpp2ElementType("MOD_EXPR");
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
+  IElementType NAMED_DECL = new Cpp2ElementType("NAMED_DECL");
   IElementType NEQ_EXPR = new Cpp2ElementType("NEQ_EXPR");
   IElementType OR_EXPR = new Cpp2ElementType("OR_EXPR");
   IElementType PARAM_DECL = new Cpp2ElementType("PARAM_DECL");
@@ -35,17 +42,16 @@ public interface Cpp2Types {
   IElementType RETURN_EXPR = new Cpp2ElementType("RETURN_EXPR");
   IElementType RIGHT_SHIFT_EXPR = new Cpp2ElementType("RIGHT_SHIFT_EXPR");
   IElementType SCOPE = new Cpp2ElementType("SCOPE");
-  IElementType STATEMENT = new Cpp2ElementType("STATEMENT");
-  IElementType STATEMENT_BLOCK = new Cpp2ElementType("STATEMENT_BLOCK");
+  IElementType STMT = new Cpp2ElementType("STMT");
+  IElementType STMT_BLOCK = new Cpp2ElementType("STMT_BLOCK");
   IElementType SUB_EXPR = new Cpp2ElementType("SUB_EXPR");
   IElementType TEMPLATE_DECL = new Cpp2ElementType("TEMPLATE_DECL");
   IElementType TEMPLATE_DEF = new Cpp2ElementType("TEMPLATE_DEF");
   IElementType TEMPLATE_PARAM_DECL = new Cpp2ElementType("TEMPLATE_PARAM_DECL");
   IElementType TYPE_ID = new Cpp2ElementType("TYPE_ID");
+  IElementType TYPE_ID_SCOPED = new Cpp2ElementType("TYPE_ID_SCOPED");
   IElementType TYPE_SPECIFIER = new Cpp2ElementType("TYPE_SPECIFIER");
-  IElementType VAR_ASSIGN = new Cpp2ElementType("VAR_ASSIGN");
   IElementType VAR_DECL = new Cpp2ElementType("VAR_DECL");
-  IElementType VAR_DEF = new Cpp2ElementType("VAR_DEF");
 
   IElementType AND = new Cpp2TokenType("&");
   IElementType ANDAND = new Cpp2TokenType("&&");
@@ -105,6 +111,9 @@ public interface Cpp2Types {
       else if (type == ARG) {
         return new Cpp2ArgImpl(node);
       }
+      else if (type == ASSIGN) {
+        return new Cpp2AssignImpl(node);
+      }
       else if (type == BIT_AND_EXPR) {
         return new Cpp2BitAndExprImpl(node);
       }
@@ -113,6 +122,9 @@ public interface Cpp2Types {
       }
       else if (type == BIT_XOR_EXPR) {
         return new Cpp2BitXorExprImpl(node);
+      }
+      else if (type == DECL) {
+        return new Cpp2DeclImpl(node);
       }
       else if (type == DIV_EXPR) {
         return new Cpp2DivExprImpl(node);
@@ -123,8 +135,20 @@ public interface Cpp2Types {
       else if (type == FOR_LOOP) {
         return new Cpp2ForLoopImpl(node);
       }
-      else if (type == FUNC_DEF) {
-        return new Cpp2FuncDefImpl(node);
+      else if (type == FUNC_CALL) {
+        return new Cpp2FuncCallImpl(node);
+      }
+      else if (type == FUNC_DECL) {
+        return new Cpp2FuncDeclImpl(node);
+      }
+      else if (type == FUNC_EXPR) {
+        return new Cpp2FuncExprImpl(node);
+      }
+      else if (type == FUNC_PARAMS) {
+        return new Cpp2FuncParamsImpl(node);
+      }
+      else if (type == FUNC_SIGNATURE) {
+        return new Cpp2FuncSignatureImpl(node);
       }
       else if (type == GTEQ_EXPR) {
         return new Cpp2GteqExprImpl(node);
@@ -153,6 +177,9 @@ public interface Cpp2Types {
       else if (type == MUL_EXPR) {
         return new Cpp2MulExprImpl(node);
       }
+      else if (type == NAMED_DECL) {
+        return new Cpp2NamedDeclImpl(node);
+      }
       else if (type == NEQ_EXPR) {
         return new Cpp2NeqExprImpl(node);
       }
@@ -174,11 +201,11 @@ public interface Cpp2Types {
       else if (type == SCOPE) {
         return new Cpp2ScopeImpl(node);
       }
-      else if (type == STATEMENT) {
-        return new Cpp2StatementImpl(node);
+      else if (type == STMT) {
+        return new Cpp2StmtImpl(node);
       }
-      else if (type == STATEMENT_BLOCK) {
-        return new Cpp2StatementBlockImpl(node);
+      else if (type == STMT_BLOCK) {
+        return new Cpp2StmtBlockImpl(node);
       }
       else if (type == SUB_EXPR) {
         return new Cpp2SubExprImpl(node);
@@ -195,17 +222,14 @@ public interface Cpp2Types {
       else if (type == TYPE_ID) {
         return new Cpp2TypeIdImpl(node);
       }
+      else if (type == TYPE_ID_SCOPED) {
+        return new Cpp2TypeIdScopedImpl(node);
+      }
       else if (type == TYPE_SPECIFIER) {
         return new Cpp2TypeSpecifierImpl(node);
       }
-      else if (type == VAR_ASSIGN) {
-        return new Cpp2VarAssignImpl(node);
-      }
       else if (type == VAR_DECL) {
         return new Cpp2VarDeclImpl(node);
-      }
-      else if (type == VAR_DEF) {
-        return new Cpp2VarDefImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2StatementBlock extends PsiElement {
+public interface Cpp2FuncDecl extends PsiElement {
 
   @NotNull
-  List<Cpp2Statement> getStatementList();
+  Cpp2FuncExpr getFuncExpr();
 
 }

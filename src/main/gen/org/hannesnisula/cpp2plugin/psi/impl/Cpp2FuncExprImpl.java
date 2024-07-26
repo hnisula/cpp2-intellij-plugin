@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2VarDeclImpl extends ASTWrapperPsiElement implements Cpp2VarDecl {
+public class Cpp2FuncExprImpl extends Cpp2ExprImpl implements Cpp2FuncExpr {
 
-  public Cpp2VarDeclImpl(@NotNull ASTNode node) {
+  public Cpp2FuncExprImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitVarDecl(this);
+    visitor.visitFuncExpr(this);
   }
 
   @Override
@@ -28,15 +28,21 @@ public class Cpp2VarDeclImpl extends ASTWrapperPsiElement implements Cpp2VarDecl
   }
 
   @Override
-  @Nullable
-  public Cpp2Expr getExpr() {
-    return findChildByClass(Cpp2Expr.class);
+  @NotNull
+  public Cpp2FuncSignature getFuncSignature() {
+    return findNotNullChildByClass(Cpp2FuncSignature.class);
   }
 
   @Override
   @Nullable
-  public Cpp2TypeSpecifier getTypeSpecifier() {
-    return findChildByClass(Cpp2TypeSpecifier.class);
+  public Cpp2Stmt getStmt() {
+    return findChildByClass(Cpp2Stmt.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2StmtBlock getStmtBlock() {
+    return findChildByClass(Cpp2StmtBlock.class);
   }
 
 }

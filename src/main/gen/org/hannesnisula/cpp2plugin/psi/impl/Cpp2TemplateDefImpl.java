@@ -27,4 +27,16 @@ public class Cpp2TemplateDefImpl extends ASTWrapperPsiElement implements Cpp2Tem
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public List<Cpp2Id> getIdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Id.class);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2TypeIdScoped> getTypeIdScopedList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TypeIdScoped.class);
+  }
+
 }

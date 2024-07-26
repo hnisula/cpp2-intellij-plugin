@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2VarAssignImpl extends ASTWrapperPsiElement implements Cpp2VarAssign {
+public class Cpp2TypeIdScopedImpl extends ASTWrapperPsiElement implements Cpp2TypeIdScoped {
 
-  public Cpp2VarAssignImpl(@NotNull ASTNode node) {
+  public Cpp2TypeIdScopedImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitVarAssign(this);
+    visitor.visitTypeIdScoped(this);
   }
 
   @Override
@@ -28,9 +28,15 @@ public class Cpp2VarAssignImpl extends ASTWrapperPsiElement implements Cpp2VarAs
   }
 
   @Override
+  @Nullable
+  public Cpp2Scope getScope() {
+    return findChildByClass(Cpp2Scope.class);
+  }
+
+  @Override
   @NotNull
-  public List<Cpp2Expr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
+  public Cpp2TypeId getTypeId() {
+    return findNotNullChildByClass(Cpp2TypeId.class);
   }
 
 }

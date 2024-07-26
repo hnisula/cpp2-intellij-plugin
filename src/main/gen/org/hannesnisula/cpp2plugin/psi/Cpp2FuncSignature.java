@@ -5,18 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2Statement extends PsiElement {
+public interface Cpp2FuncSignature extends PsiElement {
+
+  @NotNull
+  Cpp2FuncParams getFuncParams();
 
   @Nullable
-  Cpp2Expr getExpr();
-
-  @Nullable
-  Cpp2VarAssign getVarAssign();
-
-  @Nullable
-  Cpp2VarDecl getVarDecl();
-
-  @Nullable
-  Cpp2VarDef getVarDef();
+  Cpp2Id getId();
 
 }

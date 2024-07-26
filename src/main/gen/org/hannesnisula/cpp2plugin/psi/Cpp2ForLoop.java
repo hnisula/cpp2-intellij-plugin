@@ -14,6 +14,6 @@ public interface Cpp2ForLoop extends PsiElement {
   Cpp2Id getId();
 
   @Nullable
-  Cpp2StatementBlock getStatementBlock();
+  Cpp2StmtBlock getStmtBlock();
 
 }

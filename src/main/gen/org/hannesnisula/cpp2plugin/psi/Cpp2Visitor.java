@@ -19,6 +19,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitAssign(@NotNull Cpp2Assign o) {
+    visitPsiElement(o);
+  }
+
   public void visitBitAndExpr(@NotNull Cpp2BitAndExpr o) {
     visitExpr(o);
   }
@@ -29,6 +33,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
 
   public void visitBitXorExpr(@NotNull Cpp2BitXorExpr o) {
     visitExpr(o);
+  }
+
+  public void visitDecl(@NotNull Cpp2Decl o) {
+    visitPsiElement(o);
   }
 
   public void visitDivExpr(@NotNull Cpp2DivExpr o) {
@@ -47,7 +55,23 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitFuncDef(@NotNull Cpp2FuncDef o) {
+  public void visitFuncCall(@NotNull Cpp2FuncCall o) {
+    visitExpr(o);
+  }
+
+  public void visitFuncDecl(@NotNull Cpp2FuncDecl o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFuncExpr(@NotNull Cpp2FuncExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitFuncParams(@NotNull Cpp2FuncParams o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFuncSignature(@NotNull Cpp2FuncSignature o) {
     visitPsiElement(o);
   }
 
@@ -87,6 +111,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitNamedDecl(@NotNull Cpp2NamedDecl o) {
+    visitPsiElement(o);
+  }
+
   public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {
     visitExpr(o);
   }
@@ -115,11 +143,11 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitStatement(@NotNull Cpp2Statement o) {
+  public void visitStmt(@NotNull Cpp2Stmt o) {
     visitPsiElement(o);
   }
 
-  public void visitStatementBlock(@NotNull Cpp2StatementBlock o) {
+  public void visitStmtBlock(@NotNull Cpp2StmtBlock o) {
     visitPsiElement(o);
   }
 
@@ -143,19 +171,15 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitTypeIdScoped(@NotNull Cpp2TypeIdScoped o) {
+    visitPsiElement(o);
+  }
+
   public void visitTypeSpecifier(@NotNull Cpp2TypeSpecifier o) {
     visitPsiElement(o);
   }
 
-  public void visitVarAssign(@NotNull Cpp2VarAssign o) {
-    visitPsiElement(o);
-  }
-
   public void visitVarDecl(@NotNull Cpp2VarDecl o) {
-    visitPsiElement(o);
-  }
-
-  public void visitVarDef(@NotNull Cpp2VarDef o) {
     visitPsiElement(o);
   }
 

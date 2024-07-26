@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2VarDeclImpl extends ASTWrapperPsiElement implements Cpp2VarDecl {
+public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtBlock {
 
-  public Cpp2VarDeclImpl(@NotNull ASTNode node) {
+  public Cpp2StmtBlockImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitVarDecl(this);
+    visitor.visitStmtBlock(this);
   }
 
   @Override
@@ -28,15 +28,9 @@ public class Cpp2VarDeclImpl extends ASTWrapperPsiElement implements Cpp2VarDecl
   }
 
   @Override
-  @Nullable
-  public Cpp2Expr getExpr() {
-    return findChildByClass(Cpp2Expr.class);
-  }
-
-  @Override
-  @Nullable
-  public Cpp2TypeSpecifier getTypeSpecifier() {
-    return findChildByClass(Cpp2TypeSpecifier.class);
+  @NotNull
+  public List<Cpp2Stmt> getStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Stmt.class);
   }
 
 }

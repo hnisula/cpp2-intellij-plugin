@@ -5,9 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2TypeSpecifier extends PsiElement {
+public interface Cpp2FuncExpr extends Cpp2Expr {
 
   @NotNull
-  Cpp2TypeIdScoped getTypeIdScoped();
+  Cpp2FuncSignature getFuncSignature();
+
+  @Nullable
+  Cpp2Stmt getStmt();
+
+  @Nullable
+  Cpp2StmtBlock getStmtBlock();
 
 }

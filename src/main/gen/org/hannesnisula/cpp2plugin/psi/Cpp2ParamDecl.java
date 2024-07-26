@@ -10,7 +10,4 @@ public interface Cpp2ParamDecl extends PsiElement {
   @Nullable
   Cpp2ParamKind getParamKind();
 
-  @NotNull
-  Cpp2VarDecl getVarDecl();
-
 }

@@ -41,8 +41,8 @@ public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop
 
   @Override
   @Nullable
-  public Cpp2StatementBlock getStatementBlock() {
-    return findChildByClass(Cpp2StatementBlock.class);
+  public Cpp2StmtBlock getStmtBlock() {
+    return findChildByClass(Cpp2StmtBlock.class);
   }
 
 }

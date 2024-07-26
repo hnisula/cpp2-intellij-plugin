@@ -5,18 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2FuncDef extends PsiElement {
-
-  @NotNull
-  List<Cpp2ParamDecl> getParamDeclList();
+public interface Cpp2Stmt extends PsiElement {
 
   @Nullable
-  Cpp2Statement getStatement();
+  Cpp2Assign getAssign();
 
   @Nullable
-  Cpp2StatementBlock getStatementBlock();
+  Cpp2NamedDecl getNamedDecl();
 
   @Nullable
-  Cpp2TypeSpecifier getTypeSpecifier();
+  Cpp2ReturnExpr getReturnExpr();
 
 }

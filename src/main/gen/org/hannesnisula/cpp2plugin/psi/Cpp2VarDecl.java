@@ -7,7 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface Cpp2VarDecl extends PsiElement {
 
-  @NotNull
+  @Nullable
+  Cpp2Expr getExpr();
+
+  @Nullable
   Cpp2TypeSpecifier getTypeSpecifier();
 
 }
