@@ -235,13 +235,14 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // param_kind? IDENTIFIER_WORD
+  // param_kind? IDENTIFIER_WORD (':' type_specifier)?
   public static boolean param_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "param_decl")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PARAM_DECL, "<param decl>");
     r = param_decl_0(b, l + 1);
     r = r && consumeToken(b, IDENTIFIER_WORD);
+    r = r && param_decl_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -251,6 +252,24 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "param_decl_0")) return false;
     param_kind(b, l + 1);
     return true;
+  }
+
+  // (':' type_specifier)?
+  private static boolean param_decl_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "param_decl_2")) return false;
+    param_decl_2_0(b, l + 1);
+    return true;
+  }
+
+  // ':' type_specifier
+  private static boolean param_decl_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "param_decl_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COLON);
+    r = r && type_specifier(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   /* ********************************************************** */

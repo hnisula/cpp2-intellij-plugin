@@ -77,7 +77,7 @@ func_signature ::= func_params ('->' id)?
 func_params ::= '(' param_decl* ')'
 func_call ::= (id | type_id_scoped) '(' (expr)* ')' {extends=expr} // TODO: Investigate its correctness
 arg ::= param_kind? id
-param_decl ::= param_kind? IDENTIFIER_WORD // TODO: [HERE] what are the valid param declarations? type (colon) required?
+param_decl ::= param_kind? IDENTIFIER_WORD (':' type_specifier)?
 param_kind ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')
 
 var_decl ::= (':' type_specifier ('=' expr)?) | (':' '=' expr)
