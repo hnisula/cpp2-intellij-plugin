@@ -27,7 +27,7 @@ public interface Cpp2Types {
   IElementType FUNC_SIGNATURE = new Cpp2ElementType("FUNC_SIGNATURE");
   IElementType GTEQ_EXPR = new Cpp2ElementType("GTEQ_EXPR");
   IElementType GT_EXPR = new Cpp2ElementType("GT_EXPR");
-  IElementType ID = new Cpp2ElementType("ID");
+  IElementType ID_SCOPED = new Cpp2ElementType("ID_SCOPED");
   IElementType LEFT_SHIFT_EXPR = new Cpp2ElementType("LEFT_SHIFT_EXPR");
   IElementType LITERAL = new Cpp2ElementType("LITERAL");
   IElementType LTEQ_EXPR = new Cpp2ElementType("LTEQ_EXPR");
@@ -44,6 +44,7 @@ public interface Cpp2Types {
   IElementType SCOPE = new Cpp2ElementType("SCOPE");
   IElementType STMT = new Cpp2ElementType("STMT");
   IElementType STMT_BLOCK = new Cpp2ElementType("STMT_BLOCK");
+  IElementType SUBSCRIPT_EXPR = new Cpp2ElementType("SUBSCRIPT_EXPR");
   IElementType SUB_EXPR = new Cpp2ElementType("SUB_EXPR");
   IElementType TEMPLATE_DECL = new Cpp2ElementType("TEMPLATE_DECL");
   IElementType TEMPLATE_DEF = new Cpp2ElementType("TEMPLATE_DEF");
@@ -156,8 +157,8 @@ public interface Cpp2Types {
       else if (type == GT_EXPR) {
         return new Cpp2GtExprImpl(node);
       }
-      else if (type == ID) {
-        return new Cpp2IdImpl(node);
+      else if (type == ID_SCOPED) {
+        return new Cpp2IdScopedImpl(node);
       }
       else if (type == LEFT_SHIFT_EXPR) {
         return new Cpp2LeftShiftExprImpl(node);
@@ -206,6 +207,9 @@ public interface Cpp2Types {
       }
       else if (type == STMT_BLOCK) {
         return new Cpp2StmtBlockImpl(node);
+      }
+      else if (type == SUBSCRIPT_EXPR) {
+        return new Cpp2SubscriptExprImpl(node);
       }
       else if (type == SUB_EXPR) {
         return new Cpp2SubExprImpl(node);

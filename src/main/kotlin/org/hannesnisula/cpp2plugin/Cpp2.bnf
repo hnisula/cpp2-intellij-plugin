@@ -73,27 +73,24 @@ decl ::= func_decl | var_decl
 
 func_decl ::= ':' func_expr
 func_expr ::= func_signature '=' (stmt | stmt_block) {extends=expr}
-func_signature ::= func_params ('->' id)?
+func_signature ::= func_params ('->' type_id_scoped)?
 func_params ::= '(' param_decl* ')'
-func_call ::= (id | type_id_scoped) '(' (expr)* ')' {extends=expr} // TODO: Investigate its correctness
-arg ::= param_kind? id
+func_call ::= (id_scoped | type_id_scoped) '(' (expr)* ')' {extends=expr} // TODO: Investigate its correctness
+arg ::= param_kind? expr
 param_decl ::= param_kind? IDENTIFIER_WORD (':' type_specifier)?
 param_kind ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')
 
 var_decl ::= (':' type_specifier ('=' expr)?) | (':' '=' expr)
 
-// OLD ---------------------------------
-for_loop ::= 'for' id 'do' '(' arg* ')' (stmt_block) {
+for_loop ::= 'for' IDENTIFIER_WORD 'do' '(' arg* ')' (stmt_block) {
     pin=1
 }
 
 return_expr ::= RETURN expr
 
-assign ::= id '=' expr {rightAssociative=true}
-//decl ::= IDENTIFIER_WORD ':' (type_specifier | '_' | func_params)? ('=' expr)?
-//var_decl ::= IDENTIFIER_WORD ':' type_specifier !'='
+assign ::= id_scoped '=' expr {rightAssociative=true}
 
-id ::= scope? IDENTIFIER_WORD ('[' expr ']')? {extends=expr}
+id_scoped ::= scope? IDENTIFIER_WORD {extends=expr}
 literal ::= NUMBER_LITERAL | STRING_LITERAL {extends=expr}
 
 type_specifier ::= (const | '*')*  type_id_scoped
@@ -101,11 +98,11 @@ type_id_scoped ::= scope? type_id
 scope ::= (type_id '::')+
 type_id ::= IDENTIFIER_WORD template_def?
 
-template_def ::= '<' (type_id_scoped | id | NUMBER_LITERAL | STRING_LITERAL)* '>'
+template_def ::= '<' (type_id_scoped | id_scoped | NUMBER_LITERAL | STRING_LITERAL)* '>'
 template_decl ::= '<' template_param_decl+ '>'
 template_param_decl ::= IDENTIFIER_WORD '...'? (':' IDENTIFIER_WORD)?
 
-expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | group_2_expr | id | func_expr | literal
+expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | group_2_expr | id_scoped | func_expr | literal
 
 private group_14_expr   ::= or_expr
 private group_13_expr   ::= and_expr
@@ -117,7 +114,7 @@ private group_8_expr    ::= lt_expr | gt_expr | lteq_expr | gteq_expr
 private group_7_expr    ::= left_shift_expr | right_shift_expr
 private group_6_expr    ::= add_expr | sub_expr
 private group_5_expr    ::= mul_expr | div_expr | mod_expr
-private group_2_expr    ::= func_call
+private group_2_expr    ::= func_call | subscript_expr
 
 or_expr             ::= expr '||'   expr {rightAssociative=false}
 and_expr            ::= expr '&&'   expr {rightAssociative=false}
@@ -137,5 +134,6 @@ sub_expr            ::= expr '-'    expr {rightAssociative=false}
 mul_expr            ::= expr '*'    expr {rightAssociative=false}
 div_expr            ::= expr '/'    expr {rightAssociative=false}
 mod_expr            ::= expr '%'    expr {rightAssociative=false}
+subscript_expr      ::= expr '[' expr ']'
 
 //private Recovery ::= !(Identifier | NUMBER_LITERAL)

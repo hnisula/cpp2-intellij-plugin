@@ -35,12 +35,6 @@ public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop
 
   @Override
   @Nullable
-  public Cpp2Id getId() {
-    return findChildByClass(Cpp2Id.class);
-  }
-
-  @Override
-  @Nullable
   public Cpp2StmtBlock getStmtBlock() {
     return findChildByClass(Cpp2StmtBlock.class);
   }

@@ -11,9 +11,6 @@ public interface Cpp2ForLoop extends PsiElement {
   List<Cpp2Arg> getArgList();
 
   @Nullable
-  Cpp2Id getId();
-
-  @Nullable
   Cpp2StmtBlock getStmtBlock();
 
 }

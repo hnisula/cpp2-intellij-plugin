@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2TemplateDefImpl extends ASTWrapperPsiElement implements Cpp2TemplateDef {
+public class Cpp2SubscriptExprImpl extends Cpp2ExprImpl implements Cpp2SubscriptExpr {
 
-  public Cpp2TemplateDefImpl(@NotNull ASTNode node) {
+  public Cpp2SubscriptExprImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitTemplateDef(this);
+    visitor.visitSubscriptExpr(this);
   }
 
   @Override
@@ -29,14 +29,8 @@ public class Cpp2TemplateDefImpl extends ASTWrapperPsiElement implements Cpp2Tem
 
   @Override
   @NotNull
-  public List<Cpp2IdScoped> getIdScopedList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2IdScoped.class);
-  }
-
-  @Override
-  @NotNull
-  public List<Cpp2TypeIdScoped> getTypeIdScopedList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TypeIdScoped.class);
+  public List<Cpp2Expr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
   }
 
 }

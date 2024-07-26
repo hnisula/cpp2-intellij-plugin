@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2Arg extends PsiElement {
+public interface Cpp2SubscriptExpr extends Cpp2Expr {
 
   @NotNull
-  Cpp2Expr getExpr();
-
-  @Nullable
-  Cpp2ParamKind getParamKind();
+  List<Cpp2Expr> getExprList();
 
 }

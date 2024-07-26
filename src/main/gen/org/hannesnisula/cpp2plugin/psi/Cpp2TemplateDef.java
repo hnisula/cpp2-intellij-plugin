@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2TemplateDef extends PsiElement {
 
   @NotNull
-  List<Cpp2Id> getIdList();
+  List<Cpp2IdScoped> getIdScopedList();
 
   @NotNull
   List<Cpp2TypeIdScoped> getTypeIdScopedList();

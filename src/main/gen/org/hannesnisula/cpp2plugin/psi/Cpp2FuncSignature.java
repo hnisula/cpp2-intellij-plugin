@@ -11,6 +11,6 @@ public interface Cpp2FuncSignature extends PsiElement {
   Cpp2FuncParams getFuncParams();
 
   @Nullable
-  Cpp2Id getId();
+  Cpp2TypeIdScoped getTypeIdScoped();
 
 }

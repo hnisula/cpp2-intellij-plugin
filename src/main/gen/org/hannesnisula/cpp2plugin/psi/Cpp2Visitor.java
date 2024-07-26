@@ -83,7 +83,7 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitId(@NotNull Cpp2Id o) {
+  public void visitIdScoped(@NotNull Cpp2IdScoped o) {
     visitExpr(o);
   }
 
@@ -152,6 +152,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitSubExpr(@NotNull Cpp2SubExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitSubscriptExpr(@NotNull Cpp2SubscriptExpr o) {
     visitExpr(o);
   }
 

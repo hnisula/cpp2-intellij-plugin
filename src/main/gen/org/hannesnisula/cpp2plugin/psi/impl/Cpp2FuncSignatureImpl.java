@@ -35,8 +35,8 @@ public class Cpp2FuncSignatureImpl extends ASTWrapperPsiElement implements Cpp2F
 
   @Override
   @Nullable
-  public Cpp2Id getId() {
-    return findChildByClass(Cpp2Id.class);
+  public Cpp2TypeIdScoped getTypeIdScoped() {
+    return findChildByClass(Cpp2TypeIdScoped.class);
   }
 
 }

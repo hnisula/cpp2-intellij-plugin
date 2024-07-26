@@ -39,19 +39,20 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     create_token_set_(ADD_EXPR, AND_EXPR, BIT_AND_EXPR, BIT_OR_EXPR,
       BIT_XOR_EXPR, DIV_EXPR, EQ_EXPR, EXPR,
       FUNC_CALL, FUNC_EXPR, GTEQ_EXPR, GT_EXPR,
-      ID, LEFT_SHIFT_EXPR, LITERAL, LTEQ_EXPR,
+      ID_SCOPED, LEFT_SHIFT_EXPR, LITERAL, LTEQ_EXPR,
       LT_EXPR, MOD_EXPR, MUL_EXPR, NEQ_EXPR,
-      OR_EXPR, RETURN_EXPR, RIGHT_SHIFT_EXPR, SUB_EXPR),
+      OR_EXPR, RETURN_EXPR, RIGHT_SHIFT_EXPR, SUBSCRIPT_EXPR,
+      SUB_EXPR),
   };
 
   /* ********************************************************** */
-  // param_kind? id
+  // param_kind? expr
   public static boolean arg(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "arg")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ARG, "<arg>");
     r = arg_0(b, l + 1);
-    r = r && id(b, l + 1);
+    r = r && expr(b, l + 1, -1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -64,13 +65,13 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // id '=' expr
+  // id_scoped '=' expr
   public static boolean assign(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "assign")) return false;
     if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = id(b, l + 1);
+    r = id_scoped(b, l + 1);
     r = r && consumeToken(b, EQ);
     r = r && expr(b, l + 1, -1);
     exit_section_(b, m, ASSIGN, r);
@@ -114,17 +115,15 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'for' id 'do' '(' arg* ')' (stmt_block)
+  // 'for' IDENTIFIER_WORD 'do' '(' arg* ')' (stmt_block)
   public static boolean for_loop(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "for_loop")) return false;
     if (!nextTokenIs(b, FOR)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, FOR_LOOP, null);
-    r = consumeToken(b, FOR);
+    r = consumeTokens(b, 1, FOR, IDENTIFIER_WORD, DO, LEFT_PARENTHESIS);
     p = r; // pin = 1
-    r = r && report_error_(b, id(b, l + 1));
-    r = p && report_error_(b, consumeTokens(b, -1, DO, LEFT_PARENTHESIS)) && r;
-    r = p && report_error_(b, for_loop_4(b, l + 1)) && r;
+    r = r && report_error_(b, for_loop_4(b, l + 1));
     r = p && report_error_(b, consumeToken(b, RIGHT_PARENTHESIS)) && r;
     r = p && for_loop_6(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
@@ -191,7 +190,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // func_params ('->' id)?
+  // func_params ('->' type_id_scoped)?
   public static boolean func_signature(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "func_signature")) return false;
     if (!nextTokenIs(b, LEFT_PARENTHESIS)) return false;
@@ -203,20 +202,20 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ('->' id)?
+  // ('->' type_id_scoped)?
   private static boolean func_signature_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "func_signature_1")) return false;
     func_signature_1_0(b, l + 1);
     return true;
   }
 
-  // '->' id
+  // '->' type_id_scoped
   private static boolean func_signature_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "func_signature_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ARROW);
-    r = r && id(b, l + 1);
+    r = r && type_id_scoped(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -417,7 +416,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '<' (type_id_scoped | id | NUMBER_LITERAL | STRING_LITERAL)* '>'
+  // '<' (type_id_scoped | id_scoped | NUMBER_LITERAL | STRING_LITERAL)* '>'
   public static boolean template_def(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "template_def")) return false;
     if (!nextTokenIs(b, LT)) return false;
@@ -430,7 +429,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (type_id_scoped | id | NUMBER_LITERAL | STRING_LITERAL)*
+  // (type_id_scoped | id_scoped | NUMBER_LITERAL | STRING_LITERAL)*
   private static boolean template_def_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "template_def_1")) return false;
     while (true) {
@@ -441,12 +440,12 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // type_id_scoped | id | NUMBER_LITERAL | STRING_LITERAL
+  // type_id_scoped | id_scoped | NUMBER_LITERAL | STRING_LITERAL
   private static boolean template_def_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "template_def_1_0")) return false;
     boolean r;
     r = type_id_scoped(b, l + 1);
-    if (!r) r = id(b, l + 1);
+    if (!r) r = id_scoped(b, l + 1);
     if (!r) r = consumeToken(b, NUMBER_LITERAL);
     if (!r) r = consumeToken(b, STRING_LITERAL);
     return r;
@@ -629,8 +628,8 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   // 7: BINARY(left_shift_expr) BINARY(right_shift_expr)
   // 8: BINARY(add_expr) BINARY(sub_expr)
   // 9: BINARY(mul_expr) BINARY(div_expr) BINARY(mod_expr)
-  // 10: ATOM(func_call)
-  // 11: ATOM(id)
+  // 10: ATOM(func_call) BINARY(subscript_expr)
+  // 11: ATOM(id_scoped)
   // 12: ATOM(func_expr)
   // 13: ATOM(literal)
   public static boolean expr(PsiBuilder b, int l, int g) {
@@ -639,7 +638,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<expr>");
     r = func_call(b, l + 1);
-    if (!r) r = id(b, l + 1);
+    if (!r) r = id_scoped(b, l + 1);
     if (!r) r = func_expr(b, l + 1);
     if (!r) r = literal(b, l + 1);
     p = r;
@@ -725,6 +724,11 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
         r = expr(b, l, 9);
         exit_section_(b, l, m, MOD_EXPR, r, true, null);
       }
+      else if (g < 10 && consumeTokenSmart(b, "[")) {
+        r = report_error_(b, expr(b, l, 10));
+        r = consumeToken(b, "]") && r;
+        exit_section_(b, l, m, SUBSCRIPT_EXPR, r, true, null);
+      }
       else {
         exit_section_(b, l, m, null, false, false, null);
         break;
@@ -733,7 +737,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (id | type_id_scoped) '(' (expr)* ')'
+  // (id_scoped | type_id_scoped) '(' (expr)* ')'
   public static boolean func_call(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "func_call")) return false;
     if (!nextTokenIsSmart(b, IDENTIFIER_WORD)) return false;
@@ -747,11 +751,11 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // id | type_id_scoped
+  // id_scoped | type_id_scoped
   private static boolean func_call_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "func_call_0")) return false;
     boolean r;
-    r = id(b, l + 1);
+    r = id_scoped(b, l + 1);
     if (!r) r = type_id_scoped(b, l + 1);
     return r;
   }
@@ -777,43 +781,23 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // scope? IDENTIFIER_WORD ('[' expr ']')?
-  public static boolean id(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "id")) return false;
+  // scope? IDENTIFIER_WORD
+  public static boolean id_scoped(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "id_scoped")) return false;
     if (!nextTokenIsSmart(b, IDENTIFIER_WORD)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = id_0(b, l + 1);
+    r = id_scoped_0(b, l + 1);
     r = r && consumeToken(b, IDENTIFIER_WORD);
-    r = r && id_2(b, l + 1);
-    exit_section_(b, m, ID, r);
+    exit_section_(b, m, ID_SCOPED, r);
     return r;
   }
 
   // scope?
-  private static boolean id_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "id_0")) return false;
+  private static boolean id_scoped_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "id_scoped_0")) return false;
     scope(b, l + 1);
     return true;
-  }
-
-  // ('[' expr ']')?
-  private static boolean id_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "id_2")) return false;
-    id_2_0(b, l + 1);
-    return true;
-  }
-
-  // '[' expr ']'
-  private static boolean id_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "id_2_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokenSmart(b, "[");
-    r = r && expr(b, l + 1, -1);
-    r = r && consumeToken(b, "]");
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   // func_signature '=' (stmt | stmt_block)
