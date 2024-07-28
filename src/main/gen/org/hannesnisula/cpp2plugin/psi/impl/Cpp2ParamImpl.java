@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2TypeIdScopedImpl extends ASTWrapperPsiElement implements Cpp2TypeIdScoped {
+public class Cpp2ParamImpl extends ASTWrapperPsiElement implements Cpp2Param {
 
-  public Cpp2TypeIdScopedImpl(@NotNull ASTNode node) {
+  public Cpp2ParamImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitTypeIdScoped(this);
+    visitor.visitParam(this);
   }
 
   @Override
@@ -29,14 +29,8 @@ public class Cpp2TypeIdScopedImpl extends ASTWrapperPsiElement implements Cpp2Ty
 
   @Override
   @Nullable
-  public Cpp2Scope getScope() {
-    return findChildByClass(Cpp2Scope.class);
-  }
-
-  @Override
-  @NotNull
-  public Cpp2TypeId getTypeId() {
-    return findNotNullChildByClass(Cpp2TypeId.class);
+  public Cpp2Type getType() {
+    return findChildByClass(Cpp2Type.class);
   }
 
 }

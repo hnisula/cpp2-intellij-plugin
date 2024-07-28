@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2TypeIdScoped extends PsiElement {
-
-  @Nullable
-  Cpp2Scope getScope();
+public interface Cpp2Template extends PsiElement {
 
   @NotNull
-  Cpp2TypeId getTypeId();
+  List<Cpp2Type> getTypeList();
 
 }

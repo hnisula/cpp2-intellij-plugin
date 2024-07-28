@@ -8,6 +8,18 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2StmtBlock extends PsiElement {
 
   @NotNull
-  List<Cpp2Stmt> getStmtList();
+  List<Cpp2Assign> getAssignList();
+
+  @NotNull
+  List<Cpp2Decl> getDeclList();
+
+  @NotNull
+  List<Cpp2Expr> getExprList();
+
+  @NotNull
+  List<Cpp2ForLoop> getForLoopList();
+
+  @NotNull
+  List<Cpp2FuncDecl> getFuncDeclList();
 
 }

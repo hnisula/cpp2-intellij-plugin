@@ -29,8 +29,8 @@ public class Cpp2TemplateDeclImpl extends ASTWrapperPsiElement implements Cpp2Te
 
   @Override
   @NotNull
-  public List<Cpp2TemplateParamDecl> getTemplateParamDeclList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TemplateParamDecl.class);
+  public List<Cpp2Type> getTypeList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Type.class);
   }
 
 }

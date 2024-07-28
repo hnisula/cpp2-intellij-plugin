@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2Decl extends PsiElement {
 
   @Nullable
-  Cpp2FuncDecl getFuncDecl();
+  Cpp2Expr getExpr();
 
   @Nullable
-  Cpp2VarDecl getVarDecl();
+  Cpp2Type getType();
 
 }

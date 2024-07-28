@@ -69,8 +69,18 @@ COMMENT = "//".*
       "|"                   { return Cpp2Types.OR; }
       "^"                   { return Cpp2Types.EXP; }
       
+      "type"                { return Cpp2Types.TYPE_WORD; }
+      "this"                { return Cpp2Types.THIS; }
       "for"                 { return Cpp2Types.FOR; }
+      "while"               { return Cpp2Types.WHILE; }
       "do"                  { return Cpp2Types.DO; }
+      "next"                { return Cpp2Types.NEXT; }
+      "if"                  { return Cpp2Types.IF; }
+      "else"                { return Cpp2Types.ELSE; }
+      "next"                { return Cpp2Types.NEXT; }
+      "const"               { return Cpp2Types.CONST; }
+      "return"              { return Cpp2Types.RETURN; }
+      
       "in"                  { return Cpp2Types.IN; }
       "copy"                { return Cpp2Types.COPY; }
       "inout"               { return Cpp2Types.INOUT; }
@@ -78,7 +88,9 @@ COMMENT = "//".*
       "move"                { return Cpp2Types.MOVE; }
       "forward"             { return Cpp2Types.FORWARD; }
       
-      "return"              { return Cpp2Types.RETURN; }
+      "virtual"             { return Cpp2Types.VIRTUAL; }
+      "override"            { return Cpp2Types.OVERRIDE; }
+      "final"               { return Cpp2Types.FINAL; }
       
       {WHITESPACE}          { return TokenType.WHITE_SPACE; }
       

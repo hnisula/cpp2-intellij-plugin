@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2TemplateDecl extends PsiElement {
 
   @NotNull
-  List<Cpp2TemplateParamDecl> getTemplateParamDeclList();
+  List<Cpp2Type> getTypeList();
 
 }

@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2IdScopedImpl extends Cpp2ExprImpl implements Cpp2IdScoped {
+public class Cpp2ReturnTypeImpl extends ASTWrapperPsiElement implements Cpp2ReturnType {
 
-  public Cpp2IdScopedImpl(@NotNull ASTNode node) {
+  public Cpp2ReturnTypeImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitIdScoped(this);
+    visitor.visitReturnType(this);
   }
 
   @Override
@@ -29,8 +29,8 @@ public class Cpp2IdScopedImpl extends Cpp2ExprImpl implements Cpp2IdScoped {
 
   @Override
   @Nullable
-  public Cpp2Scope getScope() {
-    return findChildByClass(Cpp2Scope.class);
+  public Cpp2Type getType() {
+    return findChildByClass(Cpp2Type.class);
   }
 
 }

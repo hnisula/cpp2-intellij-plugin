@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2TemplateDefImpl extends ASTWrapperPsiElement implements Cpp2TemplateDef {
+public class Cpp2TypeImpl extends ASTWrapperPsiElement implements Cpp2Type {
 
-  public Cpp2TemplateDefImpl(@NotNull ASTNode node) {
+  public Cpp2TypeImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitTemplateDef(this);
+    visitor.visitType(this);
   }
 
   @Override
@@ -28,15 +28,15 @@ public class Cpp2TemplateDefImpl extends ASTWrapperPsiElement implements Cpp2Tem
   }
 
   @Override
-  @NotNull
-  public List<Cpp2IdScoped> getIdScopedList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2IdScoped.class);
+  @Nullable
+  public Cpp2Scope getScope() {
+    return findChildByClass(Cpp2Scope.class);
   }
 
   @Override
-  @NotNull
-  public List<Cpp2TypeIdScoped> getTypeIdScopedList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TypeIdScoped.class);
+  @Nullable
+  public Cpp2Template getTemplate() {
+    return findChildByClass(Cpp2Template.class);
   }
 
 }

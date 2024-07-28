@@ -29,14 +29,20 @@ public class Cpp2FuncCallImpl extends Cpp2ExprImpl implements Cpp2FuncCall {
 
   @Override
   @NotNull
-  public List<Cpp2Expr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
+  public List<Cpp2Arg> getArgList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Arg.class);
   }
 
   @Override
   @Nullable
-  public Cpp2TypeIdScoped getTypeIdScoped() {
-    return findChildByClass(Cpp2TypeIdScoped.class);
+  public Cpp2Scope getScope() {
+    return findChildByClass(Cpp2Scope.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2Template getTemplate() {
+    return findChildByClass(Cpp2Template.class);
   }
 
 }

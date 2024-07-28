@@ -28,9 +28,33 @@ public class Cpp2FuncDeclImpl extends ASTWrapperPsiElement implements Cpp2FuncDe
   }
 
   @Override
-  @NotNull
-  public Cpp2FuncExpr getFuncExpr() {
-    return findNotNullChildByClass(Cpp2FuncExpr.class);
+  @Nullable
+  public Cpp2Expr getExpr() {
+    return findChildByClass(Cpp2Expr.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2ParamList getParamList() {
+    return findChildByClass(Cpp2ParamList.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2ReturnType getReturnType() {
+    return findChildByClass(Cpp2ReturnType.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2StmtBlock getStmtBlock() {
+    return findChildByClass(Cpp2StmtBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2TemplateDecl getTemplateDecl() {
+    return findChildByClass(Cpp2TemplateDecl.class);
   }
 
 }

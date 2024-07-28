@@ -22,37 +22,28 @@ public interface Cpp2Types {
   IElementType FOR_LOOP = new Cpp2ElementType("FOR_LOOP");
   IElementType FUNC_CALL = new Cpp2ElementType("FUNC_CALL");
   IElementType FUNC_DECL = new Cpp2ElementType("FUNC_DECL");
-  IElementType FUNC_EXPR = new Cpp2ElementType("FUNC_EXPR");
-  IElementType FUNC_PARAMS = new Cpp2ElementType("FUNC_PARAMS");
-  IElementType FUNC_SIGNATURE = new Cpp2ElementType("FUNC_SIGNATURE");
   IElementType GTEQ_EXPR = new Cpp2ElementType("GTEQ_EXPR");
   IElementType GT_EXPR = new Cpp2ElementType("GT_EXPR");
-  IElementType ID_SCOPED = new Cpp2ElementType("ID_SCOPED");
   IElementType LEFT_SHIFT_EXPR = new Cpp2ElementType("LEFT_SHIFT_EXPR");
   IElementType LITERAL = new Cpp2ElementType("LITERAL");
   IElementType LTEQ_EXPR = new Cpp2ElementType("LTEQ_EXPR");
   IElementType LT_EXPR = new Cpp2ElementType("LT_EXPR");
+  IElementType LVALUE = new Cpp2ElementType("LVALUE");
   IElementType MOD_EXPR = new Cpp2ElementType("MOD_EXPR");
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
-  IElementType NAMED_DECL = new Cpp2ElementType("NAMED_DECL");
   IElementType NEQ_EXPR = new Cpp2ElementType("NEQ_EXPR");
   IElementType OR_EXPR = new Cpp2ElementType("OR_EXPR");
-  IElementType PARAM_DECL = new Cpp2ElementType("PARAM_DECL");
-  IElementType PARAM_KIND = new Cpp2ElementType("PARAM_KIND");
-  IElementType RETURN_EXPR = new Cpp2ElementType("RETURN_EXPR");
+  IElementType PARAM = new Cpp2ElementType("PARAM");
+  IElementType PARAM_LIST = new Cpp2ElementType("PARAM_LIST");
+  IElementType RETURN_TYPE = new Cpp2ElementType("RETURN_TYPE");
   IElementType RIGHT_SHIFT_EXPR = new Cpp2ElementType("RIGHT_SHIFT_EXPR");
   IElementType SCOPE = new Cpp2ElementType("SCOPE");
-  IElementType STMT = new Cpp2ElementType("STMT");
   IElementType STMT_BLOCK = new Cpp2ElementType("STMT_BLOCK");
   IElementType SUBSCRIPT_EXPR = new Cpp2ElementType("SUBSCRIPT_EXPR");
   IElementType SUB_EXPR = new Cpp2ElementType("SUB_EXPR");
+  IElementType TEMPLATE = new Cpp2ElementType("TEMPLATE");
   IElementType TEMPLATE_DECL = new Cpp2ElementType("TEMPLATE_DECL");
-  IElementType TEMPLATE_DEF = new Cpp2ElementType("TEMPLATE_DEF");
-  IElementType TEMPLATE_PARAM_DECL = new Cpp2ElementType("TEMPLATE_PARAM_DECL");
-  IElementType TYPE_ID = new Cpp2ElementType("TYPE_ID");
-  IElementType TYPE_ID_SCOPED = new Cpp2ElementType("TYPE_ID_SCOPED");
-  IElementType TYPE_SPECIFIER = new Cpp2ElementType("TYPE_SPECIFIER");
-  IElementType VAR_DECL = new Cpp2ElementType("VAR_DECL");
+  IElementType TYPE = new Cpp2ElementType("TYPE");
 
   IElementType AND = new Cpp2TokenType("&");
   IElementType ANDAND = new Cpp2TokenType("&&");
@@ -60,20 +51,23 @@ public interface Cpp2Types {
   IElementType ASTERISK = new Cpp2TokenType("*");
   IElementType COLON = new Cpp2TokenType(":");
   IElementType COLONCOLON = new Cpp2TokenType("::");
-  IElementType COMMENT = new Cpp2TokenType("COMMENT");
+  IElementType COMMENT = new Cpp2TokenType("comment");
   IElementType CONST = new Cpp2TokenType("const");
   IElementType COPY = new Cpp2TokenType("copy");
   IElementType DO = new Cpp2TokenType("do");
   IElementType DOTDOTDOT = new Cpp2TokenType("...");
+  IElementType ELSE = new Cpp2TokenType("else");
   IElementType EQ = new Cpp2TokenType("=");
   IElementType EQEQ = new Cpp2TokenType("==");
   IElementType EXP = new Cpp2TokenType("^");
+  IElementType FINAL = new Cpp2TokenType("final");
   IElementType FOR = new Cpp2TokenType("for");
   IElementType FORWARD = new Cpp2TokenType("forward");
   IElementType GT = new Cpp2TokenType(">");
   IElementType GTEQ = new Cpp2TokenType(">=");
   IElementType GTGT = new Cpp2TokenType(">>");
   IElementType IDENTIFIER_WORD = new Cpp2TokenType("IDENTIFIER_WORD");
+  IElementType IF = new Cpp2TokenType("if");
   IElementType IN = new Cpp2TokenType("in");
   IElementType INOUT = new Cpp2TokenType("inout");
   IElementType LEFT_BRACE = new Cpp2TokenType("{");
@@ -86,10 +80,12 @@ public interface Cpp2Types {
   IElementType MODULO = new Cpp2TokenType("%");
   IElementType MOVE = new Cpp2TokenType("move");
   IElementType NEQ = new Cpp2TokenType("!=");
+  IElementType NEXT = new Cpp2TokenType("next");
   IElementType NUMBER_LITERAL = new Cpp2TokenType("NUMBER_LITERAL");
   IElementType OR = new Cpp2TokenType("|");
   IElementType OROR = new Cpp2TokenType("||");
   IElementType OUT = new Cpp2TokenType("out");
+  IElementType OVERRIDE = new Cpp2TokenType("override");
   IElementType PLUS = new Cpp2TokenType("+");
   IElementType PLUSPLUS = new Cpp2TokenType("++");
   IElementType RETURN = new Cpp2TokenType("return");
@@ -98,7 +94,11 @@ public interface Cpp2Types {
   IElementType SEMICOLON = new Cpp2TokenType(";");
   IElementType SLASH = new Cpp2TokenType("/");
   IElementType STRING_LITERAL = new Cpp2TokenType("STRING_LITERAL");
+  IElementType THIS = new Cpp2TokenType("this");
+  IElementType TYPE_WORD = new Cpp2TokenType("type");
   IElementType UNDERSCORE = new Cpp2TokenType("_");
+  IElementType VIRTUAL = new Cpp2TokenType("virtual");
+  IElementType WHILE = new Cpp2TokenType("while");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -142,23 +142,11 @@ public interface Cpp2Types {
       else if (type == FUNC_DECL) {
         return new Cpp2FuncDeclImpl(node);
       }
-      else if (type == FUNC_EXPR) {
-        return new Cpp2FuncExprImpl(node);
-      }
-      else if (type == FUNC_PARAMS) {
-        return new Cpp2FuncParamsImpl(node);
-      }
-      else if (type == FUNC_SIGNATURE) {
-        return new Cpp2FuncSignatureImpl(node);
-      }
       else if (type == GTEQ_EXPR) {
         return new Cpp2GteqExprImpl(node);
       }
       else if (type == GT_EXPR) {
         return new Cpp2GtExprImpl(node);
-      }
-      else if (type == ID_SCOPED) {
-        return new Cpp2IdScopedImpl(node);
       }
       else if (type == LEFT_SHIFT_EXPR) {
         return new Cpp2LeftShiftExprImpl(node);
@@ -172,14 +160,14 @@ public interface Cpp2Types {
       else if (type == LT_EXPR) {
         return new Cpp2LtExprImpl(node);
       }
+      else if (type == LVALUE) {
+        return new Cpp2LvalueImpl(node);
+      }
       else if (type == MOD_EXPR) {
         return new Cpp2ModExprImpl(node);
       }
       else if (type == MUL_EXPR) {
         return new Cpp2MulExprImpl(node);
-      }
-      else if (type == NAMED_DECL) {
-        return new Cpp2NamedDeclImpl(node);
       }
       else if (type == NEQ_EXPR) {
         return new Cpp2NeqExprImpl(node);
@@ -187,23 +175,20 @@ public interface Cpp2Types {
       else if (type == OR_EXPR) {
         return new Cpp2OrExprImpl(node);
       }
-      else if (type == PARAM_DECL) {
-        return new Cpp2ParamDeclImpl(node);
+      else if (type == PARAM) {
+        return new Cpp2ParamImpl(node);
       }
-      else if (type == PARAM_KIND) {
-        return new Cpp2ParamKindImpl(node);
+      else if (type == PARAM_LIST) {
+        return new Cpp2ParamListImpl(node);
       }
-      else if (type == RETURN_EXPR) {
-        return new Cpp2ReturnExprImpl(node);
+      else if (type == RETURN_TYPE) {
+        return new Cpp2ReturnTypeImpl(node);
       }
       else if (type == RIGHT_SHIFT_EXPR) {
         return new Cpp2RightShiftExprImpl(node);
       }
       else if (type == SCOPE) {
         return new Cpp2ScopeImpl(node);
-      }
-      else if (type == STMT) {
-        return new Cpp2StmtImpl(node);
       }
       else if (type == STMT_BLOCK) {
         return new Cpp2StmtBlockImpl(node);
@@ -214,26 +199,14 @@ public interface Cpp2Types {
       else if (type == SUB_EXPR) {
         return new Cpp2SubExprImpl(node);
       }
+      else if (type == TEMPLATE) {
+        return new Cpp2TemplateImpl(node);
+      }
       else if (type == TEMPLATE_DECL) {
         return new Cpp2TemplateDeclImpl(node);
       }
-      else if (type == TEMPLATE_DEF) {
-        return new Cpp2TemplateDefImpl(node);
-      }
-      else if (type == TEMPLATE_PARAM_DECL) {
-        return new Cpp2TemplateParamDeclImpl(node);
-      }
-      else if (type == TYPE_ID) {
-        return new Cpp2TypeIdImpl(node);
-      }
-      else if (type == TYPE_ID_SCOPED) {
-        return new Cpp2TypeIdScopedImpl(node);
-      }
-      else if (type == TYPE_SPECIFIER) {
-        return new Cpp2TypeSpecifierImpl(node);
-      }
-      else if (type == VAR_DECL) {
-        return new Cpp2VarDeclImpl(node);
+      else if (type == TYPE) {
+        return new Cpp2TypeImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

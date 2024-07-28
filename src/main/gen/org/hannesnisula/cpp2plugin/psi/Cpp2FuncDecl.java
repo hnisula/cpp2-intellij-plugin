@@ -7,7 +7,19 @@ import com.intellij.psi.PsiElement;
 
 public interface Cpp2FuncDecl extends PsiElement {
 
-  @NotNull
-  Cpp2FuncExpr getFuncExpr();
+  @Nullable
+  Cpp2Expr getExpr();
+
+  @Nullable
+  Cpp2ParamList getParamList();
+
+  @Nullable
+  Cpp2ReturnType getReturnType();
+
+  @Nullable
+  Cpp2StmtBlock getStmtBlock();
+
+  @Nullable
+  Cpp2TemplateDecl getTemplateDecl();
 
 }

@@ -63,27 +63,11 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitFuncExpr(@NotNull Cpp2FuncExpr o) {
-    visitExpr(o);
-  }
-
-  public void visitFuncParams(@NotNull Cpp2FuncParams o) {
-    visitPsiElement(o);
-  }
-
-  public void visitFuncSignature(@NotNull Cpp2FuncSignature o) {
-    visitPsiElement(o);
-  }
-
   public void visitGtExpr(@NotNull Cpp2GtExpr o) {
     visitExpr(o);
   }
 
   public void visitGteqExpr(@NotNull Cpp2GteqExpr o) {
-    visitExpr(o);
-  }
-
-  public void visitIdScoped(@NotNull Cpp2IdScoped o) {
     visitExpr(o);
   }
 
@@ -103,16 +87,16 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitLvalue(@NotNull Cpp2Lvalue o) {
+    visitExpr(o);
+  }
+
   public void visitModExpr(@NotNull Cpp2ModExpr o) {
     visitExpr(o);
   }
 
   public void visitMulExpr(@NotNull Cpp2MulExpr o) {
     visitExpr(o);
-  }
-
-  public void visitNamedDecl(@NotNull Cpp2NamedDecl o) {
-    visitPsiElement(o);
   }
 
   public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {
@@ -123,16 +107,16 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitParamDecl(@NotNull Cpp2ParamDecl o) {
+  public void visitParam(@NotNull Cpp2Param o) {
     visitPsiElement(o);
   }
 
-  public void visitParamKind(@NotNull Cpp2ParamKind o) {
+  public void visitParamList(@NotNull Cpp2ParamList o) {
     visitPsiElement(o);
   }
 
-  public void visitReturnExpr(@NotNull Cpp2ReturnExpr o) {
-    visitExpr(o);
+  public void visitReturnType(@NotNull Cpp2ReturnType o) {
+    visitPsiElement(o);
   }
 
   public void visitRightShiftExpr(@NotNull Cpp2RightShiftExpr o) {
@@ -140,10 +124,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitScope(@NotNull Cpp2Scope o) {
-    visitPsiElement(o);
-  }
-
-  public void visitStmt(@NotNull Cpp2Stmt o) {
     visitPsiElement(o);
   }
 
@@ -159,31 +139,15 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitTemplate(@NotNull Cpp2Template o) {
+    visitPsiElement(o);
+  }
+
   public void visitTemplateDecl(@NotNull Cpp2TemplateDecl o) {
     visitPsiElement(o);
   }
 
-  public void visitTemplateDef(@NotNull Cpp2TemplateDef o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTemplateParamDecl(@NotNull Cpp2TemplateParamDecl o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTypeId(@NotNull Cpp2TypeId o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTypeIdScoped(@NotNull Cpp2TypeIdScoped o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTypeSpecifier(@NotNull Cpp2TypeSpecifier o) {
-    visitPsiElement(o);
-  }
-
-  public void visitVarDecl(@NotNull Cpp2VarDecl o) {
+  public void visitType(@NotNull Cpp2Type o) {
     visitPsiElement(o);
   }
 

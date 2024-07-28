@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2FuncSignatureImpl extends ASTWrapperPsiElement implements Cpp2FuncSignature {
+public class Cpp2TemplateImpl extends ASTWrapperPsiElement implements Cpp2Template {
 
-  public Cpp2FuncSignatureImpl(@NotNull ASTNode node) {
+  public Cpp2TemplateImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitFuncSignature(this);
+    visitor.visitTemplate(this);
   }
 
   @Override
@@ -29,14 +29,8 @@ public class Cpp2FuncSignatureImpl extends ASTWrapperPsiElement implements Cpp2F
 
   @Override
   @NotNull
-  public Cpp2FuncParams getFuncParams() {
-    return findNotNullChildByClass(Cpp2FuncParams.class);
-  }
-
-  @Override
-  @Nullable
-  public Cpp2TypeIdScoped getTypeIdScoped() {
-    return findChildByClass(Cpp2TypeIdScoped.class);
+  public List<Cpp2Type> getTypeList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Type.class);
   }
 
 }

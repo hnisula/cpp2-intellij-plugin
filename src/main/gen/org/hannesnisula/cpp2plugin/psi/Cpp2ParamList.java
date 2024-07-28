@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2ParamKind extends PsiElement {
+public interface Cpp2ParamList extends PsiElement {
+
+  @NotNull
+  List<Cpp2Param> getParamList();
 
 }

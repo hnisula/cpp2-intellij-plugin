@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2Stmt extends PsiElement {
+public interface Cpp2ReturnType extends PsiElement {
 
   @Nullable
-  Cpp2Assign getAssign();
-
-  @Nullable
-  Cpp2NamedDecl getNamedDecl();
-
-  @Nullable
-  Cpp2ReturnExpr getReturnExpr();
+  Cpp2Type getType();
 
 }

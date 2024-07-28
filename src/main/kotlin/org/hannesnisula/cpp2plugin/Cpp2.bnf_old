@@ -48,17 +48,8 @@
         OR                  = '|'
         EXP                 = '^'
         
-        TYPE_WORD           = 'type'
-        THIS                = 'this'
         FOR                 = 'for'
-        WHILE               = 'while'
         DO                  = 'do'
-        NEXT                = 'next'
-        IF                  = 'if'
-        ELSE                = 'else'
-        CONST               = 'const'
-        RETURN              = 'return'
-        
         IN                  = 'in'
         COPY                = 'copy'
         INOUT               = 'inout'
@@ -66,39 +57,52 @@
         MOVE                = 'move'
         FORWARD             = 'forward'
         
-        VIRTUAL             = 'virtual'
-        OVERRIDE            = 'override'
-        FINAL               = 'final'
-        
+        RETURN              = 'return'
     ]
 }
 
-file ::= (stmt | stmt_block | func_decl | comment)*
+file ::= (stmt | named_decl | for_loop | COMMENT)*
 
-stmt_block ::= '{' stmt* '}'
-private stmt ::= (decl | assign | func_decl | expr_stmt | for_loop | comment)
-private expr_stmt ::= expr ';'
-
-for_loop ::= 'for' expr ('next' expr)? 'do' param_list stmt_block {
+stmt_block ::= '{' (stmt | COMMENT)* '}'
+stmt ::= (named_decl | assign | return_expr) ";" {
     pin=1
 }
 
-assign ::= lvalue '=' expr ';'
-decl ::= IDENTIFIER_WORD ':' ((type '=' expr) | type | ('=' expr)) ';' {
-    pin=3
-}
-func_decl ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? (('='? expr ';') | ('=' stmt_block)) {
-    pin=3
-}
-return_type ::= '->' ('_' | type)
+named_decl ::= IDENTIFIER_WORD decl
+decl ::= func_decl | var_decl
 
-func_call ::= scope? IDENTIFIER_WORD template? '(' arg* ')' {extends=expr}
+func_decl ::= ':' func_expr
+func_expr ::= func_signature '=' (stmt | stmt_block) {extends=expr}
+func_signature ::= func_params ('->' type_id_scoped)?
+func_params ::= '(' param_decl* ')'
+func_call ::= (id_scoped | type_id_scoped) '(' (expr)* ')' {extends=expr} // TODO: Investigate its correctness
 arg ::= param_kind? expr
-param_list ::= '(' ((this_param | param) (',' param)*)? ')'
-param ::= param_kind? ((IDENTIFIER_WORD (':' ('_' | type))?) | (IDENTIFIER_WORD '...'))
-private this_param ::= this_param_kind? 'this'
+param_decl ::= param_kind? IDENTIFIER_WORD (':' type_specifier)?
+param_kind ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')
 
-expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | group_2_expr | literal | lvalue
+var_decl ::= (':' type_specifier ('=' expr)?) | (':' '=' expr)
+
+for_loop ::= 'for' IDENTIFIER_WORD 'do' '(' arg* ')' (stmt_block) {
+    pin=1
+}
+
+return_expr ::= RETURN expr
+
+assign ::= id_scoped '=' expr {rightAssociative=true}
+
+id_scoped ::= scope? IDENTIFIER_WORD {extends=expr}
+literal ::= NUMBER_LITERAL | STRING_LITERAL {extends=expr}
+
+type_specifier ::= (const | '*')*  type_id_scoped
+type_id_scoped ::= scope? type_id
+scope ::= (type_id '::')+
+type_id ::= IDENTIFIER_WORD template_def?
+
+template_def ::= '<' (type_id_scoped | id_scoped | NUMBER_LITERAL | STRING_LITERAL)* '>'
+template_decl ::= '<' template_param_decl+ '>'
+template_param_decl ::= IDENTIFIER_WORD '...'? (':' IDENTIFIER_WORD)?
+
+expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | group_2_expr | id_scoped | func_expr | literal
 
 private group_14_expr   ::= or_expr
 private group_13_expr   ::= and_expr
@@ -111,8 +115,6 @@ private group_7_expr    ::= left_shift_expr | right_shift_expr
 private group_6_expr    ::= add_expr | sub_expr
 private group_5_expr    ::= mul_expr | div_expr | mod_expr
 private group_2_expr    ::= func_call | subscript_expr
-
-lvalue ::= scope? IDENTIFIER_WORD ('*' | ('[' expr ']' | ('.' IDENTIFIER_WORD)))* {extends=expr}
 
 or_expr             ::= expr '||'   expr {rightAssociative=false}
 and_expr            ::= expr '&&'   expr {rightAssociative=false}
@@ -133,14 +135,3 @@ mul_expr            ::= expr '*'    expr {rightAssociative=false}
 div_expr            ::= expr '/'    expr {rightAssociative=false}
 mod_expr            ::= expr '%'    expr {rightAssociative=false}
 subscript_expr      ::= expr '[' expr ']'
-
-template_decl ::= '<' ((IDENTIFIER_WORD (':' (TYPE_WORD | type))?) | (IDENTIFIER_WORD '...' (':' TYPE_WORD)?))+ '>'
-template ::= '<' (type)* '>'
-type ::= qualifier* scope? IDENTIFIER_WORD template?
-scope ::= (IDENTIFIER_WORD template? '::')+
-
-literal ::= NUMBER_LITERAL | STRING_LITERAL {extends=expr}
-
-private qualifier ::= ('const' | '*')
-private this_param_kind ::= ('virtual' | 'override' | 'final' | param_kind)
-private param_kind ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')

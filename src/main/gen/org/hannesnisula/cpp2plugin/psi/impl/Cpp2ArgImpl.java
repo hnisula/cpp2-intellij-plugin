@@ -33,10 +33,4 @@ public class Cpp2ArgImpl extends ASTWrapperPsiElement implements Cpp2Arg {
     return findNotNullChildByClass(Cpp2Expr.class);
   }
 
-  @Override
-  @Nullable
-  public Cpp2ParamKind getParamKind() {
-    return findChildByClass(Cpp2ParamKind.class);
-  }
-
 }

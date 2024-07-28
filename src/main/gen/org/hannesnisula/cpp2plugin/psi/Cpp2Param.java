@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2IdScoped extends Cpp2Expr {
+public interface Cpp2Param extends PsiElement {
 
   @Nullable
-  Cpp2Scope getScope();
+  Cpp2Type getType();
 
 }

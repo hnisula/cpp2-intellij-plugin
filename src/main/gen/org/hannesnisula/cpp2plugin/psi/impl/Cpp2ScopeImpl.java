@@ -29,8 +29,8 @@ public class Cpp2ScopeImpl extends ASTWrapperPsiElement implements Cpp2Scope {
 
   @Override
   @NotNull
-  public List<Cpp2TypeId> getTypeIdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TypeId.class);
+  public List<Cpp2Template> getTemplateList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Template.class);
   }
 
 }

@@ -29,14 +29,14 @@ public class Cpp2DeclImpl extends ASTWrapperPsiElement implements Cpp2Decl {
 
   @Override
   @Nullable
-  public Cpp2FuncDecl getFuncDecl() {
-    return findChildByClass(Cpp2FuncDecl.class);
+  public Cpp2Expr getExpr() {
+    return findChildByClass(Cpp2Expr.class);
   }
 
   @Override
   @Nullable
-  public Cpp2VarDecl getVarDecl() {
-    return findChildByClass(Cpp2VarDecl.class);
+  public Cpp2Type getType() {
+    return findChildByClass(Cpp2Type.class);
   }
 
 }

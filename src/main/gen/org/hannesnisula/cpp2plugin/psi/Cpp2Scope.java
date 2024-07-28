@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2Scope extends PsiElement {
 
   @NotNull
-  List<Cpp2TypeId> getTypeIdList();
+  List<Cpp2Template> getTemplateList();
 
 }

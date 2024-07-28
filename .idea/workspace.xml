@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8ecf5e2-83e2-4d7a-a04e-2c2872d01c79" name="Changes" comment="Fix function parameter declaration&#10;&#10;At least the common, verbose one.">
+    <list default="true" id="e8ecf5e2-83e2-4d7a-a04e-2c2872d01c79" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/Cpp2Lexer.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/parser/Cpp2Parser.java" beforeDir="false" />
@@ -27,7 +27,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2FuncSignature.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2GtExpr.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2GteqExpr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Id.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2IdScoped.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2LeftShiftExpr.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Literal.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2LtExpr.java" beforeDir="false" />
@@ -45,6 +45,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2Stmt.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2StmtBlock.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2SubExpr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2SubscriptExpr.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2TemplateDecl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2TemplateDef.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2TemplateParamDecl.java" beforeDir="false" />
@@ -73,7 +74,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2FuncSignatureImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2GtExprImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2GteqExprImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2IdImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2IdScopedImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2LeftShiftExprImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2LiteralImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2LtExprImpl.java" beforeDir="false" />
@@ -91,6 +92,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2StmtBlockImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2StmtImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2SubExprImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2SubscriptExprImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TemplateDeclImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TemplateDefImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TemplateParamDeclImpl.java" beforeDir="false" />
@@ -99,6 +101,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TypeSpecifierImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2VarDeclImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.flex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/psi/Cpp2TokenSets.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/psi/Cpp2TokenSets.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -189,7 +192,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hannes/Code/cpp2-plugin&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hannes/Code/cpp2-plugin/src/main/kotlin/org/hannesnisula/cpp2plugin&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -204,6 +207,11 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Hannes\Code\cpp2-plugin\src\main\kotlin\org\hannesnisula\cpp2plugin" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -242,7 +250,10 @@
       <workItem from="1721798332913" duration="23709000" />
       <workItem from="1721888953420" duration="925000" />
       <workItem from="1721924173358" duration="4520000" />
-      <workItem from="1721999747827" duration="7757000" />
+      <workItem from="1721999747827" duration="12575000" />
+      <workItem from="1722068457020" duration="16700000" />
+      <workItem from="1722170763998" duration="8964000" />
+      <workItem from="1722184311862" duration="2127000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit with barely working test parser">
       <option name="closed" value="true" />
@@ -292,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722010511988</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add subscript operator">
+      <option name="closed" value="true" />
+      <created>1722011208013</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1722011208014</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,6 +347,7 @@
     <MESSAGE value="Fix lots of operators" />
     <MESSAGE value="More improvements on the basic grammar&#10;&#10;Mainly declarations and scoped identifiers have been improved.&#10;Functions' parameter declarations are not usable, though." />
     <MESSAGE value="Fix function parameter declaration&#10;&#10;At least the common, verbose one." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix function parameter declaration&#10;&#10;At least the common, verbose one." />
+    <MESSAGE value="Add subscript operator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add subscript operator" />
   </component>
 </project>

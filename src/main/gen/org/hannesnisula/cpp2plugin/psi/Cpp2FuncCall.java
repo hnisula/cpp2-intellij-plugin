@@ -8,9 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2FuncCall extends Cpp2Expr {
 
   @NotNull
-  List<Cpp2Expr> getExprList();
+  List<Cpp2Arg> getArgList();
 
   @Nullable
-  Cpp2TypeIdScoped getTypeIdScoped();
+  Cpp2Scope getScope();
+
+  @Nullable
+  Cpp2Template getTemplate();
 
 }
