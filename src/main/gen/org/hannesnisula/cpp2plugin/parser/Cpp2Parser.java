@@ -129,6 +129,17 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // !(';')
+  static boolean decl_recovery(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "decl_recovery")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !consumeToken(b, SEMICOLON);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // expr ';'
   static boolean expr_stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_stmt")) return false;
@@ -141,7 +152,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (stmt | stmt_block | func_decl | comment)*
+  // (func_decl | stmt | stmt_block | comment)*
   static boolean file(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "file")) return false;
     while (true) {
@@ -152,13 +163,13 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // stmt | stmt_block | func_decl | comment
+  // func_decl | stmt | stmt_block | comment
   private static boolean file_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "file_0")) return false;
     boolean r;
-    r = stmt(b, l + 1);
+    r = func_decl(b, l + 1);
+    if (!r) r = stmt(b, l + 1);
     if (!r) r = stmt_block(b, l + 1);
-    if (!r) r = func_decl(b, l + 1);
     if (!r) r = consumeToken(b, COMMENT);
     return r;
   }
@@ -168,17 +179,16 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   public static boolean for_loop(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "for_loop")) return false;
     if (!nextTokenIs(b, FOR)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, FOR_LOOP, null);
+    boolean r;
+    Marker m = enter_section_(b);
     r = consumeToken(b, FOR);
-    p = r; // pin = 1
-    r = r && report_error_(b, expr(b, l + 1, -1));
-    r = p && report_error_(b, for_loop_2(b, l + 1)) && r;
-    r = p && report_error_(b, consumeToken(b, DO)) && r;
-    r = p && report_error_(b, param_list(b, l + 1)) && r;
-    r = p && stmt_block(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = r && expr(b, l + 1, -1);
+    r = r && for_loop_2(b, l + 1);
+    r = r && consumeToken(b, DO);
+    r = r && param_list(b, l + 1);
+    r = r && stmt_block(b, l + 1);
+    exit_section_(b, m, FOR_LOOP, r);
+    return r;
   }
 
   // ('next' expr)?
@@ -208,9 +218,9 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, FUNC_DECL, null);
     r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON);
     r = r && func_decl_2(b, l + 1);
-    p = r; // pin = 3
-    r = r && report_error_(b, param_list(b, l + 1));
-    r = p && report_error_(b, func_decl_4(b, l + 1)) && r;
+    r = r && param_list(b, l + 1);
+    p = r; // pin = param_list
+    r = r && report_error_(b, func_decl_4(b, l + 1));
     r = p && func_decl_5(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
@@ -496,13 +506,13 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // decl | assign | func_decl | expr_stmt | for_loop | comment
+  // func_decl | decl | assign | expr_stmt | for_loop | comment
   static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
-    r = decl(b, l + 1);
+    r = func_decl(b, l + 1);
+    if (!r) r = decl(b, l + 1);
     if (!r) r = assign(b, l + 1);
-    if (!r) r = func_decl(b, l + 1);
     if (!r) r = expr_stmt(b, l + 1);
     if (!r) r = for_loop(b, l + 1);
     if (!r) r = consumeToken(b, COMMENT);

@@ -10,10 +10,10 @@ public interface Cpp2ForLoop extends PsiElement {
   @NotNull
   List<Cpp2Expr> getExprList();
 
-  @Nullable
+  @NotNull
   Cpp2ParamList getParamList();
 
-  @Nullable
+  @NotNull
   Cpp2StmtBlock getStmtBlock();
 
 }

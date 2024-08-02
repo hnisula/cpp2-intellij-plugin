@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import org.hannesnisula.cpp2plugin.psi.*;
+import com.intellij.psi.PsiReference;
 
 public class Cpp2LvalueImpl extends Cpp2ExprImpl implements Cpp2Lvalue {
 
@@ -37,6 +38,18 @@ public class Cpp2LvalueImpl extends Cpp2ExprImpl implements Cpp2Lvalue {
   @Nullable
   public Cpp2Scope getScope() {
     return findChildByClass(Cpp2Scope.class);
+  }
+
+  @Override
+  @Nullable
+  public String getIdentifierString() {
+    return Cpp2PsiUtil.getIdentifierString(this);
+  }
+
+  @Override
+  @NotNull
+  public PsiReference[] getReferences() {
+    return Cpp2PsiUtil.getReferences(this);
   }
 
 }

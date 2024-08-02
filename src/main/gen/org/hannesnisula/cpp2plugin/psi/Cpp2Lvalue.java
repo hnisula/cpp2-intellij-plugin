@@ -4,6 +4,7 @@ package org.hannesnisula.cpp2plugin.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 
 public interface Cpp2Lvalue extends Cpp2Expr {
 
@@ -12,5 +13,11 @@ public interface Cpp2Lvalue extends Cpp2Expr {
 
   @Nullable
   Cpp2Scope getScope();
+
+  @Nullable
+  String getIdentifierString();
+
+  @NotNull
+  PsiReference[] getReferences();
 
 }

@@ -10,7 +10,7 @@ public interface Cpp2FuncDecl extends PsiElement {
   @Nullable
   Cpp2Expr getExpr();
 
-  @Nullable
+  @NotNull
   Cpp2ParamList getParamList();
 
   @Nullable

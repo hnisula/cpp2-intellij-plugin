@@ -5,12 +5,21 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2Decl extends PsiElement {
+public interface Cpp2Decl extends Cpp2NamedElement {
 
   @Nullable
   Cpp2Expr getExpr();
 
   @Nullable
   Cpp2Type getType();
+
+  @Nullable
+  String getIdentifierString();
+
+  @Nullable
+  PsiElement getNameIdentifier();
+
+  @NotNull
+  PsiElement setName(@NotNull String newName);
 
 }

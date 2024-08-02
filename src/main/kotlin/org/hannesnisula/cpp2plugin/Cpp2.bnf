@@ -12,6 +12,8 @@
     elementTypeClass="org.hannesnisula.cpp2plugin.psi.Cpp2ElementType"
     tokenTypeClass="org.hannesnisula.cpp2plugin.psi.Cpp2TokenType"
     
+    psiImplUtilClass="org.hannesnisula.cpp2plugin.psi.Cpp2PsiUtil"
+    
     extends(".*expr")=expr
     
     tokens=[
@@ -28,6 +30,8 @@
         GTEQ                = '>='
         LTLT                = '<<'
         GTGT                = '>>'
+        
+        NEWLINE             = '\n'
         
         COLON               = ':'
         SEMICOLON           = ';'
@@ -73,22 +77,26 @@
     ]
 }
 
-file ::= (stmt | stmt_block | func_decl | comment)*
+file ::= (func_decl | stmt | stmt_block | comment)*
 
 stmt_block ::= '{' stmt* '}'
-private stmt ::= (decl | assign | func_decl | expr_stmt | for_loop | comment)
+private stmt ::= (func_decl | decl | assign | expr_stmt | for_loop | comment)
 private expr_stmt ::= expr ';'
 
 for_loop ::= 'for' expr ('next' expr)? 'do' param_list stmt_block {
-    pin=1
+    pin='for'
 }
 
 assign ::= lvalue '=' expr ';'
 decl ::= IDENTIFIER_WORD ':' ((type '=' expr) | type | ('=' expr)) ';' {
     pin=3
+    mixin="org.hannesnisula.cpp2plugin.psi.Cpp2NamedElementImpl"
+    implements="org.hannesnisula.cpp2plugin.psi.Cpp2NamedElement"
+    methods=[getIdentifierString getNameIdentifier setName]
 }
+private decl_recovery ::= !(';')
 func_decl ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? (('='? expr ';') | ('=' stmt_block)) {
-    pin=3
+    pin=param_list
 }
 return_type ::= '->' ('_' | type)
 
@@ -112,7 +120,10 @@ private group_6_expr    ::= add_expr | sub_expr
 private group_5_expr    ::= mul_expr | div_expr | mod_expr
 private group_2_expr    ::= func_call | subscript_expr
 
-lvalue ::= scope? IDENTIFIER_WORD ('*' | ('[' expr ']' | ('.' IDENTIFIER_WORD)))* {extends=expr}
+lvalue ::= scope? IDENTIFIER_WORD ('*' | ('[' expr ']' | ('.' IDENTIFIER_WORD)))* {
+    extends=expr
+    methods=[getIdentifierString getReferences]
+}
 
 or_expr             ::= expr '||'   expr {rightAssociative=false}
 and_expr            ::= expr '&&'   expr {rightAssociative=false}

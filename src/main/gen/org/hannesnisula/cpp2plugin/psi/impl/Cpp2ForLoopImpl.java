@@ -34,15 +34,15 @@ public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop
   }
 
   @Override
-  @Nullable
+  @NotNull
   public Cpp2ParamList getParamList() {
-    return findChildByClass(Cpp2ParamList.class);
+    return findNotNullChildByClass(Cpp2ParamList.class);
   }
 
   @Override
-  @Nullable
+  @NotNull
   public Cpp2StmtBlock getStmtBlock() {
-    return findChildByClass(Cpp2StmtBlock.class);
+    return findNotNullChildByClass(Cpp2StmtBlock.class);
   }
 
 }

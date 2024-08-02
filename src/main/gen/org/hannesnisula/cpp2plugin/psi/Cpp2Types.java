@@ -80,6 +80,7 @@ public interface Cpp2Types {
   IElementType MODULO = new Cpp2TokenType("%");
   IElementType MOVE = new Cpp2TokenType("move");
   IElementType NEQ = new Cpp2TokenType("!=");
+  IElementType NEWLINE = new Cpp2TokenType("\\n");
   IElementType NEXT = new Cpp2TokenType("next");
   IElementType NUMBER_LITERAL = new Cpp2TokenType("NUMBER_LITERAL");
   IElementType OR = new Cpp2TokenType("|");

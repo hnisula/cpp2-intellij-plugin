@@ -34,9 +34,9 @@ public class Cpp2FuncDeclImpl extends ASTWrapperPsiElement implements Cpp2FuncDe
   }
 
   @Override
-  @Nullable
+  @NotNull
   public Cpp2ParamList getParamList() {
-    return findChildByClass(Cpp2ParamList.class);
+    return findNotNullChildByClass(Cpp2ParamList.class);
   }
 
   @Override
