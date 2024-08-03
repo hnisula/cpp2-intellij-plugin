@@ -23,10 +23,22 @@ public interface Cpp2StmtBlock extends PsiElement {
   List<Cpp2ForLoop> getForLoopList();
 
   @NotNull
+  List<Cpp2FuncAliasDecl> getFuncAliasDeclList();
+
+  @NotNull
   List<Cpp2FuncDecl> getFuncDeclList();
 
   @NotNull
   List<Cpp2IfBranch> getIfBranchList();
+
+  @NotNull
+  List<Cpp2NamespaceAliasDecl> getNamespaceAliasDeclList();
+
+  @NotNull
+  List<Cpp2ObjAliasDecl> getObjAliasDeclList();
+
+  @NotNull
+  List<Cpp2TypeAliasDecl> getTypeAliasDeclList();
 
   @NotNull
   List<Cpp2WhileLoop> getWhileLoopList();

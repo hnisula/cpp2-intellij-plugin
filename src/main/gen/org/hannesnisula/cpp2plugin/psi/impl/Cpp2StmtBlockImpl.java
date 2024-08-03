@@ -59,6 +59,12 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
 
   @Override
   @NotNull
+  public List<Cpp2FuncAliasDecl> getFuncAliasDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2FuncAliasDecl.class);
+  }
+
+  @Override
+  @NotNull
   public List<Cpp2FuncDecl> getFuncDeclList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2FuncDecl.class);
   }
@@ -67,6 +73,24 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
   @NotNull
   public List<Cpp2IfBranch> getIfBranchList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2IfBranch.class);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2NamespaceAliasDecl> getNamespaceAliasDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2NamespaceAliasDecl.class);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2ObjAliasDecl> getObjAliasDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ObjAliasDecl.class);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2TypeAliasDecl> getTypeAliasDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TypeAliasDecl.class);
   }
 
   @Override

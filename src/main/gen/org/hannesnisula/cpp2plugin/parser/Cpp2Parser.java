@@ -45,6 +45,19 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   };
 
   /* ********************************************************** */
+  // obj_alias_decl | func_alias_decl | type_alias_decl | namespace_alias_decl
+  static boolean alias_decl(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "alias_decl")) return false;
+    if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
+    boolean r;
+    r = obj_alias_decl(b, l + 1);
+    if (!r) r = func_alias_decl(b, l + 1);
+    if (!r) r = type_alias_decl(b, l + 1);
+    if (!r) r = namespace_alias_decl(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
   // param_kind? expr
   public static boolean arg(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "arg")) return false;
@@ -165,28 +178,15 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (type_decl | do_while_loop | func_decl | stmt | stmt_block | comment)*
+  // root_stmt*
   static boolean file(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "file")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!file_0(b, l + 1)) break;
+      if (!root_stmt(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "file", c)) break;
     }
     return true;
-  }
-
-  // type_decl | do_while_loop | func_decl | stmt | stmt_block | comment
-  private static boolean file_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "file_0")) return false;
-    boolean r;
-    r = type_decl(b, l + 1);
-    if (!r) r = do_while_loop(b, l + 1);
-    if (!r) r = func_decl(b, l + 1);
-    if (!r) r = stmt(b, l + 1);
-    if (!r) r = stmt_block(b, l + 1);
-    if (!r) r = consumeToken(b, COMMENT);
-    return r;
   }
 
   /* ********************************************************** */
@@ -210,6 +210,78 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   private static boolean for_loop_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "for_loop_2")) return false;
     next_stmt(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER_WORD ':' template_decl? param_list return_type? (('==' stmt_block) | ('=='? expr ';'))
+  public static boolean func_alias_decl(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_alias_decl")) return false;
+    if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, FUNC_ALIAS_DECL, null);
+    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON);
+    r = r && func_alias_decl_2(b, l + 1);
+    r = r && param_list(b, l + 1);
+    p = r; // pin = param_list
+    r = r && report_error_(b, func_alias_decl_4(b, l + 1));
+    r = p && func_alias_decl_5(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // template_decl?
+  private static boolean func_alias_decl_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_alias_decl_2")) return false;
+    template_decl(b, l + 1);
+    return true;
+  }
+
+  // return_type?
+  private static boolean func_alias_decl_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_alias_decl_4")) return false;
+    return_type(b, l + 1);
+    return true;
+  }
+
+  // ('==' stmt_block) | ('=='? expr ';')
+  private static boolean func_alias_decl_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_alias_decl_5")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = func_alias_decl_5_0(b, l + 1);
+    if (!r) r = func_alias_decl_5_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '==' stmt_block
+  private static boolean func_alias_decl_5_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_alias_decl_5_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, EQEQ);
+    r = r && stmt_block(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '=='? expr ';'
+  private static boolean func_alias_decl_5_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_alias_decl_5_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = func_alias_decl_5_1_0(b, l + 1);
+    r = r && expr(b, l + 1, -1);
+    r = r && consumeToken(b, SEMICOLON);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // '=='?
+  private static boolean func_alias_decl_5_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_alias_decl_5_1_0")) return false;
+    consumeToken(b, EQEQ);
     return true;
   }
 
@@ -386,6 +458,65 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // IDENTIFIER_WORD ':' 'namespace' '==' namespace_ref ';'
+  public static boolean namespace_alias_decl(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namespace_alias_decl")) return false;
+    if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON, NAMESPACE, EQEQ);
+    r = r && namespace_ref(b, l + 1);
+    r = r && consumeToken(b, SEMICOLON);
+    exit_section_(b, m, NAMESPACE_ALIAS_DECL, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER_WORD ':' 'namespace' '{' root_stmt* '}'
+  public static boolean namespace_decl(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namespace_decl")) return false;
+    if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON, NAMESPACE, LEFT_BRACE);
+    r = r && namespace_decl_4(b, l + 1);
+    r = r && consumeToken(b, RIGHT_BRACE);
+    exit_section_(b, m, NAMESPACE_DECL, r);
+    return r;
+  }
+
+  // root_stmt*
+  private static boolean namespace_decl_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namespace_decl_4")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!root_stmt(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "namespace_decl_4", c)) break;
+    }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // scope? IDENTIFIER_WORD
+  public static boolean namespace_ref(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namespace_ref")) return false;
+    if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = namespace_ref_0(b, l + 1);
+    r = r && consumeToken(b, IDENTIFIER_WORD);
+    exit_section_(b, m, NAMESPACE_REF, r);
+    return r;
+  }
+
+  // scope?
+  private static boolean namespace_ref_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "namespace_ref_0")) return false;
+    scope(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // 'next' expr
   public static boolean next_stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "next_stmt")) return false;
@@ -396,6 +527,29 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     r = r && expr(b, l + 1, -1);
     exit_section_(b, m, NEXT_STMT, r);
     return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER_WORD ':' type? '==' expr ';'
+  public static boolean obj_alias_decl(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "obj_alias_decl")) return false;
+    if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON);
+    r = r && obj_alias_decl_2(b, l + 1);
+    r = r && consumeToken(b, EQEQ);
+    r = r && expr(b, l + 1, -1);
+    r = r && consumeToken(b, SEMICOLON);
+    exit_section_(b, m, OBJ_ALIAS_DECL, r);
+    return r;
+  }
+
+  // type?
+  private static boolean obj_alias_decl_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "obj_alias_decl_2")) return false;
+    type(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -586,6 +740,21 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // type_decl | func_decl | namespace_decl | comment
+  public static boolean root_stmt(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "root_stmt")) return false;
+    if (!nextTokenIs(b, "<root stmt>", COMMENT, IDENTIFIER_WORD)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ROOT_STMT, "<root stmt>");
+    r = type_decl(b, l + 1);
+    if (!r) r = func_decl(b, l + 1);
+    if (!r) r = namespace_decl(b, l + 1);
+    if (!r) r = consumeToken(b, COMMENT);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // (IDENTIFIER_WORD template? '::')+
   public static boolean scope(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "scope")) return false;
@@ -622,12 +791,13 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // func_decl | decl | assign | expr_stmt | if_branch | for_loop | do_while_loop | while_loop | comment
+  // func_decl | decl | alias_decl | assign | expr_stmt | if_branch | for_loop | do_while_loop | while_loop | comment
   static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     r = func_decl(b, l + 1);
     if (!r) r = decl(b, l + 1);
+    if (!r) r = alias_decl(b, l + 1);
     if (!r) r = assign(b, l + 1);
     if (!r) r = expr_stmt(b, l + 1);
     if (!r) r = if_branch(b, l + 1);
@@ -872,6 +1042,20 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "type_3")) return false;
     template(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER_WORD ':' 'type' '==' type ';'
+  public static boolean type_alias_decl(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type_alias_decl")) return false;
+    if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON, TYPE_WORD, EQEQ);
+    r = r && type(b, l + 1);
+    r = r && consumeToken(b, SEMICOLON);
+    exit_section_(b, m, TYPE_ALIAS_DECL, r);
+    return r;
   }
 
   /* ********************************************************** */

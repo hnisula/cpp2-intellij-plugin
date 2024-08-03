@@ -21,6 +21,7 @@ public interface Cpp2Types {
   IElementType EQ_EXPR = new Cpp2ElementType("EQ_EXPR");
   IElementType EXPR = new Cpp2ElementType("EXPR");
   IElementType FOR_LOOP = new Cpp2ElementType("FOR_LOOP");
+  IElementType FUNC_ALIAS_DECL = new Cpp2ElementType("FUNC_ALIAS_DECL");
   IElementType FUNC_CALL = new Cpp2ElementType("FUNC_CALL");
   IElementType FUNC_DECL = new Cpp2ElementType("FUNC_DECL");
   IElementType GTEQ_EXPR = new Cpp2ElementType("GTEQ_EXPR");
@@ -35,14 +36,19 @@ public interface Cpp2Types {
   IElementType MEMBER_DECL = new Cpp2ElementType("MEMBER_DECL");
   IElementType MOD_EXPR = new Cpp2ElementType("MOD_EXPR");
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
+  IElementType NAMESPACE_ALIAS_DECL = new Cpp2ElementType("NAMESPACE_ALIAS_DECL");
+  IElementType NAMESPACE_DECL = new Cpp2ElementType("NAMESPACE_DECL");
+  IElementType NAMESPACE_REF = new Cpp2ElementType("NAMESPACE_REF");
   IElementType NEQ_EXPR = new Cpp2ElementType("NEQ_EXPR");
   IElementType NEXT_STMT = new Cpp2ElementType("NEXT_STMT");
+  IElementType OBJ_ALIAS_DECL = new Cpp2ElementType("OBJ_ALIAS_DECL");
   IElementType OR_EXPR = new Cpp2ElementType("OR_EXPR");
   IElementType PARAM = new Cpp2ElementType("PARAM");
   IElementType PARAM_LIST = new Cpp2ElementType("PARAM_LIST");
   IElementType PAREN_EXPR = new Cpp2ElementType("PAREN_EXPR");
   IElementType RETURN_TYPE = new Cpp2ElementType("RETURN_TYPE");
   IElementType RIGHT_SHIFT_EXPR = new Cpp2ElementType("RIGHT_SHIFT_EXPR");
+  IElementType ROOT_STMT = new Cpp2ElementType("ROOT_STMT");
   IElementType SCOPE = new Cpp2ElementType("SCOPE");
   IElementType STMT_BLOCK = new Cpp2ElementType("STMT_BLOCK");
   IElementType SUBSCRIPT_EXPR = new Cpp2ElementType("SUBSCRIPT_EXPR");
@@ -50,6 +56,7 @@ public interface Cpp2Types {
   IElementType TEMPLATE = new Cpp2ElementType("TEMPLATE");
   IElementType TEMPLATE_DECL = new Cpp2ElementType("TEMPLATE_DECL");
   IElementType TYPE = new Cpp2ElementType("TYPE");
+  IElementType TYPE_ALIAS_DECL = new Cpp2ElementType("TYPE_ALIAS_DECL");
   IElementType TYPE_DECL = new Cpp2ElementType("TYPE_DECL");
   IElementType WHILE_LOOP = new Cpp2ElementType("WHILE_LOOP");
 
@@ -92,6 +99,7 @@ public interface Cpp2Types {
   IElementType MODULO = new Cpp2TokenType("%");
   IElementType MOVE = new Cpp2TokenType("move");
   IElementType MUL = new Cpp2TokenType("MUL");
+  IElementType NAMESPACE = new Cpp2TokenType("namespace");
   IElementType NEQ = new Cpp2TokenType("!=");
   IElementType NEWLINE = new Cpp2TokenType("\\n");
   IElementType NEXT = new Cpp2TokenType("next");
@@ -155,6 +163,9 @@ public interface Cpp2Types {
       else if (type == FOR_LOOP) {
         return new Cpp2ForLoopImpl(node);
       }
+      else if (type == FUNC_ALIAS_DECL) {
+        return new Cpp2FuncAliasDeclImpl(node);
+      }
       else if (type == FUNC_CALL) {
         return new Cpp2FuncCallImpl(node);
       }
@@ -197,11 +208,23 @@ public interface Cpp2Types {
       else if (type == MUL_EXPR) {
         return new Cpp2MulExprImpl(node);
       }
+      else if (type == NAMESPACE_ALIAS_DECL) {
+        return new Cpp2NamespaceAliasDeclImpl(node);
+      }
+      else if (type == NAMESPACE_DECL) {
+        return new Cpp2NamespaceDeclImpl(node);
+      }
+      else if (type == NAMESPACE_REF) {
+        return new Cpp2NamespaceRefImpl(node);
+      }
       else if (type == NEQ_EXPR) {
         return new Cpp2NeqExprImpl(node);
       }
       else if (type == NEXT_STMT) {
         return new Cpp2NextStmtImpl(node);
+      }
+      else if (type == OBJ_ALIAS_DECL) {
+        return new Cpp2ObjAliasDeclImpl(node);
       }
       else if (type == OR_EXPR) {
         return new Cpp2OrExprImpl(node);
@@ -220,6 +243,9 @@ public interface Cpp2Types {
       }
       else if (type == RIGHT_SHIFT_EXPR) {
         return new Cpp2RightShiftExprImpl(node);
+      }
+      else if (type == ROOT_STMT) {
+        return new Cpp2RootStmtImpl(node);
       }
       else if (type == SCOPE) {
         return new Cpp2ScopeImpl(node);
@@ -241,6 +267,9 @@ public interface Cpp2Types {
       }
       else if (type == TYPE) {
         return new Cpp2TypeImpl(node);
+      }
+      else if (type == TYPE_ALIAS_DECL) {
+        return new Cpp2TypeAliasDeclImpl(node);
       }
       else if (type == TYPE_DECL) {
         return new Cpp2TypeDeclImpl(node);
