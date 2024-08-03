@@ -87,6 +87,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitListExpr(@NotNull Cpp2ListExpr o) {
+    visitExpr(o);
+  }
+
   public void visitLiteral(@NotNull Cpp2Literal o) {
     visitExpr(o);
   }

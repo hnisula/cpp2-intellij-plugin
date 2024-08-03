@@ -28,6 +28,7 @@ public interface Cpp2Types {
   IElementType GT_EXPR = new Cpp2ElementType("GT_EXPR");
   IElementType IF_BRANCH = new Cpp2ElementType("IF_BRANCH");
   IElementType LEFT_SHIFT_EXPR = new Cpp2ElementType("LEFT_SHIFT_EXPR");
+  IElementType LIST_EXPR = new Cpp2ElementType("LIST_EXPR");
   IElementType LITERAL = new Cpp2ElementType("LITERAL");
   IElementType LTEQ_EXPR = new Cpp2ElementType("LTEQ_EXPR");
   IElementType LT_EXPR = new Cpp2ElementType("LT_EXPR");
@@ -67,11 +68,13 @@ public interface Cpp2Types {
   IElementType BOOL_LITERAL = new Cpp2TokenType("BOOL_LITERAL");
   IElementType COLON = new Cpp2TokenType(":");
   IElementType COLONCOLON = new Cpp2TokenType("::");
+  IElementType COMMA = new Cpp2TokenType(",");
   IElementType COMMENT = new Cpp2TokenType("comment");
   IElementType CONST = new Cpp2TokenType("const");
   IElementType COPY = new Cpp2TokenType("copy");
   IElementType DEREF = new Cpp2TokenType("DEREF");
   IElementType DO = new Cpp2TokenType("do");
+  IElementType DOT = new Cpp2TokenType(".");
   IElementType DOTDOTDOT = new Cpp2TokenType("...");
   IElementType ELSE = new Cpp2TokenType("else");
   IElementType EQ = new Cpp2TokenType("=");
@@ -185,6 +188,9 @@ public interface Cpp2Types {
       }
       else if (type == LEFT_SHIFT_EXPR) {
         return new Cpp2LeftShiftExprImpl(node);
+      }
+      else if (type == LIST_EXPR) {
+        return new Cpp2ListExprImpl(node);
       }
       else if (type == LITERAL) {
         return new Cpp2LiteralImpl(node);

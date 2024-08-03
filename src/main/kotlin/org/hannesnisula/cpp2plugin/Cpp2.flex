@@ -83,6 +83,8 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "&"                   { return Cpp2Types.AND; }
       "|"                   { return Cpp2Types.OR; }
       "^"                   { return Cpp2Types.EXP; }
+      "."                   { return Cpp2Types.DOT; }
+      ","                   { return Cpp2Types.COMMA; }
       
       "type"                { return Cpp2Types.TYPE_WORD; }
       "this"                { return Cpp2Types.THIS; }
