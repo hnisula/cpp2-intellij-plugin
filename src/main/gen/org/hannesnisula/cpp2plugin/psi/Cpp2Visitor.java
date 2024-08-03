@@ -71,6 +71,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitIfBranch(@NotNull Cpp2IfBranch o) {
+    visitPsiElement(o);
+  }
+
   public void visitLeftShiftExpr(@NotNull Cpp2LeftShiftExpr o) {
     visitExpr(o);
   }
@@ -121,6 +125,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
 
   public void visitParamList(@NotNull Cpp2ParamList o) {
     visitPsiElement(o);
+  }
+
+  public void visitParenExpr(@NotNull Cpp2ParenExpr o) {
+    visitExpr(o);
   }
 
   public void visitReturnType(@NotNull Cpp2ReturnType o) {

@@ -35,6 +35,7 @@ class Cpp2SyntaxHighlighter : SyntaxHighlighterBase() {
             Cpp2Types.OVERRIDE,
             Cpp2Types.FINAL,
             Cpp2Types.CONST,
+            Cpp2Types.IF,
             Cpp2Types.FOR,
             Cpp2Types.DO -> pack(KEYWORD)
             Cpp2Types.IDENTIFIER_WORD -> pack(IDENTIFIER)

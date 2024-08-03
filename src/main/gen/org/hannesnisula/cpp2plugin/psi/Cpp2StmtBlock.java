@@ -22,4 +22,7 @@ public interface Cpp2StmtBlock extends PsiElement {
   @NotNull
   List<Cpp2FuncDecl> getFuncDeclList();
 
+  @NotNull
+  List<Cpp2IfBranch> getIfBranchList();
+
 }

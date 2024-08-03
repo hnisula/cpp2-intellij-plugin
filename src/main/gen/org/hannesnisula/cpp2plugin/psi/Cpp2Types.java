@@ -24,6 +24,7 @@ public interface Cpp2Types {
   IElementType FUNC_DECL = new Cpp2ElementType("FUNC_DECL");
   IElementType GTEQ_EXPR = new Cpp2ElementType("GTEQ_EXPR");
   IElementType GT_EXPR = new Cpp2ElementType("GT_EXPR");
+  IElementType IF_BRANCH = new Cpp2ElementType("IF_BRANCH");
   IElementType LEFT_SHIFT_EXPR = new Cpp2ElementType("LEFT_SHIFT_EXPR");
   IElementType LITERAL = new Cpp2ElementType("LITERAL");
   IElementType LTEQ_EXPR = new Cpp2ElementType("LTEQ_EXPR");
@@ -37,6 +38,7 @@ public interface Cpp2Types {
   IElementType OR_EXPR = new Cpp2ElementType("OR_EXPR");
   IElementType PARAM = new Cpp2ElementType("PARAM");
   IElementType PARAM_LIST = new Cpp2ElementType("PARAM_LIST");
+  IElementType PAREN_EXPR = new Cpp2ElementType("PAREN_EXPR");
   IElementType RETURN_TYPE = new Cpp2ElementType("RETURN_TYPE");
   IElementType RIGHT_SHIFT_EXPR = new Cpp2ElementType("RIGHT_SHIFT_EXPR");
   IElementType SCOPE = new Cpp2ElementType("SCOPE");
@@ -159,6 +161,9 @@ public interface Cpp2Types {
       else if (type == GT_EXPR) {
         return new Cpp2GtExprImpl(node);
       }
+      else if (type == IF_BRANCH) {
+        return new Cpp2IfBranchImpl(node);
+      }
       else if (type == LEFT_SHIFT_EXPR) {
         return new Cpp2LeftShiftExprImpl(node);
       }
@@ -197,6 +202,9 @@ public interface Cpp2Types {
       }
       else if (type == PARAM_LIST) {
         return new Cpp2ParamListImpl(node);
+      }
+      else if (type == PAREN_EXPR) {
+        return new Cpp2ParenExprImpl(node);
       }
       else if (type == RETURN_TYPE) {
         return new Cpp2ReturnTypeImpl(node);

@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtBlock {
+public class Cpp2IfBranchImpl extends ASTWrapperPsiElement implements Cpp2IfBranch {
 
-  public Cpp2StmtBlockImpl(@NotNull ASTNode node) {
+  public Cpp2IfBranchImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitStmtBlock(this);
+    visitor.visitIfBranch(this);
   }
 
   @Override
@@ -29,38 +29,14 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
 
   @Override
   @NotNull
-  public List<Cpp2Assign> getAssignList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Assign.class);
-  }
-
-  @Override
-  @NotNull
-  public List<Cpp2Decl> getDeclList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Decl.class);
-  }
-
-  @Override
-  @NotNull
   public List<Cpp2Expr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
   }
 
   @Override
   @NotNull
-  public List<Cpp2ForLoop> getForLoopList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ForLoop.class);
-  }
-
-  @Override
-  @NotNull
-  public List<Cpp2FuncDecl> getFuncDeclList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2FuncDecl.class);
-  }
-
-  @Override
-  @NotNull
-  public List<Cpp2IfBranch> getIfBranchList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2IfBranch.class);
+  public List<Cpp2StmtBlock> getStmtBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2StmtBlock.class);
   }
 
 }
