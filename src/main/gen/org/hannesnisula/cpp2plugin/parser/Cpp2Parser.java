@@ -440,10 +440,9 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   // 'const' | '*'
   static boolean qualifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "qualifier")) return false;
-    if (!nextTokenIs(b, "", ASTERISK, CONST)) return false;
     boolean r;
     r = consumeToken(b, CONST);
-    if (!r) r = consumeToken(b, ASTERISK);
+    if (!r) r = consumeToken(b, "*");
     return r;
   }
 
@@ -769,16 +768,16 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   // 8: BINARY(add_expr) BINARY(sub_expr)
   // 9: BINARY(mul_expr) BINARY(div_expr) BINARY(mod_expr)
   // 10: ATOM(func_call) BINARY(subscript_expr)
-  // 11: ATOM(literal)
-  // 12: ATOM(lvalue)
+  // 11: ATOM(lvalue)
+  // 12: ATOM(literal)
   public static boolean expr(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expr")) return false;
     addVariant(b, "<expr>");
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<expr>");
     r = func_call(b, l + 1);
-    if (!r) r = literal(b, l + 1);
     if (!r) r = lvalue(b, l + 1);
+    if (!r) r = literal(b, l + 1);
     p = r;
     r = r && expr_0(b, l + 1, g);
     exit_section_(b, l, m, null, r, p, null);
@@ -850,7 +849,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
         r = expr(b, l, 8);
         exit_section_(b, l, m, SUB_EXPR, r, true, null);
       }
-      else if (g < 9 && consumeTokenSmart(b, ASTERISK)) {
+      else if (g < 9 && consumeTokenSmart(b, MUL)) {
         r = expr(b, l, 9);
         exit_section_(b, l, m, MUL_EXPR, r, true, null);
       }
@@ -916,19 +915,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // NUMBER_LITERAL | STRING_LITERAL
-  public static boolean literal(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "literal")) return false;
-    if (!nextTokenIsSmart(b, NUMBER_LITERAL, STRING_LITERAL)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, LITERAL, "<literal>");
-    r = consumeTokenSmart(b, NUMBER_LITERAL);
-    if (!r) r = consumeTokenSmart(b, STRING_LITERAL);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // scope? IDENTIFIER_WORD ('*' | ('[' expr ']' | ('.' IDENTIFIER_WORD)))*
+  // scope? IDENTIFIER_WORD(DEREF | ('[' expr ']' | ('.' IDENTIFIER_WORD)))*
   public static boolean lvalue(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "lvalue")) return false;
     if (!nextTokenIsSmart(b, IDENTIFIER_WORD)) return false;
@@ -948,7 +935,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ('*' | ('[' expr ']' | ('.' IDENTIFIER_WORD)))*
+  // (DEREF | ('[' expr ']' | ('.' IDENTIFIER_WORD)))*
   private static boolean lvalue_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "lvalue_2")) return false;
     while (true) {
@@ -959,12 +946,12 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // '*' | ('[' expr ']' | ('.' IDENTIFIER_WORD))
+  // DEREF | ('[' expr ']' | ('.' IDENTIFIER_WORD))
   private static boolean lvalue_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "lvalue_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokenSmart(b, ASTERISK);
+    r = consumeTokenSmart(b, DEREF);
     if (!r) r = lvalue_2_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -1001,6 +988,19 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     r = consumeTokenSmart(b, ".");
     r = r && consumeToken(b, IDENTIFIER_WORD);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | STRING_LITERAL
+  public static boolean literal(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "literal")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, LITERAL, "<literal>");
+    r = consumeTokenSmart(b, BOOL_LITERAL);
+    if (!r) r = consumeTokenSmart(b, INT_LITERAL);
+    if (!r) r = consumeTokenSmart(b, FLOAT_LITERAL);
+    if (!r) r = consumeTokenSmart(b, STRING_LITERAL);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

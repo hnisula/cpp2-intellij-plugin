@@ -48,12 +48,13 @@ public interface Cpp2Types {
   IElementType AND = new Cpp2TokenType("&");
   IElementType ANDAND = new Cpp2TokenType("&&");
   IElementType ARROW = new Cpp2TokenType("->");
-  IElementType ASTERISK = new Cpp2TokenType("*");
+  IElementType BOOL_LITERAL = new Cpp2TokenType("BOOL_LITERAL");
   IElementType COLON = new Cpp2TokenType(":");
   IElementType COLONCOLON = new Cpp2TokenType("::");
   IElementType COMMENT = new Cpp2TokenType("comment");
   IElementType CONST = new Cpp2TokenType("const");
   IElementType COPY = new Cpp2TokenType("copy");
+  IElementType DEREF = new Cpp2TokenType("DEREF");
   IElementType DO = new Cpp2TokenType("do");
   IElementType DOTDOTDOT = new Cpp2TokenType("...");
   IElementType ELSE = new Cpp2TokenType("else");
@@ -61,6 +62,7 @@ public interface Cpp2Types {
   IElementType EQEQ = new Cpp2TokenType("==");
   IElementType EXP = new Cpp2TokenType("^");
   IElementType FINAL = new Cpp2TokenType("final");
+  IElementType FLOAT_LITERAL = new Cpp2TokenType("FLOAT_LITERAL");
   IElementType FOR = new Cpp2TokenType("for");
   IElementType FORWARD = new Cpp2TokenType("forward");
   IElementType GT = new Cpp2TokenType(">");
@@ -70,6 +72,7 @@ public interface Cpp2Types {
   IElementType IF = new Cpp2TokenType("if");
   IElementType IN = new Cpp2TokenType("in");
   IElementType INOUT = new Cpp2TokenType("inout");
+  IElementType INT_LITERAL = new Cpp2TokenType("INT_LITERAL");
   IElementType LEFT_BRACE = new Cpp2TokenType("{");
   IElementType LEFT_PARENTHESIS = new Cpp2TokenType("(");
   IElementType LT = new Cpp2TokenType("<");
@@ -79,10 +82,10 @@ public interface Cpp2Types {
   IElementType MINUSMINUS = new Cpp2TokenType("--");
   IElementType MODULO = new Cpp2TokenType("%");
   IElementType MOVE = new Cpp2TokenType("move");
+  IElementType MUL = new Cpp2TokenType("MUL");
   IElementType NEQ = new Cpp2TokenType("!=");
   IElementType NEWLINE = new Cpp2TokenType("\\n");
   IElementType NEXT = new Cpp2TokenType("next");
-  IElementType NUMBER_LITERAL = new Cpp2TokenType("NUMBER_LITERAL");
   IElementType OR = new Cpp2TokenType("|");
   IElementType OROR = new Cpp2TokenType("||");
   IElementType OUT = new Cpp2TokenType("out");

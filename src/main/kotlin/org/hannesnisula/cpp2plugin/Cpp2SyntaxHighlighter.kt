@@ -13,7 +13,8 @@ class Cpp2SyntaxHighlighter : SyntaxHighlighterBase() {
         val KEYWORD: TextAttributesKey = createTextAttributesKey("KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
         val IDENTIFIER: TextAttributesKey = createTextAttributesKey("IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER)
         val COMMENT: TextAttributesKey = createTextAttributesKey("COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
-        val NUMBER_LITERAL: TextAttributesKey = createTextAttributesKey("NUMBER", DefaultLanguageHighlighterColors.NUMBER)
+        val NUMERIC_LITERAL: TextAttributesKey = createTextAttributesKey("NUMBER", DefaultLanguageHighlighterColors.NUMBER)
+        val BOOL_LITERAL: TextAttributesKey = createTextAttributesKey("BOOL", DefaultLanguageHighlighterColors.NUMBER)
         val STRING_LITERAL: TextAttributesKey = createTextAttributesKey("STRING", DefaultLanguageHighlighterColors.STRING)
     }
     
@@ -24,8 +25,10 @@ class Cpp2SyntaxHighlighter : SyntaxHighlighterBase() {
             Cpp2Types.FOR,
             Cpp2Types.DO -> pack(KEYWORD)
             Cpp2Types.IDENTIFIER_WORD -> pack(IDENTIFIER)
-            Cpp2Types.NUMBER_LITERAL -> pack(NUMBER_LITERAL)
+            Cpp2Types.INT_LITERAL,
+            Cpp2Types.FLOAT_LITERAL -> pack(NUMERIC_LITERAL)
             Cpp2Types.STRING_LITERAL -> pack(STRING_LITERAL)
+            Cpp2Types.BOOL_LITERAL -> pack(BOOL_LITERAL)
             Cpp2Types.COMMENT -> pack(COMMENT)
             else -> emptyArray()
         }

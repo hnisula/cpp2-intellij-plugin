@@ -43,7 +43,6 @@
         GT                  = '>'
         EQ                  = '='
         UNDERSCORE          = '_'
-        ASTERISK            = '*'
         PLUS                = '+'
         MINUS               = '-'
         SLASH               = '/'
@@ -106,7 +105,7 @@ param_list ::= '(' ((this_param | param) (',' param)*)? ')'
 param ::= param_kind? ((IDENTIFIER_WORD (':' ('_' | type))?) | (IDENTIFIER_WORD '...'))
 private this_param ::= this_param_kind? 'this'
 
-expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | group_2_expr | literal | lvalue
+expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | group_2_expr | lvalue | literal
 
 private group_14_expr   ::= or_expr
 private group_13_expr   ::= and_expr
@@ -120,7 +119,7 @@ private group_6_expr    ::= add_expr | sub_expr
 private group_5_expr    ::= mul_expr | div_expr | mod_expr
 private group_2_expr    ::= func_call | subscript_expr
 
-lvalue ::= scope? IDENTIFIER_WORD ('*' | ('[' expr ']' | ('.' IDENTIFIER_WORD)))* {
+lvalue ::= scope? IDENTIFIER_WORD(DEREF | ('[' expr ']' | ('.' IDENTIFIER_WORD)))* {
     extends=expr
     methods=[getIdentifierString getReferences]
 }
@@ -140,7 +139,7 @@ right_shift_expr    ::= expr '>>'   expr {rightAssociative=false}
 left_shift_expr     ::= expr '<<'   expr {rightAssociative=false}
 add_expr            ::= expr '+'    expr {rightAssociative=false}
 sub_expr            ::= expr '-'    expr {rightAssociative=false}
-mul_expr            ::= expr '*'    expr {rightAssociative=false}
+mul_expr            ::= expr MUL    expr {rightAssociative=false}
 div_expr            ::= expr '/'    expr {rightAssociative=false}
 mod_expr            ::= expr '%'    expr {rightAssociative=false}
 subscript_expr      ::= expr '[' expr ']'
@@ -150,7 +149,7 @@ template ::= '<' (type)* '>'
 type ::= qualifier* scope? IDENTIFIER_WORD template?
 scope ::= (IDENTIFIER_WORD template? '::')+
 
-literal ::= NUMBER_LITERAL | STRING_LITERAL {extends=expr}
+literal ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | STRING_LITERAL {extends=expr}
 
 private qualifier ::= ('const' | '*')
 private this_param_kind ::= ('virtual' | 'override' | 'final' | param_kind)

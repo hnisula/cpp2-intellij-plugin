@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e8ecf5e2-83e2-4d7a-a04e-2c2872d01c79" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/Cpp2Lexer.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/parser/Cpp2Parser.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/Cpp2AddExpr.java" beforeDir="false" />
@@ -84,8 +83,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TemplateImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gen/org/hannesnisula/cpp2plugin/psi/impl/Cpp2TypeImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.bnf_old" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/psi/Cpp2PsiUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/psi/Cpp2PsiUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2.flex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2SyntaxHighlighter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/hannesnisula/cpp2plugin/Cpp2SyntaxHighlighter.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,7 +255,9 @@
       <workItem from="1722429143346" duration="399000" />
       <workItem from="1722448652518" duration="7062000" />
       <workItem from="1722540211888" duration="428000" />
-      <workItem from="1722586514120" duration="3515000" />
+      <workItem from="1722586514120" duration="3896000" />
+      <workItem from="1722619030644" duration="801000" />
+      <workItem from="1722672333910" duration="6693000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit with barely working test parser">
       <option name="closed" value="true" />
@@ -322,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722186493915</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add first &quot;go to definition&quot;">
+      <option name="closed" value="true" />
+      <created>1722590266650</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722590266650</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +369,8 @@
     <MESSAGE value="Fix function parameter declaration&#10;&#10;At least the common, verbose one." />
     <MESSAGE value="Add subscript operator" />
     <MESSAGE value="Update some grammar in preparation for semantic analysis" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update some grammar in preparation for semantic analysis" />
+    <MESSAGE value="Add first &quot;go to definition&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add first &quot;go to definition&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

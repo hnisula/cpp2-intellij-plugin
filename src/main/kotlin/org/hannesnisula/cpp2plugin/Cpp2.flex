@@ -15,21 +15,33 @@ import com.intellij.psi.TokenType;
 %eof{ return;
 %eof}
 
-LINE_WHITESPACE = [\ \t]
-EOL_WHITESPACE = [\n\f\v\r]
-WHITESPACE = ({LINE_WHITESPACE} | {EOL_WHITESPACE})+
+LINE_WHITESPACE     = [\ \t]
+EOL_WHITESPACE      = [\n\f\v\r]
+WHITESPACE          = ({LINE_WHITESPACE} | {EOL_WHITESPACE})+
 
-BIN_LITERAL = "0b"[01_]*
-OCT_LITERAL = "0o"[0-7_]*
-DEC_LITERAL = [0-9][0-9_]*
-HEX_LITERAL = "0x"[a-fA-F0-9_]*
-NUMBER_LITERAL = {BIN_LITERAL} | {OCT_LITERAL} | {DEC_LITERAL} | {HEX_LITERAL}
+INT_SUFFIX          = [uU]([lL]{1,2})? | [lL]{1,2}[uU]?
+BIN_PREFIX          = "0"[bB]
+OCT_PREFIX          = "0"
+HEX_PREFIX          = "0"[xX]
+EXPONENT            = "e"-?([0-9])+
+BIN_EXPONENT        = "p"-?([0-9])+
+FLOAT_SUFFIX        = [fFlL]
 
-STRING_LITERAL = \" (\\\" | [^\"])* \"
+BIN_LITERAL         = -?{BIN_PREFIX}[01']+{INT_SUFFIX}?
+OCT_LITERAL         = -?{OCT_PREFIX}[0-7']+{INT_SUFFIX}?
+DEC_LITERAL         = -?[0-9][0-9']*{INT_SUFFIX}?
+HEX_LITERAL         = -?{HEX_PREFIX}[a-fA-F0-9']+{INT_SUFFIX}?
 
-IDENTIFIER_WORD = [a-zA-Z_][a-zA-Z0-9_]*
+INT_LITERAL         = {BIN_LITERAL} | {OCT_LITERAL} | {DEC_LITERAL} | {HEX_LITERAL}
+FLOAT_LITERAL       = -?[0-9][0-9']*("."[0-9']*)?({EXPONENT}|{BIN_EXPONENT})?{FLOAT_SUFFIX}?
+BOOL_LITERAL        = "true" | "false"
+STRING_LITERAL      = \" (\\\" | [^\"])* \"
 
-COMMENT = "//".*
+IDENTIFIER_WORD     = [a-zA-Z_][a-zA-Z0-9_]*
+
+COMMENT             = "//".*
+
+MUL                 = \s\*
 
 %%
 
@@ -60,7 +72,8 @@ COMMENT = "//".*
       ">"                   { return Cpp2Types.GT; }
       "="                   { return Cpp2Types.EQ; }
       "_"                   { return Cpp2Types.UNDERSCORE; }
-      "*"                   { return Cpp2Types.ASTERISK; }
+      {MUL}                 { return Cpp2Types.MUL; }
+      "*"                   { return Cpp2Types.DEREF; }
       "+"                   { return Cpp2Types.PLUS; }
       "-"                   { return Cpp2Types.MINUS; }
       "/"                   { return Cpp2Types.SLASH; }
@@ -94,9 +107,11 @@ COMMENT = "//".*
       
       {WHITESPACE}          { return TokenType.WHITE_SPACE; }
       
-      {IDENTIFIER_WORD}     { return Cpp2Types.IDENTIFIER_WORD; }
-      {NUMBER_LITERAL}      { return Cpp2Types.NUMBER_LITERAL; }
+      {INT_LITERAL}         { return Cpp2Types.INT_LITERAL; }
+      {FLOAT_LITERAL}       { return Cpp2Types.FLOAT_LITERAL; }
+      {BOOL_LITERAL}        { return Cpp2Types.BOOL_LITERAL; }
       {STRING_LITERAL}      { return Cpp2Types.STRING_LITERAL; }
+      {IDENTIFIER_WORD}     { return Cpp2Types.IDENTIFIER_WORD; }
 }
 
 [^]                         { return TokenType.BAD_CHARACTER; }
