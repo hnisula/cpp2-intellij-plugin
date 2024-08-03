@@ -57,6 +57,7 @@
         PROTECTED           = 'protected'
         PRIVATE             = 'private'
         NAMESPACE           = 'namespace'
+        USING               = 'using'
         
         FOR                 = 'for'
         WHILE               = 'while'
@@ -88,7 +89,7 @@ file ::= root_stmt*
 root_stmt           ::= (type_decl | func_decl | namespace_decl | comment)
 
 stmt_block          ::= '{' stmt* '}'
-private stmt        ::= (func_decl | decl | alias_decl | assign | expr_stmt | if_branch | for_loop | do_while_loop | while_loop | comment)
+private stmt        ::= (func_decl | decl | alias_decl | assign | using_namespace | expr_stmt | if_branch | for_loop | do_while_loop | while_loop | comment)
 private expr_stmt   ::= expr ';'
 
 // Loops and branching
@@ -136,8 +137,13 @@ decl        ::= IDENTIFIER_WORD ':' ((type '=' expr) | type | ('=' expr)) ';' {
 
 // Namespace
 
+using_namespace ::= 'using' 'namespace'? namespace_ref ';' {
+    pin='using'
+}
 namespace_ref   ::= scope? IDENTIFIER_WORD
-namespace_decl  ::= IDENTIFIER_WORD ':' 'namespace' '{' root_stmt* '}'
+namespace_decl  ::= IDENTIFIER_WORD ':' 'namespace' '{' root_stmt* '}' {
+    pin='namespace'
+}
 
 // Functions
 

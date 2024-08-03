@@ -58,6 +58,7 @@ public interface Cpp2Types {
   IElementType TYPE = new Cpp2ElementType("TYPE");
   IElementType TYPE_ALIAS_DECL = new Cpp2ElementType("TYPE_ALIAS_DECL");
   IElementType TYPE_DECL = new Cpp2ElementType("TYPE_DECL");
+  IElementType USING_NAMESPACE = new Cpp2ElementType("USING_NAMESPACE");
   IElementType WHILE_LOOP = new Cpp2ElementType("WHILE_LOOP");
 
   IElementType AND = new Cpp2TokenType("&");
@@ -121,6 +122,7 @@ public interface Cpp2Types {
   IElementType THIS = new Cpp2TokenType("this");
   IElementType TYPE_WORD = new Cpp2TokenType("type");
   IElementType UNDERSCORE = new Cpp2TokenType("_");
+  IElementType USING = new Cpp2TokenType("using");
   IElementType VIRTUAL = new Cpp2TokenType("virtual");
   IElementType WHILE = new Cpp2TokenType("while");
 
@@ -273,6 +275,9 @@ public interface Cpp2Types {
       }
       else if (type == TYPE_DECL) {
         return new Cpp2TypeDeclImpl(node);
+      }
+      else if (type == USING_NAMESPACE) {
+        return new Cpp2UsingNamespaceImpl(node);
       }
       else if (type == WHILE_LOOP) {
         return new Cpp2WhileLoopImpl(node);

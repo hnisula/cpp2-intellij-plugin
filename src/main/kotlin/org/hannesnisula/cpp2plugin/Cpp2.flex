@@ -90,6 +90,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "protected"           { return Cpp2Types.PROTECTED; }
       "private"             { return Cpp2Types.PRIVATE; }
       "namespace"           { return Cpp2Types.NAMESPACE; }
+      "using"               { return Cpp2Types.USING; }
       
       "for"                 { return Cpp2Types.FOR; }
       "while"               { return Cpp2Types.WHILE; }

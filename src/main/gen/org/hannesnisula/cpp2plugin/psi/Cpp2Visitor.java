@@ -207,6 +207,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitUsingNamespace(@NotNull Cpp2UsingNamespace o) {
+    visitPsiElement(o);
+  }
+
   public void visitWhileLoop(@NotNull Cpp2WhileLoop o) {
     visitPsiElement(o);
   }

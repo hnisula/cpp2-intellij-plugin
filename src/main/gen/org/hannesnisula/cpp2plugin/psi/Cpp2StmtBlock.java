@@ -41,6 +41,9 @@ public interface Cpp2StmtBlock extends PsiElement {
   List<Cpp2TypeAliasDecl> getTypeAliasDeclList();
 
   @NotNull
+  List<Cpp2UsingNamespace> getUsingNamespaceList();
+
+  @NotNull
   List<Cpp2WhileLoop> getWhileLoopList();
 
 }

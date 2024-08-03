@@ -791,7 +791,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // func_decl | decl | alias_decl | assign | expr_stmt | if_branch | for_loop | do_while_loop | while_loop | comment
+  // func_decl | decl | alias_decl | assign | using_namespace | expr_stmt | if_branch | for_loop | do_while_loop | while_loop | comment
   static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
@@ -799,6 +799,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!r) r = decl(b, l + 1);
     if (!r) r = alias_decl(b, l + 1);
     if (!r) r = assign(b, l + 1);
+    if (!r) r = using_namespace(b, l + 1);
     if (!r) r = expr_stmt(b, l + 1);
     if (!r) r = if_branch(b, l + 1);
     if (!r) r = for_loop(b, l + 1);
@@ -1097,6 +1098,28 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
       if (!member_decl(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "type_decl_7", c)) break;
     }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // 'using' 'namespace'? namespace_ref ';'
+  public static boolean using_namespace(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "using_namespace")) return false;
+    if (!nextTokenIs(b, USING)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, USING);
+    r = r && using_namespace_1(b, l + 1);
+    r = r && namespace_ref(b, l + 1);
+    r = r && consumeToken(b, SEMICOLON);
+    exit_section_(b, m, USING_NAMESPACE, r);
+    return r;
+  }
+
+  // 'namespace'?
+  private static boolean using_namespace_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "using_namespace_1")) return false;
+    consumeToken(b, NAMESPACE);
     return true;
   }
 

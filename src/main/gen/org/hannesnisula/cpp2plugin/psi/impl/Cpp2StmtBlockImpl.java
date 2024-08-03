@@ -95,6 +95,12 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
 
   @Override
   @NotNull
+  public List<Cpp2UsingNamespace> getUsingNamespaceList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2UsingNamespace.class);
+  }
+
+  @Override
+  @NotNull
   public List<Cpp2WhileLoop> getWhileLoopList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2WhileLoop.class);
   }
