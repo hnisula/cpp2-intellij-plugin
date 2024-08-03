@@ -35,7 +35,7 @@ HEX_LITERAL         = -?{HEX_PREFIX}[a-fA-F0-9']+{INT_SUFFIX}?
 INT_LITERAL         = {BIN_LITERAL} | {OCT_LITERAL} | {DEC_LITERAL} | {HEX_LITERAL}
 FLOAT_LITERAL       = -?[0-9][0-9']*("."[0-9']*)?({EXPONENT}|{BIN_EXPONENT})?{FLOAT_SUFFIX}?
 BOOL_LITERAL        = "true" | "false"
-STRING_LITERAL      = \" (\\\" | [^\"])* \"
+STRING_LITERAL      = ("u8" | "u" | "U" | "L")?\" (\\\" | [^\"])* \"
 
 IDENTIFIER_WORD     = [a-zA-Z_][a-zA-Z0-9_]*
 
