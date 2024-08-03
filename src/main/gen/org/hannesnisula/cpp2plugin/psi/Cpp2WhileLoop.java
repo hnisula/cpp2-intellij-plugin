@@ -5,16 +5,13 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2ForLoop extends PsiElement {
+public interface Cpp2WhileLoop extends PsiElement {
 
   @NotNull
   Cpp2Expr getExpr();
 
   @Nullable
   Cpp2NextStmt getNextStmt();
-
-  @NotNull
-  Cpp2ParamList getParamList();
 
   @NotNull
   Cpp2StmtBlock getStmtBlock();

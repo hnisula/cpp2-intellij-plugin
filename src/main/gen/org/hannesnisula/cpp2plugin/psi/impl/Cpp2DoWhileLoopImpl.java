@@ -11,14 +11,14 @@ import static org.hannesnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hannesnisula.cpp2plugin.psi.*;
 
-public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop {
+public class Cpp2DoWhileLoopImpl extends ASTWrapperPsiElement implements Cpp2DoWhileLoop {
 
-  public Cpp2ForLoopImpl(@NotNull ASTNode node) {
+  public Cpp2DoWhileLoopImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitForLoop(this);
+    visitor.visitDoWhileLoop(this);
   }
 
   @Override
@@ -37,12 +37,6 @@ public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop
   @Nullable
   public Cpp2NextStmt getNextStmt() {
     return findChildByClass(Cpp2NextStmt.class);
-  }
-
-  @Override
-  @NotNull
-  public Cpp2ParamList getParamList() {
-    return findNotNullChildByClass(Cpp2ParamList.class);
   }
 
   @Override

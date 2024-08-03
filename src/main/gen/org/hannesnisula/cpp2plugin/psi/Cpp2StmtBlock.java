@@ -14,6 +14,9 @@ public interface Cpp2StmtBlock extends PsiElement {
   List<Cpp2Decl> getDeclList();
 
   @NotNull
+  List<Cpp2DoWhileLoop> getDoWhileLoopList();
+
+  @NotNull
   List<Cpp2Expr> getExprList();
 
   @NotNull
@@ -24,5 +27,8 @@ public interface Cpp2StmtBlock extends PsiElement {
 
   @NotNull
   List<Cpp2IfBranch> getIfBranchList();
+
+  @NotNull
+  List<Cpp2WhileLoop> getWhileLoopList();
 
 }

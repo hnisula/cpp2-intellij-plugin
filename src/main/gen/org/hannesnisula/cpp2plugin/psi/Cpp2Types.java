@@ -17,6 +17,7 @@ public interface Cpp2Types {
   IElementType BIT_XOR_EXPR = new Cpp2ElementType("BIT_XOR_EXPR");
   IElementType DECL = new Cpp2ElementType("DECL");
   IElementType DIV_EXPR = new Cpp2ElementType("DIV_EXPR");
+  IElementType DO_WHILE_LOOP = new Cpp2ElementType("DO_WHILE_LOOP");
   IElementType EQ_EXPR = new Cpp2ElementType("EQ_EXPR");
   IElementType EXPR = new Cpp2ElementType("EXPR");
   IElementType FOR_LOOP = new Cpp2ElementType("FOR_LOOP");
@@ -35,6 +36,7 @@ public interface Cpp2Types {
   IElementType MOD_EXPR = new Cpp2ElementType("MOD_EXPR");
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
   IElementType NEQ_EXPR = new Cpp2ElementType("NEQ_EXPR");
+  IElementType NEXT_STMT = new Cpp2ElementType("NEXT_STMT");
   IElementType OR_EXPR = new Cpp2ElementType("OR_EXPR");
   IElementType PARAM = new Cpp2ElementType("PARAM");
   IElementType PARAM_LIST = new Cpp2ElementType("PARAM_LIST");
@@ -49,6 +51,7 @@ public interface Cpp2Types {
   IElementType TEMPLATE_DECL = new Cpp2ElementType("TEMPLATE_DECL");
   IElementType TYPE = new Cpp2ElementType("TYPE");
   IElementType TYPE_DECL = new Cpp2ElementType("TYPE_DECL");
+  IElementType WHILE_LOOP = new Cpp2ElementType("WHILE_LOOP");
 
   IElementType AND = new Cpp2TokenType("&");
   IElementType ANDAND = new Cpp2TokenType("&&");
@@ -143,6 +146,9 @@ public interface Cpp2Types {
       else if (type == DIV_EXPR) {
         return new Cpp2DivExprImpl(node);
       }
+      else if (type == DO_WHILE_LOOP) {
+        return new Cpp2DoWhileLoopImpl(node);
+      }
       else if (type == EQ_EXPR) {
         return new Cpp2EqExprImpl(node);
       }
@@ -194,6 +200,9 @@ public interface Cpp2Types {
       else if (type == NEQ_EXPR) {
         return new Cpp2NeqExprImpl(node);
       }
+      else if (type == NEXT_STMT) {
+        return new Cpp2NextStmtImpl(node);
+      }
       else if (type == OR_EXPR) {
         return new Cpp2OrExprImpl(node);
       }
@@ -235,6 +244,9 @@ public interface Cpp2Types {
       }
       else if (type == TYPE_DECL) {
         return new Cpp2TypeDeclImpl(node);
+      }
+      else if (type == WHILE_LOOP) {
+        return new Cpp2WhileLoopImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

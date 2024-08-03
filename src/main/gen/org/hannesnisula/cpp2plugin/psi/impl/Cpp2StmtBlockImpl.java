@@ -41,6 +41,12 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
 
   @Override
   @NotNull
+  public List<Cpp2DoWhileLoop> getDoWhileLoopList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2DoWhileLoop.class);
+  }
+
+  @Override
+  @NotNull
   public List<Cpp2Expr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
   }
@@ -61,6 +67,12 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
   @NotNull
   public List<Cpp2IfBranch> getIfBranchList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2IfBranch.class);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2WhileLoop> getWhileLoopList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2WhileLoop.class);
   }
 
 }
