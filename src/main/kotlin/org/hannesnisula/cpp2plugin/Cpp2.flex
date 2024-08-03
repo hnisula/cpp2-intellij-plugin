@@ -43,6 +43,8 @@ COMMENT             = "//".*
 
 MUL                 = \s\*
 
+METAFUNCTION        = "@"{IDENTIFIER_WORD}
+
 %%
 
 <YYINITIAL> {
@@ -84,6 +86,10 @@ MUL                 = \s\*
       
       "type"                { return Cpp2Types.TYPE_WORD; }
       "this"                { return Cpp2Types.THIS; }
+      "public"              { return Cpp2Types.PUBLIC; }
+      "protected"           { return Cpp2Types.PROTECTED; }
+      "private"             { return Cpp2Types.PRIVATE; }
+      
       "for"                 { return Cpp2Types.FOR; }
       "while"               { return Cpp2Types.WHILE; }
       "do"                  { return Cpp2Types.DO; }
@@ -112,6 +118,7 @@ MUL                 = \s\*
       {BOOL_LITERAL}        { return Cpp2Types.BOOL_LITERAL; }
       {STRING_LITERAL}      { return Cpp2Types.STRING_LITERAL; }
       {IDENTIFIER_WORD}     { return Cpp2Types.IDENTIFIER_WORD; }
+      {METAFUNCTION}        { return Cpp2Types.METAFUNCTION; }
 }
 
 [^]                         { return TokenType.BAD_CHARACTER; }

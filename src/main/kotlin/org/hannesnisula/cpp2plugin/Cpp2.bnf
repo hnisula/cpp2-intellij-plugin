@@ -53,6 +53,10 @@
         
         TYPE_WORD           = 'type'
         THIS                = 'this'
+        PUBLIC              = 'public'
+        PROTECTED           = 'protected'
+        PRIVATE             = 'private'
+        
         FOR                 = 'for'
         WHILE               = 'while'
         DO                  = 'do'
@@ -76,34 +80,38 @@
     ]
 }
 
-file ::= (func_decl | stmt | stmt_block | comment)*
+file ::= (type_decl | func_decl | stmt | stmt_block | comment)*
 
-stmt_block ::= '{' stmt* '}'
-private stmt ::= (func_decl | decl | assign | expr_stmt | for_loop | comment)
-private expr_stmt ::= expr ';'
+stmt_block          ::= '{' stmt* '}'
+private stmt        ::= (func_decl | decl | assign | expr_stmt | for_loop | comment)
+private expr_stmt   ::= expr ';'
 
-for_loop ::= 'for' expr ('next' expr)? 'do' param_list stmt_block {
+for_loop    ::= 'for' expr ('next' expr)? 'do' param_list stmt_block {
     pin='for'
 }
 
-assign ::= lvalue '=' expr ';'
-decl ::= IDENTIFIER_WORD ':' ((type '=' expr) | type | ('=' expr)) ';' {
+assign      ::= lvalue '=' expr ';'
+decl        ::= IDENTIFIER_WORD ':' ((type '=' expr) | type | ('=' expr)) ';' {
     pin=3
     mixin="org.hannesnisula.cpp2plugin.psi.Cpp2NamedElementImpl"
     implements="org.hannesnisula.cpp2plugin.psi.Cpp2NamedElement"
     methods=[getIdentifierString getNameIdentifier setName]
 }
-private decl_recovery ::= !(';')
-func_decl ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? (('='? expr ';') | ('=' stmt_block)) {
+
+func_decl   ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? (('='? expr ';') | ('=' stmt_block)) {
     pin=param_list
 }
 return_type ::= '->' ('_' | type)
 
-func_call ::= scope? IDENTIFIER_WORD template? '(' arg* ')' {extends=expr}
-arg ::= param_kind? expr
-param_list ::= '(' ((this_param | param) (',' param)*)? ')'
-param ::= param_kind? ((IDENTIFIER_WORD (':' ('_' | type))?) | (IDENTIFIER_WORD '...'))
-private this_param ::= this_param_kind? 'this'
+type_decl           ::= IDENTIFIER_WORD ':' template_decl? METAFUNCTION? 'type' '=' '{' member_decl* '}'
+member_decl         ::= (member_access? (type_decl | func_decl | decl | comment))
+member_access       ::= ('public' | 'protected' | 'private')
+
+func_call           ::= scope? IDENTIFIER_WORD template? '(' arg* ')' {extends=expr}
+arg                 ::= param_kind? expr
+param_list          ::= '(' ((this_param | param) (',' param)*)? ')'
+param               ::= param_kind? ((IDENTIFIER_WORD (':' ('_' | type))?) | (IDENTIFIER_WORD '...'))
+private this_param  ::= this_param_kind? 'this'
 
 expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | group_2_expr | lvalue | literal
 
@@ -119,7 +127,7 @@ private group_6_expr    ::= add_expr | sub_expr
 private group_5_expr    ::= mul_expr | div_expr | mod_expr
 private group_2_expr    ::= func_call | subscript_expr
 
-lvalue ::= scope? IDENTIFIER_WORD(DEREF | ('[' expr ']' | ('.' IDENTIFIER_WORD)))* {
+lvalue              ::= scope? IDENTIFIER_WORD(DEREF | ('[' expr ']' | ('.' IDENTIFIER_WORD)))* {
     extends=expr
     methods=[getIdentifierString getReferences]
 }
@@ -144,13 +152,13 @@ div_expr            ::= expr '/'    expr {rightAssociative=false}
 mod_expr            ::= expr '%'    expr {rightAssociative=false}
 subscript_expr      ::= expr '[' expr ']'
 
-template_decl ::= '<' ((IDENTIFIER_WORD (':' (TYPE_WORD | type))?) | (IDENTIFIER_WORD '...' (':' TYPE_WORD)?))+ '>'
-template ::= '<' (type)* '>'
-type ::= qualifier* scope? IDENTIFIER_WORD template?
-scope ::= (IDENTIFIER_WORD template? '::')+
+template_decl   ::= '<' ((IDENTIFIER_WORD (':' (TYPE_WORD | type))?) | (IDENTIFIER_WORD '...' (':' TYPE_WORD)?))+ '>'
+template        ::= '<' (type)* '>'
+type            ::= qualifier* scope? IDENTIFIER_WORD template?
+scope           ::= (IDENTIFIER_WORD template? '::')+
 
-literal ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | STRING_LITERAL {extends=expr}
+literal         ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | STRING_LITERAL {extends=expr}
 
-private qualifier ::= ('const' | '*')
+private qualifier       ::= ('const' | '*')
 private this_param_kind ::= ('virtual' | 'override' | 'final' | param_kind)
-private param_kind ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')
+private param_kind      ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')

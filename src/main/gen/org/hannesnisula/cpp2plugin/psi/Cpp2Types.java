@@ -29,6 +29,8 @@ public interface Cpp2Types {
   IElementType LTEQ_EXPR = new Cpp2ElementType("LTEQ_EXPR");
   IElementType LT_EXPR = new Cpp2ElementType("LT_EXPR");
   IElementType LVALUE = new Cpp2ElementType("LVALUE");
+  IElementType MEMBER_ACCESS = new Cpp2ElementType("MEMBER_ACCESS");
+  IElementType MEMBER_DECL = new Cpp2ElementType("MEMBER_DECL");
   IElementType MOD_EXPR = new Cpp2ElementType("MOD_EXPR");
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
   IElementType NEQ_EXPR = new Cpp2ElementType("NEQ_EXPR");
@@ -44,6 +46,7 @@ public interface Cpp2Types {
   IElementType TEMPLATE = new Cpp2ElementType("TEMPLATE");
   IElementType TEMPLATE_DECL = new Cpp2ElementType("TEMPLATE_DECL");
   IElementType TYPE = new Cpp2ElementType("TYPE");
+  IElementType TYPE_DECL = new Cpp2ElementType("TYPE_DECL");
 
   IElementType AND = new Cpp2TokenType("&");
   IElementType ANDAND = new Cpp2TokenType("&&");
@@ -78,6 +81,7 @@ public interface Cpp2Types {
   IElementType LT = new Cpp2TokenType("<");
   IElementType LTEQ = new Cpp2TokenType("<=");
   IElementType LTLT = new Cpp2TokenType("<<");
+  IElementType METAFUNCTION = new Cpp2TokenType("METAFUNCTION");
   IElementType MINUS = new Cpp2TokenType("-");
   IElementType MINUSMINUS = new Cpp2TokenType("--");
   IElementType MODULO = new Cpp2TokenType("%");
@@ -92,6 +96,9 @@ public interface Cpp2Types {
   IElementType OVERRIDE = new Cpp2TokenType("override");
   IElementType PLUS = new Cpp2TokenType("+");
   IElementType PLUSPLUS = new Cpp2TokenType("++");
+  IElementType PRIVATE = new Cpp2TokenType("private");
+  IElementType PROTECTED = new Cpp2TokenType("protected");
+  IElementType PUBLIC = new Cpp2TokenType("public");
   IElementType RETURN = new Cpp2TokenType("return");
   IElementType RIGHT_BRACE = new Cpp2TokenType("}");
   IElementType RIGHT_PARENTHESIS = new Cpp2TokenType(")");
@@ -167,6 +174,12 @@ public interface Cpp2Types {
       else if (type == LVALUE) {
         return new Cpp2LvalueImpl(node);
       }
+      else if (type == MEMBER_ACCESS) {
+        return new Cpp2MemberAccessImpl(node);
+      }
+      else if (type == MEMBER_DECL) {
+        return new Cpp2MemberDeclImpl(node);
+      }
       else if (type == MOD_EXPR) {
         return new Cpp2ModExprImpl(node);
       }
@@ -211,6 +224,9 @@ public interface Cpp2Types {
       }
       else if (type == TYPE) {
         return new Cpp2TypeImpl(node);
+      }
+      else if (type == TYPE_DECL) {
+        return new Cpp2TypeDeclImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

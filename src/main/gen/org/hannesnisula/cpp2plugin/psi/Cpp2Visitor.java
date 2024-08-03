@@ -91,6 +91,14 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitMemberAccess(@NotNull Cpp2MemberAccess o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMemberDecl(@NotNull Cpp2MemberDecl o) {
+    visitPsiElement(o);
+  }
+
   public void visitModExpr(@NotNull Cpp2ModExpr o) {
     visitExpr(o);
   }
@@ -148,6 +156,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitType(@NotNull Cpp2Type o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTypeDecl(@NotNull Cpp2TypeDecl o) {
     visitPsiElement(o);
   }
 

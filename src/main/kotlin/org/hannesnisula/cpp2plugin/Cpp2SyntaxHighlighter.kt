@@ -14,7 +14,6 @@ class Cpp2SyntaxHighlighter : SyntaxHighlighterBase() {
         val IDENTIFIER: TextAttributesKey = createTextAttributesKey("IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER)
         val COMMENT: TextAttributesKey = createTextAttributesKey("COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
         val NUMERIC_LITERAL: TextAttributesKey = createTextAttributesKey("NUMBER", DefaultLanguageHighlighterColors.NUMBER)
-        val BOOL_LITERAL: TextAttributesKey = createTextAttributesKey("BOOL", DefaultLanguageHighlighterColors.NUMBER)
         val STRING_LITERAL: TextAttributesKey = createTextAttributesKey("STRING", DefaultLanguageHighlighterColors.STRING)
     }
     
@@ -22,13 +21,26 @@ class Cpp2SyntaxHighlighter : SyntaxHighlighterBase() {
 
     override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> {
         return when (tokenType) {
+            Cpp2Types.BOOL_LITERAL,
+            Cpp2Types.THIS,
+            Cpp2Types.TYPE,
+            Cpp2Types.PUBLIC,
+            Cpp2Types.IN,
+            Cpp2Types.COPY,
+            Cpp2Types.INOUT,
+            Cpp2Types.OUT,
+            Cpp2Types.MOVE,
+            Cpp2Types.FORWARD,
+            Cpp2Types.VIRTUAL,
+            Cpp2Types.OVERRIDE,
+            Cpp2Types.FINAL,
+            Cpp2Types.CONST,
             Cpp2Types.FOR,
             Cpp2Types.DO -> pack(KEYWORD)
             Cpp2Types.IDENTIFIER_WORD -> pack(IDENTIFIER)
             Cpp2Types.INT_LITERAL,
             Cpp2Types.FLOAT_LITERAL -> pack(NUMERIC_LITERAL)
             Cpp2Types.STRING_LITERAL -> pack(STRING_LITERAL)
-            Cpp2Types.BOOL_LITERAL -> pack(BOOL_LITERAL)
             Cpp2Types.COMMENT -> pack(COMMENT)
             else -> emptyArray()
         }

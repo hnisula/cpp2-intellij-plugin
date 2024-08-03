@@ -17,7 +17,10 @@ intellij {
     version.set("2024.1.4")
     //type.set("IC") // Target IDE Platform
 
-    plugins.set(listOf("PsiViewer:241.14494.158-EAP-SNAPSHOT", "com.intellij.plugins.resharperkeymap:241.14494.150"))
+    plugins.set(listOf(
+        "PsiViewer:241.14494.158-EAP-SNAPSHOT",
+        "com.intellij.plugins.resharperkeymap:241.14494.150",
+        "Intellij_GitHub_Dark_Theme:1.1.3"))
 }
 
 sourceSets["main"].java.srcDirs("src/main/gen")
