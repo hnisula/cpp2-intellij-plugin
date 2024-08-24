@@ -216,7 +216,7 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitValueDecl(@NotNull Cpp2ValueDecl o) {
-    visitPsiElement(o);
+    visitPsiDeclaration(o);
   }
 
   public void visitVariadicParam(@NotNull Cpp2VariadicParam o) {
@@ -224,6 +224,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitWhileLoop(@NotNull Cpp2WhileLoop o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPsiDeclaration(@NotNull Cpp2PsiDeclaration o) {
     visitPsiElement(o);
   }
 

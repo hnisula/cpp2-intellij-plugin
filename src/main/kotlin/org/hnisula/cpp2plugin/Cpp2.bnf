@@ -133,7 +133,8 @@ assign                  ::= expr '=' expr ';'
 private value_decl_stmt ::= value_decl ';'
 value_decl              ::= IDENTIFIER_WORD ':' ((type_specifier '=' expr) | type_specifier | ('=' expr)) {
     pin=3
-//    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiValueDecl"
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiValueDeclaration"
+    implements="org.hnisula.cpp2plugin.psi.Cpp2PsiDeclaration"
 }
 
 // Namespace
