@@ -139,7 +139,7 @@ value_decl              ::= IDENTIFIER_WORD ':' ((type_specifier '=' expr) | typ
 
 // Namespace
 
-using_namespace ::= 'using' 'namespace'? identifier ';' {
+using_namespace ::= 'using' 'namespace'? q_identifier ';' {
     pin='using'
 }
 namespace_decl  ::= IDENTIFIER_WORD ':' 'namespace' '=' '{' root_stmt* '}' {
@@ -153,7 +153,7 @@ func_decl       ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? (
 }
 return_type     ::= '->' ('_' | type_specifier)
 
-func_call           ::= scope? IDENTIFIER_WORD template? '(' arg* ')' {extends=expr}
+func_call           ::= q_identifier '(' arg* ')' {extends=expr}
 arg                 ::= param_kind? expr
 param_list          ::= '(' ((this_param | param) (',' param)*)? ')'
 param               ::= param_kind? (value_decl | variadic_param)
@@ -170,7 +170,7 @@ member_access       ::= ('public' | 'protected' | 'private')
 
 // Expressions and operators
 
-expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | group_2_expr | identifier | literal | paren_expr | list_expr
+expr ::= group_14_expr | group_13_expr | group_12_expr | group_11_expr | group_10_expr | group_9_expr | group_8_expr | group_7_expr | group_6_expr | group_5_expr | group_2_expr | q_identifier | literal | paren_expr | list_expr
 
 paren_expr              ::= '(' expr? ')'
 list_expr               ::= '(' (expr (',' expr)* ','?)? ')'
@@ -213,13 +213,14 @@ deref_expr          ::= expr DEREF
 template_decl               ::= '<' template_decl_item (',' template_decl_item)* ','? '>'
 private template_decl_item  ::= (IDENTIFIER_WORD (':' (TYPE_WORD | type_specifier))?) | (IDENTIFIER_WORD '...' (':' TYPE_WORD)?)
 template                    ::= '<' (type_specifier (',' type_specifier)* ','?)? '>'
-type_specifier              ::= qualifier* identifier template?
-identifier                  ::= scope? IDENTIFIER_WORD {
+type_specifier              ::= qualifier* q_identifier template?
+q_identifier                ::= '::'? (identifier template? '::')* identifier template? {
     extends=expr
-    methods=[getOwnReferences]
 }
-scope                       ::= '::'? (IDENTIFIER_WORD template? '::')+
 
+identifier                  ::= IDENTIFIER_WORD {
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiIdentifier"
+}
 literal                     ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | STRING_LITERAL {extends=expr}
 
 private qualifier           ::= ('const' | '*')

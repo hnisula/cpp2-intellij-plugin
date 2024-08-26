@@ -5,7 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2Scope extends PsiElement {
+public interface Cpp2QIdentifier extends Cpp2Expr {
+
+  @NotNull
+  List<Cpp2Identifier> getIdentifierList();
 
   @NotNull
   List<Cpp2Template> getTemplateList();

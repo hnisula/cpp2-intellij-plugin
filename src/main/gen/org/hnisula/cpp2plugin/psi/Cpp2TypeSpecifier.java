@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2TypeSpecifier extends PsiElement {
 
   @NotNull
-  Cpp2Identifier getIdentifier();
+  Cpp2QIdentifier getQIdentifier();
 
   @Nullable
   Cpp2Template getTemplate();

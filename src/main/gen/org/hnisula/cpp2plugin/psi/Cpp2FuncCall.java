@@ -10,10 +10,7 @@ public interface Cpp2FuncCall extends Cpp2Expr {
   @NotNull
   List<Cpp2Arg> getArgList();
 
-  @Nullable
-  Cpp2Scope getScope();
-
-  @Nullable
-  Cpp2Template getTemplate();
+  @NotNull
+  Cpp2QIdentifier getQIdentifier();
 
 }

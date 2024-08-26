@@ -83,42 +83,5 @@ class Cpp2PsiUtil {
 
             return decls
         }
-
-        // Shared
-
-        @JvmStatic
-        fun getOwnDeclarations(element: PsiElement): Collection<PsiSymbolDeclaration> {
-            if (element::class.java !in Cpp2ScopeTypes) return emptyList()
-
-            return element.children.asSequence()
-                .filter { it::class.java in Cpp2DeclTypes }
-                .map { it as PsiSymbolDeclaration }
-                .toList()
-        }
-
-        @JvmStatic
-        fun getOwnReferences(element: Cpp2Identifier): Collection<PsiSymbolReference> {
-            val identifiers = getScopesNames(element.scope) + element.lastChild.text
-            val isGlobalScope = isGlobalScope(element.scope)
-            val references = mutableListOf<Cpp2SymbolReference>()
-
-            for (i in identifiers.indices) {
-                references.add(Cpp2SymbolReference(identifiers.subList(0, i + 1), element, isGlobalScope))
-            }
-
-            return references
-        }
-
-        private fun getScopesNames(scopeElement: Cpp2Scope?): Collection<String> {
-            if (scopeElement == null) return emptyList()
-            return scopeElement.childrenOfType<PsiElement>()
-                .filter { it.elementType == Cpp2Types.IDENTIFIER_WORD }
-                .map { it.text }
-        }
-
-        private fun isGlobalScope(element: Cpp2Scope?): Boolean {
-            if (element == null) return false
-            return element.firstChild.firstChild.text == "::"
-        }
     }
 }

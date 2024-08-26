@@ -29,8 +29,8 @@ public class Cpp2UsingNamespaceImpl extends ASTWrapperPsiElement implements Cpp2
 
   @Override
   @NotNull
-  public Cpp2Identifier getIdentifier() {
-    return findNotNullChildByClass(Cpp2Identifier.class);
+  public Cpp2QIdentifier getQIdentifier() {
+    return findNotNullChildByClass(Cpp2QIdentifier.class);
   }
 
 }

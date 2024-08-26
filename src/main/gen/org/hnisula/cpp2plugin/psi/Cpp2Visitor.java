@@ -80,7 +80,7 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitIdentifier(@NotNull Cpp2Identifier o) {
-    visitExpr(o);
+    visitPsiElement(o);
   }
 
   public void visitIfBranch(@NotNull Cpp2IfBranch o) {
@@ -159,6 +159,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitQIdentifier(@NotNull Cpp2QIdentifier o) {
+    visitExpr(o);
+  }
+
   public void visitReturnType(@NotNull Cpp2ReturnType o) {
     visitPsiElement(o);
   }
@@ -168,10 +172,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitRootStmt(@NotNull Cpp2RootStmt o) {
-    visitPsiElement(o);
-  }
-
-  public void visitScope(@NotNull Cpp2Scope o) {
     visitPsiElement(o);
   }
 

@@ -34,15 +34,9 @@ public class Cpp2FuncCallImpl extends Cpp2ExprImpl implements Cpp2FuncCall {
   }
 
   @Override
-  @Nullable
-  public Cpp2Scope getScope() {
-    return findChildByClass(Cpp2Scope.class);
-  }
-
-  @Override
-  @Nullable
-  public Cpp2Template getTemplate() {
-    return findChildByClass(Cpp2Template.class);
+  @NotNull
+  public Cpp2QIdentifier getQIdentifier() {
+    return findNotNullChildByClass(Cpp2QIdentifier.class);
   }
 
 }

@@ -8,23 +8,29 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2ScopeImpl extends ASTWrapperPsiElement implements Cpp2Scope {
+public class Cpp2QIdentifierImpl extends Cpp2ExprImpl implements Cpp2QIdentifier {
 
-  public Cpp2ScopeImpl(@NotNull ASTNode node) {
+  public Cpp2QIdentifierImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitScope(this);
+    visitor.visitQIdentifier(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof Cpp2Visitor) accept((Cpp2Visitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2Identifier> getIdentifierList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Identifier.class);
   }
 
   @Override

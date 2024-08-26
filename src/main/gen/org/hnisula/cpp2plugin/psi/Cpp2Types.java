@@ -46,10 +46,10 @@ public interface Cpp2Types {
   IElementType PARAM = new Cpp2ElementType("PARAM");
   IElementType PARAM_LIST = new Cpp2ElementType("PARAM_LIST");
   IElementType PAREN_EXPR = new Cpp2ElementType("PAREN_EXPR");
+  IElementType Q_IDENTIFIER = new Cpp2ElementType("Q_IDENTIFIER");
   IElementType RETURN_TYPE = new Cpp2ElementType("RETURN_TYPE");
   IElementType RIGHT_SHIFT_EXPR = new Cpp2ElementType("RIGHT_SHIFT_EXPR");
   IElementType ROOT_STMT = new Cpp2ElementType("ROOT_STMT");
-  IElementType SCOPE = new Cpp2ElementType("SCOPE");
   IElementType STMT_BLOCK = new Cpp2ElementType("STMT_BLOCK");
   IElementType SUBSCRIPT_EXPR = new Cpp2ElementType("SUBSCRIPT_EXPR");
   IElementType SUB_EXPR = new Cpp2ElementType("SUB_EXPR");
@@ -246,6 +246,9 @@ public interface Cpp2Types {
       else if (type == PAREN_EXPR) {
         return new Cpp2ParenExprImpl(node);
       }
+      else if (type == Q_IDENTIFIER) {
+        return new Cpp2QIdentifierImpl(node);
+      }
       else if (type == RETURN_TYPE) {
         return new Cpp2ReturnTypeImpl(node);
       }
@@ -254,9 +257,6 @@ public interface Cpp2Types {
       }
       else if (type == ROOT_STMT) {
         return new Cpp2RootStmtImpl(node);
-      }
-      else if (type == SCOPE) {
-        return new Cpp2ScopeImpl(node);
       }
       else if (type == STMT_BLOCK) {
         return new Cpp2StmtBlockImpl(node);

@@ -10,7 +10,7 @@ import org.hnisula.cpp2plugin.psi.Cpp2ResolverUtil
 class Cpp2SymbolReference(
     private val identifiers: Collection<String>,
     private val element: PsiElement,
-    private val isGlobal: Boolean = false
+    private val isGlobal: Boolean
 ) : PsiSymbolReference {
     override fun getElement(): PsiElement {
         return element

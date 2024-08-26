@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2UsingNamespace extends PsiElement {
 
   @NotNull
-  Cpp2Identifier getIdentifier();
+  Cpp2QIdentifier getQIdentifier();
 
 }

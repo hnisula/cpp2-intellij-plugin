@@ -29,8 +29,8 @@ public class Cpp2TypeSpecifierImpl extends ASTWrapperPsiElement implements Cpp2T
 
   @Override
   @NotNull
-  public Cpp2Identifier getIdentifier() {
-    return findNotNullChildByClass(Cpp2Identifier.class);
+  public Cpp2QIdentifier getQIdentifier() {
+    return findNotNullChildByClass(Cpp2QIdentifier.class);
   }
 
   @Override
