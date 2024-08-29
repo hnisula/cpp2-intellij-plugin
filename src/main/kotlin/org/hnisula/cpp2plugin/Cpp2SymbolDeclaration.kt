@@ -12,7 +12,7 @@ class Cpp2SymbolDeclaration(private val declarationIdentifier: String, protected
     override fun getRangeInDeclaringElement(): TextRange = element.textRange
 
     override fun getSymbol(): Symbol {
-        return Cpp2Symbol(this)
+        return Cpp2Symbol(declarationIdentifier)
     }
     
     val identifier: String

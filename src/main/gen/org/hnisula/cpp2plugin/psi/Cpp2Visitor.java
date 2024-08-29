@@ -68,7 +68,7 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitFuncDecl(@NotNull Cpp2FuncDecl o) {
-    visitPsiElement(o);
+    visitPsiScope(o);
   }
 
   public void visitGtExpr(@NotNull Cpp2GtExpr o) {
@@ -228,6 +228,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitPsiDeclaration(@NotNull Cpp2PsiDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitPsiScope(@NotNull Cpp2PsiScope o) {
     visitPsiElement(o);
   }
 

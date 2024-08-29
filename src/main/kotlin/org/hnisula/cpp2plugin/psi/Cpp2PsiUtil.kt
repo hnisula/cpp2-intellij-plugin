@@ -1,15 +1,9 @@
 package org.hnisula.cpp2plugin.psi
 
-import com.intellij.model.psi.PsiSymbolDeclaration
-import com.intellij.model.psi.PsiSymbolReference
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.childrenOfType
-import com.intellij.psi.util.elementType
 import org.hnisula.cpp2plugin.Cpp2SymbolDeclaration
-import org.hnisula.cpp2plugin.Cpp2SymbolReference
-import org.hnisula.cpp2plugin.psi.impl.Cpp2FuncDeclImpl
-import org.hnisula.cpp2plugin.psi.impl.Cpp2ParamImpl
 
 class Cpp2PsiUtil {
     companion object {
@@ -42,46 +36,8 @@ class Cpp2PsiUtil {
 
         @JvmStatic
         fun getDeclsInScope(scopeElement: PsiElement): Collection<Cpp2SymbolDeclaration> {
-//            return PsiTreeUtil.getChildrenOfAnyType(scopeElement, *Cpp2DeclTypes)
-//            return PsiTreeUtil.getChildrenOfAnyType(scopeElement, Cpp2ValueDecl::class.java)
-//            val t = PsiTreeUtil.getChildrenOfAnyType(scopeElement, Cpp2ValueDecl::class.java)
-            return emptyList()
-        }
-
-        @JvmStatic
-        fun getDeclsInFuncScope(funcDeclElement: Cpp2FuncDeclImpl): Collection<Cpp2SymbolDeclaration> {
-            val decls = mutableListOf<Cpp2SymbolDeclaration>()
-
-            decls.addAll(getDeclsInParamList(funcDeclElement)) // TODO: FIX THESE 2
-            decls.addAll(getDeclsInStmtBlock(funcDeclElement))
-
-            return decls
-        }
-
-        @JvmStatic
-        fun getDeclsInParamList(paramListElement: PsiElement): Collection<Cpp2SymbolDeclaration> {
-            val decls = mutableListOf<Cpp2SymbolDeclaration>()
-            var paramElements = PsiTreeUtil.getChildrenOfAnyType(paramListElement, Cpp2ParamImpl::class.java)
-//            var variadicElements = PsiTreeUtil.getChildrenOfAnyType(paramListElement, Cpp2VariadicParam::class.java)
-
-            for (paramElement in paramElements) {
-//                decls.add(paramElement.valueDecl)
-            }
-
-            return decls
-        }
-
-        @JvmStatic
-        fun getDeclsInStmtBlock(stmtBlockElement: PsiElement): Collection<Cpp2SymbolDeclaration> {
-            val decls = mutableListOf<Cpp2SymbolDeclaration>()
-//            var valueDecls = PsiTreeUtil.getChildrenOfAnyType(stmtBlockElement, Cpp2ValueDecl::class.java)
-            var valueDecls = listOf<PsiElement>()
-
-            for (valueDecl in valueDecls) {
-//                decls.add(valueDecl.)
-            }
-
-            return decls
+            val declElements = scopeElement.childrenOfType<Cpp2PsiDeclaration>()
+            return declElements.map { it.symbolDeclaration }
         }
     }
 }

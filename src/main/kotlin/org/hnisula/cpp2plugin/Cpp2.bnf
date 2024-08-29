@@ -90,7 +90,9 @@ file ::= root_stmt*
 
 root_stmt           ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | comment)
 
-stmt_block          ::= '{' stmt* '}'
+stmt_block          ::= '{' stmt* '}' {
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
+}
 private stmt        ::= (func_decl | value_decl_stmt | alias_decl | assign | using_namespace | expr_stmt | if_branch | for_loop | do_while_loop | while_loop | comment)
 private expr_stmt   ::= expr ';'
 
@@ -150,6 +152,8 @@ namespace_decl  ::= IDENTIFIER_WORD ':' 'namespace' '=' '{' root_stmt* '}' {
 
 func_decl       ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? (('=' stmt_block) | ('='? expr ';')) {
     pin=param_list
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiFuncDeclaration"
+    implements="org.hnisula.cpp2plugin.psi.Cpp2PsiScope"
 }
 return_type     ::= '->' ('_' | type_specifier)
 

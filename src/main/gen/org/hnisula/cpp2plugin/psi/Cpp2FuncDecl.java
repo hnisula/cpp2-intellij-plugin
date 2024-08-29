@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2FuncDecl extends PsiElement {
+public interface Cpp2FuncDecl extends Cpp2PsiScope {
 
   @Nullable
   Cpp2Expr getExpr();
