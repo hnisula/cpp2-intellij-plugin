@@ -21,7 +21,7 @@ class Cpp2SymbolReference(
     }
 
     override fun resolveReference(): MutableCollection<out Symbol> {
-        val symbols = mutableListOf<Symbol>()
+        val symbols = mutableListOf<Cpp2Symbol>()
         var parentScope = Cpp2PsiUtil.getContext(element)
         
         // Travel up parent scopes and try to resolve the reference in each scope
@@ -39,13 +39,13 @@ class Cpp2SymbolReference(
         return symbols
     }
     
-    private fun findSymbolInScope(scope: PsiElement, identifierIndex: Int): Symbol? {
+    private fun findSymbolInScope(scope: PsiElement, identifierIndex: Int): Cpp2Symbol? {
         val scopeDecls = scope.ownDeclarations.mapNotNull { it as? Cpp2SymbolDeclaration }
         
         for (decl in scopeDecls) {
             if (identifiers[identifierIndex] == decl.identifier) {
                 if (isLastIdentifier(identifierIndex)) {
-                    return decl.symbol
+                    return decl.symbol as Cpp2Symbol
                 } else {
                     return findSymbolInScope(decl.getDeclaringElement(), identifierIndex + 1)
                 }

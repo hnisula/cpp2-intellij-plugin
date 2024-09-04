@@ -5,7 +5,6 @@ import com.intellij.lang.ASTNode
 import com.intellij.model.Symbol
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
-import org.hnisula.cpp2plugin.Cpp2Symbol
 import org.hnisula.cpp2plugin.Cpp2SymbolDeclaration
 
 open class Cpp2PsiValueDeclaration(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2PsiDeclaration {
@@ -18,5 +17,5 @@ open class Cpp2PsiValueDeclaration(node: ASTNode) : ASTWrapperPsiElement(node), 
 
     override fun getRangeInDeclaringElement(): TextRange = textRange
 
-    override fun getSymbol(): Symbol = Cpp2Symbol(node.psi.firstChild.text)
+    override fun getSymbol(): Symbol = symbolDeclaration.symbol
 }
