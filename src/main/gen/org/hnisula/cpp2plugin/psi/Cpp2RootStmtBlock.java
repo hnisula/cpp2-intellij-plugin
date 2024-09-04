@@ -5,13 +5,19 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2IfBranch extends PsiElement {
+public interface Cpp2RootStmtBlock extends PsiElement {
 
   @NotNull
-  List<Cpp2Expr> getExprList();
+  List<Cpp2FuncDecl> getFuncDeclList();
 
   @NotNull
-  List<Cpp2StmtBlock> getStmtBlockList();
+  List<Cpp2NamespaceDecl> getNamespaceDeclList();
+
+  @NotNull
+  List<Cpp2TypeDecl> getTypeDeclList();
+
+  @NotNull
+  List<Cpp2ValueDecl> getValueDeclList();
 
   @Nullable
   PsiElement getContext();

@@ -22,4 +22,7 @@ public interface Cpp2FuncAliasDecl extends PsiElement {
   @Nullable
   Cpp2TemplateDecl getTemplateDecl();
 
+  @Nullable
+  PsiElement getContext();
+
 }

@@ -27,4 +27,10 @@ public class Cpp2IdentifierImpl extends Cpp2PsiIdentifier implements Cpp2Identif
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

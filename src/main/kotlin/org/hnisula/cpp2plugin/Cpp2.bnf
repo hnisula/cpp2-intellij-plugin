@@ -13,6 +13,7 @@
     tokenTypeClass="org.hnisula.cpp2plugin.psi.Cpp2TokenType"
     
     psiImplUtilClass="org.hnisula.cpp2plugin.psi.Cpp2PsiUtil"
+    methods=[getContext]
     
     extends(".*expr")=expr
     
@@ -86,9 +87,15 @@
 
 // Root stuff
 
-file ::= root_stmt*
+file ::= root_stmts
 
-root_stmt           ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | comment)
+root_stmt_block     ::= '{' root_stmt* '}' {
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
+}
+root_stmts          ::= root_stmt* {
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
+}
+private root_stmt   ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | comment)
 
 stmt_block          ::= '{' stmt* '}' {
     mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
@@ -144,8 +151,10 @@ value_decl              ::= IDENTIFIER_WORD ':' ((type_specifier '=' expr) | typ
 using_namespace ::= 'using' 'namespace'? q_identifier ';' {
     pin='using'
 }
-namespace_decl  ::= IDENTIFIER_WORD ':' 'namespace' '=' '{' root_stmt* '}' {
-  pin=3
+namespace_decl  ::= identifier ':' 'namespace' '=' root_stmt_block {
+    pin=3
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiNamespaceDeclaration"
+    implements=["org.hnisula.cpp2plugin.psi.Cpp2PsiScope";"org.hnisula.cpp2plugin.psi.Cpp2PsiDeclaration"]
 }
 
 // Functions

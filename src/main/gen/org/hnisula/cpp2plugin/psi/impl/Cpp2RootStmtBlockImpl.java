@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop {
+public class Cpp2RootStmtBlockImpl extends Cpp2PsiStatementBlock implements Cpp2RootStmtBlock {
 
-  public Cpp2ForLoopImpl(@NotNull ASTNode node) {
+  public Cpp2RootStmtBlockImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitForLoop(this);
+    visitor.visitRootStmtBlock(this);
   }
 
   @Override
@@ -29,26 +29,26 @@ public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop
 
   @Override
   @NotNull
-  public Cpp2Expr getExpr() {
-    return findNotNullChildByClass(Cpp2Expr.class);
-  }
-
-  @Override
-  @Nullable
-  public Cpp2NextStmt getNextStmt() {
-    return findChildByClass(Cpp2NextStmt.class);
+  public List<Cpp2FuncDecl> getFuncDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2FuncDecl.class);
   }
 
   @Override
   @NotNull
-  public Cpp2ParamList getParamList() {
-    return findNotNullChildByClass(Cpp2ParamList.class);
+  public List<Cpp2NamespaceDecl> getNamespaceDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2NamespaceDecl.class);
   }
 
   @Override
   @NotNull
-  public Cpp2StmtBlock getStmtBlock() {
-    return findNotNullChildByClass(Cpp2StmtBlock.class);
+  public List<Cpp2TypeDecl> getTypeDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TypeDecl.class);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2ValueDecl> getValueDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ValueDecl.class);
   }
 
   @Override

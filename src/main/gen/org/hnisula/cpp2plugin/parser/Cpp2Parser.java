@@ -140,15 +140,9 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // root_stmt*
+  // root_stmts
   static boolean file(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "file")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!root_stmt(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "file", c)) break;
-    }
-    return true;
+    return root_stmts(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -444,29 +438,18 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER_WORD ':' 'namespace' '=' '{' root_stmt* '}'
+  // identifier ':' 'namespace' '=' root_stmt_block
   public static boolean namespace_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespace_decl")) return false;
     if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, NAMESPACE_DECL, null);
-    r = consumeTokens(b, 3, IDENTIFIER_WORD, COLON, NAMESPACE, EQ, LEFT_BRACE);
+    r = identifier(b, l + 1);
+    r = r && consumeTokens(b, 2, COLON, NAMESPACE, EQ);
     p = r; // pin = 3
-    r = r && report_error_(b, namespace_decl_5(b, l + 1));
-    r = p && consumeToken(b, RIGHT_BRACE) && r;
+    r = r && root_stmt_block(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  // root_stmt*
-  private static boolean namespace_decl_5(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "namespace_decl_5")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!root_stmt(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "namespace_decl_5", c)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */
@@ -644,18 +627,55 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // type_decl | func_decl | namespace_decl | value_decl_stmt | comment
-  public static boolean root_stmt(PsiBuilder b, int l) {
+  static boolean root_stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "root_stmt")) return false;
-    if (!nextTokenIs(b, "<root stmt>", COMMENT, IDENTIFIER_WORD)) return false;
+    if (!nextTokenIs(b, "", COMMENT, IDENTIFIER_WORD)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ROOT_STMT, "<root stmt>");
     r = type_decl(b, l + 1);
     if (!r) r = func_decl(b, l + 1);
     if (!r) r = namespace_decl(b, l + 1);
     if (!r) r = value_decl_stmt(b, l + 1);
     if (!r) r = consumeToken(b, COMMENT);
-    exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  /* ********************************************************** */
+  // '{' root_stmt* '}'
+  public static boolean root_stmt_block(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "root_stmt_block")) return false;
+    if (!nextTokenIs(b, LEFT_BRACE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LEFT_BRACE);
+    r = r && root_stmt_block_1(b, l + 1);
+    r = r && consumeToken(b, RIGHT_BRACE);
+    exit_section_(b, m, ROOT_STMT_BLOCK, r);
+    return r;
+  }
+
+  // root_stmt*
+  private static boolean root_stmt_block_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "root_stmt_block_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!root_stmt(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "root_stmt_block_1", c)) break;
+    }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // root_stmt*
+  public static boolean root_stmts(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "root_stmts")) return false;
+    Marker m = enter_section_(b, l, _NONE_, ROOT_STMTS, "<root stmts>");
+    while (true) {
+      int c = current_position_(b);
+      if (!root_stmt(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "root_stmts", c)) break;
+    }
+    exit_section_(b, l, m, true, false, null);
+    return true;
   }
 
   /* ********************************************************** */

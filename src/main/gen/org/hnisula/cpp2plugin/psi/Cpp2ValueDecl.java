@@ -13,4 +13,7 @@ public interface Cpp2ValueDecl extends Cpp2PsiDeclaration {
   @Nullable
   Cpp2TypeSpecifier getTypeSpecifier();
 
+  @Nullable
+  PsiElement getContext();
+
 }

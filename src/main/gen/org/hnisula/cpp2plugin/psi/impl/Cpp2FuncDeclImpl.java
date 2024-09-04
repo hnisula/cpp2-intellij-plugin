@@ -57,4 +57,10 @@ public class Cpp2FuncDeclImpl extends Cpp2PsiFuncDeclaration implements Cpp2Func
     return findChildByClass(Cpp2TemplateDecl.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

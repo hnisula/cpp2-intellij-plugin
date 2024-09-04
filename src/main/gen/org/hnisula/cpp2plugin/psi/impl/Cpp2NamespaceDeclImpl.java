@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import org.hnisula.cpp2plugin.psi.Cpp2PsiNamespaceDeclaration;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2NamespaceDeclImpl extends ASTWrapperPsiElement implements Cpp2NamespaceDecl {
+public class Cpp2NamespaceDeclImpl extends Cpp2PsiNamespaceDeclaration implements Cpp2NamespaceDecl {
 
   public Cpp2NamespaceDeclImpl(@NotNull ASTNode node) {
     super(node);
@@ -29,8 +29,20 @@ public class Cpp2NamespaceDeclImpl extends ASTWrapperPsiElement implements Cpp2N
 
   @Override
   @NotNull
-  public List<Cpp2RootStmt> getRootStmtList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2RootStmt.class);
+  public Cpp2Identifier getIdentifier() {
+    return findNotNullChildByClass(Cpp2Identifier.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2RootStmtBlock getRootStmtBlock() {
+    return findChildByClass(Cpp2RootStmtBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
   }
 
 }

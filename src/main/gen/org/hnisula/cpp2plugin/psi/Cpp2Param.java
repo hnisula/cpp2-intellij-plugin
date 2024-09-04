@@ -13,4 +13,7 @@ public interface Cpp2Param extends PsiElement {
   @Nullable
   Cpp2VariadicParam getVariadicParam();
 
+  @Nullable
+  PsiElement getContext();
+
 }

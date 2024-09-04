@@ -10,4 +10,7 @@ public interface Cpp2UsingNamespace extends PsiElement {
   @NotNull
   Cpp2QIdentifier getQIdentifier();
 
+  @Nullable
+  PsiElement getContext();
+
 }

@@ -39,4 +39,10 @@ public class Cpp2TypeDeclImpl extends ASTWrapperPsiElement implements Cpp2TypeDe
     return findChildByClass(Cpp2TemplateDecl.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

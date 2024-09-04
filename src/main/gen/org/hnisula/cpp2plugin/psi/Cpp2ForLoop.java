@@ -19,4 +19,7 @@ public interface Cpp2ForLoop extends PsiElement {
   @NotNull
   Cpp2StmtBlock getStmtBlock();
 
+  @Nullable
+  PsiElement getContext();
+
 }

@@ -13,4 +13,7 @@ public interface Cpp2ParamList extends PsiElement {
   @Nullable
   Cpp2ThisParam getThisParam();
 
+  @Nullable
+  PsiElement getContext();
+
 }

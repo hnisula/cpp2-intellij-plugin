@@ -57,4 +57,10 @@ public class Cpp2FuncAliasDeclImpl extends ASTWrapperPsiElement implements Cpp2F
     return findChildByClass(Cpp2TemplateDecl.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

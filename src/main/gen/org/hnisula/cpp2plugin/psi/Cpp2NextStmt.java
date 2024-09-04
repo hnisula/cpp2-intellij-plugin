@@ -10,4 +10,7 @@ public interface Cpp2NextStmt extends PsiElement {
   @NotNull
   Cpp2Expr getExpr();
 
+  @Nullable
+  PsiElement getContext();
+
 }

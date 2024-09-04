@@ -128,7 +128,8 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitNamespaceDecl(@NotNull Cpp2NamespaceDecl o) {
-    visitPsiElement(o);
+    visitPsiScope(o);
+    // visitPsiDeclaration(o);
   }
 
   public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {
@@ -171,7 +172,11 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitRootStmt(@NotNull Cpp2RootStmt o) {
+  public void visitRootStmtBlock(@NotNull Cpp2RootStmtBlock o) {
+    visitPsiElement(o);
+  }
+
+  public void visitRootStmts(@NotNull Cpp2RootStmts o) {
     visitPsiElement(o);
   }
 

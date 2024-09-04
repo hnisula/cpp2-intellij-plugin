@@ -13,4 +13,7 @@ public interface Cpp2TypeDecl extends PsiElement {
   @Nullable
   Cpp2TemplateDecl getTemplateDecl();
 
+  @Nullable
+  PsiElement getContext();
+
 }

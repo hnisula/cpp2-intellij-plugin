@@ -22,7 +22,7 @@ class Cpp2PsiUtil {
             *Cpp2AliasDeclTypes
         )
         private val Cpp2ScopeTypes = arrayOf(
-            Cpp2File::class.java,
+            Cpp2RootStmts::class.java,
             Cpp2NamespaceDecl::class.java,
             Cpp2TypeDecl::class.java,
             Cpp2FuncDecl::class.java,

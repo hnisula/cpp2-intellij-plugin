@@ -27,4 +27,10 @@ public class Cpp2LiteralImpl extends Cpp2ExprImpl implements Cpp2Literal {
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

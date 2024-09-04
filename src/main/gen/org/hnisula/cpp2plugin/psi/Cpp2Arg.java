@@ -10,4 +10,7 @@ public interface Cpp2Arg extends PsiElement {
   @NotNull
   Cpp2Expr getExpr();
 
+  @Nullable
+  PsiElement getContext();
+
 }

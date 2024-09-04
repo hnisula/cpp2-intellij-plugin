@@ -27,4 +27,10 @@ public class Cpp2ThisParamImpl extends ASTWrapperPsiElement implements Cpp2ThisP
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

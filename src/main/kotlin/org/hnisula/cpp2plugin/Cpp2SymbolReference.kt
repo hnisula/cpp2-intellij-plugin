@@ -4,8 +4,8 @@ import com.intellij.model.Symbol
 import com.intellij.model.psi.PsiSymbolReference
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
-import com.intellij.util.containers.addIfNotNull
 import org.hnisula.cpp2plugin.psi.Cpp2PsiUtil
+import kotlin.reflect.typeOf
 
 class Cpp2SymbolReference(
     private val identifiers: List<String>,

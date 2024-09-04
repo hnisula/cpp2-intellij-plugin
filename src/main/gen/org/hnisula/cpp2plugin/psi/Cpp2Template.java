@@ -10,4 +10,7 @@ public interface Cpp2Template extends PsiElement {
   @NotNull
   List<Cpp2TypeSpecifier> getTypeSpecifierList();
 
+  @Nullable
+  PsiElement getContext();
+
 }

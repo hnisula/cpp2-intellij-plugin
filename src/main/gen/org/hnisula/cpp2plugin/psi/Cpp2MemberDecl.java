@@ -19,4 +19,7 @@ public interface Cpp2MemberDecl extends PsiElement {
   @Nullable
   Cpp2ValueDecl getValueDecl();
 
+  @Nullable
+  PsiElement getContext();
+
 }

@@ -3,6 +3,7 @@ package org.hnisula.cpp2plugin.psi
 import com.intellij.extapi.psi.ASTWrapperPsiElement
 import com.intellij.lang.ASTNode
 import com.intellij.model.psi.PsiSymbolDeclaration
+import com.intellij.psi.PsiElement
 import com.intellij.psi.util.childrenOfType
 
 open class Cpp2PsiFuncDeclaration(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2PsiScope {
@@ -18,4 +19,5 @@ open class Cpp2PsiFuncDeclaration(node: ASTNode) : ASTWrapperPsiElement(node), C
         return decls
     }
 
+//    override fun getContext(): PsiElement? = Cpp2PsiUtil.getContext(this)
 }

@@ -13,4 +13,7 @@ public interface Cpp2ObjAliasDecl extends PsiElement {
   @Nullable
   Cpp2TypeSpecifier getTypeSpecifier();
 
+  @Nullable
+  PsiElement getContext();
+
 }

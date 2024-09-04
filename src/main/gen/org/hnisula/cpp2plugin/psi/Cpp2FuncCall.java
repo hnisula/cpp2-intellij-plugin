@@ -13,4 +13,7 @@ public interface Cpp2FuncCall extends Cpp2Expr {
   @NotNull
   Cpp2QIdentifier getQIdentifier();
 
+  @Nullable
+  PsiElement getContext();
+
 }

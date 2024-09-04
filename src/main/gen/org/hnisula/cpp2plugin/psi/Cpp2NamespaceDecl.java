@@ -5,9 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2NamespaceDecl extends PsiElement {
+public interface Cpp2NamespaceDecl extends Cpp2PsiScope, Cpp2PsiDeclaration {
 
   @NotNull
-  List<Cpp2RootStmt> getRootStmtList();
+  Cpp2Identifier getIdentifier();
+
+  @Nullable
+  Cpp2RootStmtBlock getRootStmtBlock();
+
+  @Nullable
+  PsiElement getContext();
 
 }

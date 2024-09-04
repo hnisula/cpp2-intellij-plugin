@@ -33,4 +33,10 @@ public class Cpp2AssignImpl extends ASTWrapperPsiElement implements Cpp2Assign {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

@@ -105,4 +105,10 @@ public class Cpp2StmtBlockImpl extends Cpp2PsiStatementBlock implements Cpp2Stmt
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2WhileLoop.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

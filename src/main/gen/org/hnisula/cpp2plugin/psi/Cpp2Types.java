@@ -49,7 +49,8 @@ public interface Cpp2Types {
   IElementType Q_IDENTIFIER = new Cpp2ElementType("Q_IDENTIFIER");
   IElementType RETURN_TYPE = new Cpp2ElementType("RETURN_TYPE");
   IElementType RIGHT_SHIFT_EXPR = new Cpp2ElementType("RIGHT_SHIFT_EXPR");
-  IElementType ROOT_STMT = new Cpp2ElementType("ROOT_STMT");
+  IElementType ROOT_STMTS = new Cpp2ElementType("ROOT_STMTS");
+  IElementType ROOT_STMT_BLOCK = new Cpp2ElementType("ROOT_STMT_BLOCK");
   IElementType STMT_BLOCK = new Cpp2ElementType("STMT_BLOCK");
   IElementType SUBSCRIPT_EXPR = new Cpp2ElementType("SUBSCRIPT_EXPR");
   IElementType SUB_EXPR = new Cpp2ElementType("SUB_EXPR");
@@ -255,8 +256,11 @@ public interface Cpp2Types {
       else if (type == RIGHT_SHIFT_EXPR) {
         return new Cpp2RightShiftExprImpl(node);
       }
-      else if (type == ROOT_STMT) {
-        return new Cpp2RootStmtImpl(node);
+      else if (type == ROOT_STMTS) {
+        return new Cpp2RootStmtsImpl(node);
+      }
+      else if (type == ROOT_STMT_BLOCK) {
+        return new Cpp2RootStmtBlockImpl(node);
       }
       else if (type == STMT_BLOCK) {
         return new Cpp2StmtBlockImpl(node);
