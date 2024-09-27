@@ -13,7 +13,8 @@ public interface Cpp2QIdentifier extends Cpp2Expr {
   @NotNull
   List<Cpp2Template> getTemplateList();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2QIdentifier, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

@@ -13,7 +13,8 @@ public interface Cpp2Param extends PsiElement {
   @Nullable
   Cpp2VariadicParam getVariadicParam();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2Param, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

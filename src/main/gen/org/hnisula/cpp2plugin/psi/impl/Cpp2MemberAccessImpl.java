@@ -27,10 +27,4 @@ public class Cpp2MemberAccessImpl extends ASTWrapperPsiElement implements Cpp2Me
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

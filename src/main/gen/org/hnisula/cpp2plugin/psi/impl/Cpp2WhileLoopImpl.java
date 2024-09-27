@@ -45,10 +45,4 @@ public class Cpp2WhileLoopImpl extends ASTWrapperPsiElement implements Cpp2While
     return findNotNullChildByClass(Cpp2StmtBlock.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

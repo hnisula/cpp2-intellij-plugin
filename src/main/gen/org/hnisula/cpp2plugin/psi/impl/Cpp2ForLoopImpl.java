@@ -51,10 +51,4 @@ public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop
     return findNotNullChildByClass(Cpp2StmtBlock.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

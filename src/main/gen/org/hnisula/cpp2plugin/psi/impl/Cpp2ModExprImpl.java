@@ -33,10 +33,4 @@ public class Cpp2ModExprImpl extends Cpp2ExprImpl implements Cpp2ModExpr {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

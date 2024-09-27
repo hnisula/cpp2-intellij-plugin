@@ -33,10 +33,4 @@ public class Cpp2NextStmtImpl extends ASTWrapperPsiElement implements Cpp2NextSt
     return findNotNullChildByClass(Cpp2Expr.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

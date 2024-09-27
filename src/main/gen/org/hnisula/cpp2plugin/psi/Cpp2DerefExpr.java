@@ -10,7 +10,8 @@ public interface Cpp2DerefExpr extends Cpp2Expr {
   @NotNull
   Cpp2Expr getExpr();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2DerefExpr, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

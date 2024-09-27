@@ -35,6 +35,12 @@ public class Cpp2FuncAliasDeclImpl extends ASTWrapperPsiElement implements Cpp2F
 
   @Override
   @NotNull
+  public Cpp2Identifier getIdentifier() {
+    return findNotNullChildByClass(Cpp2Identifier.class);
+  }
+
+  @Override
+  @NotNull
   public Cpp2ParamList getParamList() {
     return findNotNullChildByClass(Cpp2ParamList.class);
   }
@@ -55,12 +61,6 @@ public class Cpp2FuncAliasDeclImpl extends ASTWrapperPsiElement implements Cpp2F
   @Nullable
   public Cpp2TemplateDecl getTemplateDecl() {
     return findChildByClass(Cpp2TemplateDecl.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
   }
 
 }

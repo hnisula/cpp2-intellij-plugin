@@ -38,13 +38,5 @@
                 language="Cpp2"
                 implementationClass="org.hnisula.cpp2plugin.Cpp2ParserDefinition"
         />
-        <lang.syntaxHighlighterFactory
-                language="Cpp2"
-                implementationClass="org.hnisula.cpp2plugin.Cpp2SyntaxHighlighterFactory"
-        />
-        <completion.contributor
-                language="Cpp2"
-                implementationClass="org.hnisula.cpp2plugin.Cpp2CompletionContributor"
-        />
     </extensions>
 </idea-plugin>

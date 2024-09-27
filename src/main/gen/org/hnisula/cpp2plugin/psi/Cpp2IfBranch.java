@@ -13,7 +13,8 @@ public interface Cpp2IfBranch extends PsiElement {
   @NotNull
   List<Cpp2StmtBlock> getStmtBlockList();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2IfBranch, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

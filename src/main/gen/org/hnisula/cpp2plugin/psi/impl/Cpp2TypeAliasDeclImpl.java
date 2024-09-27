@@ -29,14 +29,14 @@ public class Cpp2TypeAliasDeclImpl extends ASTWrapperPsiElement implements Cpp2T
 
   @Override
   @NotNull
-  public Cpp2TypeSpecifier getTypeSpecifier() {
-    return findNotNullChildByClass(Cpp2TypeSpecifier.class);
+  public Cpp2Identifier getIdentifier() {
+    return findNotNullChildByClass(Cpp2Identifier.class);
   }
 
   @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
+  @NotNull
+  public Cpp2TypeSpecifier getTypeSpecifier() {
+    return findNotNullChildByClass(Cpp2TypeSpecifier.class);
   }
 
 }

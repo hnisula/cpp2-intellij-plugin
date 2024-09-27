@@ -10,7 +10,8 @@ public interface Cpp2ReturnType extends PsiElement {
   @Nullable
   Cpp2TypeSpecifier getTypeSpecifier();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2ReturnType, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

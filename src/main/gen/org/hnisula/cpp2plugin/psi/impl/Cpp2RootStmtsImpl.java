@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2RootStmtsImpl extends Cpp2PsiStatementBlock implements Cpp2RootStmts {
+public class Cpp2RootStmtsImpl extends ASTWrapperPsiElement implements Cpp2RootStmts {
 
   public Cpp2RootStmtsImpl(@NotNull ASTNode node) {
     super(node);
@@ -49,12 +49,6 @@ public class Cpp2RootStmtsImpl extends Cpp2PsiStatementBlock implements Cpp2Root
   @NotNull
   public List<Cpp2ValueDecl> getValueDeclList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ValueDecl.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
   }
 
 }

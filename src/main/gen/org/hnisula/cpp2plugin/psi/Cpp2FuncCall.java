@@ -13,7 +13,8 @@ public interface Cpp2FuncCall extends Cpp2Expr {
   @NotNull
   Cpp2QIdentifier getQIdentifier();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2FuncCall, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

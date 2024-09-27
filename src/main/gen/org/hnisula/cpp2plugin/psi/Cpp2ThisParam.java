@@ -7,7 +7,8 @@ import com.intellij.psi.PsiElement;
 
 public interface Cpp2ThisParam extends PsiElement {
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2ThisParam, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

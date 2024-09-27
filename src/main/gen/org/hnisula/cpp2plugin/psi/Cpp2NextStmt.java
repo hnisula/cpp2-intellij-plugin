@@ -10,7 +10,8 @@ public interface Cpp2NextStmt extends PsiElement {
   @NotNull
   Cpp2Expr getExpr();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2NextStmt, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

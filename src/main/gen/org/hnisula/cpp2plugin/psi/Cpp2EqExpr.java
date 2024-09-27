@@ -10,7 +10,8 @@ public interface Cpp2EqExpr extends Cpp2Expr {
   @NotNull
   List<Cpp2Expr> getExprList();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2EqExpr, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

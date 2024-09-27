@@ -10,10 +10,14 @@ public interface Cpp2ObjAliasDecl extends PsiElement {
   @NotNull
   Cpp2Expr getExpr();
 
+  @NotNull
+  Cpp2Identifier getIdentifier();
+
   @Nullable
   Cpp2TypeSpecifier getTypeSpecifier();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2ObjAliasDecl, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

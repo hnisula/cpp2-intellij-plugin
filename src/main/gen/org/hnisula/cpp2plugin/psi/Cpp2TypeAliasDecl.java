@@ -8,9 +8,13 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2TypeAliasDecl extends PsiElement {
 
   @NotNull
+  Cpp2Identifier getIdentifier();
+
+  @NotNull
   Cpp2TypeSpecifier getTypeSpecifier();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2TypeAliasDecl, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

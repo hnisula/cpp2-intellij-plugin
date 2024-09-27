@@ -33,10 +33,4 @@ public class Cpp2GteqExprImpl extends Cpp2ExprImpl implements Cpp2GteqExpr {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

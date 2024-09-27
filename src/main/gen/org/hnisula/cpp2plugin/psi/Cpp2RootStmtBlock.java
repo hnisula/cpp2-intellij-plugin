@@ -19,7 +19,8 @@ public interface Cpp2RootStmtBlock extends PsiElement {
   @NotNull
   List<Cpp2ValueDecl> getValueDeclList();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2RootStmtBlock, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

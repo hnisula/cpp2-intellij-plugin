@@ -39,10 +39,4 @@ public class Cpp2IfBranchImpl extends ASTWrapperPsiElement implements Cpp2IfBran
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2StmtBlock.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

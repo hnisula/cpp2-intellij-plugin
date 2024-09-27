@@ -33,10 +33,4 @@ public class Cpp2ReturnTypeImpl extends ASTWrapperPsiElement implements Cpp2Retu
     return findChildByClass(Cpp2TypeSpecifier.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

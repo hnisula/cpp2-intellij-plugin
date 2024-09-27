@@ -90,15 +90,15 @@
 file ::= root_stmts
 
 root_stmt_block     ::= '{' root_stmt* '}' {
-    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
+//    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
 }
 root_stmts          ::= root_stmt* {
-    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
+//    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
 }
 private root_stmt   ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | comment)
 
 stmt_block          ::= '{' stmt* '}' {
-    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
+//    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock"
 }
 private stmt        ::= (func_decl | value_decl_stmt | alias_decl | assign | using_namespace | expr_stmt | if_branch | for_loop | do_while_loop | while_loop | comment)
 private expr_stmt   ::= expr ';'
@@ -123,16 +123,16 @@ if_branch ::= 'if' expr stmt_block ('else' 'if' expr stmt_block)* ('else' stmt_b
 // Aliases
 
 private alias_decl      ::= obj_alias_decl | func_alias_decl | type_alias_decl | namespace_alias_decl 
-namespace_alias_decl    ::= IDENTIFIER_WORD ':' 'namespace' '==' namespace_ref ';' {
+namespace_alias_decl    ::= identifier ':' 'namespace' '==' namespace_ref ';' {
     pin='=='
 }
-type_alias_decl         ::= IDENTIFIER_WORD ':' 'type' '==' type_specifier ';' {
+type_alias_decl         ::= identifier ':' 'type' '==' type_specifier ';' {
     pin='=='
 }
-func_alias_decl         ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? (('==' stmt_block) | ('=='? expr ';')) {
+func_alias_decl         ::= identifier ':' template_decl? param_list return_type? (('==' stmt_block) | ('=='? expr ';')) {
     pin=param_list
 }
-obj_alias_decl          ::= IDENTIFIER_WORD ':' type_specifier? '==' expr ';' {
+obj_alias_decl          ::= identifier ':' type_specifier? '==' expr ';' {
     pin='=='
 }
 
@@ -140,10 +140,10 @@ obj_alias_decl          ::= IDENTIFIER_WORD ':' type_specifier? '==' expr ';' {
 
 assign                  ::= expr '=' expr ';'
 private value_decl_stmt ::= value_decl ';'
-value_decl              ::= IDENTIFIER_WORD ':' ((type_specifier '=' expr) | type_specifier | ('=' expr)) {
+value_decl              ::= identifier ':' ((type_specifier '=' expr) | type_specifier | ('=' expr)) {
     pin=3
-    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiValueDeclaration"
-    implements="org.hnisula.cpp2plugin.psi.Cpp2PsiDeclaration"
+//    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiValueDeclaration"
+//    implements="org.hnisula.cpp2plugin.psi.Cpp2PsiDeclaration"
 }
 
 // Namespace
@@ -153,16 +153,17 @@ using_namespace ::= 'using' 'namespace'? q_identifier ';' {
 }
 namespace_decl  ::= identifier ':' 'namespace' '=' root_stmt_block {
     pin=3
-    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiNamespaceDeclaration"
-    implements=["org.hnisula.cpp2plugin.psi.Cpp2PsiScope";"org.hnisula.cpp2plugin.psi.Cpp2PsiDeclaration"]
+//    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiNamespaceDeclaration"
+//    implements=["org.hnisula.cpp2plugin.psi.Cpp2PsiScope";"org.hnisula.cpp2plugin.psi.Cpp2PsiDeclaration"]
 }
 
 // Functions
 
-func_decl       ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? (('=' stmt_block) | ('='? expr ';')) {
+func_decl       ::= identifier ':' template_decl? param_list return_type? (('=' stmt_block) | ('='? expr ';')) {
     pin=param_list
-    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiFuncDeclaration"
-    implements="org.hnisula.cpp2plugin.psi.Cpp2PsiScope"
+//    mixin="org.hnisula.cpp2plugin.psi.Cpp2FuncDeclarationMixin"
+//    implements="org.hnisula.cpp2plugin.psi.Cpp2PsiScope"
+//    stubClass="org.hnisula.cpp2plugin.psi.stubs.Cpp2FuncDeclarationStub"
 }
 return_type     ::= '->' ('_' | type_specifier)
 
@@ -171,7 +172,7 @@ arg                 ::= param_kind? expr
 param_list          ::= '(' ((this_param | param) (',' param)*)? ')'
 param               ::= param_kind? (value_decl | variadic_param)
 this_param          ::= this_param_kind? 'this'
-variadic_param      ::= IDENTIFIER_WORD '...'
+variadic_param      ::= identifier '...'
 
 // Type declaration
 
@@ -232,7 +233,7 @@ q_identifier                ::= '::'? (identifier template? '::')* identifier te
 }
 
 identifier                  ::= IDENTIFIER_WORD {
-    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiIdentifier"
+//    mixin="org.hnisula.cpp2plugin.psi.Cpp2PsiIdentifier"
 }
 literal                     ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | STRING_LITERAL {extends=expr}
 

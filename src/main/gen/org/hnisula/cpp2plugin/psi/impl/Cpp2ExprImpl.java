@@ -27,10 +27,4 @@ public abstract class Cpp2ExprImpl extends ASTWrapperPsiElement implements Cpp2E
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

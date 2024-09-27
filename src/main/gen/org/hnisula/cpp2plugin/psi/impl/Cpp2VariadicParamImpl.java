@@ -28,9 +28,9 @@ public class Cpp2VariadicParamImpl extends ASTWrapperPsiElement implements Cpp2V
   }
 
   @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
+  @NotNull
+  public Cpp2Identifier getIdentifier() {
+    return findNotNullChildByClass(Cpp2Identifier.class);
   }
 
 }

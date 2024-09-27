@@ -68,7 +68,7 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitFuncDecl(@NotNull Cpp2FuncDecl o) {
-    visitPsiScope(o);
+    visitPsiElement(o);
   }
 
   public void visitGtExpr(@NotNull Cpp2GtExpr o) {
@@ -128,8 +128,7 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitNamespaceDecl(@NotNull Cpp2NamespaceDecl o) {
-    visitPsiScope(o);
-    // visitPsiDeclaration(o);
+    visitPsiElement(o);
   }
 
   public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {
@@ -221,7 +220,7 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitValueDecl(@NotNull Cpp2ValueDecl o) {
-    visitPsiDeclaration(o);
+    visitPsiElement(o);
   }
 
   public void visitVariadicParam(@NotNull Cpp2VariadicParam o) {
@@ -229,14 +228,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitWhileLoop(@NotNull Cpp2WhileLoop o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPsiDeclaration(@NotNull Cpp2PsiDeclaration o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPsiScope(@NotNull Cpp2PsiScope o) {
     visitPsiElement(o);
   }
 

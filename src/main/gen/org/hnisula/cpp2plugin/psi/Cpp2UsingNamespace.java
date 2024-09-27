@@ -10,7 +10,8 @@ public interface Cpp2UsingNamespace extends PsiElement {
   @NotNull
   Cpp2QIdentifier getQIdentifier();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2UsingNamespace, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

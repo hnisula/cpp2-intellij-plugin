@@ -11,6 +11,9 @@ public interface Cpp2FuncAliasDecl extends PsiElement {
   Cpp2Expr getExpr();
 
   @NotNull
+  Cpp2Identifier getIdentifier();
+
+  @NotNull
   Cpp2ParamList getParamList();
 
   @Nullable
@@ -22,7 +25,8 @@ public interface Cpp2FuncAliasDecl extends PsiElement {
   @Nullable
   Cpp2TemplateDecl getTemplateDecl();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2FuncAliasDecl, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

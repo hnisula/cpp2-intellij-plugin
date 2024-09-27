@@ -10,7 +10,8 @@ public interface Cpp2BitOrExpr extends Cpp2Expr {
   @NotNull
   List<Cpp2Expr> getExprList();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2BitOrExpr, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

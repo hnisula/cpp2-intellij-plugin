@@ -10,7 +10,8 @@ public interface Cpp2Assign extends PsiElement {
   @NotNull
   List<Cpp2Expr> getExprList();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2Assign, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

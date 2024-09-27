@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import org.hnisula.cpp2plugin.psi.Cpp2PsiFuncDeclaration;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2FuncDeclImpl extends Cpp2PsiFuncDeclaration implements Cpp2FuncDecl {
+public class Cpp2FuncDeclImpl extends ASTWrapperPsiElement implements Cpp2FuncDecl {
 
   public Cpp2FuncDeclImpl(@NotNull ASTNode node) {
     super(node);
@@ -31,6 +31,12 @@ public class Cpp2FuncDeclImpl extends Cpp2PsiFuncDeclaration implements Cpp2Func
   @Nullable
   public Cpp2Expr getExpr() {
     return findChildByClass(Cpp2Expr.class);
+  }
+
+  @Override
+  @NotNull
+  public Cpp2Identifier getIdentifier() {
+    return findNotNullChildByClass(Cpp2Identifier.class);
   }
 
   @Override
@@ -55,12 +61,6 @@ public class Cpp2FuncDeclImpl extends Cpp2PsiFuncDeclaration implements Cpp2Func
   @Nullable
   public Cpp2TemplateDecl getTemplateDecl() {
     return findChildByClass(Cpp2TemplateDecl.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
   }
 
 }

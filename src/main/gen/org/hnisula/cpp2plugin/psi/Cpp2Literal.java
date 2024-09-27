@@ -7,7 +7,8 @@ import com.intellij.psi.PsiElement;
 
 public interface Cpp2Literal extends Cpp2Expr {
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2Literal, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

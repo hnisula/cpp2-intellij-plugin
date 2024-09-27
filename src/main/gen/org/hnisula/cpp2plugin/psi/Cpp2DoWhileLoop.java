@@ -16,7 +16,8 @@ public interface Cpp2DoWhileLoop extends PsiElement {
   @NotNull
   Cpp2StmtBlock getStmtBlock();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2DoWhileLoop, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

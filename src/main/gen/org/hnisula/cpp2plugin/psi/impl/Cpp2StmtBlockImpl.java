@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import org.hnisula.cpp2plugin.psi.Cpp2PsiStatementBlock;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2StmtBlockImpl extends Cpp2PsiStatementBlock implements Cpp2StmtBlock {
+public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtBlock {
 
   public Cpp2StmtBlockImpl(@NotNull ASTNode node) {
     super(node);
@@ -103,12 +103,6 @@ public class Cpp2StmtBlockImpl extends Cpp2PsiStatementBlock implements Cpp2Stmt
   @NotNull
   public List<Cpp2WhileLoop> getWhileLoopList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2WhileLoop.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
   }
 
 }

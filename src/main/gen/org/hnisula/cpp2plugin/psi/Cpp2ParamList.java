@@ -13,7 +13,8 @@ public interface Cpp2ParamList extends PsiElement {
   @Nullable
   Cpp2ThisParam getThisParam();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2ParamList, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

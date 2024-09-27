@@ -39,10 +39,4 @@ public class Cpp2FuncCallImpl extends Cpp2ExprImpl implements Cpp2FuncCall {
     return findNotNullChildByClass(Cpp2QIdentifier.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

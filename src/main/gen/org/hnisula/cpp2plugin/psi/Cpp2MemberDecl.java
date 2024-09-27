@@ -19,7 +19,8 @@ public interface Cpp2MemberDecl extends PsiElement {
   @Nullable
   Cpp2ValueDecl getValueDecl();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2MemberDecl, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

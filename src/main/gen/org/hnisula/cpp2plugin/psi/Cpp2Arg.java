@@ -10,7 +10,8 @@ public interface Cpp2Arg extends PsiElement {
   @NotNull
   Cpp2Expr getExpr();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2Arg, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

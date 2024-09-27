@@ -13,7 +13,8 @@ public interface Cpp2TypeSpecifier extends PsiElement {
   @Nullable
   Cpp2Template getTemplate();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2TypeSpecifier, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

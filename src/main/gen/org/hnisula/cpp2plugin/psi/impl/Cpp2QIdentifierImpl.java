@@ -39,10 +39,4 @@ public class Cpp2QIdentifierImpl extends Cpp2ExprImpl implements Cpp2QIdentifier
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Template.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

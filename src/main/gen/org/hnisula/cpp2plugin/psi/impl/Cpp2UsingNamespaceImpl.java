@@ -33,10 +33,4 @@ public class Cpp2UsingNamespaceImpl extends ASTWrapperPsiElement implements Cpp2
     return findNotNullChildByClass(Cpp2QIdentifier.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

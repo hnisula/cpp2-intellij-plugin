@@ -21,7 +21,7 @@ intellij {
     plugins.set(listOf(
         "PsiViewer:242.4697",
         "com.intellij.plugins.resharperkeymap:242.21829.3",
-//        "com.jetbrains.hackathon.indices.viewer:1.27",
+        "com.jetbrains.hackathon.indices.viewer:1.27",
 //        "Intellij_GitHub_Dark_Theme:1.1.3"))
     ))
 }

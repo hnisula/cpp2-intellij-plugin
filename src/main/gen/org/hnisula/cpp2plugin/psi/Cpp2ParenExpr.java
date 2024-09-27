@@ -10,7 +10,8 @@ public interface Cpp2ParenExpr extends Cpp2Expr {
   @Nullable
   Cpp2Expr getExpr();
 
-  @Nullable
-  PsiElement getContext();
+  //WARNING: getContext(...) is skipped
+  //matching getContext(Cpp2ParenExpr, ...)
+  //methods are not found in Cpp2PsiUtil
 
 }

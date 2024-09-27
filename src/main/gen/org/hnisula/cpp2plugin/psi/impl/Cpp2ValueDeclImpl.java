@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import org.hnisula.cpp2plugin.psi.Cpp2PsiValueDeclaration;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2ValueDeclImpl extends Cpp2PsiValueDeclaration implements Cpp2ValueDecl {
+public class Cpp2ValueDeclImpl extends ASTWrapperPsiElement implements Cpp2ValueDecl {
 
   public Cpp2ValueDeclImpl(@NotNull ASTNode node) {
     super(node);
@@ -34,15 +34,15 @@ public class Cpp2ValueDeclImpl extends Cpp2PsiValueDeclaration implements Cpp2Va
   }
 
   @Override
-  @Nullable
-  public Cpp2TypeSpecifier getTypeSpecifier() {
-    return findChildByClass(Cpp2TypeSpecifier.class);
+  @NotNull
+  public Cpp2Identifier getIdentifier() {
+    return findNotNullChildByClass(Cpp2Identifier.class);
   }
 
   @Override
   @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
+  public Cpp2TypeSpecifier getTypeSpecifier() {
+    return findChildByClass(Cpp2TypeSpecifier.class);
   }
 
 }
