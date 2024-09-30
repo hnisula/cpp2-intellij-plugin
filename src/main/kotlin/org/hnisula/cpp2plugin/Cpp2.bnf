@@ -178,6 +178,8 @@ variadic_param      ::= identifier '...'
 
 type_decl           ::= IDENTIFIER_WORD ':' template_decl? METAFUNCTION? 'type' '=' '{' member_decl* '}' {
     pin='type'
+    implements=["org.hnisula.cpp2plugin.psi.Cpp2Declaration"]
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2TypeDeclMixin"
 }
 member_decl         ::= (member_access? (type_decl | func_decl | value_decl | comment))
 member_access       ::= ('public' | 'protected' | 'private')
