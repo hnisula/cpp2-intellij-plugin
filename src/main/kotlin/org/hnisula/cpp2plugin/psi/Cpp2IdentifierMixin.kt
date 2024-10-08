@@ -37,7 +37,7 @@ open class Cpp2IdentifierMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2
     private data class ScopeInfo(val scopeIdentifiers: MutableList<String>, val isGlobalScope: Boolean)
     
     private fun getScopeInfo(): ScopeInfo {
-        if (node !is Cpp2QIdentifier) {
+        if (node.treeParent.psi !is Cpp2QIdentifier) {
             return ScopeInfo(mutableListOf(), false)
         }
 
