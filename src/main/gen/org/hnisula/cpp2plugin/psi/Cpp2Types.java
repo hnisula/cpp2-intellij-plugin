@@ -20,6 +20,7 @@ public interface Cpp2Types {
   IElementType DO_WHILE_LOOP = new Cpp2ElementType("DO_WHILE_LOOP");
   IElementType EQ_EXPR = new Cpp2ElementType("EQ_EXPR");
   IElementType EXPR = new Cpp2ElementType("EXPR");
+  IElementType FILE_WRAPPER = new Cpp2ElementType("FILE_WRAPPER");
   IElementType FOR_LOOP = new Cpp2ElementType("FOR_LOOP");
   IElementType FUNC_ALIAS_DECL = new Cpp2ElementType("FUNC_ALIAS_DECL");
   IElementType FUNC_CALL = new Cpp2ElementType("FUNC_CALL");
@@ -168,6 +169,9 @@ public interface Cpp2Types {
       }
       else if (type == EQ_EXPR) {
         return new Cpp2EqExprImpl(node);
+      }
+      else if (type == FILE_WRAPPER) {
+        return new Cpp2FileWrapperImpl(node);
       }
       else if (type == FOR_LOOP) {
         return new Cpp2ForLoopImpl(node);

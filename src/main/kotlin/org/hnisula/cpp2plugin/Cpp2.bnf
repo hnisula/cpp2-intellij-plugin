@@ -13,7 +13,7 @@
     tokenTypeClass="org.hnisula.cpp2plugin.psi.Cpp2TokenType"
     
     psiImplUtilClass="org.hnisula.cpp2plugin.psi.Cpp2PsiUtil"
-//    methods=[getContext]
+    methods=[getContext]
     
     extends(".*expr")=expr
     
@@ -87,7 +87,11 @@
 
 // Root stuff
 
-file ::= root_stmts
+file ::= file_wrapper
+file_wrapper ::= root_stmts {
+    implements=["org.hnisula.cpp2plugin.Cpp2Scope"]
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2FileWrapperMixin"
+}
 
 root_stmt_block     ::= '{' root_stmt* '}'
 root_stmts          ::= root_stmt*
@@ -116,7 +120,7 @@ if_branch ::= 'if' expr stmt_block ('else' 'if' expr stmt_block)* ('else' stmt_b
 
 // Aliases
 
-private alias_decl      ::= obj_alias_decl | func_alias_decl | type_alias_decl | namespace_alias_decl 
+private alias_decl      ::= obj_alias_decl | func_alias_decl | type_alias_decl | namespace_alias_decl
 namespace_alias_decl    ::= IDENTIFIER_WORD ':' 'namespace' '==' namespace_ref ';' {
     pin='=='
 }
@@ -165,8 +169,10 @@ variadic_param      ::= IDENTIFIER_WORD '...'
 
 type_decl           ::= IDENTIFIER_WORD ':' template_decl? METAFUNCTION? 'type' '=' '{' member_decl* '}' {
     pin='type'
+    implements=["org.hnisula.cpp2plugin.Cpp2NamedDeclaration"]
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2TypeDeclMixin"
 }
-member_decl         ::= (member_access? (type_decl | func_decl | value_decl | comment))
+member_decl         ::= (member_access? (type_decl | func_decl | (value_decl ';') | comment))
 member_access       ::= ('public' | 'protected' | 'private')
 
 // Expressions and operators
@@ -219,7 +225,10 @@ q_identifier                ::= '::'? (identifier template? '::')* identifier te
     extends=expr
 }
 
-identifier                  ::= IDENTIFIER_WORD
+identifier                  ::= IDENTIFIER_WORD {
+    implements="org.hnisula.cpp2plugin.Cpp2Reference"
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2IdentifierMixin"
+}
 literal                     ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | STRING_LITERAL {extends=expr}
 
 private qualifier           ::= ('const' | '*')

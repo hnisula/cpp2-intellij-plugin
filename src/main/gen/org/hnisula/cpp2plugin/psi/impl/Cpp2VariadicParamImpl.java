@@ -27,4 +27,10 @@ public class Cpp2VariadicParamImpl extends ASTWrapperPsiElement implements Cpp2V
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

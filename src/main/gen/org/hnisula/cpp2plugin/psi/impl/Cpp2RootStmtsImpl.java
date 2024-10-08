@@ -51,4 +51,10 @@ public class Cpp2RootStmtsImpl extends ASTWrapperPsiElement implements Cpp2RootS
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ValueDecl.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

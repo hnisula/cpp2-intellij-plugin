@@ -51,4 +51,10 @@ public class Cpp2MemberDeclImpl extends ASTWrapperPsiElement implements Cpp2Memb
     return findChildByClass(Cpp2ValueDecl.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import org.hnisula.cpp2plugin.psi.Cpp2TypeDeclMixin;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2TypeDeclImpl extends ASTWrapperPsiElement implements Cpp2TypeDecl {
+public class Cpp2TypeDeclImpl extends Cpp2TypeDeclMixin implements Cpp2TypeDecl {
 
   public Cpp2TypeDeclImpl(@NotNull ASTNode node) {
     super(node);
@@ -37,6 +37,12 @@ public class Cpp2TypeDeclImpl extends ASTWrapperPsiElement implements Cpp2TypeDe
   @Nullable
   public Cpp2TemplateDecl getTemplateDecl() {
     return findChildByClass(Cpp2TemplateDecl.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
   }
 
 }

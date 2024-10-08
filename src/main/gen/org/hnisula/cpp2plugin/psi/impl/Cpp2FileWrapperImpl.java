@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import org.hnisula.cpp2plugin.psi.Cpp2FileWrapperMixin;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop {
+public class Cpp2FileWrapperImpl extends Cpp2FileWrapperMixin implements Cpp2FileWrapper {
 
-  public Cpp2ForLoopImpl(@NotNull ASTNode node) {
+  public Cpp2FileWrapperImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitForLoop(this);
+    visitor.visitFileWrapper(this);
   }
 
   @Override
@@ -29,26 +29,8 @@ public class Cpp2ForLoopImpl extends ASTWrapperPsiElement implements Cpp2ForLoop
 
   @Override
   @NotNull
-  public Cpp2Expr getExpr() {
-    return findNotNullChildByClass(Cpp2Expr.class);
-  }
-
-  @Override
-  @Nullable
-  public Cpp2NextStmt getNextStmt() {
-    return findChildByClass(Cpp2NextStmt.class);
-  }
-
-  @Override
-  @NotNull
-  public Cpp2ParamList getParamList() {
-    return findNotNullChildByClass(Cpp2ParamList.class);
-  }
-
-  @Override
-  @NotNull
-  public Cpp2StmtBlock getStmtBlock() {
-    return findNotNullChildByClass(Cpp2StmtBlock.class);
+  public Cpp2RootStmts getRootStmts() {
+    return findNotNullChildByClass(Cpp2RootStmts.class);
   }
 
   @Override

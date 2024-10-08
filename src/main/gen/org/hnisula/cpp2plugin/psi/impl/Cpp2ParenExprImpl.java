@@ -33,4 +33,10 @@ public class Cpp2ParenExprImpl extends Cpp2ExprImpl implements Cpp2ParenExpr {
     return findChildByClass(Cpp2Expr.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

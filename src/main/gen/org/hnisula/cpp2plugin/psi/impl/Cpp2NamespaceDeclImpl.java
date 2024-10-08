@@ -39,4 +39,10 @@ public class Cpp2NamespaceDeclImpl extends ASTWrapperPsiElement implements Cpp2N
     return findChildByClass(Cpp2RootStmtBlock.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

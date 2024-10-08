@@ -13,4 +13,7 @@ public interface Cpp2NamespaceDecl extends PsiElement {
   @Nullable
   Cpp2RootStmtBlock getRootStmtBlock();
 
+  @Nullable
+  PsiElement getContext();
+
 }

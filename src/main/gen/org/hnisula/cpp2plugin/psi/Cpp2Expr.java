@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface Cpp2Expr extends PsiElement {
 
+  @Nullable
+  PsiElement getContext();
+
 }

@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface Cpp2Literal extends Cpp2Expr {
 
+  @Nullable
+  PsiElement getContext();
+
 }

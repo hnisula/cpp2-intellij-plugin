@@ -39,4 +39,10 @@ public class Cpp2ObjAliasDeclImpl extends ASTWrapperPsiElement implements Cpp2Ob
     return findChildByClass(Cpp2TypeSpecifier.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

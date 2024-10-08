@@ -39,4 +39,10 @@ public class Cpp2ValueDeclImpl extends ASTWrapperPsiElement implements Cpp2Value
     return findChildByClass(Cpp2TypeSpecifier.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

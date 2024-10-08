@@ -13,4 +13,7 @@ public interface Cpp2QIdentifier extends Cpp2Expr {
   @NotNull
   List<Cpp2Template> getTemplateList();
 
+  @Nullable
+  PsiElement getContext();
+
 }

@@ -10,4 +10,7 @@ public interface Cpp2ModExpr extends Cpp2Expr {
   @NotNull
   List<Cpp2Expr> getExprList();
 
+  @Nullable
+  PsiElement getContext();
+
 }

@@ -39,4 +39,10 @@ public class Cpp2ParamImpl extends ASTWrapperPsiElement implements Cpp2Param {
     return findChildByClass(Cpp2VariadicParam.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

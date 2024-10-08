@@ -140,9 +140,20 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // root_stmts
+  // file_wrapper
   static boolean file(PsiBuilder b, int l) {
-    return root_stmts(b, l + 1);
+    return file_wrapper(b, l + 1);
+  }
+
+  /* ********************************************************** */
+  // root_stmts
+  public static boolean file_wrapper(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "file_wrapper")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, FILE_WRAPPER, "<file wrapper>");
+    r = root_stmts(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */
@@ -396,7 +407,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // member_access? (type_decl | func_decl | value_decl | comment)
+  // member_access? (type_decl | func_decl | (value_decl ';') | comment)
   public static boolean member_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "member_decl")) return false;
     boolean r;
@@ -414,14 +425,27 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // type_decl | func_decl | value_decl | comment
+  // type_decl | func_decl | (value_decl ';') | comment
   private static boolean member_decl_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "member_decl_1")) return false;
     boolean r;
+    Marker m = enter_section_(b);
     r = type_decl(b, l + 1);
     if (!r) r = func_decl(b, l + 1);
-    if (!r) r = value_decl(b, l + 1);
+    if (!r) r = member_decl_1_2(b, l + 1);
     if (!r) r = consumeToken(b, COMMENT);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // value_decl ';'
+  private static boolean member_decl_1_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "member_decl_1_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = value_decl(b, l + 1);
+    r = r && consumeToken(b, SEMICOLON);
+    exit_section_(b, m, null, r);
     return r;
   }
 

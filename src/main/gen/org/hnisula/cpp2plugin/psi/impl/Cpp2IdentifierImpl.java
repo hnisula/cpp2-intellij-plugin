@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import org.hnisula.cpp2plugin.psi.Cpp2IdentifierMixin;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2IdentifierImpl extends ASTWrapperPsiElement implements Cpp2Identifier {
+public class Cpp2IdentifierImpl extends Cpp2IdentifierMixin implements Cpp2Identifier {
 
   public Cpp2IdentifierImpl(@NotNull ASTNode node) {
     super(node);
@@ -25,6 +25,12 @@ public class Cpp2IdentifierImpl extends ASTWrapperPsiElement implements Cpp2Iden
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof Cpp2Visitor) accept((Cpp2Visitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
   }
 
 }

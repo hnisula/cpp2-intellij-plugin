@@ -19,4 +19,7 @@ public interface Cpp2RootStmts extends PsiElement {
   @NotNull
   List<Cpp2ValueDecl> getValueDeclList();
 
+  @Nullable
+  PsiElement getContext();
+
 }

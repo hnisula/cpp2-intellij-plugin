@@ -10,4 +10,7 @@ public interface Cpp2Assign extends PsiElement {
   @NotNull
   List<Cpp2Expr> getExprList();
 
+  @Nullable
+  PsiElement getContext();
+
 }

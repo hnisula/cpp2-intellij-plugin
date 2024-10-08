@@ -10,4 +10,7 @@ public interface Cpp2LeftShiftExpr extends Cpp2Expr {
   @NotNull
   List<Cpp2Expr> getExprList();
 
+  @Nullable
+  PsiElement getContext();
+
 }

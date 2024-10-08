@@ -10,4 +10,7 @@ public interface Cpp2DerefExpr extends Cpp2Expr {
   @NotNull
   Cpp2Expr getExpr();
 
+  @Nullable
+  PsiElement getContext();
+
 }

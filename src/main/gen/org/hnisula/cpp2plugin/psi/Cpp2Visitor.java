@@ -4,6 +4,9 @@ package org.hnisula.cpp2plugin.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiElement;
+import org.hnisula.cpp2plugin.Cpp2Reference;
+import org.hnisula.cpp2plugin.Cpp2NamedDeclaration;
+import org.hnisula.cpp2plugin.Cpp2Scope;
 
 public class Cpp2Visitor extends PsiElementVisitor {
 
@@ -55,6 +58,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitFileWrapper(@NotNull Cpp2FileWrapper o) {
+    visitScope(o);
+  }
+
   public void visitForLoop(@NotNull Cpp2ForLoop o) {
     visitPsiElement(o);
   }
@@ -80,7 +87,7 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitIdentifier(@NotNull Cpp2Identifier o) {
-    visitPsiElement(o);
+    visitReference(o);
   }
 
   public void visitIfBranch(@NotNull Cpp2IfBranch o) {
@@ -208,7 +215,7 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitTypeDecl(@NotNull Cpp2TypeDecl o) {
-    visitPsiElement(o);
+    visitNamedDeclaration(o);
   }
 
   public void visitTypeSpecifier(@NotNull Cpp2TypeSpecifier o) {
@@ -228,6 +235,18 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitWhileLoop(@NotNull Cpp2WhileLoop o) {
+    visitPsiElement(o);
+  }
+
+  public void visitNamedDeclaration(@NotNull Cpp2NamedDeclaration o) {
+    visitPsiElement(o);
+  }
+
+  public void visitReference(@NotNull Cpp2Reference o) {
+    visitPsiElement(o);
+  }
+
+  public void visitScope(@NotNull Cpp2Scope o) {
     visitPsiElement(o);
   }
 

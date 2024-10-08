@@ -13,4 +13,7 @@ public interface Cpp2IfBranch extends PsiElement {
   @NotNull
   List<Cpp2StmtBlock> getStmtBlockList();
 
+  @Nullable
+  PsiElement getContext();
+
 }

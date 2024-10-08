@@ -33,4 +33,10 @@ public class Cpp2OrExprImpl extends Cpp2ExprImpl implements Cpp2OrExpr {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

@@ -10,4 +10,7 @@ public interface Cpp2ReturnType extends PsiElement {
   @Nullable
   Cpp2TypeSpecifier getTypeSpecifier();
 
+  @Nullable
+  PsiElement getContext();
+
 }

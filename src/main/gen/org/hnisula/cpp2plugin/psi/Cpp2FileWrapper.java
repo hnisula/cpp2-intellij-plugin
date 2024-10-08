@@ -4,11 +4,12 @@ package org.hnisula.cpp2plugin.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import org.hnisula.cpp2plugin.Cpp2Scope;
 
-public interface Cpp2Template extends PsiElement {
+public interface Cpp2FileWrapper extends Cpp2Scope {
 
   @NotNull
-  List<Cpp2TypeSpecifier> getTypeSpecifierList();
+  Cpp2RootStmts getRootStmts();
 
   @Nullable
   PsiElement getContext();

@@ -27,4 +27,10 @@ public class Cpp2NamespaceAliasDeclImpl extends ASTWrapperPsiElement implements 
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }

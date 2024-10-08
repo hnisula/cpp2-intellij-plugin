@@ -33,4 +33,10 @@ public class Cpp2TemplateImpl extends ASTWrapperPsiElement implements Cpp2Templa
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TypeSpecifier.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
+  }
+
 }
