@@ -107,7 +107,7 @@ class Cpp2PsiUtil {
         private fun isLastIdentifier(index: Int, identifiers: List<String>): Boolean {
             return index == identifiers.size - 1
         }
-        
+
         @JvmStatic
         fun getSymbol(element: Cpp2NamedDeclaration): Symbol {
             val parentScope =

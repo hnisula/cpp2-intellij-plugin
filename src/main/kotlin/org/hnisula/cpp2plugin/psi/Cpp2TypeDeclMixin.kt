@@ -8,11 +8,12 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import org.hnisula.cpp2plugin.Cpp2NamedDeclaration
 import org.hnisula.cpp2plugin.Cpp2Scope
-import org.hnisula.cpp2plugin.Cpp2Symbol
 
 open class Cpp2TypeDeclMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2NamedDeclaration, Cpp2Scope {
     override val identifier: String
         get() = name!!
+
+    override fun getName(): String? = node.firstChildNode.text
 
     override fun getDeclaringElement(): PsiElement {
         return this
@@ -23,8 +24,6 @@ open class Cpp2TypeDeclMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2Na
     }
 
     override fun getSymbol(): Symbol = Cpp2PsiUtil.getSymbol(this)
-
-    override fun getName(): String? = node.firstChildNode.text
 
     override fun setName(name: String): PsiElement {
         TODO("Not yet implemented")
@@ -48,7 +47,7 @@ open class Cpp2TypeDeclMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2Na
                     memberDeclNode = memberDeclNode.treeNext
                 }
 
-                if (memberDeclNode.elementType != Cpp2Types.COMMENT && memberDeclNode.psi is PsiSymbolDeclaration) {
+                if (memberDeclNode.elementType != Cpp2Types.COMMENT && memberDeclNode.psi is Cpp2NamedDeclaration) {
                     memberDecls.add(memberDeclNode.psi as PsiSymbolDeclaration)
                 }
             }

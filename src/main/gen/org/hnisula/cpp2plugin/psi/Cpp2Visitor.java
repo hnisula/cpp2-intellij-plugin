@@ -135,7 +135,8 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitNamespaceDecl(@NotNull Cpp2NamespaceDecl o) {
-    visitPsiElement(o);
+    visitNamedDeclaration(o);
+    // visitScope(o);
   }
 
   public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {

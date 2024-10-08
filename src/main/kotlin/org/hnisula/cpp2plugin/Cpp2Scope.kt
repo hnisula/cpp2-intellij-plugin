@@ -13,6 +13,7 @@ interface Cpp2Scope : PsiElement {
     fun getScopeName(): String
     
     fun getGloballyScopedIdentifier(): List<String> {
+        // TODO: Redundant and annoying to evaluate value in other subclasses?
         if (isGlobal) {
             return listOf()
         }

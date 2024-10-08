@@ -151,6 +151,9 @@ using_namespace ::= 'using' 'namespace'? q_identifier ';' {
 }
 namespace_decl  ::= identifier ':' 'namespace' '=' root_stmt_block {
     pin=3
+    implements=["org.hnisula.cpp2plugin.Cpp2NamedDeclaration";"org.hnisula.cpp2plugin.Cpp2Scope"]
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2NamespaceDeclMixin"
+    methods=[identifier=""]
 }
 
 // Functions
