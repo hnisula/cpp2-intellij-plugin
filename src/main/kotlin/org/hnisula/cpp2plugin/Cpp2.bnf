@@ -140,6 +140,8 @@ assign                  ::= expr '=' expr ';'
 private value_decl_stmt ::= value_decl ';'
 value_decl              ::= IDENTIFIER_WORD ':' ((type_specifier '=' expr) | type_specifier | ('=' expr)) {
     pin=3
+    implements="org.hnisula.cpp2plugin.Cpp2NamedDeclaration"
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2ValueDeclMixin"
 }
 
 // Namespace
@@ -169,7 +171,7 @@ variadic_param      ::= IDENTIFIER_WORD '...'
 
 type_decl           ::= IDENTIFIER_WORD ':' template_decl? METAFUNCTION? 'type' '=' '{' member_decl* '}' {
     pin='type'
-    implements=["org.hnisula.cpp2plugin.Cpp2NamedDeclaration"]
+    implements=["org.hnisula.cpp2plugin.Cpp2NamedDeclaration";"org.hnisula.cpp2plugin.Cpp2Scope"]
     mixin="org.hnisula.cpp2plugin.psi.Cpp2TypeDeclMixin"
 }
 member_decl         ::= (member_access? (type_decl | func_decl | (value_decl ';') | comment))

@@ -11,6 +11,7 @@ import com.intellij.psi.util.parentOfTypes
 import org.hnisula.cpp2plugin.Cpp2NamedDeclaration
 import org.hnisula.cpp2plugin.Cpp2Reference
 import org.hnisula.cpp2plugin.Cpp2Scope
+import org.hnisula.cpp2plugin.Cpp2Symbol
 
 class Cpp2PsiUtil {
     companion object {
@@ -105,6 +106,14 @@ class Cpp2PsiUtil {
         @JvmStatic
         private fun isLastIdentifier(index: Int, identifiers: List<String>): Boolean {
             return index == identifiers.size - 1
+        }
+        
+        @JvmStatic
+        fun getSymbol(element: Cpp2NamedDeclaration): Symbol {
+            val parentScope =
+                getParentScope(element) ?: throw IllegalStateException("Type declaration must have a parent scope")
+
+            return Cpp2Symbol(element.identifier, parentScope.getGloballyScopedIdentifier(), element)
         }
     }
 }
