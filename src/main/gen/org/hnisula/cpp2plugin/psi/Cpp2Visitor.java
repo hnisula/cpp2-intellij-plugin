@@ -75,7 +75,8 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitFuncDecl(@NotNull Cpp2FuncDecl o) {
-    visitPsiElement(o);
+    visitNamedDeclaration(o);
+    // visitScope(o);
   }
 
   public void visitGtExpr(@NotNull Cpp2GtExpr o) {

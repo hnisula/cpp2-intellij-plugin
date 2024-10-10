@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import org.hnisula.cpp2plugin.psi.Cpp2FuncDeclMixin;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2FuncDeclImpl extends ASTWrapperPsiElement implements Cpp2FuncDecl {
+public class Cpp2FuncDeclImpl extends Cpp2FuncDeclMixin implements Cpp2FuncDecl {
 
   public Cpp2FuncDeclImpl(@NotNull ASTNode node) {
     super(node);

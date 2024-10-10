@@ -7,7 +7,7 @@ import org.hnisula.cpp2plugin.Cpp2Scope
 
 open class Cpp2FileWrapperMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2Scope {
     override fun getOwnDeclarations(): Collection<PsiSymbolDeclaration> {
-        return Cpp2PsiUtil.getDeclarations(this.firstChild)
+        return Cpp2PsiUtil.getNamedDeclarations(this.firstChild)
     }
 
     override val isAnonymous: Boolean

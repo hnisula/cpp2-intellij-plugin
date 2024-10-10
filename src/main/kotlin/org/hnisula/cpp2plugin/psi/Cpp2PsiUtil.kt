@@ -52,12 +52,27 @@ class Cpp2PsiUtil {
         }
 
         @JvmStatic
-        fun getDeclarations(scope: PsiElement): Collection<PsiSymbolDeclaration> {
+        fun getNamedDeclarations(scope: PsiElement): Collection<PsiSymbolDeclaration> {
             val t = PsiTreeUtil.getChildrenOfType(scope, Cpp2NamedDeclaration::class.java) ?: return emptyList()
 
             return t.mapNotNull { it }
         }
+        
+        @JvmStatic
+        fun getParamDecls(paramList: Cpp2ParamList): Collection<PsiSymbolDeclaration> {
+            val paramDecls = mutableListOf<PsiSymbolDeclaration>()
 
+            for (param in paramList.paramList) {
+                if (param.valueDecl != null) {
+                    paramDecls.add(param.valueDecl!!)
+                } else if (param.variadicParam != null) {
+//                    paramDecls.add(param.variadicParam!!)
+                }
+            }
+
+            return paramDecls
+        }
+        
         @JvmStatic
         fun resolveReference(
             element: Cpp2Reference, identifier: String, scopeIdentifiers: List<String>, isGlobalScope: Boolean

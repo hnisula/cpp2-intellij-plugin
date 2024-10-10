@@ -146,10 +146,10 @@ value_decl              ::= IDENTIFIER_WORD ':' ((type_specifier '=' expr) | typ
 
 // Namespace
 
-using_namespace ::= 'using' 'namespace'? q_identifier ';' {
+using_namespace     ::= 'using' 'namespace'? q_identifier ';' {
     pin='using'
 }
-namespace_decl  ::= identifier ':' 'namespace' '=' root_stmt_block {
+namespace_decl      ::= identifier ':' 'namespace' '=' root_stmt_block {
     pin=3
     implements=["org.hnisula.cpp2plugin.Cpp2NamedDeclaration";"org.hnisula.cpp2plugin.Cpp2Scope"]
     mixin="org.hnisula.cpp2plugin.psi.Cpp2NamespaceDeclMixin"
@@ -158,10 +158,12 @@ namespace_decl  ::= identifier ':' 'namespace' '=' root_stmt_block {
 
 // Functions
 
-func_decl       ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? (('=' stmt_block) | ('='? expr ';')) {
+func_decl           ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? '=' (stmt_block | (expr ';')) {
     pin=param_list
+    implements=["org.hnisula.cpp2plugin.Cpp2NamedDeclaration";"org.hnisula.cpp2plugin.Cpp2Scope"]
+    mixin="org.hnisula.cpp2plugin.psi.Cpp2FuncDeclMixin"
 }
-return_type     ::= '->' ('_' | type_specifier)
+return_type         ::= '->' ('_' | type_specifier)
 
 func_call           ::= q_identifier '(' arg* ')' {extends=expr}
 arg                 ::= param_kind? expr
