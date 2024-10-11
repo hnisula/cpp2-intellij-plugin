@@ -39,5 +39,6 @@
                 implementationClass="org.hnisula.cpp2plugin.Cpp2ParserDefinition"
         />
         <lang.commenter language="Cpp2" implementationClass="org.hnisula.cpp2plugin.Cpp2Commenter"/>
+        <lang.syntaxHighlighterFactory language="Cpp2" implementationClass="org.hnisula.cpp2plugin.Cpp2SyntaxHighlighterFactory"/>
     </extensions>
 </idea-plugin>
