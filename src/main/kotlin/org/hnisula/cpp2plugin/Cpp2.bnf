@@ -81,7 +81,6 @@
         VIRTUAL             = 'virtual'
         OVERRIDE            = 'override'
         FINAL               = 'final'
-        
     ]
 }
 
@@ -241,3 +240,5 @@ literal                     ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | STR
 private qualifier           ::= ('const' | '*')
 private this_param_kind     ::= ('virtual' | 'override' | 'final' | param_kind)
 private param_kind          ::= ('in' | 'copy' | 'inout' | 'out' | 'move' | 'forward')
+
+comment                     ::= LINE_COMMENT | BLOCK_COMMENT

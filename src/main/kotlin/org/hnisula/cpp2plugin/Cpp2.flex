@@ -39,7 +39,8 @@ STRING_LITERAL      = ("u8" | "u" | "U" | "L")?\" (\\\" | [^\"])* \"
 
 IDENTIFIER_WORD     = [a-zA-Z_][a-zA-Z0-9_]*
 
-COMMENT             = "//".*
+LINE_COMMENT             = "//".*
+BLOCK_COMMENT            = "/\*".*"\*/"
 
 MUL                 = \s\*
 
@@ -48,7 +49,8 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
 %%
 
 <YYINITIAL> {
-      {COMMENT}             { return Cpp2Types.COMMENT; }
+      {LINE_COMMENT}        { return Cpp2Types.LINE_COMMENT; }
+      {BLOCK_COMMENT}       { return Cpp2Types.BLOCK_COMMENT; }
       
       "->"                  { return Cpp2Types.ARROW; }
       "::"                  { return Cpp2Types.COLONCOLON; }

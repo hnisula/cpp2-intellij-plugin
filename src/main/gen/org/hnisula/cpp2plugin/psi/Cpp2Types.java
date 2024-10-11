@@ -15,6 +15,7 @@ public interface Cpp2Types {
   IElementType BIT_AND_EXPR = new Cpp2ElementType("BIT_AND_EXPR");
   IElementType BIT_OR_EXPR = new Cpp2ElementType("BIT_OR_EXPR");
   IElementType BIT_XOR_EXPR = new Cpp2ElementType("BIT_XOR_EXPR");
+  IElementType COMMENT = new Cpp2ElementType("COMMENT");
   IElementType DEREF_EXPR = new Cpp2ElementType("DEREF_EXPR");
   IElementType DIV_EXPR = new Cpp2ElementType("DIV_EXPR");
   IElementType DO_WHILE_LOOP = new Cpp2ElementType("DO_WHILE_LOOP");
@@ -69,11 +70,11 @@ public interface Cpp2Types {
   IElementType AND = new Cpp2TokenType("&");
   IElementType ANDAND = new Cpp2TokenType("&&");
   IElementType ARROW = new Cpp2TokenType("->");
+  IElementType BLOCK_COMMENT = new Cpp2TokenType("BLOCK_COMMENT");
   IElementType BOOL_LITERAL = new Cpp2TokenType("BOOL_LITERAL");
   IElementType COLON = new Cpp2TokenType(":");
   IElementType COLONCOLON = new Cpp2TokenType("::");
   IElementType COMMA = new Cpp2TokenType(",");
-  IElementType COMMENT = new Cpp2TokenType("comment");
   IElementType CONST = new Cpp2TokenType("const");
   IElementType COPY = new Cpp2TokenType("copy");
   IElementType DEREF = new Cpp2TokenType("DEREF");
@@ -98,6 +99,7 @@ public interface Cpp2Types {
   IElementType INT_LITERAL = new Cpp2TokenType("INT_LITERAL");
   IElementType LEFT_BRACE = new Cpp2TokenType("{");
   IElementType LEFT_PARENTHESIS = new Cpp2TokenType("(");
+  IElementType LINE_COMMENT = new Cpp2TokenType("LINE_COMMENT");
   IElementType LT = new Cpp2TokenType("<");
   IElementType LTEQ = new Cpp2TokenType("<=");
   IElementType LTLT = new Cpp2TokenType("<<");
@@ -157,6 +159,9 @@ public interface Cpp2Types {
       }
       else if (type == BIT_XOR_EXPR) {
         return new Cpp2BitXorExprImpl(node);
+      }
+      else if (type == COMMENT) {
+        return new Cpp2CommentImpl(node);
       }
       else if (type == DEREF_EXPR) {
         return new Cpp2DerefExprImpl(node);
