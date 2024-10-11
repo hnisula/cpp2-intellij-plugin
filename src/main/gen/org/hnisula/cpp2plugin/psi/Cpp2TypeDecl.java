@@ -15,7 +15,4 @@ public interface Cpp2TypeDecl extends Cpp2NamedDeclaration, Cpp2Scope {
   @Nullable
   Cpp2TemplateDecl getTemplateDecl();
 
-  @Nullable
-  PsiElement getContext();
-
 }

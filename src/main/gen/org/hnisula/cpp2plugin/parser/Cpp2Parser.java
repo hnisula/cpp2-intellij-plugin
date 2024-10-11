@@ -266,13 +266,14 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER_WORD ':' template_decl? param_list return_type? '=' (stmt_block | (expr ';'))
+  // identifier ':' template_decl? param_list return_type? '=' (stmt_block | (expr ';'))
   public static boolean func_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "func_decl")) return false;
     if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, FUNC_DECL, null);
-    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON);
+    r = identifier(b, l + 1);
+    r = r && consumeToken(b, COLON);
     r = r && func_decl_2(b, l + 1);
     r = r && param_list(b, l + 1);
     p = r; // pin = param_list
@@ -972,13 +973,14 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER_WORD ':' template_decl? METAFUNCTION? 'type' '=' '{' member_decl* '}'
+  // identifier ':' template_decl? METAFUNCTION? 'type' '=' '{' member_decl* '}'
   public static boolean type_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type_decl")) return false;
     if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON);
+    r = identifier(b, l + 1);
+    r = r && consumeToken(b, COLON);
     r = r && type_decl_2(b, l + 1);
     r = r && type_decl_3(b, l + 1);
     r = r && consumeTokens(b, 0, TYPE_WORD, EQ, LEFT_BRACE);

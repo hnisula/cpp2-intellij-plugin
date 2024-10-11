@@ -39,10 +39,4 @@ public class Cpp2TypeDeclImpl extends Cpp2TypeDeclMixin implements Cpp2TypeDecl 
     return findChildByClass(Cpp2TemplateDecl.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getContext() {
-    return Cpp2PsiUtil.getContext(this);
-  }
-
 }

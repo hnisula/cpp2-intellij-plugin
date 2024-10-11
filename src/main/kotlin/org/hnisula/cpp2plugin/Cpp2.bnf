@@ -159,10 +159,11 @@ namespace_decl      ::= identifier ':' 'namespace' '=' root_stmt_block {
 
 // Functions
 
-func_decl           ::= IDENTIFIER_WORD ':' template_decl? param_list return_type? '=' (stmt_block | (expr ';')) {
+func_decl           ::= identifier ':' template_decl? param_list return_type? '=' (stmt_block | (expr ';')) {
     pin=param_list
     implements=["org.hnisula.cpp2plugin.Cpp2NamedDeclaration";"org.hnisula.cpp2plugin.Cpp2Scope"]
     mixin="org.hnisula.cpp2plugin.psi.Cpp2FuncDeclMixin"
+    methods=[identifier=""]
 }
 return_type         ::= '->' ('_' | type_specifier)
 
@@ -175,10 +176,11 @@ variadic_param      ::= IDENTIFIER_WORD '...'
 
 // Type declaration
 
-type_decl           ::= IDENTIFIER_WORD ':' template_decl? METAFUNCTION? 'type' '=' '{' member_decl* '}' {
+type_decl           ::= identifier ':' template_decl? METAFUNCTION? 'type' '=' '{' member_decl* '}' {
     pin='type'
     implements=["org.hnisula.cpp2plugin.Cpp2NamedDeclaration";"org.hnisula.cpp2plugin.Cpp2Scope"]
     mixin="org.hnisula.cpp2plugin.psi.Cpp2TypeDeclMixin"
+    methods=[identifier=""]
 }
 member_decl         ::= (member_access? (type_decl | func_decl | (value_decl ';') | comment))
 member_access       ::= ('public' | 'protected' | 'private')
