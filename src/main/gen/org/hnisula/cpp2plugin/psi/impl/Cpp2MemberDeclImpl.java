@@ -29,6 +29,12 @@ public class Cpp2MemberDeclImpl extends ASTWrapperPsiElement implements Cpp2Memb
 
   @Override
   @Nullable
+  public Cpp2Comment getComment() {
+    return findChildByClass(Cpp2Comment.class);
+  }
+
+  @Override
+  @Nullable
   public Cpp2FuncDecl getFuncDecl() {
     return findChildByClass(Cpp2FuncDecl.class);
   }

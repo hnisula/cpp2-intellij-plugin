@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import org.hnisula.cpp2plugin.psi.Cpp2TypeDeclMixin;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2TypeDeclImpl extends Cpp2TypeDeclMixin implements Cpp2TypeDecl {
+public class Cpp2CommentImpl extends ASTWrapperPsiElement implements Cpp2Comment {
 
-  public Cpp2TypeDeclImpl(@NotNull ASTNode node) {
+  public Cpp2CommentImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitTypeDecl(this);
+    visitor.visitComment(this);
   }
 
   @Override
@@ -28,15 +28,9 @@ public class Cpp2TypeDeclImpl extends Cpp2TypeDeclMixin implements Cpp2TypeDecl 
   }
 
   @Override
-  @NotNull
-  public List<Cpp2MemberDecl> getMemberDeclList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2MemberDecl.class);
-  }
-
-  @Override
   @Nullable
-  public Cpp2TemplateDecl getTemplateDecl() {
-    return findChildByClass(Cpp2TemplateDecl.class);
+  public PsiElement getContext() {
+    return Cpp2PsiUtil.getContext(this);
   }
 
 }

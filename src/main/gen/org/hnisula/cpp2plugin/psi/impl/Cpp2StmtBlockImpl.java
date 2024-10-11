@@ -35,6 +35,12 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
 
   @Override
   @NotNull
+  public List<Cpp2Comment> getCommentList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Comment.class);
+  }
+
+  @Override
+  @NotNull
   public List<Cpp2DoWhileLoop> getDoWhileLoopList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2DoWhileLoop.class);
   }
