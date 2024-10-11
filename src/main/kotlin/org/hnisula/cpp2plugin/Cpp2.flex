@@ -105,6 +105,8 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "next"                { return Cpp2Types.NEXT; }
       "const"               { return Cpp2Types.CONST; }
       "return"              { return Cpp2Types.RETURN; }
+      "break"               { return Cpp2Types.BREAK; }
+      "continue"            { return Cpp2Types.CONTINUE; }
       
       "in"                  { return Cpp2Types.IN; }
       "copy"                { return Cpp2Types.COPY; }

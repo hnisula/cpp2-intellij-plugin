@@ -23,11 +23,15 @@ class Cpp2SyntaxHighlighter : SyntaxHighlighterBase() {
         private val STRING_LITERAL: TextAttributesKey = TextAttributesKey.createTextAttributesKey(
             "CPP2_STRING_LITERAL", DefaultLanguageHighlighterColors.STRING
         )
+        private val KEYWORD: TextAttributesKey = TextAttributesKey.createTextAttributesKey(
+            "CPP2_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD
+        )
 
         val COMMENT_KEYS: Array<TextAttributesKey> = arrayOf(LINE_COMMENT, BLOCK_COMMENT)
         val BOOL_LITERAL_KEYS: Array<TextAttributesKey> = arrayOf(BOOL_LITERAL)
         val NUMERIC_LITERAL_EYS: Array<TextAttributesKey> = arrayOf(NUMERIC_LITERAL)
         val STRING_LITERAL_KEYS: Array<TextAttributesKey> = arrayOf(STRING_LITERAL)
+        val KEYWORD_KEYS: Array<TextAttributesKey> = arrayOf(KEYWORD)
     }
 
     override fun getHighlightingLexer(): Lexer = Cpp2LexerAdapter()
@@ -41,6 +45,9 @@ class Cpp2SyntaxHighlighter : SyntaxHighlighterBase() {
             return NUMERIC_LITERAL_EYS
         } else if (tokenType == Cpp2Types.STRING_LITERAL) {
             return STRING_LITERAL_KEYS
+        } else if (tokenType == Cpp2Types.FOR || tokenType == Cpp2Types.IF || tokenType == Cpp2Types.WHILE || tokenType == Cpp2Types.DO || tokenType == Cpp2Types.BREAK || tokenType == Cpp2Types.CONTINUE || tokenType == Cpp2Types.RETURN) {
+            // Recheck these keywords later as I assume some should be contextual
+            return KEYWORD_KEYS
         } else {
             return emptyArray()
         }

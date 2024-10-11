@@ -72,10 +72,12 @@ public interface Cpp2Types {
   IElementType ARROW = new Cpp2TokenType("->");
   IElementType BLOCK_COMMENT = new Cpp2TokenType("BLOCK_COMMENT");
   IElementType BOOL_LITERAL = new Cpp2TokenType("BOOL_LITERAL");
+  IElementType BREAK = new Cpp2TokenType("break");
   IElementType COLON = new Cpp2TokenType(":");
   IElementType COLONCOLON = new Cpp2TokenType("::");
   IElementType COMMA = new Cpp2TokenType(",");
   IElementType CONST = new Cpp2TokenType("const");
+  IElementType CONTINUE = new Cpp2TokenType("continue");
   IElementType COPY = new Cpp2TokenType("copy");
   IElementType DEREF = new Cpp2TokenType("DEREF");
   IElementType DO = new Cpp2TokenType("do");

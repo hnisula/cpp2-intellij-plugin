@@ -70,6 +70,8 @@
         ELSE                = 'else'
         CONST               = 'const'
         RETURN              = 'return'
+        BREAK               = 'break'
+        CONTINUE            = 'continue'
         
         IN                  = 'in'
         COPY                = 'copy'
