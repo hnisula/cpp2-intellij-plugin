@@ -185,10 +185,10 @@ func_decl           ::= identifier ":" template_decl? param_list return_type? "=
 return_type         ::= "->" ("_" | type_specifier)
 return_stmt         ::= "return" expr ";"
 
-func_call           ::= expr "(" (arg ("," arg)*)? ")" {extends=expr}
+func_call           ::= expr "(" (arg ("," arg)* ","?)? ")" {extends=expr}
 arg                 ::= param_kind? expr
-param_list          ::= "(" ((this_param | param) ("," param)*)? ")"
-param               ::= param_kind? (IDENTIFIER_WORD | value_decl | variadic_param)
+param_list          ::= "(" ((this_param | param) ("," param)* ","?)? ")"
+param               ::= param_kind? (value_decl | variadic_param | IDENTIFIER_WORD)
 this_param          ::= this_param_kind? "this"
 variadic_param      ::= IDENTIFIER_WORD "..."
 
@@ -255,7 +255,7 @@ sub_expr            ::= expr "-"    expr    {rightAssociative=false}
 mul_expr            ::= expr MUL    expr    {rightAssociative=false}
 div_expr            ::= expr "/"    expr    {rightAssociative=false}
 mod_expr            ::= expr "%"    expr    {rightAssociative=false}
-subscript_expr      ::= expr "[" expr "]"   {rightAssociative=false}
+subscript_expr      ::= expr "[" expr ("," expr)* ","? "]"   {rightAssociative=false}
 member_access_expr  ::= expr "." (identifier | func_call) {rightAssociative=false} // Associativity correct?
 
 deref_expr          ::= expr DEREF
