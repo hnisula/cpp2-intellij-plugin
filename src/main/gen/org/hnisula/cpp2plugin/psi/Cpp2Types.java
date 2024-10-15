@@ -36,6 +36,7 @@ public interface Cpp2Types {
   IElementType LTEQ_EXPR = new Cpp2ElementType("LTEQ_EXPR");
   IElementType LT_EXPR = new Cpp2ElementType("LT_EXPR");
   IElementType MEMBER_ACCESS = new Cpp2ElementType("MEMBER_ACCESS");
+  IElementType MEMBER_ACCESS_EXPR = new Cpp2ElementType("MEMBER_ACCESS_EXPR");
   IElementType MEMBER_DECL = new Cpp2ElementType("MEMBER_DECL");
   IElementType MOD_EXPR = new Cpp2ElementType("MOD_EXPR");
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
@@ -222,6 +223,9 @@ public interface Cpp2Types {
       }
       else if (type == MEMBER_ACCESS) {
         return new Cpp2MemberAccessImpl(node);
+      }
+      else if (type == MEMBER_ACCESS_EXPR) {
+        return new Cpp2MemberAccessExprImpl(node);
       }
       else if (type == MEMBER_DECL) {
         return new Cpp2MemberDeclImpl(node);

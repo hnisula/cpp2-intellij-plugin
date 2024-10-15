@@ -5,13 +5,13 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2FuncCall extends Cpp2Expr {
+public interface Cpp2MemberAccessExpr extends Cpp2Expr {
 
   @NotNull
-  List<Cpp2Arg> getArgList();
+  List<Cpp2Expr> getExprList();
 
-  @NotNull
-  Cpp2Expr getExpr();
+  @Nullable
+  Cpp2Identifier getIdentifier();
 
   @Nullable
   PsiElement getContext();

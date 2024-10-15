@@ -98,7 +98,7 @@ root_stmt_block     ::= "{" root_stmt* "}"
 root_stmts          ::= root_stmt*
 private root_stmt   ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | comment)
 
-stmt_block          ::= "{" stmt* "}" 
+stmt_block          ::= "{" stmt* "}"
 private stmt        ::= func_decl
                         | value_decl_stmt
                         | alias_decl
@@ -183,7 +183,7 @@ func_decl           ::= identifier ":" template_decl? param_list return_type? "=
 return_type         ::= "->" ("_" | type_specifier)
 return_stmt         ::= "return" expr ";"
 
-func_call           ::= q_identifier "(" arg ("," arg)* ")" {extends=expr}
+func_call           ::= expr "(" (arg ("," arg)*)? ")" {extends=expr}
 arg                 ::= param_kind? expr
 param_list          ::= "(" ((this_param | param) ("," param)*)? ")"
 param               ::= param_kind? (IDENTIFIER_WORD | value_decl | variadic_param)
@@ -214,6 +214,7 @@ expr ::= group_14_expr
     | group_6_expr
     | group_5_expr
     | group_2_expr
+    | group_1_expr
     | q_identifier
     | literal
     | paren_expr
@@ -231,7 +232,8 @@ private group_8_expr    ::= lt_expr | gt_expr | lteq_expr | gteq_expr
 private group_7_expr    ::= left_shift_expr | right_shift_expr
 private group_6_expr    ::= add_expr | sub_expr
 private group_5_expr    ::= mul_expr | div_expr | mod_expr
-private group_2_expr    ::= func_call | subscript_expr
+private group_2_expr    ::= func_call | subscript_expr | member_access_expr
+private group_1_expr    ::= deref_expr
 
 or_expr             ::= expr "||"   expr    {rightAssociative=false}
 and_expr            ::= expr "&&"   expr    {rightAssociative=false}
@@ -252,6 +254,7 @@ mul_expr            ::= expr MUL    expr    {rightAssociative=false}
 div_expr            ::= expr "/"    expr    {rightAssociative=false}
 mod_expr            ::= expr "%"    expr    {rightAssociative=false}
 subscript_expr      ::= expr "[" expr "]"   {rightAssociative=false}
+member_access_expr  ::= expr "." (identifier | func_call) {rightAssociative=false} // Associativity correct?
 
 deref_expr          ::= expr DEREF
 

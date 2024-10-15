@@ -123,6 +123,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitMemberAccessExpr(@NotNull Cpp2MemberAccessExpr o) {
+    visitExpr(o);
+  }
+
   public void visitMemberDecl(@NotNull Cpp2MemberDecl o) {
     visitPsiElement(o);
   }

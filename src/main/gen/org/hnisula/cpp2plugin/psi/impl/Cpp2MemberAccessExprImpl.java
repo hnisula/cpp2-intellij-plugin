@@ -10,15 +10,15 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2FuncCallImpl extends Cpp2ExprImpl implements Cpp2FuncCall {
+public class Cpp2MemberAccessExprImpl extends Cpp2ExprImpl implements Cpp2MemberAccessExpr {
 
-  public Cpp2FuncCallImpl(@NotNull ASTNode node) {
+  public Cpp2MemberAccessExprImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitFuncCall(this);
+    visitor.visitMemberAccessExpr(this);
   }
 
   @Override
@@ -29,14 +29,14 @@ public class Cpp2FuncCallImpl extends Cpp2ExprImpl implements Cpp2FuncCall {
 
   @Override
   @NotNull
-  public List<Cpp2Arg> getArgList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Arg.class);
+  public List<Cpp2Expr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Expr.class);
   }
 
   @Override
-  @NotNull
-  public Cpp2Expr getExpr() {
-    return findNotNullChildByClass(Cpp2Expr.class);
+  @Nullable
+  public Cpp2Identifier getIdentifier() {
+    return findChildByClass(Cpp2Identifier.class);
   }
 
   @Override
