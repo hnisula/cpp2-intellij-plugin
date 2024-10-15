@@ -99,7 +99,18 @@ root_stmts          ::= root_stmt*
 private root_stmt   ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | comment)
 
 stmt_block          ::= "{" stmt* "}" 
-private stmt        ::= (func_decl | value_decl_stmt | alias_decl | assign | using_namespace | expr_stmt | if_branch | for_loop | do_while_loop | while_loop | return_stmt | comment)
+private stmt        ::= func_decl
+                        | value_decl_stmt
+                        | alias_decl
+                        | assign
+                        | using_namespace
+                        | expr_stmt
+                        | if_branch
+                        | for_loop
+                        | do_while_loop
+                        | while_loop
+                        | return_stmt
+                        | comment
 private expr_stmt   ::= expr ";"
 
 // Loops and branching
@@ -139,7 +150,9 @@ obj_alias_decl          ::= IDENTIFIER_WORD ":" type_specifier? "==" expr ";" {
 
 // Declaration and assignment
 
-assign                  ::= expr "=" expr ";"
+assign                  ::= expr "=" expr ";" {
+    pin=2
+}
 private value_decl_stmt ::= value_decl ";"
 value_decl              ::= IDENTIFIER_WORD ":" ((type_specifier "=" expr) | type_specifier | ("=" expr)) {
     pin=3
