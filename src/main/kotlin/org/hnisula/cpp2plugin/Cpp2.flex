@@ -16,7 +16,7 @@ import com.intellij.psi.TokenType;
 %eof}
 
 LINE_WHITESPACE     = [\ \t]
-EOL_WHITESPACE      = [\n\f\v\r]
+EOL_WHITESPACE      = [\n\f\r]
 WHITESPACE          = ({LINE_WHITESPACE} | {EOL_WHITESPACE})+
 
 INT_SUFFIX          = [uU]([lL]{1,2})? | [lL]{1,2}[uU]?
