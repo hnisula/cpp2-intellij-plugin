@@ -75,6 +75,7 @@ public interface Cpp2Types {
   IElementType BLOCK_COMMENT = new Cpp2TokenType("BLOCK_COMMENT");
   IElementType BOOL_LITERAL = new Cpp2TokenType("BOOL_LITERAL");
   IElementType BREAK = new Cpp2TokenType("break");
+  IElementType CHAR_LITERAL = new Cpp2TokenType("CHAR_LITERAL");
   IElementType COLON = new Cpp2TokenType(":");
   IElementType COLONCOLON = new Cpp2TokenType("::");
   IElementType COMMA = new Cpp2TokenType(",");
@@ -102,6 +103,7 @@ public interface Cpp2Types {
   IElementType INOUT = new Cpp2TokenType("inout");
   IElementType INT_LITERAL = new Cpp2TokenType("INT_LITERAL");
   IElementType LEFT_BRACE = new Cpp2TokenType("{");
+  IElementType LEFT_BRACKET = new Cpp2TokenType("[");
   IElementType LEFT_PARENTHESIS = new Cpp2TokenType("(");
   IElementType LINE_COMMENT = new Cpp2TokenType("LINE_COMMENT");
   IElementType LT = new Cpp2TokenType("<");
@@ -129,6 +131,7 @@ public interface Cpp2Types {
   IElementType PUBLIC = new Cpp2TokenType("public");
   IElementType RETURN = new Cpp2TokenType("return");
   IElementType RIGHT_BRACE = new Cpp2TokenType("}");
+  IElementType RIGHT_BRACKET = new Cpp2TokenType("]");
   IElementType RIGHT_PARENTHESIS = new Cpp2TokenType(")");
   IElementType SEMICOLON = new Cpp2TokenType(";");
   IElementType SLASH = new Cpp2TokenType("/");

@@ -40,6 +40,8 @@
         RIGHT_BRACE         = "}"
         LEFT_PARENTHESIS    = "("
         RIGHT_PARENTHESIS   = ")"
+        LEFT_BRACKET        = "["
+        RIGHT_BRACKET       = "]"
         LT                  = "<"
         GT                  = ">"
         EQ                  = "="
@@ -272,7 +274,7 @@ identifier                  ::= IDENTIFIER_WORD {
     implements="org.hnisula.cpp2plugin.Cpp2Reference"
     mixin="org.hnisula.cpp2plugin.psi.Cpp2IdentifierMixin"
 }
-literal                     ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | STRING_LITERAL {extends=expr}
+literal                     ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | CHAR_LITERAL | STRING_LITERAL {extends=expr}
 
 private qualifier           ::= ("const" | "*")
 private this_param_kind     ::= ("virtual" | "override" | "final" | param_kind)

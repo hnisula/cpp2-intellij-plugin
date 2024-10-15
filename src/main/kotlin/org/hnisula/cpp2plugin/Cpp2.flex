@@ -36,13 +36,14 @@ INT_LITERAL         = {BIN_LITERAL} | {OCT_LITERAL} | {DEC_LITERAL} | {HEX_LITER
 FLOAT_LITERAL       = -?[0-9][0-9']*("."[0-9']*)?({EXPONENT}|{BIN_EXPONENT})?{FLOAT_SUFFIX}?
 BOOL_LITERAL        = "true" | "false"
 STRING_LITERAL      = ("u8" | "u" | "U" | "L")?\" (\\\" | [^\"])* \"
+CHAR_LITERAL        = ("u8" | "u" | "U" | "L")?\' (\\\' | [^\'])* \'
 
 IDENTIFIER_WORD     = [a-zA-Z_][a-zA-Z0-9_]*
 
 LINE_COMMENT        = "//".*
 BLOCK_COMMENT       = "/\*".*"\*/"
 
-MUL                 = \s\*
+MUL                 = \s\* // Is this correct?
 
 METAFUNCTION        = "@"{IDENTIFIER_WORD}
 
@@ -72,6 +73,8 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "}"                   { return Cpp2Types.RIGHT_BRACE; }
       "("                   { return Cpp2Types.LEFT_PARENTHESIS; }
       ")"                   { return Cpp2Types.RIGHT_PARENTHESIS; }
+      "["                   { return Cpp2Types.LEFT_BRACKET; }
+      "]"                   { return Cpp2Types.RIGHT_BRACKET; }
       "<"                   { return Cpp2Types.LT; }
       ">"                   { return Cpp2Types.GT; }
       "="                   { return Cpp2Types.EQ; }
@@ -125,6 +128,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       {FLOAT_LITERAL}       { return Cpp2Types.FLOAT_LITERAL; }
       {BOOL_LITERAL}        { return Cpp2Types.BOOL_LITERAL; }
       {STRING_LITERAL}      { return Cpp2Types.STRING_LITERAL; }
+      {CHAR_LITERAL}        { return Cpp2Types.CHAR_LITERAL; }
       {IDENTIFIER_WORD}     { return Cpp2Types.IDENTIFIER_WORD; }
       {METAFUNCTION}        { return Cpp2Types.METAFUNCTION; }
 }
