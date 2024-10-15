@@ -49,6 +49,7 @@ public interface Cpp2Types {
   IElementType PARAM_LIST = new Cpp2ElementType("PARAM_LIST");
   IElementType PAREN_EXPR = new Cpp2ElementType("PAREN_EXPR");
   IElementType Q_IDENTIFIER = new Cpp2ElementType("Q_IDENTIFIER");
+  IElementType RETURN_STMT = new Cpp2ElementType("RETURN_STMT");
   IElementType RETURN_TYPE = new Cpp2ElementType("RETURN_TYPE");
   IElementType RIGHT_SHIFT_EXPR = new Cpp2ElementType("RIGHT_SHIFT_EXPR");
   IElementType ROOT_STMTS = new Cpp2ElementType("ROOT_STMTS");
@@ -260,6 +261,9 @@ public interface Cpp2Types {
       }
       else if (type == Q_IDENTIFIER) {
         return new Cpp2QIdentifierImpl(node);
+      }
+      else if (type == RETURN_STMT) {
+        return new Cpp2ReturnStmtImpl(node);
       }
       else if (type == RETURN_TYPE) {
         return new Cpp2ReturnTypeImpl(node);

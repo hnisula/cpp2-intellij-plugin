@@ -39,8 +39,8 @@ STRING_LITERAL      = ("u8" | "u" | "U" | "L")?\" (\\\" | [^\"])* \"
 
 IDENTIFIER_WORD     = [a-zA-Z_][a-zA-Z0-9_]*
 
-LINE_COMMENT             = "//".*
-BLOCK_COMMENT            = "/\*".*"\*/"
+LINE_COMMENT        = "//".*
+BLOCK_COMMENT       = "/\*".*"\*/"
 
 MUL                 = \s\*
 

@@ -11,14 +11,14 @@ import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2NextStmtImpl extends ASTWrapperPsiElement implements Cpp2NextStmt {
+public class Cpp2ReturnStmtImpl extends ASTWrapperPsiElement implements Cpp2ReturnStmt {
 
-  public Cpp2NextStmtImpl(@NotNull ASTNode node) {
+  public Cpp2ReturnStmtImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitNextStmt(this);
+    visitor.visitReturnStmt(this);
   }
 
   @Override
@@ -28,9 +28,9 @@ public class Cpp2NextStmtImpl extends ASTWrapperPsiElement implements Cpp2NextSt
   }
 
   @Override
-  @Nullable
+  @NotNull
   public Cpp2Expr getExpr() {
-    return findChildByClass(Cpp2Expr.class);
+    return findNotNullChildByClass(Cpp2Expr.class);
   }
 
   @Override

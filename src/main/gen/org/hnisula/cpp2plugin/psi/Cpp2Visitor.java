@@ -176,6 +176,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitReturnStmt(@NotNull Cpp2ReturnStmt o) {
+    visitPsiElement(o);
+  }
+
   public void visitReturnType(@NotNull Cpp2ReturnType o) {
     visitPsiElement(o);
   }
