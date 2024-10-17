@@ -759,6 +759,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   //                         | while_loop
   //                         | return_stmt
   //                         | comment
+  //                         | stmt_block
   static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
@@ -774,6 +775,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!r) r = while_loop(b, l + 1);
     if (!r) r = return_stmt(b, l + 1);
     if (!r) r = comment(b, l + 1);
+    if (!r) r = stmt_block(b, l + 1);
     return r;
   }
 

@@ -116,6 +116,7 @@ private stmt        ::= func_decl
                         | while_loop
                         | return_stmt
                         | comment
+                        | stmt_block
 private expr_stmt   ::= expr ";"
 
 // Loops and branching
