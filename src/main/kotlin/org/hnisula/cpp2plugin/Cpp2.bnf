@@ -46,7 +46,7 @@
         LT                  = "<"
         GT                  = ">"
         EQ                  = "="
-        UNDERSCORE          = "_"
+        WILDCARD            = "_"
         PLUS                = "+"
         MINUS               = "-"
         ASTERISK            = "*"
@@ -57,6 +57,7 @@
         EXP                 = "^"
         DOT                 = "."
         COMMA               = ","
+        EXCLAMATION         = "!"
         
         TYPE_WORD           = "type"
         THIS                = "this"
@@ -132,9 +133,10 @@ next_stmt       ::= "next" expr {
     pin=1
 }
 
-if_branch ::= "if" expr stmt_block ("else" "if" expr stmt_block)* ("else" stmt_block)? {
+if_branch ::= "if" condition stmt_block ("else" "if" condition stmt_block)* ("else" stmt_block)? {
     pin=1
 }
+private condition ::= expr | "(" expr ")"
 
 // Aliases
 
@@ -158,7 +160,7 @@ assign                  ::= expr "=" expr ";" {
     pin=2
 }
 private value_decl_stmt ::= value_decl ";"
-value_decl              ::= IDENTIFIER_WORD ":" ((type_specifier "=" expr) | type_specifier | ("=" expr)) {
+value_decl              ::= (IDENTIFIER_WORD | "_") ":" ((type_specifier "=" expr) | type_specifier | ("=" expr)) {
     pin=3
     implements="org.hnisula.cpp2plugin.Cpp2NamedDeclaration"
     mixin="org.hnisula.cpp2plugin.psi.Cpp2ValueDeclMixin"
@@ -219,7 +221,7 @@ expr ::=
     | add_expr | sub_expr
     | mul_expr | div_expr | mod_expr
     | func_call | member_access_expr | subscript_expr
-    | deref_expr
+    | deref_expr | negate_expr
     | q_identifier
     | literal
     | paren_expr
@@ -249,13 +251,14 @@ mod_expr            ::= expr "%"    expr    {rightAssociative=false}
 subscript_expr      ::= expr "[" (expr ("," expr)* ","?) "]"
 member_access_expr  ::= expr "." (identifier | func_call)
 deref_expr          ::= expr "*"
+negate_expr         ::= "!" expr
 
 // Misc fundamentals
 
 template_decl               ::= "<" template_decl_item ("," template_decl_item)* ","? ">"
 private template_decl_item  ::= (IDENTIFIER_WORD (":" (TYPE_WORD | type_specifier))?) | (IDENTIFIER_WORD "..." (":" TYPE_WORD)?)
 template                    ::= "<" (type_specifier ("," type_specifier)* ","?)? ">"
-type_specifier              ::= qualifier* q_identifier template?
+type_specifier              ::= ((qualifier* q_identifier template?) | "_")
 q_identifier                ::= "::"? (identifier template? "::")* identifier template? {
     extends=expr
 }

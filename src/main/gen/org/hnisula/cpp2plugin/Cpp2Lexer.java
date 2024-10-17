@@ -101,21 +101,21 @@ class Cpp2Lexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\2\1\1\3\1\4\1\1\1\5"+
-    "\1\6\1\7\1\10\1\11\1\12\1\13\1\14\2\15"+
-    "\1\16\1\17\1\20\1\21\1\22\1\1\2\23\1\24"+
-    "\1\25\1\26\1\27\17\23\1\30\1\31\1\32\1\33"+
-    "\1\0\1\34\1\0\1\35\1\0\1\36\1\0\1\37"+
-    "\1\40\1\41\2\0\1\42\1\43\1\0\1\43\2\15"+
-    "\2\0\1\44\1\45\1\46\1\47\1\50\1\51\1\52"+
-    "\2\23\1\53\4\23\1\54\1\55\16\23\1\56\1\34"+
-    "\1\36\1\57\1\0\5\15\1\0\1\43\6\23\1\60"+
-    "\4\23\1\61\13\23\1\62\3\23\1\63\1\64\3\23"+
-    "\1\65\1\23\1\66\5\23\1\67\1\70\1\71\3\23"+
-    "\1\72\1\73\1\23\1\74\1\23\1\75\6\23\1\76"+
-    "\1\23\1\77\6\23\1\100\1\101\2\23\1\102\2\23"+
-    "\1\103\1\23\1\104\1\105\1\23\1\106\1\23\1\107"+
-    "\1\110";
+    "\1\0\1\1\1\2\1\3\1\1\1\4\1\5\1\1"+
+    "\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15"+
+    "\2\16\1\17\1\20\1\21\1\22\1\23\1\1\2\24"+
+    "\1\25\1\26\1\27\1\30\17\24\1\31\1\32\1\33"+
+    "\1\34\1\0\1\35\1\0\1\36\1\0\1\37\1\0"+
+    "\1\40\1\41\1\42\2\0\1\43\1\44\1\0\1\44"+
+    "\2\16\2\0\1\45\1\46\1\47\1\50\1\51\1\52"+
+    "\1\53\2\24\1\54\4\24\1\55\1\56\16\24\1\57"+
+    "\1\35\1\37\1\60\1\0\5\16\1\0\1\44\6\24"+
+    "\1\61\4\24\1\62\13\24\1\63\3\24\1\64\1\65"+
+    "\3\24\1\66\1\24\1\67\5\24\1\70\1\71\1\72"+
+    "\3\24\1\73\1\74\1\24\1\75\1\24\1\76\6\24"+
+    "\1\77\1\24\1\100\6\24\1\101\1\102\2\24\1\103"+
+    "\2\24\1\104\1\24\1\105\1\106\1\24\1\107\1\24"+
+    "\1\110\1\111";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[194];
@@ -701,362 +701,367 @@ class Cpp2Lexer implements FlexLexer {
             { return TokenType.BAD_CHARACTER;
             }
           // fall through
-          case 73: break;
+          case 74: break;
           case 2:
             { return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 74: break;
-          case 3:
-            { return Cpp2Types.MODULO;
-            }
-          // fall through
           case 75: break;
-          case 4:
-            { return Cpp2Types.AND;
+          case 3:
+            { return Cpp2Types.EXCLAMATION;
             }
           // fall through
           case 76: break;
-          case 5:
-            { return Cpp2Types.LEFT_PARENTHESIS;
+          case 4:
+            { return Cpp2Types.MODULO;
             }
           // fall through
           case 77: break;
-          case 6:
-            { return Cpp2Types.RIGHT_PARENTHESIS;
+          case 5:
+            { return Cpp2Types.AND;
             }
           // fall through
           case 78: break;
-          case 7:
-            { return Cpp2Types.ASTERISK;
+          case 6:
+            { return Cpp2Types.LEFT_PARENTHESIS;
             }
           // fall through
           case 79: break;
-          case 8:
-            { return Cpp2Types.PLUS;
+          case 7:
+            { return Cpp2Types.RIGHT_PARENTHESIS;
             }
           // fall through
           case 80: break;
-          case 9:
-            { return Cpp2Types.COMMA;
+          case 8:
+            { return Cpp2Types.ASTERISK;
             }
           // fall through
           case 81: break;
-          case 10:
-            { return Cpp2Types.MINUS;
+          case 9:
+            { return Cpp2Types.PLUS;
             }
           // fall through
           case 82: break;
-          case 11:
-            { return Cpp2Types.DOT;
+          case 10:
+            { return Cpp2Types.COMMA;
             }
           // fall through
           case 83: break;
-          case 12:
-            { return Cpp2Types.SLASH;
+          case 11:
+            { return Cpp2Types.MINUS;
             }
           // fall through
           case 84: break;
-          case 13:
-            { return Cpp2Types.INT_LITERAL;
+          case 12:
+            { return Cpp2Types.DOT;
             }
           // fall through
           case 85: break;
-          case 14:
-            { return Cpp2Types.COLON;
+          case 13:
+            { return Cpp2Types.SLASH;
             }
           // fall through
           case 86: break;
-          case 15:
-            { return Cpp2Types.SEMICOLON;
+          case 14:
+            { return Cpp2Types.INT_LITERAL;
             }
           // fall through
           case 87: break;
-          case 16:
-            { return Cpp2Types.LT;
+          case 15:
+            { return Cpp2Types.COLON;
             }
           // fall through
           case 88: break;
-          case 17:
-            { return Cpp2Types.EQ;
+          case 16:
+            { return Cpp2Types.SEMICOLON;
             }
           // fall through
           case 89: break;
-          case 18:
-            { return Cpp2Types.GT;
+          case 17:
+            { return Cpp2Types.LT;
             }
           // fall through
           case 90: break;
-          case 19:
-            { return Cpp2Types.IDENTIFIER_WORD;
+          case 18:
+            { return Cpp2Types.EQ;
             }
           // fall through
           case 91: break;
-          case 20:
-            { return Cpp2Types.LEFT_BRACKET;
+          case 19:
+            { return Cpp2Types.GT;
             }
           // fall through
           case 92: break;
-          case 21:
-            { return Cpp2Types.RIGHT_BRACKET;
+          case 20:
+            { return Cpp2Types.IDENTIFIER_WORD;
             }
           // fall through
           case 93: break;
-          case 22:
-            { return Cpp2Types.EXP;
+          case 21:
+            { return Cpp2Types.LEFT_BRACKET;
             }
           // fall through
           case 94: break;
-          case 23:
-            { return Cpp2Types.UNDERSCORE;
+          case 22:
+            { return Cpp2Types.RIGHT_BRACKET;
             }
           // fall through
           case 95: break;
-          case 24:
-            { return Cpp2Types.LEFT_BRACE;
+          case 23:
+            { return Cpp2Types.EXP;
             }
           // fall through
           case 96: break;
-          case 25:
-            { return Cpp2Types.OR;
+          case 24:
+            { return Cpp2Types.WILDCARD;
             }
           // fall through
           case 97: break;
-          case 26:
-            { return Cpp2Types.RIGHT_BRACE;
+          case 25:
+            { return Cpp2Types.LEFT_BRACE;
             }
           // fall through
           case 98: break;
-          case 27:
-            { return Cpp2Types.NEQ;
+          case 26:
+            { return Cpp2Types.OR;
             }
           // fall through
           case 99: break;
-          case 28:
-            { return Cpp2Types.STRING_LITERAL;
+          case 27:
+            { return Cpp2Types.RIGHT_BRACE;
             }
           // fall through
           case 100: break;
-          case 29:
-            { return Cpp2Types.ANDAND;
+          case 28:
+            { return Cpp2Types.NEQ;
             }
           // fall through
           case 101: break;
-          case 30:
-            { return Cpp2Types.CHAR_LITERAL;
+          case 29:
+            { return Cpp2Types.STRING_LITERAL;
             }
           // fall through
           case 102: break;
-          case 31:
-            { return Cpp2Types.PLUSPLUS;
+          case 30:
+            { return Cpp2Types.ANDAND;
             }
           // fall through
           case 103: break;
-          case 32:
-            { return Cpp2Types.MINUSMINUS;
+          case 31:
+            { return Cpp2Types.CHAR_LITERAL;
             }
           // fall through
           case 104: break;
-          case 33:
-            { return Cpp2Types.ARROW;
+          case 32:
+            { return Cpp2Types.PLUSPLUS;
             }
           // fall through
           case 105: break;
-          case 34:
-            { return Cpp2Types.LINE_COMMENT;
+          case 33:
+            { return Cpp2Types.MINUSMINUS;
             }
           // fall through
           case 106: break;
-          case 35:
-            { return Cpp2Types.FLOAT_LITERAL;
+          case 34:
+            { return Cpp2Types.ARROW;
             }
           // fall through
           case 107: break;
-          case 36:
-            { return Cpp2Types.COLONCOLON;
+          case 35:
+            { return Cpp2Types.LINE_COMMENT;
             }
           // fall through
           case 108: break;
-          case 37:
-            { return Cpp2Types.LTLT;
+          case 36:
+            { return Cpp2Types.FLOAT_LITERAL;
             }
           // fall through
           case 109: break;
-          case 38:
-            { return Cpp2Types.LTEQ;
+          case 37:
+            { return Cpp2Types.COLONCOLON;
             }
           // fall through
           case 110: break;
-          case 39:
-            { return Cpp2Types.EQEQ;
+          case 38:
+            { return Cpp2Types.LTLT;
             }
           // fall through
           case 111: break;
-          case 40:
-            { return Cpp2Types.GTEQ;
+          case 39:
+            { return Cpp2Types.LTEQ;
             }
           // fall through
           case 112: break;
-          case 41:
-            { return Cpp2Types.GTGT;
+          case 40:
+            { return Cpp2Types.EQEQ;
             }
           // fall through
           case 113: break;
-          case 42:
-            { return Cpp2Types.METAFUNCTION;
+          case 41:
+            { return Cpp2Types.GTEQ;
             }
           // fall through
           case 114: break;
-          case 43:
-            { return Cpp2Types.DO;
+          case 42:
+            { return Cpp2Types.GTGT;
             }
           // fall through
           case 115: break;
-          case 44:
-            { return Cpp2Types.IF;
+          case 43:
+            { return Cpp2Types.METAFUNCTION;
             }
           // fall through
           case 116: break;
-          case 45:
-            { return Cpp2Types.IN;
+          case 44:
+            { return Cpp2Types.DO;
             }
           // fall through
           case 117: break;
-          case 46:
-            { return Cpp2Types.OROR;
+          case 45:
+            { return Cpp2Types.IF;
             }
           // fall through
           case 118: break;
-          case 47:
-            { return Cpp2Types.DOTDOTDOT;
+          case 46:
+            { return Cpp2Types.IN;
             }
           // fall through
           case 119: break;
-          case 48:
-            { return Cpp2Types.FOR;
+          case 47:
+            { return Cpp2Types.OROR;
             }
           // fall through
           case 120: break;
-          case 49:
-            { return Cpp2Types.OUT;
+          case 48:
+            { return Cpp2Types.DOTDOTDOT;
             }
           // fall through
           case 121: break;
-          case 50:
-            { return Cpp2Types.BLOCK_COMMENT;
+          case 49:
+            { return Cpp2Types.FOR;
             }
           // fall through
           case 122: break;
-          case 51:
-            { return Cpp2Types.COPY;
+          case 50:
+            { return Cpp2Types.OUT;
             }
           // fall through
           case 123: break;
-          case 52:
-            { return Cpp2Types.ELSE;
+          case 51:
+            { return Cpp2Types.BLOCK_COMMENT;
             }
           // fall through
           case 124: break;
-          case 53:
-            { return Cpp2Types.MOVE;
+          case 52:
+            { return Cpp2Types.COPY;
             }
           // fall through
           case 125: break;
-          case 54:
-            { return Cpp2Types.NEXT;
+          case 53:
+            { return Cpp2Types.ELSE;
             }
           // fall through
           case 126: break;
-          case 55:
-            { return Cpp2Types.THIS;
+          case 54:
+            { return Cpp2Types.MOVE;
             }
           // fall through
           case 127: break;
-          case 56:
-            { return Cpp2Types.BOOL_LITERAL;
+          case 55:
+            { return Cpp2Types.NEXT;
             }
           // fall through
           case 128: break;
-          case 57:
-            { return Cpp2Types.TYPE_WORD;
+          case 56:
+            { return Cpp2Types.THIS;
             }
           // fall through
           case 129: break;
-          case 58:
-            { return Cpp2Types.BREAK;
+          case 57:
+            { return Cpp2Types.BOOL_LITERAL;
             }
           // fall through
           case 130: break;
-          case 59:
-            { return Cpp2Types.CONST;
+          case 58:
+            { return Cpp2Types.TYPE_WORD;
             }
           // fall through
           case 131: break;
-          case 60:
-            { return Cpp2Types.FINAL;
+          case 59:
+            { return Cpp2Types.BREAK;
             }
           // fall through
           case 132: break;
-          case 61:
-            { return Cpp2Types.INOUT;
+          case 60:
+            { return Cpp2Types.CONST;
             }
           // fall through
           case 133: break;
-          case 62:
-            { return Cpp2Types.USING;
+          case 61:
+            { return Cpp2Types.FINAL;
             }
           // fall through
           case 134: break;
-          case 63:
-            { return Cpp2Types.WHILE;
+          case 62:
+            { return Cpp2Types.INOUT;
             }
           // fall through
           case 135: break;
-          case 64:
-            { return Cpp2Types.PUBLIC;
+          case 63:
+            { return Cpp2Types.USING;
             }
           // fall through
           case 136: break;
-          case 65:
-            { return Cpp2Types.RETURN;
+          case 64:
+            { return Cpp2Types.WHILE;
             }
           // fall through
           case 137: break;
-          case 66:
-            { return Cpp2Types.FORWARD;
+          case 65:
+            { return Cpp2Types.PUBLIC;
             }
           // fall through
           case 138: break;
-          case 67:
-            { return Cpp2Types.PRIVATE;
+          case 66:
+            { return Cpp2Types.RETURN;
             }
           // fall through
           case 139: break;
-          case 68:
-            { return Cpp2Types.VIRTUAL;
+          case 67:
+            { return Cpp2Types.FORWARD;
             }
           // fall through
           case 140: break;
-          case 69:
-            { return Cpp2Types.CONTINUE;
+          case 68:
+            { return Cpp2Types.PRIVATE;
             }
           // fall through
           case 141: break;
-          case 70:
-            { return Cpp2Types.OVERRIDE;
+          case 69:
+            { return Cpp2Types.VIRTUAL;
             }
           // fall through
           case 142: break;
-          case 71:
-            { return Cpp2Types.NAMESPACE;
+          case 70:
+            { return Cpp2Types.CONTINUE;
             }
           // fall through
           case 143: break;
-          case 72:
-            { return Cpp2Types.PROTECTED;
+          case 71:
+            { return Cpp2Types.OVERRIDE;
             }
           // fall through
           case 144: break;
+          case 72:
+            { return Cpp2Types.NAMESPACE;
+            }
+          // fall through
+          case 145: break;
+          case 73:
+            { return Cpp2Types.PROTECTED;
+            }
+          // fall through
+          case 146: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

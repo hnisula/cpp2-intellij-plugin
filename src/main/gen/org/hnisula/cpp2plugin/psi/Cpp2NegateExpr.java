@@ -5,13 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2TypeSpecifier extends PsiElement {
+public interface Cpp2NegateExpr extends Cpp2Expr {
 
   @Nullable
-  Cpp2QIdentifier getQIdentifier();
-
-  @Nullable
-  Cpp2Template getTemplate();
+  Cpp2Expr getExpr();
 
   @Nullable
   PsiElement getContext();

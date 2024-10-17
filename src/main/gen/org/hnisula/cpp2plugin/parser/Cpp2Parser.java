@@ -41,8 +41,8 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
       EXPR, FUNC_CALL, GTEQ_EXPR, GT_EXPR,
       LEFT_SHIFT_EXPR, LIST_EXPR, LITERAL, LTEQ_EXPR,
       LT_EXPR, MEMBER_ACCESS_EXPR, MOD_EXPR, MUL_EXPR,
-      NEQ_EXPR, OR_EXPR, PAREN_EXPR, Q_IDENTIFIER,
-      RIGHT_SHIFT_EXPR, SUBSCRIPT_EXPR, SUB_EXPR),
+      NEGATE_EXPR, NEQ_EXPR, OR_EXPR, PAREN_EXPR,
+      Q_IDENTIFIER, RIGHT_SHIFT_EXPR, SUBSCRIPT_EXPR, SUB_EXPR),
   };
 
   /* ********************************************************** */
@@ -102,6 +102,30 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     r = consumeToken(b, LINE_COMMENT);
     if (!r) r = consumeToken(b, BLOCK_COMMENT);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr | "(" expr ")"
+  static boolean condition(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "condition")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expr(b, l + 1, -1);
+    if (!r) r = condition_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // "(" expr ")"
+  private static boolean condition_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "condition_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LEFT_PARENTHESIS);
+    r = r && expr(b, l + 1, -1);
+    r = r && consumeToken(b, RIGHT_PARENTHESIS);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -323,7 +347,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "if" expr stmt_block ("else" "if" expr stmt_block)* ("else" stmt_block)?
+  // "if" condition stmt_block ("else" "if" condition stmt_block)* ("else" stmt_block)?
   public static boolean if_branch(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "if_branch")) return false;
     if (!nextTokenIs(b, IF)) return false;
@@ -331,7 +355,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, IF_BRANCH, null);
     r = consumeToken(b, IF);
     p = r; // pin = 1
-    r = r && report_error_(b, expr(b, l + 1, -1));
+    r = r && report_error_(b, condition(b, l + 1));
     r = p && report_error_(b, stmt_block(b, l + 1)) && r;
     r = p && report_error_(b, if_branch_3(b, l + 1)) && r;
     r = p && if_branch_4(b, l + 1) && r;
@@ -339,7 +363,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // ("else" "if" expr stmt_block)*
+  // ("else" "if" condition stmt_block)*
   private static boolean if_branch_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "if_branch_3")) return false;
     while (true) {
@@ -350,13 +374,13 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // "else" "if" expr stmt_block
+  // "else" "if" condition stmt_block
   private static boolean if_branch_3_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "if_branch_3_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeTokens(b, 0, ELSE, IF);
-    r = r && expr(b, l + 1, -1);
+    r = r && condition(b, l + 1);
     r = r && stmt_block(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -656,7 +680,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   private static boolean return_type_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "return_type_1")) return false;
     boolean r;
-    r = consumeToken(b, UNDERSCORE);
+    r = consumeToken(b, WILDCARD);
     if (!r) r = type_specifier(b, l + 1);
     return r;
   }
@@ -1044,32 +1068,43 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // qualifier* q_identifier template?
+  // (qualifier* q_identifier template?) | "_"
   public static boolean type_specifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type_specifier")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, TYPE_SPECIFIER, "<type specifier>");
     r = type_specifier_0(b, l + 1);
-    r = r && q_identifier(b, l + 1);
-    r = r && type_specifier_2(b, l + 1);
+    if (!r) r = consumeToken(b, WILDCARD);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // qualifier*
+  // qualifier* q_identifier template?
   private static boolean type_specifier_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type_specifier_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = type_specifier_0_0(b, l + 1);
+    r = r && q_identifier(b, l + 1);
+    r = r && type_specifier_0_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // qualifier*
+  private static boolean type_specifier_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type_specifier_0_0")) return false;
     while (true) {
       int c = current_position_(b);
       if (!qualifier(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "type_specifier_0", c)) break;
+      if (!empty_element_parsed_guard_(b, "type_specifier_0_0", c)) break;
     }
     return true;
   }
 
   // template?
-  private static boolean type_specifier_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "type_specifier_2")) return false;
+  private static boolean type_specifier_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type_specifier_0_2")) return false;
     template(b, l + 1);
     return true;
   }
@@ -1097,15 +1132,25 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER_WORD ":" ((type_specifier "=" expr) | type_specifier | ("=" expr))
+  // (IDENTIFIER_WORD | "_") ":" ((type_specifier "=" expr) | type_specifier | ("=" expr))
   public static boolean value_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "value_decl")) return false;
-    if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
+    if (!nextTokenIs(b, "<value decl>", IDENTIFIER_WORD, WILDCARD)) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON);
+    Marker m = enter_section_(b, l, _NONE_, VALUE_DECL, "<value decl>");
+    r = value_decl_0(b, l + 1);
+    r = r && consumeToken(b, COLON);
     r = r && value_decl_2(b, l + 1);
-    exit_section_(b, m, VALUE_DECL, r);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // IDENTIFIER_WORD | "_"
+  private static boolean value_decl_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "value_decl_0")) return false;
+    boolean r;
+    r = consumeToken(b, IDENTIFIER_WORD);
+    if (!r) r = consumeToken(b, WILDCARD);
     return r;
   }
 
@@ -1148,7 +1193,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   // value_decl ";"
   static boolean value_decl_stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "value_decl_stmt")) return false;
-    if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
+    if (!nextTokenIs(b, "", IDENTIFIER_WORD, WILDCARD)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = value_decl(b, l + 1);
@@ -1216,16 +1261,18 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   // 19: POSTFIX(member_access_expr)
   // 20: POSTFIX(subscript_expr)
   // 21: POSTFIX(deref_expr)
-  // 22: ATOM(q_identifier)
-  // 23: ATOM(literal)
-  // 24: ATOM(paren_expr)
-  // 25: ATOM(list_expr)
+  // 22: PREFIX(negate_expr)
+  // 23: ATOM(q_identifier)
+  // 24: ATOM(literal)
+  // 25: ATOM(paren_expr)
+  // 26: ATOM(list_expr)
   public static boolean expr(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expr")) return false;
     addVariant(b, "<expr>");
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<expr>");
-    r = q_identifier(b, l + 1);
+    r = negate_expr(b, l + 1);
+    if (!r) r = q_identifier(b, l + 1);
     if (!r) r = literal(b, l + 1);
     if (!r) r = paren_expr(b, l + 1);
     if (!r) r = list_expr(b, l + 1);
@@ -1478,6 +1525,18 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "subscript_expr_0_1_2")) return false;
     consumeTokenSmart(b, COMMA);
     return true;
+  }
+
+  public static boolean negate_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "negate_expr")) return false;
+    if (!nextTokenIsSmart(b, EXCLAMATION)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeTokenSmart(b, EXCLAMATION);
+    p = r;
+    r = p && expr(b, l, 22);
+    exit_section_(b, l, m, NEGATE_EXPR, r, p, null);
+    return r || p;
   }
 
   // "::"? (identifier template? "::")* identifier template?

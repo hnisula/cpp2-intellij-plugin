@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2TypeSpecifierImpl extends ASTWrapperPsiElement implements Cpp2TypeSpecifier {
+public class Cpp2NegateExprImpl extends Cpp2ExprImpl implements Cpp2NegateExpr {
 
-  public Cpp2TypeSpecifierImpl(@NotNull ASTNode node) {
+  public Cpp2NegateExprImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitTypeSpecifier(this);
+    visitor.visitNegateExpr(this);
   }
 
   @Override
@@ -29,14 +29,8 @@ public class Cpp2TypeSpecifierImpl extends ASTWrapperPsiElement implements Cpp2T
 
   @Override
   @Nullable
-  public Cpp2QIdentifier getQIdentifier() {
-    return findChildByClass(Cpp2QIdentifier.class);
-  }
-
-  @Override
-  @Nullable
-  public Cpp2Template getTemplate() {
-    return findChildByClass(Cpp2Template.class);
+  public Cpp2Expr getExpr() {
+    return findChildByClass(Cpp2Expr.class);
   }
 
   @Override

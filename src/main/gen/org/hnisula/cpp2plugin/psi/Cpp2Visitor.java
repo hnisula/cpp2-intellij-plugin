@@ -148,6 +148,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     // visitScope(o);
   }
 
+  public void visitNegateExpr(@NotNull Cpp2NegateExpr o) {
+    visitExpr(o);
+  }
+
   public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {
     visitExpr(o);
   }

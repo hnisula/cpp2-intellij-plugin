@@ -42,6 +42,7 @@ public interface Cpp2Types {
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
   IElementType NAMESPACE_ALIAS_DECL = new Cpp2ElementType("NAMESPACE_ALIAS_DECL");
   IElementType NAMESPACE_DECL = new Cpp2ElementType("NAMESPACE_DECL");
+  IElementType NEGATE_EXPR = new Cpp2ElementType("NEGATE_EXPR");
   IElementType NEQ_EXPR = new Cpp2ElementType("NEQ_EXPR");
   IElementType NEXT_STMT = new Cpp2ElementType("NEXT_STMT");
   IElementType OBJ_ALIAS_DECL = new Cpp2ElementType("OBJ_ALIAS_DECL");
@@ -89,6 +90,7 @@ public interface Cpp2Types {
   IElementType ELSE = new Cpp2TokenType("else");
   IElementType EQ = new Cpp2TokenType("=");
   IElementType EQEQ = new Cpp2TokenType("==");
+  IElementType EXCLAMATION = new Cpp2TokenType("!");
   IElementType EXP = new Cpp2TokenType("^");
   IElementType FINAL = new Cpp2TokenType("final");
   IElementType FLOAT_LITERAL = new Cpp2TokenType("FLOAT_LITERAL");
@@ -137,10 +139,10 @@ public interface Cpp2Types {
   IElementType STRING_LITERAL = new Cpp2TokenType("STRING_LITERAL");
   IElementType THIS = new Cpp2TokenType("this");
   IElementType TYPE_WORD = new Cpp2TokenType("type");
-  IElementType UNDERSCORE = new Cpp2TokenType("_");
   IElementType USING = new Cpp2TokenType("using");
   IElementType VIRTUAL = new Cpp2TokenType("virtual");
   IElementType WHILE = new Cpp2TokenType("while");
+  IElementType WILDCARD = new Cpp2TokenType("_");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -243,6 +245,9 @@ public interface Cpp2Types {
       }
       else if (type == NAMESPACE_DECL) {
         return new Cpp2NamespaceDeclImpl(node);
+      }
+      else if (type == NEGATE_EXPR) {
+        return new Cpp2NegateExprImpl(node);
       }
       else if (type == NEQ_EXPR) {
         return new Cpp2NeqExprImpl(node);

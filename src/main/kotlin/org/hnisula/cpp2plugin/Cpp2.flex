@@ -76,7 +76,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "<"                   { return Cpp2Types.LT; }
       ">"                   { return Cpp2Types.GT; }
       "="                   { return Cpp2Types.EQ; }
-      "_"                   { return Cpp2Types.UNDERSCORE; }
+      "_"                   { return Cpp2Types.WILDCARD; }
       "*"                   { return Cpp2Types.ASTERISK; }
       "+"                   { return Cpp2Types.PLUS; }
       "-"                   { return Cpp2Types.MINUS; }
@@ -87,6 +87,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "^"                   { return Cpp2Types.EXP; }
       "."                   { return Cpp2Types.DOT; }
       ","                   { return Cpp2Types.COMMA; }
+      "!"                   { return Cpp2Types.EXCLAMATION; }
       
       "type"                { return Cpp2Types.TYPE_WORD; }
       "this"                { return Cpp2Types.THIS; }
