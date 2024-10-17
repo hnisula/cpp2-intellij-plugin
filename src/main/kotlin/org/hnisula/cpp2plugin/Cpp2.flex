@@ -43,8 +43,6 @@ IDENTIFIER_WORD     = [a-zA-Z_][a-zA-Z0-9_]*
 LINE_COMMENT        = "//".*
 BLOCK_COMMENT       = "/\*".*"\*/"
 
-MUL                 = \s\* // Is this correct?
-
 METAFUNCTION        = "@"{IDENTIFIER_WORD}
 
 %%
@@ -79,8 +77,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       ">"                   { return Cpp2Types.GT; }
       "="                   { return Cpp2Types.EQ; }
       "_"                   { return Cpp2Types.UNDERSCORE; }
-      {MUL}                 { return Cpp2Types.MUL; }
-      "*"                   { return Cpp2Types.DEREF; }
+      "*"                   { return Cpp2Types.ASTERISK; }
       "+"                   { return Cpp2Types.PLUS; }
       "-"                   { return Cpp2Types.MINUS; }
       "/"                   { return Cpp2Types.SLASH; }

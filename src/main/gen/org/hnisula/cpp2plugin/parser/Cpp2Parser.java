@@ -143,9 +143,15 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // file_wrapper
+  // expr*
   static boolean file(PsiBuilder b, int l) {
-    return file_wrapper(b, l + 1);
+    if (!recursion_guard_(b, l, "file")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!expr(b, l + 1, -1)) break;
+      if (!empty_element_parsed_guard_(b, "file", c)) break;
+    }
+    return true;
   }
 
   /* ********************************************************** */
@@ -615,12 +621,24 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "const" | "*"
+  // ("const" | "*") NEED BETTER DISAMBIGUATION OF THE ASTERISK
   static boolean qualifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "qualifier")) return false;
+    if (!nextTokenIs(b, "", ASTERISK, CONST)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = qualifier_0(b, l + 1);
+    r = r && consumeTokens(b, 0, NEED, BETTER, DISAMBIGUATION, OF, THE, ASTERISK);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // "const" | "*"
+  private static boolean qualifier_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "qualifier_0")) return false;
     boolean r;
     r = consumeToken(b, CONST);
-    if (!r) r = consumeToken(b, "*");
+    if (!r) r = consumeToken(b, ASTERISK);
     return r;
   }
 
@@ -1198,17 +1216,27 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   // 2: BINARY(bit_or_expr)
   // 3: BINARY(bit_xor_expr)
   // 4: BINARY(bit_and_expr)
-  // 5: BINARY(eq_expr) BINARY(neq_expr)
-  // 6: BINARY(lt_expr) BINARY(gt_expr) BINARY(lteq_expr) BINARY(gteq_expr)
-  // 7: BINARY(left_shift_expr) BINARY(right_shift_expr)
-  // 8: BINARY(add_expr) BINARY(sub_expr)
-  // 9: BINARY(mul_expr) BINARY(div_expr) BINARY(mod_expr)
-  // 10: POSTFIX(func_call) BINARY(subscript_expr) POSTFIX(member_access_expr)
-  // 11: POSTFIX(deref_expr)
-  // 12: ATOM(q_identifier)
-  // 13: ATOM(literal)
-  // 14: ATOM(paren_expr)
-  // 15: ATOM(list_expr)
+  // 5: BINARY(eq_expr)
+  // 6: BINARY(neq_expr)
+  // 7: BINARY(lt_expr)
+  // 8: BINARY(gt_expr)
+  // 9: BINARY(lteq_expr)
+  // 10: BINARY(gteq_expr)
+  // 11: BINARY(left_shift_expr)
+  // 12: BINARY(right_shift_expr)
+  // 13: BINARY(add_expr)
+  // 14: BINARY(sub_expr)
+  // 15: BINARY(mul_expr)
+  // 16: BINARY(div_expr)
+  // 17: BINARY(mod_expr)
+  // 18: POSTFIX(func_call)
+  // 19: POSTFIX(member_access_expr)
+  // 20: POSTFIX(subscript_expr)
+  // 21: POSTFIX(deref_expr)
+  // 22: ATOM(q_identifier)
+  // 23: ATOM(literal)
+  // 24: ATOM(paren_expr)
+  // 25: ATOM(list_expr)
   public static boolean expr(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expr")) return false;
     addVariant(b, "<expr>");
@@ -1253,70 +1281,65 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
         r = expr(b, l, 5);
         exit_section_(b, l, m, EQ_EXPR, r, true, null);
       }
-      else if (g < 5 && consumeTokenSmart(b, NEQ)) {
-        r = expr(b, l, 5);
+      else if (g < 6 && consumeTokenSmart(b, NEQ)) {
+        r = expr(b, l, 6);
         exit_section_(b, l, m, NEQ_EXPR, r, true, null);
       }
-      else if (g < 6 && consumeTokenSmart(b, LT)) {
-        r = expr(b, l, 6);
+      else if (g < 7 && consumeTokenSmart(b, LT)) {
+        r = expr(b, l, 7);
         exit_section_(b, l, m, LT_EXPR, r, true, null);
       }
-      else if (g < 6 && consumeTokenSmart(b, GT)) {
-        r = expr(b, l, 6);
+      else if (g < 8 && consumeTokenSmart(b, GT)) {
+        r = expr(b, l, 8);
         exit_section_(b, l, m, GT_EXPR, r, true, null);
       }
-      else if (g < 6 && consumeTokenSmart(b, LTEQ)) {
-        r = expr(b, l, 6);
+      else if (g < 9 && consumeTokenSmart(b, LTEQ)) {
+        r = expr(b, l, 9);
         exit_section_(b, l, m, LTEQ_EXPR, r, true, null);
       }
-      else if (g < 6 && consumeTokenSmart(b, GTEQ)) {
-        r = expr(b, l, 6);
+      else if (g < 10 && consumeTokenSmart(b, GTEQ)) {
+        r = expr(b, l, 10);
         exit_section_(b, l, m, GTEQ_EXPR, r, true, null);
       }
-      else if (g < 7 && consumeTokenSmart(b, LTLT)) {
-        r = expr(b, l, 7);
+      else if (g < 11 && consumeTokenSmart(b, LTLT)) {
+        r = expr(b, l, 11);
         exit_section_(b, l, m, LEFT_SHIFT_EXPR, r, true, null);
       }
-      else if (g < 7 && consumeTokenSmart(b, GTGT)) {
-        r = expr(b, l, 7);
+      else if (g < 12 && consumeTokenSmart(b, GTGT)) {
+        r = expr(b, l, 12);
         exit_section_(b, l, m, RIGHT_SHIFT_EXPR, r, true, null);
       }
-      else if (g < 8 && consumeTokenSmart(b, PLUS)) {
-        r = expr(b, l, 8);
+      else if (g < 13 && consumeTokenSmart(b, PLUS)) {
+        r = expr(b, l, 13);
         exit_section_(b, l, m, ADD_EXPR, r, true, null);
       }
-      else if (g < 8 && consumeTokenSmart(b, MINUS)) {
-        r = expr(b, l, 8);
+      else if (g < 14 && consumeTokenSmart(b, MINUS)) {
+        r = expr(b, l, 14);
         exit_section_(b, l, m, SUB_EXPR, r, true, null);
       }
-      else if (g < 9 && consumeTokenSmart(b, MUL)) {
-        r = expr(b, l, 9);
+      else if (g < 15 && consumeTokenSmart(b, ASTERISK)) {
+        r = expr(b, l, 15);
         exit_section_(b, l, m, MUL_EXPR, r, true, null);
       }
-      else if (g < 9 && consumeTokenSmart(b, SLASH)) {
-        r = expr(b, l, 9);
+      else if (g < 16 && consumeTokenSmart(b, SLASH)) {
+        r = expr(b, l, 16);
         exit_section_(b, l, m, DIV_EXPR, r, true, null);
       }
-      else if (g < 9 && consumeTokenSmart(b, MODULO)) {
-        r = expr(b, l, 9);
+      else if (g < 17 && consumeTokenSmart(b, MODULO)) {
+        r = expr(b, l, 17);
         exit_section_(b, l, m, MOD_EXPR, r, true, null);
       }
-      else if (g < 10 && func_call_0(b, l + 1)) {
+      else if (g < 18 && func_call_0(b, l + 1)) {
         r = true;
         exit_section_(b, l, m, FUNC_CALL, r, true, null);
       }
-      else if (g < 10 && consumeTokenSmart(b, LEFT_BRACKET)) {
-        r = report_error_(b, expr(b, l, 10));
-        r = subscript_expr_1(b, l + 1) && r;
-        exit_section_(b, l, m, SUBSCRIPT_EXPR, r, true, null);
-      }
-      else if (g < 10 && member_access_expr_0(b, l + 1)) {
+      else if (g < 19 && member_access_expr_0(b, l + 1)) {
         r = true;
         exit_section_(b, l, m, MEMBER_ACCESS_EXPR, r, true, null);
       }
-      else if (g < 11 && consumeTokenSmart(b, DEREF)) {
+      else if (g < 20 && subscript_expr_0(b, l + 1)) {
         r = true;
-        exit_section_(b, l, m, DEREF_EXPR, r, true, null);
+        exit_section_(b, l, m, SUBSCRIPT_EXPR, r, true, null);
       }
       else {
         exit_section_(b, l, m, null, false, false, null);
@@ -1386,47 +1409,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ("," expr)* ","? "]"
-  private static boolean subscript_expr_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "subscript_expr_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = subscript_expr_1_0(b, l + 1);
-    r = r && subscript_expr_1_1(b, l + 1);
-    r = r && consumeToken(b, RIGHT_BRACKET);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // ("," expr)*
-  private static boolean subscript_expr_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "subscript_expr_1_0")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!subscript_expr_1_0_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "subscript_expr_1_0", c)) break;
-    }
-    return true;
-  }
-
-  // "," expr
-  private static boolean subscript_expr_1_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "subscript_expr_1_0_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, COMMA);
-    r = r && expr(b, l + 1, -1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // ","?
-  private static boolean subscript_expr_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "subscript_expr_1_1")) return false;
-    consumeToken(b, COMMA);
-    return true;
-  }
-
   // "." (identifier | func_call)
   private static boolean member_access_expr_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "member_access_expr_0")) return false;
@@ -1443,8 +1425,61 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "member_access_expr_0_1")) return false;
     boolean r;
     r = identifier(b, l + 1);
-    if (!r) r = expr(b, l + 1, 9);
+    if (!r) r = expr(b, l + 1, 17);
     return r;
+  }
+
+  // "[" (expr ("," expr)* ","?) "]"
+  private static boolean subscript_expr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "subscript_expr_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokenSmart(b, LEFT_BRACKET);
+    r = r && subscript_expr_0_1(b, l + 1);
+    r = r && consumeToken(b, RIGHT_BRACKET);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // expr ("," expr)* ","?
+  private static boolean subscript_expr_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "subscript_expr_0_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expr(b, l + 1, -1);
+    r = r && subscript_expr_0_1_1(b, l + 1);
+    r = r && subscript_expr_0_1_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ("," expr)*
+  private static boolean subscript_expr_0_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "subscript_expr_0_1_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!subscript_expr_0_1_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "subscript_expr_0_1_1", c)) break;
+    }
+    return true;
+  }
+
+  // "," expr
+  private static boolean subscript_expr_0_1_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "subscript_expr_0_1_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokenSmart(b, COMMA);
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ","?
+  private static boolean subscript_expr_0_1_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "subscript_expr_0_1_2")) return false;
+    consumeTokenSmart(b, COMMA);
+    return true;
   }
 
   // "::"? (identifier template? "::")* identifier template?
