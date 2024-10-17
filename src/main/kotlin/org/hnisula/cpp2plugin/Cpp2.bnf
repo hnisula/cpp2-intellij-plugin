@@ -156,7 +156,8 @@ obj_alias_decl          ::= IDENTIFIER_WORD ":" type_specifier? "==" expr ";" {
 
 // Declaration and assignment
 
-assign                  ::= expr "=" expr ";" {
+// Unsure if this is the way to handle the wildcard here
+assign                  ::= (expr | "_") "=" expr ";" {
     pin=2
 }
 private value_decl_stmt ::= value_decl ";"

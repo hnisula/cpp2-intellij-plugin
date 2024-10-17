@@ -78,18 +78,27 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expr "=" expr ";"
+  // (expr | "_") "=" expr ";"
   public static boolean assign(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "assign")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, ASSIGN, "<assign>");
-    r = expr(b, l + 1, -1);
+    r = assign_0(b, l + 1);
     r = r && consumeToken(b, EQ);
     p = r; // pin = 2
     r = r && report_error_(b, expr(b, l + 1, -1));
     r = p && consumeToken(b, SEMICOLON) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  // expr | "_"
+  private static boolean assign_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "assign_0")) return false;
+    boolean r;
+    r = expr(b, l + 1, -1);
+    if (!r) r = consumeToken(b, WILDCARD);
+    return r;
   }
 
   /* ********************************************************** */
