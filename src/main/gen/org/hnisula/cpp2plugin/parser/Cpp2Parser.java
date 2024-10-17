@@ -4,7 +4,7 @@ package org.hnisula.cpp2plugin.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
+import static org.hnisula.cpp2plugin.psi.Cpp2ParserUtil.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
@@ -143,15 +143,9 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expr*
+  // file_wrapper
   static boolean file(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "file")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!expr(b, l + 1, -1)) break;
-      if (!empty_element_parsed_guard_(b, "file", c)) break;
-    }
-    return true;
+    return file_wrapper(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -621,21 +615,10 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ("const" | "*") NEED BETTER DISAMBIGUATION OF THE ASTERISK
+  // "const" | "*"
   static boolean qualifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "qualifier")) return false;
     if (!nextTokenIs(b, "", ASTERISK, CONST)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = qualifier_0(b, l + 1);
-    r = r && consumeTokens(b, 0, NEED, BETTER, DISAMBIGUATION, OF, THE, ASTERISK);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // "const" | "*"
-  private static boolean qualifier_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "qualifier_0")) return false;
     boolean r;
     r = consumeToken(b, CONST);
     if (!r) r = consumeToken(b, ASTERISK);
@@ -1317,7 +1300,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
         r = expr(b, l, 14);
         exit_section_(b, l, m, SUB_EXPR, r, true, null);
       }
-      else if (g < 15 && consumeTokenSmart(b, ASTERISK)) {
+      else if (g < 15 && mul_expr_0(b, l + 1)) {
         r = expr(b, l, 15);
         exit_section_(b, l, m, MUL_EXPR, r, true, null);
       }
@@ -1341,11 +1324,26 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
         r = true;
         exit_section_(b, l, m, SUBSCRIPT_EXPR, r, true, null);
       }
+      else if (g < 21 && consumeTokenSmart(b, ASTERISK)) {
+        r = true;
+        exit_section_(b, l, m, DEREF_EXPR, r, true, null);
+      }
       else {
         exit_section_(b, l, m, null, false, false, null);
         break;
       }
     }
+    return r;
+  }
+
+  // <<mulDerefDisambiguator>> "*"
+  private static boolean mul_expr_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mul_expr_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = mulDerefDisambiguator(b, l + 1);
+    r = r && consumeToken(b, ASTERISK);
+    exit_section_(b, m, null, r);
     return r;
   }
 

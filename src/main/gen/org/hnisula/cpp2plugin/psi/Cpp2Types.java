@@ -73,7 +73,6 @@ public interface Cpp2Types {
   IElementType ANDAND = new Cpp2TokenType("&&");
   IElementType ARROW = new Cpp2TokenType("->");
   IElementType ASTERISK = new Cpp2TokenType("*");
-  IElementType BETTER = new Cpp2TokenType("BETTER");
   IElementType BLOCK_COMMENT = new Cpp2TokenType("BLOCK_COMMENT");
   IElementType BOOL_LITERAL = new Cpp2TokenType("BOOL_LITERAL");
   IElementType BREAK = new Cpp2TokenType("break");
@@ -84,7 +83,6 @@ public interface Cpp2Types {
   IElementType CONST = new Cpp2TokenType("const");
   IElementType CONTINUE = new Cpp2TokenType("continue");
   IElementType COPY = new Cpp2TokenType("copy");
-  IElementType DISAMBIGUATION = new Cpp2TokenType("DISAMBIGUATION");
   IElementType DO = new Cpp2TokenType("do");
   IElementType DOT = new Cpp2TokenType(".");
   IElementType DOTDOTDOT = new Cpp2TokenType("...");
@@ -118,11 +116,9 @@ public interface Cpp2Types {
   IElementType MOVE = new Cpp2TokenType("move");
   IElementType NAMESPACE = new Cpp2TokenType("namespace");
   IElementType NAMESPACE_REF = new Cpp2TokenType("namespace_ref");
-  IElementType NEED = new Cpp2TokenType("NEED");
   IElementType NEQ = new Cpp2TokenType("!=");
   IElementType NEWLINE = new Cpp2TokenType("\\n");
   IElementType NEXT = new Cpp2TokenType("next");
-  IElementType OF = new Cpp2TokenType("OF");
   IElementType OR = new Cpp2TokenType("|");
   IElementType OROR = new Cpp2TokenType("||");
   IElementType OUT = new Cpp2TokenType("out");
@@ -139,7 +135,6 @@ public interface Cpp2Types {
   IElementType SEMICOLON = new Cpp2TokenType(";");
   IElementType SLASH = new Cpp2TokenType("/");
   IElementType STRING_LITERAL = new Cpp2TokenType("STRING_LITERAL");
-  IElementType THE = new Cpp2TokenType("THE");
   IElementType THIS = new Cpp2TokenType("this");
   IElementType TYPE_WORD = new Cpp2TokenType("type");
   IElementType UNDERSCORE = new Cpp2TokenType("_");

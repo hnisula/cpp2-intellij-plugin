@@ -1,6 +1,7 @@
 {
     parserClass="org.hnisula.cpp2plugin.parser.Cpp2Parser"
-    
+    parserUtilClass="org.hnisula.cpp2plugin.psi.Cpp2ParserUtil"
+
     extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
     
     psiClassPrefix="Cpp2"
@@ -242,7 +243,7 @@ right_shift_expr    ::= expr ">>"   expr    {rightAssociative=false}
 left_shift_expr     ::= expr "<<"   expr    {rightAssociative=false}
 add_expr            ::= expr "+"    expr    {rightAssociative=false}
 sub_expr            ::= expr "-"    expr    {rightAssociative=false}
-mul_expr            ::= expr "*"    expr    {rightAssociative=false}
+mul_expr            ::= expr <<mulDerefDisambiguator>> "*" expr {rightAssociative=false}
 div_expr            ::= expr "/"    expr    {rightAssociative=false}
 mod_expr            ::= expr "%"    expr    {rightAssociative=false}
 subscript_expr      ::= expr "[" (expr ("," expr)* ","?) "]"
