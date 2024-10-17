@@ -89,6 +89,18 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
 
   @Override
   @NotNull
+  public List<Cpp2ReturnStmt> getReturnStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ReturnStmt.class);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2StmtBlock> getStmtBlockList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2StmtBlock.class);
+  }
+
+  @Override
+  @NotNull
   public List<Cpp2TypeAliasDecl> getTypeAliasDeclList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TypeAliasDecl.class);
   }

@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2FuncCall extends Cpp2Expr {
+public interface Cpp2NegateExpr extends Cpp2Expr {
 
-  @NotNull
-  List<Cpp2Arg> getArgList();
-
-  @NotNull
+  @Nullable
   Cpp2Expr getExpr();
 
   @Nullable

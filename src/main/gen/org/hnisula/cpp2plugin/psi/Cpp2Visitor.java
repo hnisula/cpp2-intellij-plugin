@@ -123,6 +123,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitMemberAccessExpr(@NotNull Cpp2MemberAccessExpr o) {
+    visitExpr(o);
+  }
+
   public void visitMemberDecl(@NotNull Cpp2MemberDecl o) {
     visitPsiElement(o);
   }
@@ -142,6 +146,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
   public void visitNamespaceDecl(@NotNull Cpp2NamespaceDecl o) {
     visitNamedDeclaration(o);
     // visitScope(o);
+  }
+
+  public void visitNegateExpr(@NotNull Cpp2NegateExpr o) {
+    visitExpr(o);
   }
 
   public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {
@@ -174,6 +182,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
 
   public void visitQIdentifier(@NotNull Cpp2QIdentifier o) {
     visitExpr(o);
+  }
+
+  public void visitReturnStmt(@NotNull Cpp2ReturnStmt o) {
+    visitPsiElement(o);
   }
 
   public void visitReturnType(@NotNull Cpp2ReturnType o) {

@@ -7,13 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface Cpp2DoWhileLoop extends PsiElement {
 
-  @NotNull
+  @Nullable
   Cpp2Expr getExpr();
 
   @Nullable
   Cpp2NextStmt getNextStmt();
 
-  @NotNull
+  @Nullable
   Cpp2StmtBlock getStmtBlock();
 
   @Nullable

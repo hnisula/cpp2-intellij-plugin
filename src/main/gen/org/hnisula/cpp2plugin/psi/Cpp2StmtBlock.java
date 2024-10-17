@@ -38,6 +38,12 @@ public interface Cpp2StmtBlock extends PsiElement {
   List<Cpp2ObjAliasDecl> getObjAliasDeclList();
 
   @NotNull
+  List<Cpp2ReturnStmt> getReturnStmtList();
+
+  @NotNull
+  List<Cpp2StmtBlock> getStmtBlockList();
+
+  @NotNull
   List<Cpp2TypeAliasDecl> getTypeAliasDeclList();
 
   @NotNull

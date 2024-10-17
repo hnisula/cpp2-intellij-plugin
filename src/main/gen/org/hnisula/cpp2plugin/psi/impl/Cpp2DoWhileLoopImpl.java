@@ -28,9 +28,9 @@ public class Cpp2DoWhileLoopImpl extends ASTWrapperPsiElement implements Cpp2DoW
   }
 
   @Override
-  @NotNull
+  @Nullable
   public Cpp2Expr getExpr() {
-    return findNotNullChildByClass(Cpp2Expr.class);
+    return findChildByClass(Cpp2Expr.class);
   }
 
   @Override
@@ -40,9 +40,9 @@ public class Cpp2DoWhileLoopImpl extends ASTWrapperPsiElement implements Cpp2DoW
   }
 
   @Override
-  @NotNull
+  @Nullable
   public Cpp2StmtBlock getStmtBlock() {
-    return findNotNullChildByClass(Cpp2StmtBlock.class);
+    return findChildByClass(Cpp2StmtBlock.class);
   }
 
   @Override
