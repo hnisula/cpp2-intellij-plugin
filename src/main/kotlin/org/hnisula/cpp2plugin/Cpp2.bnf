@@ -101,11 +101,12 @@ file_wrapper ::= root_stmts {
 
 root_stmt_block     ::= "{" root_stmt* "}"
 root_stmts          ::= root_stmt*
-private root_stmt   ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | comment)
+private root_stmt   ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | constexpr_decl | alias_decl | comment)
 
 stmt_block          ::= "{" stmt* "}"
 private stmt        ::= func_decl
                         | value_decl_stmt
+                        | constexpr_decl
                         | alias_decl
                         | assign
                         | using_namespace
@@ -141,7 +142,7 @@ private condition ::= expr | "(" expr ")"
 
 // Aliases
 
-private alias_decl      ::= obj_alias_decl | func_alias_decl | type_alias_decl | namespace_alias_decl
+private alias_decl      ::= func_alias_decl | type_alias_decl | namespace_alias_decl
 namespace_alias_decl    ::= IDENTIFIER_WORD ":" "namespace" "==" namespace_ref ";" {
     pin="=="
 }
@@ -151,7 +152,7 @@ type_alias_decl         ::= IDENTIFIER_WORD ":" "type" "==" type_specifier ";" {
 func_alias_decl         ::= IDENTIFIER_WORD ":" template_decl? param_list return_type? (("==" stmt_block) | ("=="? expr ";")) { 
     pin=param_list
 }
-obj_alias_decl          ::= IDENTIFIER_WORD ":" type_specifier? "==" expr ";" {
+constexpr_decl          ::= IDENTIFIER_WORD ":" type_specifier? "==" expr ";" {
     pin="=="
 }
 
@@ -199,7 +200,7 @@ func_call           ::= expr "(" (arg ("," arg)* ","?)? ")" {
     extends=expr
     pin=2
 }
-arg                 ::= param_kind? lambda_decl
+arg                 ::= param_kind? expr
 param_list          ::= "(" ((this_param | param) ("," param)* ","?)? ")"
 param               ::= param_kind? (value_decl | variadic_param | IDENTIFIER_WORD)
 this_param          ::= this_param_kind? "this"
@@ -244,7 +245,7 @@ or_expr             ::= expr "||"   expr    {rightAssociative=false}
 and_expr            ::= expr "&&"   expr    {rightAssociative=false}
 bit_or_expr         ::= expr "|"    expr    {rightAssociative=false}
 bit_xor_expr        ::= expr "^"    expr    {rightAssociative=false}
-bit_and_expr        ::= expr "&"    expr    {rightAssociative=false} // TODO: THIS NEEDS A DISAMBIGUATOR, TOO
+bit_and_expr        ::= expr "&"    expr    {rightAssociative=false}
 eq_expr             ::= expr "=="   expr    {rightAssociative=false}
 neq_expr            ::= expr "!="   expr    {rightAssociative=false}
 lteq_expr           ::= expr "<="   expr    {rightAssociative=false}
@@ -269,7 +270,7 @@ address_expr        ::= expr "&"
 template_decl               ::= "<" template_decl_item ("," template_decl_item)* ","? ">"
 private template_decl_item  ::= (IDENTIFIER_WORD (":" (TYPE_WORD | type_specifier))?) | (IDENTIFIER_WORD "..." (":" TYPE_WORD)?)
 template                    ::= "<" (type_specifier ("," type_specifier)* ","?)? ">"
-type_specifier              ::= ((qualifier* q_identifier template?) | "_")
+type_specifier              ::= ((template_decl? qualifier* q_identifier template?) | "_")
 q_identifier                ::= "::"? (identifier template? "::")* identifier template? {
     extends=expr
 }

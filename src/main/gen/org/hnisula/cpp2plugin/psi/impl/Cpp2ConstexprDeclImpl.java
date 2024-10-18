@@ -11,14 +11,14 @@ import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2ObjAliasDeclImpl extends ASTWrapperPsiElement implements Cpp2ObjAliasDecl {
+public class Cpp2ConstexprDeclImpl extends ASTWrapperPsiElement implements Cpp2ConstexprDecl {
 
-  public Cpp2ObjAliasDeclImpl(@NotNull ASTNode node) {
+  public Cpp2ConstexprDeclImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitObjAliasDecl(this);
+    visitor.visitConstexprDecl(this);
   }
 
   @Override

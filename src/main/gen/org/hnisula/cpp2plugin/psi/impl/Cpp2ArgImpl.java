@@ -29,8 +29,8 @@ public class Cpp2ArgImpl extends ASTWrapperPsiElement implements Cpp2Arg {
 
   @Override
   @NotNull
-  public Cpp2LambdaDecl getLambdaDecl() {
-    return findNotNullChildByClass(Cpp2LambdaDecl.class);
+  public Cpp2Expr getExpr() {
+    return findNotNullChildByClass(Cpp2Expr.class);
   }
 
   @Override

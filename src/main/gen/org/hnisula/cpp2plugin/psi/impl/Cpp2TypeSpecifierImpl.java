@@ -41,6 +41,12 @@ public class Cpp2TypeSpecifierImpl extends ASTWrapperPsiElement implements Cpp2T
 
   @Override
   @Nullable
+  public Cpp2TemplateDecl getTemplateDecl() {
+    return findChildByClass(Cpp2TemplateDecl.class);
+  }
+
+  @Override
+  @Nullable
   public PsiElement getContext() {
     return Cpp2PsiUtil.getContext(this);
   }

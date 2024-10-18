@@ -46,6 +46,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitConstexprDecl(@NotNull Cpp2ConstexprDecl o) {
+    visitPsiElement(o);
+  }
+
   public void visitDerefExpr(@NotNull Cpp2DerefExpr o) {
     visitExpr(o);
   }
@@ -165,10 +169,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitNextStmt(@NotNull Cpp2NextStmt o) {
-    visitPsiElement(o);
-  }
-
-  public void visitObjAliasDecl(@NotNull Cpp2ObjAliasDecl o) {
     visitPsiElement(o);
   }
 

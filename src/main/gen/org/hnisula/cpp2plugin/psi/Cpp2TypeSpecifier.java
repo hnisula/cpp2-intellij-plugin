@@ -14,6 +14,9 @@ public interface Cpp2TypeSpecifier extends PsiElement {
   Cpp2Template getTemplate();
 
   @Nullable
+  Cpp2TemplateDecl getTemplateDecl();
+
+  @Nullable
   PsiElement getContext();
 
 }

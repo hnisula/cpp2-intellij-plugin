@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2ObjAliasDecl extends PsiElement {
+public interface Cpp2ConstexprDecl extends PsiElement {
 
   @NotNull
   Cpp2Expr getExpr();

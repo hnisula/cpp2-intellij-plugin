@@ -35,14 +35,38 @@ public class Cpp2RootStmtBlockImpl extends ASTWrapperPsiElement implements Cpp2R
 
   @Override
   @NotNull
+  public List<Cpp2ConstexprDecl> getConstexprDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ConstexprDecl.class);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2FuncAliasDecl> getFuncAliasDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2FuncAliasDecl.class);
+  }
+
+  @Override
+  @NotNull
   public List<Cpp2FuncDecl> getFuncDeclList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2FuncDecl.class);
   }
 
   @Override
   @NotNull
+  public List<Cpp2NamespaceAliasDecl> getNamespaceAliasDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2NamespaceAliasDecl.class);
+  }
+
+  @Override
+  @NotNull
   public List<Cpp2NamespaceDecl> getNamespaceDeclList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2NamespaceDecl.class);
+  }
+
+  @Override
+  @NotNull
+  public List<Cpp2TypeAliasDecl> getTypeAliasDeclList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2TypeAliasDecl.class);
   }
 
   @Override

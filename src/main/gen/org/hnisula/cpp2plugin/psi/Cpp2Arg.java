@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2Arg extends PsiElement {
 
   @NotNull
-  Cpp2LambdaDecl getLambdaDecl();
+  Cpp2Expr getExpr();
 
   @Nullable
   PsiElement getContext();

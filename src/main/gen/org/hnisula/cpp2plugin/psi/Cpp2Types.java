@@ -17,6 +17,7 @@ public interface Cpp2Types {
   IElementType BIT_OR_EXPR = new Cpp2ElementType("BIT_OR_EXPR");
   IElementType BIT_XOR_EXPR = new Cpp2ElementType("BIT_XOR_EXPR");
   IElementType COMMENT = new Cpp2ElementType("COMMENT");
+  IElementType CONSTEXPR_DECL = new Cpp2ElementType("CONSTEXPR_DECL");
   IElementType DEREF_EXPR = new Cpp2ElementType("DEREF_EXPR");
   IElementType DIV_EXPR = new Cpp2ElementType("DIV_EXPR");
   IElementType DO_WHILE_LOOP = new Cpp2ElementType("DO_WHILE_LOOP");
@@ -47,7 +48,6 @@ public interface Cpp2Types {
   IElementType NEGATE_EXPR = new Cpp2ElementType("NEGATE_EXPR");
   IElementType NEQ_EXPR = new Cpp2ElementType("NEQ_EXPR");
   IElementType NEXT_STMT = new Cpp2ElementType("NEXT_STMT");
-  IElementType OBJ_ALIAS_DECL = new Cpp2ElementType("OBJ_ALIAS_DECL");
   IElementType OR_EXPR = new Cpp2ElementType("OR_EXPR");
   IElementType PARAM = new Cpp2ElementType("PARAM");
   IElementType PARAM_LIST = new Cpp2ElementType("PARAM_LIST");
@@ -176,6 +176,9 @@ public interface Cpp2Types {
       else if (type == COMMENT) {
         return new Cpp2CommentImpl(node);
       }
+      else if (type == CONSTEXPR_DECL) {
+        return new Cpp2ConstexprDeclImpl(node);
+      }
       else if (type == DEREF_EXPR) {
         return new Cpp2DerefExprImpl(node);
       }
@@ -262,9 +265,6 @@ public interface Cpp2Types {
       }
       else if (type == NEXT_STMT) {
         return new Cpp2NextStmtImpl(node);
-      }
-      else if (type == OBJ_ALIAS_DECL) {
-        return new Cpp2ObjAliasDeclImpl(node);
       }
       else if (type == OR_EXPR) {
         return new Cpp2OrExprImpl(node);
