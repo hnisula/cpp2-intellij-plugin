@@ -676,7 +676,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "->" ("_" | type_specifier)
+  // "->" (FORWARD | FORWARD_REF)? ("_" | type_specifier)
   public static boolean return_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "return_type")) return false;
     if (!nextTokenIs(b, ARROW)) return false;
@@ -684,13 +684,30 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, ARROW);
     r = r && return_type_1(b, l + 1);
+    r = r && return_type_2(b, l + 1);
     exit_section_(b, m, RETURN_TYPE, r);
     return r;
   }
 
-  // "_" | type_specifier
+  // (FORWARD | FORWARD_REF)?
   private static boolean return_type_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "return_type_1")) return false;
+    return_type_1_0(b, l + 1);
+    return true;
+  }
+
+  // FORWARD | FORWARD_REF
+  private static boolean return_type_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "return_type_1_0")) return false;
+    boolean r;
+    r = consumeToken(b, FORWARD);
+    if (!r) r = consumeToken(b, FORWARD_REF);
+    return r;
+  }
+
+  // "_" | type_specifier
+  private static boolean return_type_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "return_type_2")) return false;
     boolean r;
     r = consumeToken(b, WILDCARD);
     if (!r) r = type_specifier(b, l + 1);

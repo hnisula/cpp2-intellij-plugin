@@ -84,6 +84,7 @@
         OUT                 = "out"
         MOVE                = "move"
         FORWARD             = "forward"
+        FORWARD_REF         = "forward_ref"
         
         VIRTUAL             = "virtual"
         OVERRIDE            = "override"
@@ -193,7 +194,7 @@ lambda_decl         ::= ":"? template_decl? param_list return_type? "=" (stmt_bl
     pin=5
     extends=expr
 }
-return_type         ::= "->" ("_" | type_specifier)
+return_type         ::= "->" (FORWARD | FORWARD_REF)? ("_" | type_specifier)
 return_stmt         ::= "return" expr ";"
 
 func_call           ::= expr "(" (arg ("," arg)* ","?)? ")" {
@@ -254,7 +255,7 @@ lt_expr             ::= expr "<"    expr    {rightAssociative=false}
 gt_expr             ::= expr ">"    expr    {rightAssociative=false}
 right_shift_expr    ::= expr ">>"   expr    {rightAssociative=false}
 left_shift_expr     ::= expr "<<"   expr    {rightAssociative=false}
-add_expr            ::= expr "+"    expr    {rightAssociative=false}
+add_expr            ::= expr "+"    expr    {rightAssociative=false} // Merge with other similar math expressions? There are lots more to come (e.g. +=)
 sub_expr            ::= expr "-"    expr    {rightAssociative=false}
 mul_expr            ::= expr <<mulDerefDisambiguator>> "*" expr {rightAssociative=false}
 div_expr            ::= expr "/"    expr    {rightAssociative=false}

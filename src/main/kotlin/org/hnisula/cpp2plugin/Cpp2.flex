@@ -115,6 +115,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "out"                 { return Cpp2Types.OUT; }
       "move"                { return Cpp2Types.MOVE; }
       "forward"             { return Cpp2Types.FORWARD; }
+      "forward_ref"         { return Cpp2Types.FORWARD_REF; }
       
       "virtual"             { return Cpp2Types.VIRTUAL; }
       "override"            { return Cpp2Types.OVERRIDE; }

@@ -98,6 +98,7 @@ public interface Cpp2Types {
   IElementType FLOAT_LITERAL = new Cpp2TokenType("FLOAT_LITERAL");
   IElementType FOR = new Cpp2TokenType("for");
   IElementType FORWARD = new Cpp2TokenType("forward");
+  IElementType FORWARD_REF = new Cpp2TokenType("forward_ref");
   IElementType GT = new Cpp2TokenType(">");
   IElementType GTEQ = new Cpp2TokenType(">=");
   IElementType GTGT = new Cpp2TokenType(">>");
