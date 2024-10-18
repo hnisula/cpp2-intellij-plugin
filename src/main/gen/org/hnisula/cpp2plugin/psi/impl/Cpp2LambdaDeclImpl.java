@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2ArgImpl extends ASTWrapperPsiElement implements Cpp2Arg {
+public class Cpp2LambdaDeclImpl extends Cpp2ExprImpl implements Cpp2LambdaDecl {
 
-  public Cpp2ArgImpl(@NotNull ASTNode node) {
+  public Cpp2LambdaDeclImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitArg(this);
+    visitor.visitLambdaDecl(this);
   }
 
   @Override
@@ -28,9 +28,33 @@ public class Cpp2ArgImpl extends ASTWrapperPsiElement implements Cpp2Arg {
   }
 
   @Override
+  @Nullable
+  public Cpp2Expr getExpr() {
+    return findChildByClass(Cpp2Expr.class);
+  }
+
+  @Override
   @NotNull
-  public Cpp2LambdaDecl getLambdaDecl() {
-    return findNotNullChildByClass(Cpp2LambdaDecl.class);
+  public Cpp2ParamList getParamList() {
+    return findNotNullChildByClass(Cpp2ParamList.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2ReturnType getReturnType() {
+    return findChildByClass(Cpp2ReturnType.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2StmtBlock getStmtBlock() {
+    return findChildByClass(Cpp2StmtBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2TemplateDecl getTemplateDecl() {
+    return findChildByClass(Cpp2TemplateDecl.class);
   }
 
   @Override

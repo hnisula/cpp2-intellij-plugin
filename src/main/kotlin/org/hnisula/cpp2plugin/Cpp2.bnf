@@ -148,7 +148,7 @@ namespace_alias_decl    ::= IDENTIFIER_WORD ":" "namespace" "==" namespace_ref "
 type_alias_decl         ::= IDENTIFIER_WORD ":" "type" "==" type_specifier ";" {
     pin="=="
 }
-func_alias_decl         ::= IDENTIFIER_WORD ":" template_decl? param_list return_type? (("==" stmt_block) | ("=="? expr ";")) {
+func_alias_decl         ::= IDENTIFIER_WORD ":" template_decl? param_list return_type? (("==" stmt_block) | ("=="? expr ";")) { 
     pin=param_list
 }
 obj_alias_decl          ::= IDENTIFIER_WORD ":" type_specifier? "==" expr ";" {
@@ -158,7 +158,7 @@ obj_alias_decl          ::= IDENTIFIER_WORD ":" type_specifier? "==" expr ";" {
 // Declaration and assignment
 
 // Unsure if this is the way to handle the wildcard here
-assign                  ::= (expr | "_") "=" expr ";" {
+assign                  ::= (q_identifier | "_" | subscript_expr | deref_expr | member_access_expr) "=" expr ";" {
     pin=2
 }
 private value_decl_stmt ::= value_decl ";"
@@ -188,11 +188,18 @@ func_decl           ::= identifier ":" template_decl? param_list return_type? "=
     mixin="org.hnisula.cpp2plugin.psi.Cpp2FuncDeclMixin"
     methods=[identifier=""]
 }
+lambda_decl         ::= ":"? template_decl? param_list return_type? "=" (stmt_block | expr) {
+    pin=5
+    extends=expr
+}
 return_type         ::= "->" ("_" | type_specifier)
 return_stmt         ::= "return" expr ";"
 
-func_call           ::= expr "(" (arg ("," arg)* ","?)? ")" {extends=expr}
-arg                 ::= param_kind? expr
+func_call           ::= expr "(" (arg ("," arg)* ","?)? ")" {
+    extends=expr
+    pin=2
+}
+arg                 ::= param_kind? lambda_decl
 param_list          ::= "(" ((this_param | param) ("," param)* ","?)? ")"
 param               ::= param_kind? (value_decl | variadic_param | IDENTIFIER_WORD)
 this_param          ::= this_param_kind? "this"
@@ -206,8 +213,8 @@ type_decl           ::= identifier ":" template_decl? METAFUNCTION? "type" "=" "
     mixin="org.hnisula.cpp2plugin.psi.Cpp2TypeDeclMixin"
     methods=[identifier=""]
 }
-member_decl         ::= (member_access? (type_decl | func_decl | (value_decl ";") | comment))
-member_access       ::= ("public" | "protected" | "private")
+member_decl         ::= (member_access_level? (type_decl | func_decl | (value_decl ";") | comment))
+member_access_level       ::= ("public" | "protected" | "private")
 
 // Expressions and operators
 
@@ -223,9 +230,10 @@ expr ::=
     | add_expr | sub_expr
     | mul_expr | div_expr | mod_expr
     | func_call | member_access_expr | subscript_expr
-    | deref_expr | negate_expr
+    | deref_expr | negate_expr | address_expr
     | q_identifier
     | literal
+    | lambda_decl
     | paren_expr
     | list_expr
 
@@ -236,7 +244,7 @@ or_expr             ::= expr "||"   expr    {rightAssociative=false}
 and_expr            ::= expr "&&"   expr    {rightAssociative=false}
 bit_or_expr         ::= expr "|"    expr    {rightAssociative=false}
 bit_xor_expr        ::= expr "^"    expr    {rightAssociative=false}
-bit_and_expr        ::= expr "&"    expr    {rightAssociative=false}
+bit_and_expr        ::= expr "&"    expr    {rightAssociative=false} // TODO: THIS NEEDS A DISAMBIGUATOR, TOO
 eq_expr             ::= expr "=="   expr    {rightAssociative=false}
 neq_expr            ::= expr "!="   expr    {rightAssociative=false}
 lteq_expr           ::= expr "<="   expr    {rightAssociative=false}
@@ -254,6 +262,7 @@ subscript_expr      ::= expr "[" (expr ("," expr)* ","?) "]"
 member_access_expr  ::= expr "." (identifier | func_call)
 deref_expr          ::= expr "*"
 negate_expr         ::= "!" expr
+address_expr        ::= expr "&"
 
 // Misc fundamentals
 

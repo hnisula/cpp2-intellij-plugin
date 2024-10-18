@@ -5,10 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2Arg extends PsiElement {
+public interface Cpp2AddressExpr extends Cpp2Expr {
 
   @NotNull
-  Cpp2LambdaDecl getLambdaDecl();
+  Cpp2Expr getExpr();
 
   @Nullable
   PsiElement getContext();

@@ -11,14 +11,14 @@ import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2MemberAccessImpl extends ASTWrapperPsiElement implements Cpp2MemberAccess {
+public class Cpp2MemberAccessLevelImpl extends ASTWrapperPsiElement implements Cpp2MemberAccessLevel {
 
-  public Cpp2MemberAccessImpl(@NotNull ASTNode node) {
+  public Cpp2MemberAccessLevelImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitMemberAccess(this);
+    visitor.visitMemberAccessLevel(this);
   }
 
   @Override

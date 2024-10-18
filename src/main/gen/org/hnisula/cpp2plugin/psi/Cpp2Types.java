@@ -8,6 +8,7 @@ import org.hnisula.cpp2plugin.psi.impl.*;
 
 public interface Cpp2Types {
 
+  IElementType ADDRESS_EXPR = new Cpp2ElementType("ADDRESS_EXPR");
   IElementType ADD_EXPR = new Cpp2ElementType("ADD_EXPR");
   IElementType AND_EXPR = new Cpp2ElementType("AND_EXPR");
   IElementType ARG = new Cpp2ElementType("ARG");
@@ -30,13 +31,14 @@ public interface Cpp2Types {
   IElementType GT_EXPR = new Cpp2ElementType("GT_EXPR");
   IElementType IDENTIFIER = new Cpp2ElementType("IDENTIFIER");
   IElementType IF_BRANCH = new Cpp2ElementType("IF_BRANCH");
+  IElementType LAMBDA_DECL = new Cpp2ElementType("LAMBDA_DECL");
   IElementType LEFT_SHIFT_EXPR = new Cpp2ElementType("LEFT_SHIFT_EXPR");
   IElementType LIST_EXPR = new Cpp2ElementType("LIST_EXPR");
   IElementType LITERAL = new Cpp2ElementType("LITERAL");
   IElementType LTEQ_EXPR = new Cpp2ElementType("LTEQ_EXPR");
   IElementType LT_EXPR = new Cpp2ElementType("LT_EXPR");
-  IElementType MEMBER_ACCESS = new Cpp2ElementType("MEMBER_ACCESS");
   IElementType MEMBER_ACCESS_EXPR = new Cpp2ElementType("MEMBER_ACCESS_EXPR");
+  IElementType MEMBER_ACCESS_LEVEL = new Cpp2ElementType("MEMBER_ACCESS_LEVEL");
   IElementType MEMBER_DECL = new Cpp2ElementType("MEMBER_DECL");
   IElementType MOD_EXPR = new Cpp2ElementType("MOD_EXPR");
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
@@ -147,7 +149,10 @@ public interface Cpp2Types {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == ADD_EXPR) {
+      if (type == ADDRESS_EXPR) {
+        return new Cpp2AddressExprImpl(node);
+      }
+      else if (type == ADD_EXPR) {
         return new Cpp2AddExprImpl(node);
       }
       else if (type == AND_EXPR) {
@@ -210,6 +215,9 @@ public interface Cpp2Types {
       else if (type == IF_BRANCH) {
         return new Cpp2IfBranchImpl(node);
       }
+      else if (type == LAMBDA_DECL) {
+        return new Cpp2LambdaDeclImpl(node);
+      }
       else if (type == LEFT_SHIFT_EXPR) {
         return new Cpp2LeftShiftExprImpl(node);
       }
@@ -225,11 +233,11 @@ public interface Cpp2Types {
       else if (type == LT_EXPR) {
         return new Cpp2LtExprImpl(node);
       }
-      else if (type == MEMBER_ACCESS) {
-        return new Cpp2MemberAccessImpl(node);
-      }
       else if (type == MEMBER_ACCESS_EXPR) {
         return new Cpp2MemberAccessExprImpl(node);
+      }
+      else if (type == MEMBER_ACCESS_LEVEL) {
+        return new Cpp2MemberAccessLevelImpl(node);
       }
       else if (type == MEMBER_DECL) {
         return new Cpp2MemberDeclImpl(node);

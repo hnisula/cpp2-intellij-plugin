@@ -41,8 +41,8 @@ public class Cpp2MemberDeclImpl extends ASTWrapperPsiElement implements Cpp2Memb
 
   @Override
   @Nullable
-  public Cpp2MemberAccess getMemberAccess() {
-    return findChildByClass(Cpp2MemberAccess.class);
+  public Cpp2MemberAccessLevel getMemberAccessLevel() {
+    return findChildByClass(Cpp2MemberAccessLevel.class);
   }
 
   @Override

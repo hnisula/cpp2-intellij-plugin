@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2MemberAccess extends PsiElement {
+public interface Cpp2MemberAccessLevel extends PsiElement {
 
   @Nullable
   PsiElement getContext();

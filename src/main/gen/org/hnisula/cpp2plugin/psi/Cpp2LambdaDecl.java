@@ -5,22 +5,22 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2MemberDecl extends PsiElement {
+public interface Cpp2LambdaDecl extends Cpp2Expr {
 
   @Nullable
-  Cpp2Comment getComment();
+  Cpp2Expr getExpr();
+
+  @NotNull
+  Cpp2ParamList getParamList();
 
   @Nullable
-  Cpp2FuncDecl getFuncDecl();
+  Cpp2ReturnType getReturnType();
 
   @Nullable
-  Cpp2MemberAccessLevel getMemberAccessLevel();
+  Cpp2StmtBlock getStmtBlock();
 
   @Nullable
-  Cpp2TypeDecl getTypeDecl();
-
-  @Nullable
-  Cpp2ValueDecl getValueDecl();
+  Cpp2TemplateDecl getTemplateDecl();
 
   @Nullable
   PsiElement getContext();
