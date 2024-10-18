@@ -16,7 +16,7 @@ import com.intellij.psi.TokenType;
 %eof}
 
 LINE_WHITESPACE     = [\ \t]
-EOL_WHITESPACE      = [\n\f\v\r]
+EOL_WHITESPACE      = [\n\f\r]
 WHITESPACE          = ({LINE_WHITESPACE} | {EOL_WHITESPACE})+
 
 INT_SUFFIX          = [uU]([lL]{1,2})? | [lL]{1,2}[uU]?
@@ -36,13 +36,12 @@ INT_LITERAL         = {BIN_LITERAL} | {OCT_LITERAL} | {DEC_LITERAL} | {HEX_LITER
 FLOAT_LITERAL       = -?[0-9][0-9']*("."[0-9']*)?({EXPONENT}|{BIN_EXPONENT})?{FLOAT_SUFFIX}?
 BOOL_LITERAL        = "true" | "false"
 STRING_LITERAL      = ("u8" | "u" | "U" | "L")?\" (\\\" | [^\"])* \"
+CHAR_LITERAL        = ("u8" | "u" | "U" | "L")?\' (\\\' | [^\'])* \'
 
 IDENTIFIER_WORD     = [a-zA-Z_][a-zA-Z0-9_]*
 
-LINE_COMMENT             = "//".*
-BLOCK_COMMENT            = "/\*".*"\*/"
-
-MUL                 = \s\*
+LINE_COMMENT        = "//".*
+BLOCK_COMMENT       = "/\*".*"\*/"
 
 METAFUNCTION        = "@"{IDENTIFIER_WORD}
 
@@ -72,12 +71,13 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "}"                   { return Cpp2Types.RIGHT_BRACE; }
       "("                   { return Cpp2Types.LEFT_PARENTHESIS; }
       ")"                   { return Cpp2Types.RIGHT_PARENTHESIS; }
+      "["                   { return Cpp2Types.LEFT_BRACKET; }
+      "]"                   { return Cpp2Types.RIGHT_BRACKET; }
       "<"                   { return Cpp2Types.LT; }
       ">"                   { return Cpp2Types.GT; }
       "="                   { return Cpp2Types.EQ; }
-      "_"                   { return Cpp2Types.UNDERSCORE; }
-      {MUL}                 { return Cpp2Types.MUL; }
-      "*"                   { return Cpp2Types.DEREF; }
+      "_"                   { return Cpp2Types.WILDCARD; }
+      "*"                   { return Cpp2Types.ASTERISK; }
       "+"                   { return Cpp2Types.PLUS; }
       "-"                   { return Cpp2Types.MINUS; }
       "/"                   { return Cpp2Types.SLASH; }
@@ -87,6 +87,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "^"                   { return Cpp2Types.EXP; }
       "."                   { return Cpp2Types.DOT; }
       ","                   { return Cpp2Types.COMMA; }
+      "!"                   { return Cpp2Types.EXCLAMATION; }
       
       "type"                { return Cpp2Types.TYPE_WORD; }
       "this"                { return Cpp2Types.THIS; }
@@ -114,6 +115,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "out"                 { return Cpp2Types.OUT; }
       "move"                { return Cpp2Types.MOVE; }
       "forward"             { return Cpp2Types.FORWARD; }
+      "forward_ref"         { return Cpp2Types.FORWARD_REF; }
       
       "virtual"             { return Cpp2Types.VIRTUAL; }
       "override"            { return Cpp2Types.OVERRIDE; }
@@ -125,6 +127,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       {FLOAT_LITERAL}       { return Cpp2Types.FLOAT_LITERAL; }
       {BOOL_LITERAL}        { return Cpp2Types.BOOL_LITERAL; }
       {STRING_LITERAL}      { return Cpp2Types.STRING_LITERAL; }
+      {CHAR_LITERAL}        { return Cpp2Types.CHAR_LITERAL; }
       {IDENTIFIER_WORD}     { return Cpp2Types.IDENTIFIER_WORD; }
       {METAFUNCTION}        { return Cpp2Types.METAFUNCTION; }
 }

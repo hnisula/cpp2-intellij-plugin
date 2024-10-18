@@ -43,7 +43,7 @@ open class Cpp2TypeDeclMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2Na
             if (memberDeclIt.elementType == Cpp2Types.MEMBER_DECL) {
                 var memberDeclNode = memberDeclIt.firstChildNode
 
-                if (memberDeclNode.elementType == Cpp2Types.MEMBER_ACCESS) {
+                if (memberDeclNode.elementType == Cpp2Types.MEMBER_ACCESS_LEVEL) {
                     memberDeclNode = memberDeclNode.treeNext
                 }
 

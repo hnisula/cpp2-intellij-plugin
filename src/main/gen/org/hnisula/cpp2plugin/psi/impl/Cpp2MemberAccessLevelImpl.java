@@ -8,35 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2FuncCallImpl extends Cpp2ExprImpl implements Cpp2FuncCall {
+public class Cpp2MemberAccessLevelImpl extends ASTWrapperPsiElement implements Cpp2MemberAccessLevel {
 
-  public Cpp2FuncCallImpl(@NotNull ASTNode node) {
+  public Cpp2MemberAccessLevelImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitFuncCall(this);
+    visitor.visitMemberAccessLevel(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof Cpp2Visitor) accept((Cpp2Visitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<Cpp2Arg> getArgList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Arg.class);
-  }
-
-  @Override
-  @NotNull
-  public Cpp2Expr getExpr() {
-    return findNotNullChildByClass(Cpp2Expr.class);
   }
 
   @Override

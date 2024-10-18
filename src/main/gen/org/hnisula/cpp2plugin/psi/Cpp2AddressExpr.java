@@ -5,10 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2FuncCall extends Cpp2Expr {
-
-  @NotNull
-  List<Cpp2Arg> getArgList();
+public interface Cpp2AddressExpr extends Cpp2Expr {
 
   @NotNull
   Cpp2Expr getExpr();

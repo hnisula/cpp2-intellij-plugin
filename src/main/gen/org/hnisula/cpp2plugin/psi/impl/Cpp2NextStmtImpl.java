@@ -28,9 +28,9 @@ public class Cpp2NextStmtImpl extends ASTWrapperPsiElement implements Cpp2NextSt
   }
 
   @Override
-  @NotNull
+  @Nullable
   public Cpp2Expr getExpr() {
-    return findNotNullChildByClass(Cpp2Expr.class);
+    return findChildByClass(Cpp2Expr.class);
   }
 
   @Override

@@ -17,7 +17,7 @@ open class Cpp2FuncDeclMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2Na
 
     override fun getOwnDeclarations(): Collection<PsiSymbolDeclaration> {
         val paramDecls = Cpp2PsiUtil.getParamDecls(node.findChildByType(Cpp2Types.PARAM_LIST)!!.psi as Cpp2ParamList)
-        val stmtBlock = node.findChildByType(Cpp2Types.STMT_BLOCK)!!.psi as Cpp2StmtBlock
+        val stmtBlock = node.findChildByType(Cpp2Types.STMT_BLOCK)?.psi as Cpp2StmtBlock
         
         if (stmtBlock != null) {
             val stmtBlockDecls = Cpp2PsiUtil.getNamedDeclarations(stmtBlock)

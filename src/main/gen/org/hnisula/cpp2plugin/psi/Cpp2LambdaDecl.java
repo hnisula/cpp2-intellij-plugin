@@ -5,13 +5,19 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2TypeSpecifier extends PsiElement {
+public interface Cpp2LambdaDecl extends Cpp2Expr {
 
   @Nullable
-  Cpp2QIdentifier getQIdentifier();
+  Cpp2Expr getExpr();
+
+  @NotNull
+  Cpp2ParamList getParamList();
 
   @Nullable
-  Cpp2Template getTemplate();
+  Cpp2ReturnType getReturnType();
+
+  @Nullable
+  Cpp2StmtBlock getStmtBlock();
 
   @Nullable
   Cpp2TemplateDecl getTemplateDecl();

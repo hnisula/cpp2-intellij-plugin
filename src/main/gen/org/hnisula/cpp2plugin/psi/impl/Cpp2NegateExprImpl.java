@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2ObjAliasDeclImpl extends ASTWrapperPsiElement implements Cpp2ObjAliasDecl {
+public class Cpp2NegateExprImpl extends Cpp2ExprImpl implements Cpp2NegateExpr {
 
-  public Cpp2ObjAliasDeclImpl(@NotNull ASTNode node) {
+  public Cpp2NegateExprImpl(@NotNull ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitObjAliasDecl(this);
+    visitor.visitNegateExpr(this);
   }
 
   @Override
@@ -28,15 +28,9 @@ public class Cpp2ObjAliasDeclImpl extends ASTWrapperPsiElement implements Cpp2Ob
   }
 
   @Override
-  @NotNull
-  public Cpp2Expr getExpr() {
-    return findNotNullChildByClass(Cpp2Expr.class);
-  }
-
-  @Override
   @Nullable
-  public Cpp2TypeSpecifier getTypeSpecifier() {
-    return findChildByClass(Cpp2TypeSpecifier.class);
+  public Cpp2Expr getExpr() {
+    return findChildByClass(Cpp2Expr.class);
   }
 
   @Override

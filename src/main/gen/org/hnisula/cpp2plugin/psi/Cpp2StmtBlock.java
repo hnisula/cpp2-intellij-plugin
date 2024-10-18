@@ -14,6 +14,9 @@ public interface Cpp2StmtBlock extends PsiElement {
   List<Cpp2Comment> getCommentList();
 
   @NotNull
+  List<Cpp2ConstexprDecl> getConstexprDeclList();
+
+  @NotNull
   List<Cpp2DoWhileLoop> getDoWhileLoopList();
 
   @NotNull
@@ -35,7 +38,10 @@ public interface Cpp2StmtBlock extends PsiElement {
   List<Cpp2NamespaceAliasDecl> getNamespaceAliasDeclList();
 
   @NotNull
-  List<Cpp2ObjAliasDecl> getObjAliasDeclList();
+  List<Cpp2ReturnStmt> getReturnStmtList();
+
+  @NotNull
+  List<Cpp2StmtBlock> getStmtBlockList();
 
   @NotNull
   List<Cpp2TypeAliasDecl> getTypeAliasDeclList();

@@ -10,15 +10,15 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2FuncCallImpl extends Cpp2ExprImpl implements Cpp2FuncCall {
+public class Cpp2LambdaDeclImpl extends Cpp2ExprImpl implements Cpp2LambdaDecl {
 
-  public Cpp2FuncCallImpl(@NotNull ASTNode node) {
+  public Cpp2LambdaDeclImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitFuncCall(this);
+    visitor.visitLambdaDecl(this);
   }
 
   @Override
@@ -28,15 +28,33 @@ public class Cpp2FuncCallImpl extends Cpp2ExprImpl implements Cpp2FuncCall {
   }
 
   @Override
-  @NotNull
-  public List<Cpp2Arg> getArgList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Arg.class);
+  @Nullable
+  public Cpp2Expr getExpr() {
+    return findChildByClass(Cpp2Expr.class);
   }
 
   @Override
   @NotNull
-  public Cpp2Expr getExpr() {
-    return findNotNullChildByClass(Cpp2Expr.class);
+  public Cpp2ParamList getParamList() {
+    return findNotNullChildByClass(Cpp2ParamList.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2ReturnType getReturnType() {
+    return findChildByClass(Cpp2ReturnType.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2StmtBlock getStmtBlock() {
+    return findChildByClass(Cpp2StmtBlock.class);
+  }
+
+  @Override
+  @Nullable
+  public Cpp2TemplateDecl getTemplateDecl() {
+    return findChildByClass(Cpp2TemplateDecl.class);
   }
 
   @Override

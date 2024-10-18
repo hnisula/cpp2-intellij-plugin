@@ -14,6 +14,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitAddressExpr(@NotNull Cpp2AddressExpr o) {
+    visitExpr(o);
+  }
+
   public void visitAndExpr(@NotNull Cpp2AndExpr o) {
     visitExpr(o);
   }
@@ -39,6 +43,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitComment(@NotNull Cpp2Comment o) {
+    visitPsiElement(o);
+  }
+
+  public void visitConstexprDecl(@NotNull Cpp2ConstexprDecl o) {
     visitPsiElement(o);
   }
 
@@ -99,6 +107,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLambdaDecl(@NotNull Cpp2LambdaDecl o) {
+    visitExpr(o);
+  }
+
   public void visitLeftShiftExpr(@NotNull Cpp2LeftShiftExpr o) {
     visitExpr(o);
   }
@@ -119,7 +131,11 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitMemberAccess(@NotNull Cpp2MemberAccess o) {
+  public void visitMemberAccessExpr(@NotNull Cpp2MemberAccessExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitMemberAccessLevel(@NotNull Cpp2MemberAccessLevel o) {
     visitPsiElement(o);
   }
 
@@ -144,15 +160,15 @@ public class Cpp2Visitor extends PsiElementVisitor {
     // visitScope(o);
   }
 
+  public void visitNegateExpr(@NotNull Cpp2NegateExpr o) {
+    visitExpr(o);
+  }
+
   public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {
     visitExpr(o);
   }
 
   public void visitNextStmt(@NotNull Cpp2NextStmt o) {
-    visitPsiElement(o);
-  }
-
-  public void visitObjAliasDecl(@NotNull Cpp2ObjAliasDecl o) {
     visitPsiElement(o);
   }
 
@@ -174,6 +190,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
 
   public void visitQIdentifier(@NotNull Cpp2QIdentifier o) {
     visitExpr(o);
+  }
+
+  public void visitReturnStmt(@NotNull Cpp2ReturnStmt o) {
+    visitPsiElement(o);
   }
 
   public void visitReturnType(@NotNull Cpp2ReturnType o) {

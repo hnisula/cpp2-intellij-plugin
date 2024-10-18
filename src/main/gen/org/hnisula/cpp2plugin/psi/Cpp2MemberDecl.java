@@ -14,7 +14,7 @@ public interface Cpp2MemberDecl extends PsiElement {
   Cpp2FuncDecl getFuncDecl();
 
   @Nullable
-  Cpp2MemberAccess getMemberAccess();
+  Cpp2MemberAccessLevel getMemberAccessLevel();
 
   @Nullable
   Cpp2TypeDecl getTypeDecl();
