@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2NegateExpr extends Cpp2Expr {
+public interface Cpp2NotExpr extends Cpp2Expr {
 
   @Nullable
   Cpp2Expr getExpr();

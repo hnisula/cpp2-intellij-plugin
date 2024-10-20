@@ -59,6 +59,7 @@
         AND                 = "&"
         OR                  = "|"
         EXP                 = "^"
+        TILDE               = "~"
         DOT                 = "."
         COMMA               = ","
         EXCLAMATION         = "!"
@@ -238,7 +239,7 @@ expr ::=
     | add_expr | sub_expr
     | mul_expr | div_expr | mod_expr
     | func_call | member_access_expr | subscript_expr
-    | deref_expr | negate_expr | address_expr | unary_minus_expr | unary_plus_expr
+    | deref_expr | not_expr | bit_not_expr | address_expr | unary_minus_expr | unary_plus_expr
     | q_identifier | literal
     | increment_expr | decrement_expr
     | lambda_decl | paren_expr | list_expr
@@ -250,7 +251,7 @@ or_expr             ::= expr "||"   expr    {rightAssociative=false}
 and_expr            ::= expr "&&"   expr    {rightAssociative=false}
 bit_or_expr         ::= expr "|"    expr    {rightAssociative=false}
 bit_xor_expr        ::= expr "^"    expr    {rightAssociative=false}
-bit_and_expr        ::= expr "&"    expr    {rightAssociative=false}
+bit_and_expr        ::= expr <<binaryOpTermLookhead>> "&" expr {rightAssociative=false}
 eq_expr             ::= expr "=="   expr    {rightAssociative=false}
 neq_expr            ::= expr "!="   expr    {rightAssociative=false}
 lteq_expr           ::= expr "<="   expr    {rightAssociative=false}
@@ -261,19 +262,20 @@ right_shift_expr    ::= expr ">>"   expr    {rightAssociative=false}
 left_shift_expr     ::= expr "<<"   expr    {rightAssociative=false}
 add_expr            ::= expr "+"    expr    {rightAssociative=false} // Merge with other similar math expressions? There are lots more to come (e.g. +=)
 sub_expr            ::= expr "-"    expr    {rightAssociative=false}
-mul_expr            ::= expr <<mulDerefDisambiguator>> "*" expr {rightAssociative=false}
+mul_expr            ::= expr <<binaryOpTermLookhead>> "*" expr {rightAssociative=false}
 div_expr            ::= expr "/"    expr    {rightAssociative=false}
 mod_expr            ::= expr "%"    expr    {rightAssociative=false}
 
 unary_minus_expr    ::= "-" expr
 unary_plus_expr     ::= "+" expr
+bit_not_expr        ::= expr "~"
 increment_expr      ::= expr "++"
 decrement_expr      ::= expr "--"
 
 subscript_expr      ::= expr "[" (expr ("," expr)* ","?) "]"
 member_access_expr  ::= expr "." (identifier | func_call)
 deref_expr          ::= expr "*"
-negate_expr         ::= "!" expr
+not_expr            ::= "!" expr
 address_expr        ::= expr "&"
 
 // Misc fundamentals

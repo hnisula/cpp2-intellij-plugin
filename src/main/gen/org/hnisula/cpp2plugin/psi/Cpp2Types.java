@@ -15,6 +15,7 @@ public interface Cpp2Types {
   IElementType ARG = new Cpp2ElementType("ARG");
   IElementType ASSIGN = new Cpp2ElementType("ASSIGN");
   IElementType BIT_AND_EXPR = new Cpp2ElementType("BIT_AND_EXPR");
+  IElementType BIT_NOT_EXPR = new Cpp2ElementType("BIT_NOT_EXPR");
   IElementType BIT_OR_EXPR = new Cpp2ElementType("BIT_OR_EXPR");
   IElementType BIT_XOR_EXPR = new Cpp2ElementType("BIT_XOR_EXPR");
   IElementType COMMENT = new Cpp2ElementType("COMMENT");
@@ -50,9 +51,9 @@ public interface Cpp2Types {
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
   IElementType NAMESPACE_ALIAS_DECL = new Cpp2ElementType("NAMESPACE_ALIAS_DECL");
   IElementType NAMESPACE_DECL = new Cpp2ElementType("NAMESPACE_DECL");
-  IElementType NEGATE_EXPR = new Cpp2ElementType("NEGATE_EXPR");
   IElementType NEQ_EXPR = new Cpp2ElementType("NEQ_EXPR");
   IElementType NEXT_STMT = new Cpp2ElementType("NEXT_STMT");
+  IElementType NOT_EXPR = new Cpp2ElementType("NOT_EXPR");
   IElementType OR_EXPR = new Cpp2ElementType("OR_EXPR");
   IElementType PARAM = new Cpp2ElementType("PARAM");
   IElementType PARAM_LIST = new Cpp2ElementType("PARAM_LIST");
@@ -153,6 +154,7 @@ public interface Cpp2Types {
   IElementType SLASHEQ = new Cpp2TokenType("/=");
   IElementType STRING_LITERAL = new Cpp2TokenType("STRING_LITERAL");
   IElementType THIS = new Cpp2TokenType("this");
+  IElementType TILDE = new Cpp2TokenType("~");
   IElementType TYPE_WORD = new Cpp2TokenType("type");
   IElementType USING = new Cpp2TokenType("using");
   IElementType VIRTUAL = new Cpp2TokenType("virtual");
@@ -182,6 +184,9 @@ public interface Cpp2Types {
       }
       else if (type == BIT_AND_EXPR) {
         return new Cpp2BitAndExprImpl(node);
+      }
+      else if (type == BIT_NOT_EXPR) {
+        return new Cpp2BitNotExprImpl(node);
       }
       else if (type == BIT_OR_EXPR) {
         return new Cpp2BitOrExprImpl(node);
@@ -285,14 +290,14 @@ public interface Cpp2Types {
       else if (type == NAMESPACE_DECL) {
         return new Cpp2NamespaceDeclImpl(node);
       }
-      else if (type == NEGATE_EXPR) {
-        return new Cpp2NegateExprImpl(node);
-      }
       else if (type == NEQ_EXPR) {
         return new Cpp2NeqExprImpl(node);
       }
       else if (type == NEXT_STMT) {
         return new Cpp2NextStmtImpl(node);
+      }
+      else if (type == NOT_EXPR) {
+        return new Cpp2NotExprImpl(node);
       }
       else if (type == OR_EXPR) {
         return new Cpp2OrExprImpl(node);

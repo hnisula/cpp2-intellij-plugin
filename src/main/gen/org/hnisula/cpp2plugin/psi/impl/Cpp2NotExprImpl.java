@@ -10,15 +10,15 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2NegateExprImpl extends Cpp2ExprImpl implements Cpp2NegateExpr {
+public class Cpp2NotExprImpl extends Cpp2ExprImpl implements Cpp2NotExpr {
 
-  public Cpp2NegateExprImpl(@NotNull ASTNode node) {
+  public Cpp2NotExprImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitNegateExpr(this);
+    visitor.visitNotExpr(this);
   }
 
   @Override

@@ -38,6 +38,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitBitNotExpr(@NotNull Cpp2BitNotExpr o) {
+    visitExpr(o);
+  }
+
   public void visitBitOrExpr(@NotNull Cpp2BitOrExpr o) {
     visitExpr(o);
   }
@@ -180,16 +184,16 @@ public class Cpp2Visitor extends PsiElementVisitor {
     // visitScope(o);
   }
 
-  public void visitNegateExpr(@NotNull Cpp2NegateExpr o) {
-    visitExpr(o);
-  }
-
   public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {
     visitExpr(o);
   }
 
   public void visitNextStmt(@NotNull Cpp2NextStmt o) {
     visitPsiElement(o);
+  }
+
+  public void visitNotExpr(@NotNull Cpp2NotExpr o) {
+    visitExpr(o);
   }
 
   public void visitOrExpr(@NotNull Cpp2OrExpr o) {
