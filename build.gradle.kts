@@ -14,12 +14,12 @@ repositories {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2024.1.4")
+    version.set("2024.2.3")
     //type.set("IC") // Target IDE Platform
 
     plugins.set(listOf(
-        "PsiViewer:241.14494.158-EAP-SNAPSHOT",
-        "com.intellij.plugins.resharperkeymap:241.14494.150",
+        "PsiViewer:242.4697",
+        "com.intellij.plugins.resharperkeymap:242.21829.3",
         "Intellij_GitHub_Dark_Theme:1.1.3"))
 }
 
@@ -34,7 +34,7 @@ tasks {
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = "17"
     }
-    
+
     buildSearchableOptions {
         enabled = false
     }
