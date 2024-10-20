@@ -37,14 +37,31 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
 
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
     create_token_set_(ADDRESS_EXPR, ADD_EXPR, AND_EXPR, BIT_AND_EXPR,
-      BIT_OR_EXPR, BIT_XOR_EXPR, DEREF_EXPR, DIV_EXPR,
-      EQ_EXPR, EXPR, FUNC_CALL, GTEQ_EXPR,
-      GT_EXPR, LAMBDA_DECL, LEFT_SHIFT_EXPR, LIST_EXPR,
-      LITERAL, LTEQ_EXPR, LT_EXPR, MEMBER_ACCESS_EXPR,
-      MOD_EXPR, MUL_EXPR, NEGATE_EXPR, NEQ_EXPR,
-      OR_EXPR, PAREN_EXPR, Q_IDENTIFIER, RIGHT_SHIFT_EXPR,
-      SUBSCRIPT_EXPR, SUB_EXPR),
+      BIT_OR_EXPR, BIT_XOR_EXPR, DECREMENT_EXPR, DEREF_EXPR,
+      DIV_EXPR, EQ_EXPR, EXPR, FUNC_CALL,
+      GTEQ_EXPR, GT_EXPR, INCREMENT_EXPR, LAMBDA_DECL,
+      LEFT_SHIFT_EXPR, LIST_EXPR, LITERAL, LTEQ_EXPR,
+      LT_EXPR, MEMBER_ACCESS_EXPR, MOD_EXPR, MUL_EXPR,
+      NEGATE_EXPR, NEQ_EXPR, OR_EXPR, PAREN_EXPR,
+      Q_IDENTIFIER, RIGHT_SHIFT_EXPR, SUBSCRIPT_EXPR, SUB_EXPR,
+      UNARY_MINUS_EXPR, UNARY_PLUS_EXPR),
   };
+
+  /* ********************************************************** */
+  // q_identifier "+=" expr ";"
+  public static boolean add_assign(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "add_assign")) return false;
+    if (!nextTokenIs(b, "<add assign>", COLONCOLON, IDENTIFIER_WORD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ADD_ASSIGN, "<add assign>");
+    r = q_identifier(b, l + 1);
+    r = r && consumeToken(b, PLUSEQ);
+    p = r; // pin = 2
+    r = r && report_error_(b, expr(b, l + 1, -1));
+    r = p && consumeToken(b, SEMICOLON) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
 
   /* ********************************************************** */
   // func_alias_decl | type_alias_decl | namespace_alias_decl
@@ -162,6 +179,22 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "constexpr_decl_2")) return false;
     type_specifier(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // q_identifier "/=" expr ";"
+  public static boolean div_assign(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "div_assign")) return false;
+    if (!nextTokenIs(b, "<div assign>", COLONCOLON, IDENTIFIER_WORD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, DIV_ASSIGN, "<div assign>");
+    r = q_identifier(b, l + 1);
+    r = r && consumeToken(b, SLASHEQ);
+    p = r; // pin = 2
+    r = r && report_error_(b, expr(b, l + 1, -1));
+    r = p && consumeToken(b, SEMICOLON) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
@@ -496,6 +529,22 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // q_identifier "*=" expr ";"
+  public static boolean mul_assign(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mul_assign")) return false;
+    if (!nextTokenIs(b, "<mul assign>", COLONCOLON, IDENTIFIER_WORD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, MUL_ASSIGN, "<mul assign>");
+    r = q_identifier(b, l + 1);
+    r = r && consumeToken(b, ASTERISKEQ);
+    p = r; // pin = 2
+    r = r && report_error_(b, expr(b, l + 1, -1));
+    r = p && consumeToken(b, SEMICOLON) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
   // IDENTIFIER_WORD ":" "namespace" "==" namespace_ref ";"
   public static boolean namespace_alias_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespace_alias_decl")) return false;
@@ -773,7 +822,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   //                         | value_decl_stmt
   //                         | constexpr_decl
   //                         | alias_decl
-  //                         | assign
+  //                         | assign | add_assign | sub_assign | mul_assign | div_assign
   //                         | using_namespace
   //                         | expr_stmt
   //                         | if_branch
@@ -791,6 +840,10 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!r) r = constexpr_decl(b, l + 1);
     if (!r) r = alias_decl(b, l + 1);
     if (!r) r = assign(b, l + 1);
+    if (!r) r = add_assign(b, l + 1);
+    if (!r) r = sub_assign(b, l + 1);
+    if (!r) r = mul_assign(b, l + 1);
+    if (!r) r = div_assign(b, l + 1);
     if (!r) r = using_namespace(b, l + 1);
     if (!r) r = expr_stmt(b, l + 1);
     if (!r) r = if_branch(b, l + 1);
@@ -826,6 +879,22 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
       if (!empty_element_parsed_guard_(b, "stmt_block_1", c)) break;
     }
     return true;
+  }
+
+  /* ********************************************************** */
+  // q_identifier "-=" expr ";"
+  public static boolean sub_assign(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "sub_assign")) return false;
+    if (!nextTokenIs(b, "<sub assign>", COLONCOLON, IDENTIFIER_WORD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, SUB_ASSIGN, "<sub assign>");
+    r = q_identifier(b, l + 1);
+    r = r && consumeToken(b, MINUSEQ);
+    p = r; // pin = 2
+    r = r && report_error_(b, expr(b, l + 1, -1));
+    r = p && consumeToken(b, SEMICOLON) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
@@ -1306,17 +1375,23 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   // 21: POSTFIX(deref_expr)
   // 22: PREFIX(negate_expr)
   // 23: POSTFIX(address_expr)
-  // 24: ATOM(q_identifier)
-  // 25: ATOM(literal)
-  // 26: ATOM(lambda_decl)
-  // 27: ATOM(paren_expr)
-  // 28: ATOM(list_expr)
+  // 24: PREFIX(unary_minus_expr)
+  // 25: PREFIX(unary_plus_expr)
+  // 26: ATOM(q_identifier)
+  // 27: ATOM(literal)
+  // 28: POSTFIX(increment_expr)
+  // 29: POSTFIX(decrement_expr)
+  // 30: ATOM(lambda_decl)
+  // 31: ATOM(paren_expr)
+  // 32: ATOM(list_expr)
   public static boolean expr(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expr")) return false;
     addVariant(b, "<expr>");
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<expr>");
-    r = negate_expr(b, l + 1);
+    r = unary_plus_expr(b, l + 1);
+    if (!r) r = unary_minus_expr(b, l + 1);
+    if (!r) r = negate_expr(b, l + 1);
     if (!r) r = q_identifier(b, l + 1);
     if (!r) r = literal(b, l + 1);
     if (!r) r = lambda_decl(b, l + 1);
@@ -1421,12 +1496,44 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
         r = true;
         exit_section_(b, l, m, DEREF_EXPR, r, true, null);
       }
+      else if (g < 28 && consumeTokenSmart(b, PLUSPLUS)) {
+        r = true;
+        exit_section_(b, l, m, INCREMENT_EXPR, r, true, null);
+      }
+      else if (g < 29 && consumeTokenSmart(b, MINUSMINUS)) {
+        r = true;
+        exit_section_(b, l, m, DECREMENT_EXPR, r, true, null);
+      }
       else {
         exit_section_(b, l, m, null, false, false, null);
         break;
       }
     }
     return r;
+  }
+
+  public static boolean unary_plus_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "unary_plus_expr")) return false;
+    if (!nextTokenIsSmart(b, PLUS)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeTokenSmart(b, PLUS);
+    p = r;
+    r = p && expr(b, l, 25);
+    exit_section_(b, l, m, UNARY_PLUS_EXPR, r, p, null);
+    return r || p;
+  }
+
+  public static boolean unary_minus_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "unary_minus_expr")) return false;
+    if (!nextTokenIsSmart(b, MINUS)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeTokenSmart(b, MINUS);
+    p = r;
+    r = p && expr(b, l, 24);
+    exit_section_(b, l, m, UNARY_MINUS_EXPR, r, p, null);
+    return r || p;
   }
 
   // <<mulDerefDisambiguator>> "*"

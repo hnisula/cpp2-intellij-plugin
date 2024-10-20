@@ -10,6 +10,10 @@ import org.hnisula.cpp2plugin.Cpp2Scope;
 
 public class Cpp2Visitor extends PsiElementVisitor {
 
+  public void visitAddAssign(@NotNull Cpp2AddAssign o) {
+    visitPsiElement(o);
+  }
+
   public void visitAddExpr(@NotNull Cpp2AddExpr o) {
     visitExpr(o);
   }
@@ -50,8 +54,16 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDecrementExpr(@NotNull Cpp2DecrementExpr o) {
+    visitExpr(o);
+  }
+
   public void visitDerefExpr(@NotNull Cpp2DerefExpr o) {
     visitExpr(o);
+  }
+
+  public void visitDivAssign(@NotNull Cpp2DivAssign o) {
+    visitPsiElement(o);
   }
 
   public void visitDivExpr(@NotNull Cpp2DivExpr o) {
@@ -107,6 +119,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitIncrementExpr(@NotNull Cpp2IncrementExpr o) {
+    visitExpr(o);
+  }
+
   public void visitLambdaDecl(@NotNull Cpp2LambdaDecl o) {
     visitExpr(o);
   }
@@ -145,6 +161,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
 
   public void visitModExpr(@NotNull Cpp2ModExpr o) {
     visitExpr(o);
+  }
+
+  public void visitMulAssign(@NotNull Cpp2MulAssign o) {
+    visitPsiElement(o);
   }
 
   public void visitMulExpr(@NotNull Cpp2MulExpr o) {
@@ -216,6 +236,10 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitSubAssign(@NotNull Cpp2SubAssign o) {
+    visitPsiElement(o);
+  }
+
   public void visitSubExpr(@NotNull Cpp2SubExpr o) {
     visitExpr(o);
   }
@@ -247,6 +271,14 @@ public class Cpp2Visitor extends PsiElementVisitor {
 
   public void visitTypeSpecifier(@NotNull Cpp2TypeSpecifier o) {
     visitPsiElement(o);
+  }
+
+  public void visitUnaryMinusExpr(@NotNull Cpp2UnaryMinusExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitUnaryPlusExpr(@NotNull Cpp2UnaryPlusExpr o) {
+    visitExpr(o);
   }
 
   public void visitUsingNamespace(@NotNull Cpp2UsingNamespace o) {

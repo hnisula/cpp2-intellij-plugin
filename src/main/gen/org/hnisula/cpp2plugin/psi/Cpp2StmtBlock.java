@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2StmtBlock extends PsiElement {
 
   @NotNull
+  List<Cpp2AddAssign> getAddAssignList();
+
+  @NotNull
   List<Cpp2Assign> getAssignList();
 
   @NotNull
@@ -15,6 +18,9 @@ public interface Cpp2StmtBlock extends PsiElement {
 
   @NotNull
   List<Cpp2ConstexprDecl> getConstexprDeclList();
+
+  @NotNull
+  List<Cpp2DivAssign> getDivAssignList();
 
   @NotNull
   List<Cpp2DoWhileLoop> getDoWhileLoopList();
@@ -35,6 +41,9 @@ public interface Cpp2StmtBlock extends PsiElement {
   List<Cpp2IfBranch> getIfBranchList();
 
   @NotNull
+  List<Cpp2MulAssign> getMulAssignList();
+
+  @NotNull
   List<Cpp2NamespaceAliasDecl> getNamespaceAliasDeclList();
 
   @NotNull
@@ -42,6 +51,9 @@ public interface Cpp2StmtBlock extends PsiElement {
 
   @NotNull
   List<Cpp2StmtBlock> getStmtBlockList();
+
+  @NotNull
+  List<Cpp2SubAssign> getSubAssignList();
 
   @NotNull
   List<Cpp2TypeAliasDecl> getTypeAliasDeclList();

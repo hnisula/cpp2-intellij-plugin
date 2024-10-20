@@ -64,6 +64,10 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       ">="                  { return Cpp2Types.GTEQ; }
       "<<"                  { return Cpp2Types.LTLT; }
       ">>"                  { return Cpp2Types.GTGT; }
+      "+="                  { return Cpp2Types.PLUSEQ; }
+      "-="                  { return Cpp2Types.MINUSEQ; }
+      "*="                  { return Cpp2Types.ASTERISKEQ; }
+      "/="                  { return Cpp2Types.SLASHEQ; }
       
       ":"                   { return Cpp2Types.COLON; }
       ";"                   { return Cpp2Types.SEMICOLON; }
