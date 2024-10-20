@@ -216,7 +216,7 @@ type_decl           ::= identifier ":" template_decl? METAFUNCTION? "type" "=" "
     methods=[identifier=""]
 }
 member_decl         ::= (member_access_level? (type_decl | func_decl | (value_decl ";") | comment))
-member_access_level       ::= ("public" | "protected" | "private")
+member_access_level ::= ("public" | "protected" | "private")
 
 // Expressions and operators
 
@@ -239,8 +239,8 @@ expr ::=
     | paren_expr
     | list_expr
 
-paren_expr              ::= "(" expr? ")"
-list_expr               ::= "(" (expr ("," expr)* ","?)? ")"
+paren_expr          ::= "(" expr? ")"
+list_expr           ::= "(" (expr ("," expr)* ","?)? ")"
 
 or_expr             ::= expr "||"   expr    {rightAssociative=false}
 and_expr            ::= expr "&&"   expr    {rightAssociative=false}
