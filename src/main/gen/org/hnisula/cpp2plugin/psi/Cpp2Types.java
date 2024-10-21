@@ -18,6 +18,7 @@ public interface Cpp2Types {
   IElementType BIT_NOT_EXPR = new Cpp2ElementType("BIT_NOT_EXPR");
   IElementType BIT_OR_EXPR = new Cpp2ElementType("BIT_OR_EXPR");
   IElementType BIT_XOR_EXPR = new Cpp2ElementType("BIT_XOR_EXPR");
+  IElementType CHAIN_COMPARE_EXPR = new Cpp2ElementType("CHAIN_COMPARE_EXPR");
   IElementType COMMENT = new Cpp2ElementType("COMMENT");
   IElementType CONSTEXPR_DECL = new Cpp2ElementType("CONSTEXPR_DECL");
   IElementType DECREMENT_EXPR = new Cpp2ElementType("DECREMENT_EXPR");
@@ -152,6 +153,7 @@ public interface Cpp2Types {
   IElementType SEMICOLON = new Cpp2TokenType(";");
   IElementType SLASH = new Cpp2TokenType("/");
   IElementType SLASHEQ = new Cpp2TokenType("/=");
+  IElementType SPACESHIP = new Cpp2TokenType("<=>");
   IElementType STRING_LITERAL = new Cpp2TokenType("STRING_LITERAL");
   IElementType THIS = new Cpp2TokenType("this");
   IElementType TILDE = new Cpp2TokenType("~");
@@ -193,6 +195,9 @@ public interface Cpp2Types {
       }
       else if (type == BIT_XOR_EXPR) {
         return new Cpp2BitXorExprImpl(node);
+      }
+      else if (type == CHAIN_COMPARE_EXPR) {
+        return new Cpp2ChainCompareExprImpl(node);
       }
       else if (type == COMMENT) {
         return new Cpp2CommentImpl(node);

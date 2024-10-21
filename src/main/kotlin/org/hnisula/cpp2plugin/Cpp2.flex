@@ -51,6 +51,8 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       {LINE_COMMENT}        { return Cpp2Types.LINE_COMMENT; }
       {BLOCK_COMMENT}       { return Cpp2Types.BLOCK_COMMENT; }
       
+      "<=>"                 { return Cpp2Types.SPACESHIP; }
+      
       "->"                  { return Cpp2Types.ARROW; }
       "::"                  { return Cpp2Types.COLONCOLON; }
       "..."                 { return Cpp2Types.DOTDOTDOT; }

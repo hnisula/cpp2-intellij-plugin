@@ -37,14 +37,14 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
 
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
     create_token_set_(ADDRESS_EXPR, ADD_EXPR, AND_EXPR, BIT_AND_EXPR,
-      BIT_NOT_EXPR, BIT_OR_EXPR, BIT_XOR_EXPR, DECREMENT_EXPR,
-      DEREF_EXPR, DIV_EXPR, EQ_EXPR, EXPR,
-      FUNC_CALL, GTEQ_EXPR, GT_EXPR, INCREMENT_EXPR,
-      LAMBDA_DECL, LEFT_SHIFT_EXPR, LIST_EXPR, LITERAL,
-      LTEQ_EXPR, LT_EXPR, MEMBER_ACCESS_EXPR, MOD_EXPR,
-      MUL_EXPR, NEQ_EXPR, NOT_EXPR, OR_EXPR,
-      PAREN_EXPR, Q_IDENTIFIER, RIGHT_SHIFT_EXPR, SUBSCRIPT_EXPR,
-      SUB_EXPR, UNARY_MINUS_EXPR, UNARY_PLUS_EXPR),
+      BIT_NOT_EXPR, BIT_OR_EXPR, BIT_XOR_EXPR, CHAIN_COMPARE_EXPR,
+      DECREMENT_EXPR, DEREF_EXPR, DIV_EXPR, EQ_EXPR,
+      EXPR, FUNC_CALL, GTEQ_EXPR, GT_EXPR,
+      INCREMENT_EXPR, LAMBDA_DECL, LEFT_SHIFT_EXPR, LIST_EXPR,
+      LITERAL, LTEQ_EXPR, LT_EXPR, MEMBER_ACCESS_EXPR,
+      MOD_EXPR, MUL_EXPR, NEQ_EXPR, NOT_EXPR,
+      OR_EXPR, PAREN_EXPR, Q_IDENTIFIER, RIGHT_SHIFT_EXPR,
+      SUBSCRIPT_EXPR, SUB_EXPR, UNARY_MINUS_EXPR, UNARY_PLUS_EXPR),
   };
 
   /* ********************************************************** */
@@ -115,9 +115,23 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     boolean r;
     r = q_identifier(b, l + 1);
     if (!r) r = consumeToken(b, WILDCARD);
-    if (!r) r = expr(b, l + 1, 19);
-    if (!r) r = expr(b, l + 1, 20);
-    if (!r) r = expr(b, l + 1, 18);
+    if (!r) r = expr(b, l + 1, 14);
+    if (!r) r = expr(b, l + 1, 15);
+    if (!r) r = expr(b, l + 1, 13);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // "==" | "!=" | "<=" | ">=" | "<" | ">"
+  static boolean chain_op(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "chain_op")) return false;
+    boolean r;
+    r = consumeToken(b, EQEQ);
+    if (!r) r = consumeToken(b, NEQ);
+    if (!r) r = consumeToken(b, LTEQ);
+    if (!r) r = consumeToken(b, GTEQ);
+    if (!r) r = consumeToken(b, LT);
+    if (!r) r = consumeToken(b, GT);
     return r;
   }
 
@@ -220,6 +234,19 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "do_while_loop_2")) return false;
     next_stmt(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // expr "=="   expr
+  public static boolean eq_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "eq_expr")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, EQ_EXPR, "<eq expr>");
+    r = expr(b, l + 1, -1);
+    r = r && consumeToken(b, EQEQ);
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */
@@ -403,6 +430,32 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // expr ">"    expr
+  public static boolean gt_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "gt_expr")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, GT_EXPR, "<gt expr>");
+    r = expr(b, l + 1, -1);
+    r = r && consumeToken(b, GT);
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr ">="   expr
+  public static boolean gteq_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "gteq_expr")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, GTEQ_EXPR, "<gteq expr>");
+    r = expr(b, l + 1, -1);
+    r = r && consumeToken(b, GTEQ);
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // IDENTIFIER_WORD
   public static boolean identifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "identifier")) return false;
@@ -469,6 +522,32 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     r = consumeToken(b, ELSE);
     r = r && stmt_block(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr "<"    expr
+  public static boolean lt_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "lt_expr")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, LT_EXPR, "<lt expr>");
+    r = expr(b, l + 1, -1);
+    r = r && consumeToken(b, LT);
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr "<="   expr
+  public static boolean lteq_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "lteq_expr")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, LTEQ_EXPR, "<lteq expr>");
+    r = expr(b, l + 1, -1);
+    r = r && consumeToken(b, LTEQ);
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -569,6 +648,19 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     r = r && root_stmt_block(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // expr "!="   expr
+  public static boolean neq_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "neq_expr")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, NEQ_EXPR, "<neq expr>");
+    r = expr(b, l + 1, -1);
+    r = r && consumeToken(b, NEQ);
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */
@@ -1356,35 +1448,30 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   // 2: BINARY(bit_or_expr)
   // 3: BINARY(bit_xor_expr)
   // 4: BINARY(bit_and_expr)
-  // 5: BINARY(eq_expr)
-  // 6: BINARY(neq_expr)
-  // 7: BINARY(lt_expr)
-  // 8: BINARY(gt_expr)
-  // 9: BINARY(lteq_expr)
-  // 10: BINARY(gteq_expr)
-  // 11: BINARY(left_shift_expr)
-  // 12: BINARY(right_shift_expr)
-  // 13: BINARY(add_expr)
-  // 14: BINARY(sub_expr)
-  // 15: BINARY(mul_expr)
-  // 16: BINARY(div_expr)
-  // 17: BINARY(mod_expr)
-  // 18: POSTFIX(func_call)
-  // 19: POSTFIX(member_access_expr)
-  // 20: POSTFIX(subscript_expr)
-  // 21: POSTFIX(deref_expr)
-  // 22: PREFIX(not_expr)
-  // 23: POSTFIX(bit_not_expr)
-  // 24: POSTFIX(address_expr)
-  // 25: PREFIX(unary_minus_expr)
-  // 26: PREFIX(unary_plus_expr)
-  // 27: ATOM(q_identifier)
-  // 28: ATOM(literal)
-  // 29: POSTFIX(increment_expr)
-  // 30: POSTFIX(decrement_expr)
-  // 31: ATOM(lambda_decl)
-  // 32: ATOM(paren_expr)
-  // 33: ATOM(list_expr)
+  // 5: N_ARY(chain_compare_expr)
+  // 6: BINARY(left_shift_expr)
+  // 7: BINARY(right_shift_expr)
+  // 8: BINARY(add_expr)
+  // 9: BINARY(sub_expr)
+  // 10: BINARY(mul_expr)
+  // 11: BINARY(div_expr)
+  // 12: BINARY(mod_expr)
+  // 13: POSTFIX(func_call)
+  // 14: POSTFIX(member_access_expr)
+  // 15: POSTFIX(subscript_expr)
+  // 16: POSTFIX(deref_expr)
+  // 17: PREFIX(not_expr)
+  // 18: POSTFIX(bit_not_expr)
+  // 19: POSTFIX(address_expr)
+  // 20: PREFIX(unary_minus_expr)
+  // 21: PREFIX(unary_plus_expr)
+  // 22: ATOM(q_identifier)
+  // 23: ATOM(literal)
+  // 24: POSTFIX(increment_expr)
+  // 25: POSTFIX(decrement_expr)
+  // 26: ATOM(lambda_decl)
+  // 27: ATOM(paren_expr)
+  // 28: ATOM(list_expr)
   public static boolean expr(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expr")) return false;
     addVariant(b, "<expr>");
@@ -1429,87 +1516,73 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
         r = expr(b, l, 4);
         exit_section_(b, l, m, BIT_AND_EXPR, r, true, null);
       }
-      else if (g < 5 && consumeTokenSmart(b, EQEQ)) {
-        r = expr(b, l, 5);
-        exit_section_(b, l, m, EQ_EXPR, r, true, null);
+      else if (g < 5 && chain_op(b, l + 1)) {
+        int c = current_position_(b);
+        while (true) {
+          r = report_error_(b, expr(b, l, 5));
+          if (!chain_op(b, l + 1)) break;
+          if (!empty_element_parsed_guard_(b, "chain_compare_expr", c)) break;
+          c = current_position_(b);
+        }
+        exit_section_(b, l, m, CHAIN_COMPARE_EXPR, r, true, null);
       }
-      else if (g < 6 && consumeTokenSmart(b, NEQ)) {
+      else if (g < 6 && consumeTokenSmart(b, LTLT)) {
         r = expr(b, l, 6);
-        exit_section_(b, l, m, NEQ_EXPR, r, true, null);
-      }
-      else if (g < 7 && consumeTokenSmart(b, LT)) {
-        r = expr(b, l, 7);
-        exit_section_(b, l, m, LT_EXPR, r, true, null);
-      }
-      else if (g < 8 && consumeTokenSmart(b, GT)) {
-        r = expr(b, l, 8);
-        exit_section_(b, l, m, GT_EXPR, r, true, null);
-      }
-      else if (g < 9 && consumeTokenSmart(b, LTEQ)) {
-        r = expr(b, l, 9);
-        exit_section_(b, l, m, LTEQ_EXPR, r, true, null);
-      }
-      else if (g < 10 && consumeTokenSmart(b, GTEQ)) {
-        r = expr(b, l, 10);
-        exit_section_(b, l, m, GTEQ_EXPR, r, true, null);
-      }
-      else if (g < 11 && consumeTokenSmart(b, LTLT)) {
-        r = expr(b, l, 11);
         exit_section_(b, l, m, LEFT_SHIFT_EXPR, r, true, null);
       }
-      else if (g < 12 && consumeTokenSmart(b, GTGT)) {
-        r = expr(b, l, 12);
+      else if (g < 7 && consumeTokenSmart(b, GTGT)) {
+        r = expr(b, l, 7);
         exit_section_(b, l, m, RIGHT_SHIFT_EXPR, r, true, null);
       }
-      else if (g < 13 && consumeTokenSmart(b, PLUS)) {
-        r = expr(b, l, 13);
+      else if (g < 8 && consumeTokenSmart(b, PLUS)) {
+        r = expr(b, l, 8);
         exit_section_(b, l, m, ADD_EXPR, r, true, null);
       }
-      else if (g < 14 && consumeTokenSmart(b, MINUS)) {
-        r = expr(b, l, 14);
+      else if (g < 9 && consumeTokenSmart(b, MINUS)) {
+        r = expr(b, l, 9);
         exit_section_(b, l, m, SUB_EXPR, r, true, null);
       }
-      else if (g < 15 && mul_expr_0(b, l + 1)) {
-        r = expr(b, l, 15);
+      else if (g < 10 && mul_expr_0(b, l + 1)) {
+        r = expr(b, l, 10);
         exit_section_(b, l, m, MUL_EXPR, r, true, null);
       }
-      else if (g < 16 && consumeTokenSmart(b, SLASH)) {
-        r = expr(b, l, 16);
+      else if (g < 11 && consumeTokenSmart(b, SLASH)) {
+        r = expr(b, l, 11);
         exit_section_(b, l, m, DIV_EXPR, r, true, null);
       }
-      else if (g < 17 && consumeTokenSmart(b, MODULO)) {
-        r = expr(b, l, 17);
+      else if (g < 12 && consumeTokenSmart(b, MODULO)) {
+        r = expr(b, l, 12);
         exit_section_(b, l, m, MOD_EXPR, r, true, null);
       }
-      else if (g < 18 && func_call_0(b, l + 1)) {
+      else if (g < 13 && func_call_0(b, l + 1)) {
         r = true;
         exit_section_(b, l, m, FUNC_CALL, r, true, null);
       }
-      else if (g < 19 && member_access_expr_0(b, l + 1)) {
+      else if (g < 14 && member_access_expr_0(b, l + 1)) {
         r = true;
         exit_section_(b, l, m, MEMBER_ACCESS_EXPR, r, true, null);
       }
-      else if (g < 20 && subscript_expr_0(b, l + 1)) {
+      else if (g < 15 && subscript_expr_0(b, l + 1)) {
         r = true;
         exit_section_(b, l, m, SUBSCRIPT_EXPR, r, true, null);
       }
-      else if (g < 21 && consumeTokenSmart(b, ASTERISK)) {
+      else if (g < 16 && consumeTokenSmart(b, ASTERISK)) {
         r = true;
         exit_section_(b, l, m, DEREF_EXPR, r, true, null);
       }
-      else if (g < 23 && consumeTokenSmart(b, TILDE)) {
+      else if (g < 18 && consumeTokenSmart(b, TILDE)) {
         r = true;
         exit_section_(b, l, m, BIT_NOT_EXPR, r, true, null);
       }
-      else if (g < 24 && consumeTokenSmart(b, AND)) {
+      else if (g < 19 && consumeTokenSmart(b, AND)) {
         r = true;
         exit_section_(b, l, m, ADDRESS_EXPR, r, true, null);
       }
-      else if (g < 29 && consumeTokenSmart(b, PLUSPLUS)) {
+      else if (g < 24 && consumeTokenSmart(b, PLUSPLUS)) {
         r = true;
         exit_section_(b, l, m, INCREMENT_EXPR, r, true, null);
       }
-      else if (g < 30 && consumeTokenSmart(b, MINUSMINUS)) {
+      else if (g < 25 && consumeTokenSmart(b, MINUSMINUS)) {
         r = true;
         exit_section_(b, l, m, DECREMENT_EXPR, r, true, null);
       }
@@ -1539,7 +1612,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokenSmart(b, PLUS);
     p = r;
-    r = p && expr(b, l, 26);
+    r = p && expr(b, l, 21);
     exit_section_(b, l, m, UNARY_PLUS_EXPR, r, p, null);
     return r || p;
   }
@@ -1551,7 +1624,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokenSmart(b, MINUS);
     p = r;
-    r = p && expr(b, l, 25);
+    r = p && expr(b, l, 20);
     exit_section_(b, l, m, UNARY_MINUS_EXPR, r, p, null);
     return r || p;
   }
@@ -1643,7 +1716,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "member_access_expr_0_1")) return false;
     boolean r;
     r = identifier(b, l + 1);
-    if (!r) r = expr(b, l + 1, 17);
+    if (!r) r = expr(b, l + 1, 12);
     return r;
   }
 
@@ -1707,7 +1780,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokenSmart(b, EXCLAMATION);
     p = r;
-    r = p && expr(b, l, 22);
+    r = p && expr(b, l, 17);
     exit_section_(b, l, m, NOT_EXPR, r, p, null);
     return r || p;
   }

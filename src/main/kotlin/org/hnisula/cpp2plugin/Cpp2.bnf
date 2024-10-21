@@ -19,6 +19,8 @@
     extends(".*expr")=expr
     
     tokens=[
+        SPACESHIP           = "<=>"
+    
         ARROW               = "->"
         COLONCOLON          = "::"
         DOTDOTDOT           = "..."
@@ -233,8 +235,9 @@ expr ::=
     | bit_or_expr
     | bit_xor_expr
     | bit_and_expr
-    | eq_expr | neq_expr
-    | lt_expr | gt_expr | lteq_expr | gteq_expr
+    | chain_compare_expr // Correct precedence?
+//    | eq_expr | neq_expr
+//    | lt_expr | gt_expr | lteq_expr | gteq_expr
     | left_shift_expr | right_shift_expr
     | add_expr | sub_expr
     | mul_expr | div_expr | mod_expr
@@ -265,6 +268,9 @@ sub_expr            ::= expr "-"    expr    {rightAssociative=false}
 mul_expr            ::= expr <<binaryOpTermLookhead>> "*" expr {rightAssociative=false}
 div_expr            ::= expr "/"    expr    {rightAssociative=false}
 mod_expr            ::= expr "%"    expr    {rightAssociative=false}
+
+chain_compare_expr  ::= expr (chain_op expr)+ {rightAssociative=true}
+private chain_op    ::= "==" | "!=" | "<=" | ">=" | "<" | ">"
 
 unary_minus_expr    ::= "-" expr
 unary_plus_expr     ::= "+" expr

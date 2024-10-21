@@ -110,16 +110,16 @@ class Cpp2Lexer implements FlexLexer {
     "\1\47\1\50\1\51\1\0\1\51\2\16\2\0\1\52"+
     "\1\53\1\54\1\55\1\56\1\57\1\60\2\24\1\61"+
     "\4\24\1\62\1\63\16\24\1\64\1\36\1\40\1\65"+
-    "\1\0\5\16\1\0\1\51\6\24\1\66\4\24\1\67"+
-    "\13\24\1\70\3\24\1\71\1\72\3\24\1\73\1\24"+
-    "\1\74\5\24\1\75\1\76\1\77\3\24\1\100\1\101"+
-    "\1\24\1\102\1\24\1\103\6\24\1\104\1\24\1\105"+
-    "\6\24\1\106\1\107\2\24\1\110\2\24\1\111\1\24"+
-    "\1\112\1\113\2\24\1\114\2\24\1\115\1\116\1\24"+
-    "\1\117";
+    "\1\0\5\16\1\0\1\51\1\66\6\24\1\67\4\24"+
+    "\1\70\13\24\1\71\3\24\1\72\1\73\3\24\1\74"+
+    "\1\24\1\75\5\24\1\76\1\77\1\100\3\24\1\101"+
+    "\1\102\1\24\1\103\1\24\1\104\6\24\1\105\1\24"+
+    "\1\106\6\24\1\107\1\110\2\24\1\111\2\24\1\112"+
+    "\1\24\1\113\1\114\2\24\1\115\2\24\1\116\1\117"+
+    "\1\24\1\120";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[203];
+    int [] result = new int[204];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -153,26 +153,26 @@ class Cpp2Lexer implements FlexLexer {
     "\0\102\0\102\0\u0108\0\102\0\u098a\0\102\0\u018c\0\102"+
     "\0\u09cc\0\102\0\102\0\102\0\102\0\102\0\102\0\u0a0e"+
     "\0\u0a50\0\u0a92\0\102\0\u0ad4\0\u0b16\0\102\0\u0b58\0\u0b9a"+
-    "\0\u0bdc\0\u0c1e\0\102\0\102\0\102\0\102\0\102\0\102"+
-    "\0\u0c60\0\u0ca2\0\u0ce4\0\u04e6\0\u0d26\0\u0d68\0\u0daa\0\u0dec"+
-    "\0\u04e6\0\u0e2e\0\u0e70\0\u0eb2\0\u0ef4\0\u0f36\0\u0f78\0\u0fba"+
-    "\0\u0ffc\0\u103e\0\u1080\0\u10c2\0\u1104\0\u1146\0\u1188\0\u11ca"+
-    "\0\102\0\u0108\0\u018c\0\102\0\u120c\0\u124e\0\u1290\0\102"+
-    "\0\u12d2\0\u1314\0\u1356\0\u1398\0\u13da\0\u141c\0\u145e\0\u14a0"+
-    "\0\u14e2\0\u1524\0\u1566\0\u15a8\0\u15ea\0\u162c\0\u166e\0\u04e6"+
-    "\0\u16b0\0\u16f2\0\u1734\0\u1776\0\u17b8\0\u17fa\0\u183c\0\u187e"+
-    "\0\u18c0\0\u1902\0\u1944\0\u0a50\0\u1986\0\u19c8\0\u1a0a\0\u04e6"+
-    "\0\u04e6\0\u1a4c\0\u1a8e\0\u1ad0\0\u04e6\0\u1b12\0\u04e6\0\u1b54"+
-    "\0\u1b96\0\u1bd8\0\u1c1a\0\u1c5c\0\u04e6\0\u04e6\0\u04e6\0\u1c9e"+
-    "\0\u1ce0\0\u1d22\0\u04e6\0\u04e6\0\u1d64\0\u04e6\0\u1da6\0\u04e6"+
-    "\0\u1de8\0\u1e2a\0\u1e6c\0\u1eae\0\u1ef0\0\u1f32\0\u04e6\0\u1f74"+
-    "\0\u04e6\0\u1fb6\0\u1ff8\0\u203a\0\u207c\0\u20be\0\u2100\0\u04e6"+
-    "\0\u04e6\0\u2142\0\u2184\0\u21c6\0\u2208\0\u224a\0\u04e6\0\u228c"+
-    "\0\u04e6\0\u04e6\0\u22ce\0\u2310\0\u04e6\0\u2352\0\u2394\0\u04e6"+
-    "\0\u04e6\0\u23d6\0\u04e6";
+    "\0\u0bdc\0\u0c1e\0\102\0\102\0\u0c60\0\102\0\102\0\102"+
+    "\0\u0ca2\0\u0ce4\0\u0d26\0\u04e6\0\u0d68\0\u0daa\0\u0dec\0\u0e2e"+
+    "\0\u04e6\0\u0e70\0\u0eb2\0\u0ef4\0\u0f36\0\u0f78\0\u0fba\0\u0ffc"+
+    "\0\u103e\0\u1080\0\u10c2\0\u1104\0\u1146\0\u1188\0\u11ca\0\u120c"+
+    "\0\102\0\u0108\0\u018c\0\102\0\u124e\0\u1290\0\u12d2\0\102"+
+    "\0\u1314\0\u1356\0\u1398\0\u13da\0\102\0\u141c\0\u145e\0\u14a0"+
+    "\0\u14e2\0\u1524\0\u1566\0\u15a8\0\u15ea\0\u162c\0\u166e\0\u16b0"+
+    "\0\u04e6\0\u16f2\0\u1734\0\u1776\0\u17b8\0\u17fa\0\u183c\0\u187e"+
+    "\0\u18c0\0\u1902\0\u1944\0\u1986\0\u0a50\0\u19c8\0\u1a0a\0\u1a4c"+
+    "\0\u04e6\0\u04e6\0\u1a8e\0\u1ad0\0\u1b12\0\u04e6\0\u1b54\0\u04e6"+
+    "\0\u1b96\0\u1bd8\0\u1c1a\0\u1c5c\0\u1c9e\0\u04e6\0\u04e6\0\u04e6"+
+    "\0\u1ce0\0\u1d22\0\u1d64\0\u04e6\0\u04e6\0\u1da6\0\u04e6\0\u1de8"+
+    "\0\u04e6\0\u1e2a\0\u1e6c\0\u1eae\0\u1ef0\0\u1f32\0\u1f74\0\u04e6"+
+    "\0\u1fb6\0\u04e6\0\u1ff8\0\u203a\0\u207c\0\u20be\0\u2100\0\u2142"+
+    "\0\u04e6\0\u04e6\0\u2184\0\u21c6\0\u2208\0\u224a\0\u228c\0\u04e6"+
+    "\0\u22ce\0\u04e6\0\u04e6\0\u2310\0\u2352\0\u04e6\0\u2394\0\u23d6"+
+    "\0\u04e6\0\u04e6\0\u2418\0\u04e6";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[203];
+    int [] result = new int[204];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -242,102 +242,102 @@ class Cpp2Lexer implements FlexLexer {
     "\10\0\2\156\116\0\1\157\1\160\20\0\1\157\7\0"+
     "\1\160\47\0\1\161\21\0\1\161\30\0\1\162\10\0"+
     "\4\162\6\0\3\162\11\0\6\162\43\0\1\163\2\0"+
-    "\4\164\76\0\4\121\6\0\7\121\4\0\30\121\25\0"+
-    "\4\31\6\0\7\31\4\0\5\31\1\165\22\31\25\0"+
-    "\4\31\6\0\7\31\4\0\15\31\1\166\1\31\1\167"+
-    "\10\31\25\0\4\31\6\0\7\31\4\0\21\31\1\170"+
-    "\6\31\25\0\4\31\6\0\7\31\4\0\13\31\1\171"+
-    "\14\31\25\0\4\31\6\0\7\31\4\0\15\31\1\172"+
-    "\12\31\25\0\4\31\6\0\7\31\4\0\20\31\1\173"+
-    "\7\31\25\0\4\31\6\0\7\31\4\0\16\31\1\174"+
-    "\11\31\25\0\4\31\6\0\7\31\4\0\24\31\1\175"+
-    "\3\31\25\0\4\31\6\0\7\31\4\0\14\31\1\176"+
-    "\13\31\25\0\4\31\6\0\7\31\4\0\26\31\1\177"+
-    "\1\31\25\0\4\31\6\0\7\31\4\0\22\31\1\200"+
-    "\5\31\25\0\4\31\6\0\7\31\4\0\5\31\1\201"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\11\31\1\202"+
-    "\4\31\1\203\11\31\25\0\4\31\6\0\7\31\4\0"+
-    "\2\31\1\204\25\31\25\0\4\31\6\0\7\31\4\0"+
-    "\22\31\1\205\5\31\25\0\4\31\6\0\7\31\4\0"+
-    "\11\31\1\206\16\31\25\0\4\31\6\0\7\31\4\0"+
-    "\23\31\1\207\4\31\25\0\4\31\6\0\7\31\4\0"+
-    "\17\31\1\210\10\31\25\0\4\31\6\0\7\31\4\0"+
-    "\11\31\1\211\16\31\25\0\4\31\6\0\7\31\4\0"+
-    "\20\31\1\212\7\31\25\0\4\31\6\0\7\31\4\0"+
-    "\11\31\1\213\16\31\4\0\2\101\2\0\7\101\1\155"+
-    "\4\101\1\214\61\101\10\0\1\156\10\0\2\156\14\0"+
-    "\1\107\1\110\20\0\1\107\7\0\1\110\50\0\1\160"+
-    "\30\0\1\160\47\0\1\160\21\0\1\160\30\0\1\162"+
-    "\10\0\4\162\6\0\3\162\1\0\1\107\1\110\6\0"+
-    "\6\162\4\0\1\107\7\0\1\110\31\0\4\164\76\0"+
-    "\4\164\10\0\1\106\1\0\1\106\14\0\1\106\4\0"+
-    "\1\106\41\0\4\31\6\0\7\31\4\0\1\31\1\215"+
-    "\26\31\25\0\4\31\6\0\7\31\4\0\21\31\1\216"+
-    "\1\217\5\31\25\0\4\31\6\0\7\31\4\0\27\31"+
-    "\1\220\25\0\4\31\6\0\7\31\4\0\5\31\1\221"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\21\31\1\207"+
-    "\6\31\25\0\4\31\6\0\7\31\4\0\1\31\1\222"+
-    "\26\31\25\0\4\31\6\0\7\31\4\0\25\31\1\223"+
-    "\2\31\25\0\4\31\6\0\7\31\4\0\23\31\1\224"+
-    "\4\31\25\0\4\31\6\0\7\31\4\0\5\31\1\225"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\5\31\1\226"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\22\31\1\227"+
-    "\5\31\25\0\4\31\6\0\7\31\4\0\20\31\1\230"+
-    "\7\31\25\0\4\31\6\0\7\31\4\0\24\31\1\231"+
-    "\3\31\25\0\4\31\6\0\7\31\4\0\22\31\1\232"+
-    "\5\31\25\0\4\31\6\0\7\31\4\0\13\31\1\233"+
-    "\14\31\25\0\4\31\6\0\7\31\4\0\23\31\1\234"+
-    "\4\31\25\0\4\31\6\0\7\31\4\0\21\31\1\235"+
-    "\6\31\25\0\4\31\6\0\7\31\4\0\5\31\1\236"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\5\31\1\237"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\15\31\1\240"+
-    "\12\31\25\0\4\31\6\0\7\31\4\0\22\31\1\241"+
-    "\5\31\25\0\4\31\6\0\7\31\4\0\13\31\1\242"+
-    "\14\31\25\0\4\31\6\0\7\31\4\0\12\31\1\243"+
-    "\15\31\25\0\4\31\6\0\7\31\4\0\22\31\1\244"+
-    "\5\31\25\0\4\31\6\0\7\31\4\0\11\31\1\245"+
-    "\16\31\25\0\4\31\6\0\7\31\4\0\13\31\1\246"+
-    "\14\31\25\0\4\31\6\0\7\31\4\0\1\31\1\247"+
-    "\26\31\25\0\4\31\6\0\7\31\4\0\22\31\1\250"+
-    "\5\31\25\0\4\31\6\0\7\31\4\0\21\31\1\251"+
-    "\6\31\25\0\4\31\6\0\7\31\4\0\20\31\1\252"+
-    "\7\31\25\0\4\31\6\0\7\31\4\0\1\31\1\253"+
-    "\26\31\25\0\4\31\6\0\7\31\4\0\5\31\1\254"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\11\31\1\255"+
-    "\16\31\25\0\4\31\6\0\7\31\4\0\20\31\1\256"+
-    "\7\31\25\0\4\31\6\0\7\31\4\0\7\31\1\257"+
-    "\20\31\25\0\4\31\6\0\7\31\4\0\23\31\1\260"+
-    "\4\31\25\0\4\31\6\0\7\31\4\0\5\31\1\261"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\15\31\1\262"+
-    "\12\31\25\0\4\31\6\0\7\31\4\0\20\31\1\263"+
-    "\7\31\25\0\4\31\6\0\7\31\4\0\17\31\1\264"+
-    "\10\31\25\0\4\31\6\0\7\31\4\0\11\31\1\265"+
-    "\16\31\25\0\4\31\6\0\7\31\4\0\22\31\1\266"+
-    "\5\31\25\0\4\31\6\0\7\31\4\0\3\31\1\267"+
-    "\24\31\25\0\4\31\6\0\7\31\4\0\3\31\1\270"+
-    "\24\31\25\0\4\31\6\0\7\31\4\0\15\31\1\271"+
-    "\12\31\25\0\4\31\6\0\7\31\4\0\1\31\1\272"+
-    "\26\31\25\0\4\31\6\0\7\31\4\0\23\31\1\273"+
-    "\4\31\25\0\4\31\6\0\7\31\4\0\4\31\1\274"+
-    "\23\31\25\0\4\31\6\0\7\31\4\0\1\31\1\275"+
-    "\26\31\25\0\4\31\6\0\7\31\4\0\4\31\1\276"+
-    "\23\31\25\0\4\31\6\0\7\31\4\0\5\31\1\277"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\22\31\1\300"+
-    "\5\31\25\0\4\31\6\0\7\31\4\0\13\31\1\301"+
-    "\14\31\25\0\4\31\6\0\7\31\4\0\5\31\1\302"+
-    "\22\31\25\0\4\31\6\0\7\31\4\0\1\303\27\31"+
-    "\25\0\4\31\6\0\7\31\4\0\3\31\1\304\24\31"+
-    "\25\0\4\31\6\0\7\31\4\0\5\31\1\305\22\31"+
-    "\25\0\4\31\6\0\7\31\4\0\5\31\1\306\22\31"+
-    "\25\0\4\31\6\0\7\31\4\0\20\31\1\307\7\31"+
-    "\25\0\4\31\6\0\7\31\4\0\5\31\1\310\22\31"+
-    "\25\0\4\31\6\0\7\31\4\0\4\31\1\311\23\31"+
-    "\25\0\4\31\6\0\7\31\4\0\5\31\1\312\22\31"+
-    "\25\0\4\31\6\0\7\31\4\0\6\31\1\313\21\31"+
-    "\4\0";
+    "\4\164\106\0\1\165\71\0\4\121\6\0\7\121\4\0"+
+    "\30\121\25\0\4\31\6\0\7\31\4\0\5\31\1\166"+
+    "\22\31\25\0\4\31\6\0\7\31\4\0\15\31\1\167"+
+    "\1\31\1\170\10\31\25\0\4\31\6\0\7\31\4\0"+
+    "\21\31\1\171\6\31\25\0\4\31\6\0\7\31\4\0"+
+    "\13\31\1\172\14\31\25\0\4\31\6\0\7\31\4\0"+
+    "\15\31\1\173\12\31\25\0\4\31\6\0\7\31\4\0"+
+    "\20\31\1\174\7\31\25\0\4\31\6\0\7\31\4\0"+
+    "\16\31\1\175\11\31\25\0\4\31\6\0\7\31\4\0"+
+    "\24\31\1\176\3\31\25\0\4\31\6\0\7\31\4\0"+
+    "\14\31\1\177\13\31\25\0\4\31\6\0\7\31\4\0"+
+    "\26\31\1\200\1\31\25\0\4\31\6\0\7\31\4\0"+
+    "\22\31\1\201\5\31\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\202\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\11\31\1\203\4\31\1\204\11\31\25\0\4\31\6\0"+
+    "\7\31\4\0\2\31\1\205\25\31\25\0\4\31\6\0"+
+    "\7\31\4\0\22\31\1\206\5\31\25\0\4\31\6\0"+
+    "\7\31\4\0\11\31\1\207\16\31\25\0\4\31\6\0"+
+    "\7\31\4\0\23\31\1\210\4\31\25\0\4\31\6\0"+
+    "\7\31\4\0\17\31\1\211\10\31\25\0\4\31\6\0"+
+    "\7\31\4\0\11\31\1\212\16\31\25\0\4\31\6\0"+
+    "\7\31\4\0\20\31\1\213\7\31\25\0\4\31\6\0"+
+    "\7\31\4\0\11\31\1\214\16\31\4\0\2\101\2\0"+
+    "\7\101\1\155\4\101\1\215\61\101\10\0\1\156\10\0"+
+    "\2\156\14\0\1\107\1\110\20\0\1\107\7\0\1\110"+
+    "\50\0\1\160\30\0\1\160\47\0\1\160\21\0\1\160"+
+    "\30\0\1\162\10\0\4\162\6\0\3\162\1\0\1\107"+
+    "\1\110\6\0\6\162\4\0\1\107\7\0\1\110\31\0"+
+    "\4\164\76\0\4\164\10\0\1\106\1\0\1\106\14\0"+
+    "\1\106\4\0\1\106\41\0\4\31\6\0\7\31\4\0"+
+    "\1\31\1\216\26\31\25\0\4\31\6\0\7\31\4\0"+
+    "\21\31\1\217\1\220\5\31\25\0\4\31\6\0\7\31"+
+    "\4\0\27\31\1\221\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\222\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\21\31\1\210\6\31\25\0\4\31\6\0\7\31\4\0"+
+    "\1\31\1\223\26\31\25\0\4\31\6\0\7\31\4\0"+
+    "\25\31\1\224\2\31\25\0\4\31\6\0\7\31\4\0"+
+    "\23\31\1\225\4\31\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\226\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\227\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\22\31\1\230\5\31\25\0\4\31\6\0\7\31\4\0"+
+    "\20\31\1\231\7\31\25\0\4\31\6\0\7\31\4\0"+
+    "\24\31\1\232\3\31\25\0\4\31\6\0\7\31\4\0"+
+    "\22\31\1\233\5\31\25\0\4\31\6\0\7\31\4\0"+
+    "\13\31\1\234\14\31\25\0\4\31\6\0\7\31\4\0"+
+    "\23\31\1\235\4\31\25\0\4\31\6\0\7\31\4\0"+
+    "\21\31\1\236\6\31\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\237\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\240\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\15\31\1\241\12\31\25\0\4\31\6\0\7\31\4\0"+
+    "\22\31\1\242\5\31\25\0\4\31\6\0\7\31\4\0"+
+    "\13\31\1\243\14\31\25\0\4\31\6\0\7\31\4\0"+
+    "\12\31\1\244\15\31\25\0\4\31\6\0\7\31\4\0"+
+    "\22\31\1\245\5\31\25\0\4\31\6\0\7\31\4\0"+
+    "\11\31\1\246\16\31\25\0\4\31\6\0\7\31\4\0"+
+    "\13\31\1\247\14\31\25\0\4\31\6\0\7\31\4\0"+
+    "\1\31\1\250\26\31\25\0\4\31\6\0\7\31\4\0"+
+    "\22\31\1\251\5\31\25\0\4\31\6\0\7\31\4\0"+
+    "\21\31\1\252\6\31\25\0\4\31\6\0\7\31\4\0"+
+    "\20\31\1\253\7\31\25\0\4\31\6\0\7\31\4\0"+
+    "\1\31\1\254\26\31\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\255\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\11\31\1\256\16\31\25\0\4\31\6\0\7\31\4\0"+
+    "\20\31\1\257\7\31\25\0\4\31\6\0\7\31\4\0"+
+    "\7\31\1\260\20\31\25\0\4\31\6\0\7\31\4\0"+
+    "\23\31\1\261\4\31\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\262\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\15\31\1\263\12\31\25\0\4\31\6\0\7\31\4\0"+
+    "\20\31\1\264\7\31\25\0\4\31\6\0\7\31\4\0"+
+    "\17\31\1\265\10\31\25\0\4\31\6\0\7\31\4\0"+
+    "\11\31\1\266\16\31\25\0\4\31\6\0\7\31\4\0"+
+    "\22\31\1\267\5\31\25\0\4\31\6\0\7\31\4\0"+
+    "\3\31\1\270\24\31\25\0\4\31\6\0\7\31\4\0"+
+    "\3\31\1\271\24\31\25\0\4\31\6\0\7\31\4\0"+
+    "\15\31\1\272\12\31\25\0\4\31\6\0\7\31\4\0"+
+    "\1\31\1\273\26\31\25\0\4\31\6\0\7\31\4\0"+
+    "\23\31\1\274\4\31\25\0\4\31\6\0\7\31\4\0"+
+    "\4\31\1\275\23\31\25\0\4\31\6\0\7\31\4\0"+
+    "\1\31\1\276\26\31\25\0\4\31\6\0\7\31\4\0"+
+    "\4\31\1\277\23\31\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\300\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\22\31\1\301\5\31\25\0\4\31\6\0\7\31\4\0"+
+    "\13\31\1\302\14\31\25\0\4\31\6\0\7\31\4\0"+
+    "\5\31\1\303\22\31\25\0\4\31\6\0\7\31\4\0"+
+    "\1\304\27\31\25\0\4\31\6\0\7\31\4\0\3\31"+
+    "\1\305\24\31\25\0\4\31\6\0\7\31\4\0\5\31"+
+    "\1\306\22\31\25\0\4\31\6\0\7\31\4\0\5\31"+
+    "\1\307\22\31\25\0\4\31\6\0\7\31\4\0\20\31"+
+    "\1\310\7\31\25\0\4\31\6\0\7\31\4\0\5\31"+
+    "\1\311\22\31\25\0\4\31\6\0\7\31\4\0\4\31"+
+    "\1\312\23\31\25\0\4\31\6\0\7\31\4\0\5\31"+
+    "\1\313\22\31\25\0\4\31\6\0\7\31\4\0\6\31"+
+    "\1\314\21\31\4\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[9240];
+    int [] result = new int[9306];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -379,11 +379,11 @@ class Cpp2Lexer implements FlexLexer {
     "\6\1\1\11\6\1\3\11\20\1\1\11\1\1\3\11"+
     "\1\0\1\11\1\0\1\11\1\0\1\11\1\0\6\11"+
     "\2\0\1\1\1\11\1\1\1\0\1\11\2\1\2\0"+
-    "\6\11\30\1\1\11\2\1\1\11\1\0\2\1\1\11"+
-    "\2\1\1\0\130\1";
+    "\2\11\1\1\3\11\30\1\1\11\2\1\1\11\1\0"+
+    "\2\1\1\11\2\1\1\0\1\1\1\11\127\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[203];
+    int [] result = new int[204];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -708,397 +708,402 @@ class Cpp2Lexer implements FlexLexer {
             { return TokenType.BAD_CHARACTER;
             }
           // fall through
-          case 80: break;
+          case 81: break;
           case 2:
             { return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 81: break;
+          case 82: break;
           case 3:
             { return Cpp2Types.EXCLAMATION;
             }
           // fall through
-          case 82: break;
+          case 83: break;
           case 4:
             { return Cpp2Types.MODULO;
             }
           // fall through
-          case 83: break;
+          case 84: break;
           case 5:
             { return Cpp2Types.AND;
             }
           // fall through
-          case 84: break;
+          case 85: break;
           case 6:
             { return Cpp2Types.LEFT_PARENTHESIS;
             }
           // fall through
-          case 85: break;
+          case 86: break;
           case 7:
             { return Cpp2Types.RIGHT_PARENTHESIS;
             }
           // fall through
-          case 86: break;
+          case 87: break;
           case 8:
             { return Cpp2Types.ASTERISK;
             }
           // fall through
-          case 87: break;
+          case 88: break;
           case 9:
             { return Cpp2Types.PLUS;
             }
           // fall through
-          case 88: break;
+          case 89: break;
           case 10:
             { return Cpp2Types.COMMA;
             }
           // fall through
-          case 89: break;
+          case 90: break;
           case 11:
             { return Cpp2Types.MINUS;
             }
           // fall through
-          case 90: break;
+          case 91: break;
           case 12:
             { return Cpp2Types.DOT;
             }
           // fall through
-          case 91: break;
+          case 92: break;
           case 13:
             { return Cpp2Types.SLASH;
             }
           // fall through
-          case 92: break;
+          case 93: break;
           case 14:
             { return Cpp2Types.INT_LITERAL;
             }
           // fall through
-          case 93: break;
+          case 94: break;
           case 15:
             { return Cpp2Types.COLON;
             }
           // fall through
-          case 94: break;
+          case 95: break;
           case 16:
             { return Cpp2Types.SEMICOLON;
             }
           // fall through
-          case 95: break;
+          case 96: break;
           case 17:
             { return Cpp2Types.LT;
             }
           // fall through
-          case 96: break;
+          case 97: break;
           case 18:
             { return Cpp2Types.EQ;
             }
           // fall through
-          case 97: break;
+          case 98: break;
           case 19:
             { return Cpp2Types.GT;
             }
           // fall through
-          case 98: break;
+          case 99: break;
           case 20:
             { return Cpp2Types.IDENTIFIER_WORD;
             }
           // fall through
-          case 99: break;
+          case 100: break;
           case 21:
             { return Cpp2Types.LEFT_BRACKET;
             }
           // fall through
-          case 100: break;
+          case 101: break;
           case 22:
             { return Cpp2Types.RIGHT_BRACKET;
             }
           // fall through
-          case 101: break;
+          case 102: break;
           case 23:
             { return Cpp2Types.EXP;
             }
           // fall through
-          case 102: break;
+          case 103: break;
           case 24:
             { return Cpp2Types.WILDCARD;
             }
           // fall through
-          case 103: break;
+          case 104: break;
           case 25:
             { return Cpp2Types.LEFT_BRACE;
             }
           // fall through
-          case 104: break;
+          case 105: break;
           case 26:
             { return Cpp2Types.OR;
             }
           // fall through
-          case 105: break;
+          case 106: break;
           case 27:
             { return Cpp2Types.RIGHT_BRACE;
             }
           // fall through
-          case 106: break;
+          case 107: break;
           case 28:
             { return Cpp2Types.TILDE;
             }
           // fall through
-          case 107: break;
+          case 108: break;
           case 29:
             { return Cpp2Types.NEQ;
             }
           // fall through
-          case 108: break;
+          case 109: break;
           case 30:
             { return Cpp2Types.STRING_LITERAL;
             }
           // fall through
-          case 109: break;
+          case 110: break;
           case 31:
             { return Cpp2Types.ANDAND;
             }
           // fall through
-          case 110: break;
+          case 111: break;
           case 32:
             { return Cpp2Types.CHAR_LITERAL;
             }
           // fall through
-          case 111: break;
+          case 112: break;
           case 33:
             { return Cpp2Types.ASTERISKEQ;
             }
           // fall through
-          case 112: break;
+          case 113: break;
           case 34:
             { return Cpp2Types.PLUSPLUS;
             }
           // fall through
-          case 113: break;
+          case 114: break;
           case 35:
             { return Cpp2Types.PLUSEQ;
             }
           // fall through
-          case 114: break;
+          case 115: break;
           case 36:
             { return Cpp2Types.MINUSMINUS;
             }
           // fall through
-          case 115: break;
+          case 116: break;
           case 37:
             { return Cpp2Types.MINUSEQ;
             }
           // fall through
-          case 116: break;
+          case 117: break;
           case 38:
             { return Cpp2Types.ARROW;
             }
           // fall through
-          case 117: break;
+          case 118: break;
           case 39:
             { return Cpp2Types.LINE_COMMENT;
             }
           // fall through
-          case 118: break;
+          case 119: break;
           case 40:
             { return Cpp2Types.SLASHEQ;
             }
           // fall through
-          case 119: break;
+          case 120: break;
           case 41:
             { return Cpp2Types.FLOAT_LITERAL;
             }
           // fall through
-          case 120: break;
+          case 121: break;
           case 42:
             { return Cpp2Types.COLONCOLON;
             }
           // fall through
-          case 121: break;
+          case 122: break;
           case 43:
             { return Cpp2Types.LTLT;
             }
           // fall through
-          case 122: break;
+          case 123: break;
           case 44:
             { return Cpp2Types.LTEQ;
             }
           // fall through
-          case 123: break;
+          case 124: break;
           case 45:
             { return Cpp2Types.EQEQ;
             }
           // fall through
-          case 124: break;
+          case 125: break;
           case 46:
             { return Cpp2Types.GTEQ;
             }
           // fall through
-          case 125: break;
+          case 126: break;
           case 47:
             { return Cpp2Types.GTGT;
             }
           // fall through
-          case 126: break;
+          case 127: break;
           case 48:
             { return Cpp2Types.METAFUNCTION;
             }
           // fall through
-          case 127: break;
+          case 128: break;
           case 49:
             { return Cpp2Types.DO;
             }
           // fall through
-          case 128: break;
+          case 129: break;
           case 50:
             { return Cpp2Types.IF;
             }
           // fall through
-          case 129: break;
+          case 130: break;
           case 51:
             { return Cpp2Types.IN;
             }
           // fall through
-          case 130: break;
+          case 131: break;
           case 52:
             { return Cpp2Types.OROR;
             }
           // fall through
-          case 131: break;
+          case 132: break;
           case 53:
             { return Cpp2Types.DOTDOTDOT;
             }
           // fall through
-          case 132: break;
-          case 54:
-            { return Cpp2Types.FOR;
-            }
-          // fall through
           case 133: break;
-          case 55:
-            { return Cpp2Types.OUT;
+          case 54:
+            { return Cpp2Types.SPACESHIP;
             }
           // fall through
           case 134: break;
-          case 56:
-            { return Cpp2Types.BLOCK_COMMENT;
+          case 55:
+            { return Cpp2Types.FOR;
             }
           // fall through
           case 135: break;
-          case 57:
-            { return Cpp2Types.COPY;
+          case 56:
+            { return Cpp2Types.OUT;
             }
           // fall through
           case 136: break;
-          case 58:
-            { return Cpp2Types.ELSE;
+          case 57:
+            { return Cpp2Types.BLOCK_COMMENT;
             }
           // fall through
           case 137: break;
-          case 59:
-            { return Cpp2Types.MOVE;
+          case 58:
+            { return Cpp2Types.COPY;
             }
           // fall through
           case 138: break;
-          case 60:
-            { return Cpp2Types.NEXT;
+          case 59:
+            { return Cpp2Types.ELSE;
             }
           // fall through
           case 139: break;
-          case 61:
-            { return Cpp2Types.THIS;
+          case 60:
+            { return Cpp2Types.MOVE;
             }
           // fall through
           case 140: break;
-          case 62:
-            { return Cpp2Types.BOOL_LITERAL;
+          case 61:
+            { return Cpp2Types.NEXT;
             }
           // fall through
           case 141: break;
-          case 63:
-            { return Cpp2Types.TYPE_WORD;
+          case 62:
+            { return Cpp2Types.THIS;
             }
           // fall through
           case 142: break;
-          case 64:
-            { return Cpp2Types.BREAK;
+          case 63:
+            { return Cpp2Types.BOOL_LITERAL;
             }
           // fall through
           case 143: break;
-          case 65:
-            { return Cpp2Types.CONST;
+          case 64:
+            { return Cpp2Types.TYPE_WORD;
             }
           // fall through
           case 144: break;
-          case 66:
-            { return Cpp2Types.FINAL;
+          case 65:
+            { return Cpp2Types.BREAK;
             }
           // fall through
           case 145: break;
-          case 67:
-            { return Cpp2Types.INOUT;
+          case 66:
+            { return Cpp2Types.CONST;
             }
           // fall through
           case 146: break;
-          case 68:
-            { return Cpp2Types.USING;
+          case 67:
+            { return Cpp2Types.FINAL;
             }
           // fall through
           case 147: break;
-          case 69:
-            { return Cpp2Types.WHILE;
+          case 68:
+            { return Cpp2Types.INOUT;
             }
           // fall through
           case 148: break;
-          case 70:
-            { return Cpp2Types.PUBLIC;
+          case 69:
+            { return Cpp2Types.USING;
             }
           // fall through
           case 149: break;
-          case 71:
-            { return Cpp2Types.RETURN;
+          case 70:
+            { return Cpp2Types.WHILE;
             }
           // fall through
           case 150: break;
-          case 72:
-            { return Cpp2Types.FORWARD;
+          case 71:
+            { return Cpp2Types.PUBLIC;
             }
           // fall through
           case 151: break;
-          case 73:
-            { return Cpp2Types.PRIVATE;
+          case 72:
+            { return Cpp2Types.RETURN;
             }
           // fall through
           case 152: break;
-          case 74:
-            { return Cpp2Types.VIRTUAL;
+          case 73:
+            { return Cpp2Types.FORWARD;
             }
           // fall through
           case 153: break;
-          case 75:
-            { return Cpp2Types.CONTINUE;
+          case 74:
+            { return Cpp2Types.PRIVATE;
             }
           // fall through
           case 154: break;
-          case 76:
-            { return Cpp2Types.OVERRIDE;
+          case 75:
+            { return Cpp2Types.VIRTUAL;
             }
           // fall through
           case 155: break;
-          case 77:
-            { return Cpp2Types.NAMESPACE;
+          case 76:
+            { return Cpp2Types.CONTINUE;
             }
           // fall through
           case 156: break;
-          case 78:
-            { return Cpp2Types.PROTECTED;
+          case 77:
+            { return Cpp2Types.OVERRIDE;
             }
           // fall through
           case 157: break;
-          case 79:
-            { return Cpp2Types.FORWARD_REF;
+          case 78:
+            { return Cpp2Types.NAMESPACE;
             }
           // fall through
           case 158: break;
+          case 79:
+            { return Cpp2Types.PROTECTED;
+            }
+          // fall through
+          case 159: break;
+          case 80:
+            { return Cpp2Types.FORWARD_REF;
+            }
+          // fall through
+          case 160: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
