@@ -83,6 +83,12 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
 
   @Override
   @NotNull
+  public List<Cpp2MathAssign> getMathAssignList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2MathAssign.class);
+  }
+
+  @Override
+  @NotNull
   public List<Cpp2NamespaceAliasDecl> getNamespaceAliasDeclList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2NamespaceAliasDecl.class);
   }

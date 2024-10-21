@@ -51,6 +51,8 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       {LINE_COMMENT}        { return Cpp2Types.LINE_COMMENT; }
       {BLOCK_COMMENT}       { return Cpp2Types.BLOCK_COMMENT; }
       
+      "<=>"                 { return Cpp2Types.SPACESHIP; }
+      
       "->"                  { return Cpp2Types.ARROW; }
       "::"                  { return Cpp2Types.COLONCOLON; }
       "..."                 { return Cpp2Types.DOTDOTDOT; }
@@ -64,6 +66,10 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       ">="                  { return Cpp2Types.GTEQ; }
       "<<"                  { return Cpp2Types.LTLT; }
       ">>"                  { return Cpp2Types.GTGT; }
+      "+="                  { return Cpp2Types.PLUSEQ; }
+      "-="                  { return Cpp2Types.MINUSEQ; }
+      "*="                  { return Cpp2Types.ASTERISKEQ; }
+      "/="                  { return Cpp2Types.SLASHEQ; }
       
       ":"                   { return Cpp2Types.COLON; }
       ";"                   { return Cpp2Types.SEMICOLON; }
@@ -85,6 +91,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "&"                   { return Cpp2Types.AND; }
       "|"                   { return Cpp2Types.OR; }
       "^"                   { return Cpp2Types.EXP; }
+      "~"                   { return Cpp2Types.TILDE; }
       "."                   { return Cpp2Types.DOT; }
       ","                   { return Cpp2Types.COMMA; }
       "!"                   { return Cpp2Types.EXCLAMATION; }

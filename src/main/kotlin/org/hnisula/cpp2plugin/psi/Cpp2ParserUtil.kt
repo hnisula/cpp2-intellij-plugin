@@ -5,7 +5,7 @@ import com.intellij.psi.tree.IElementType
 
 open class Cpp2ParserUtil : com.intellij.lang.parser.GeneratedParserUtilBase() {
     companion object {
-        private val MUL_LOOKAHEADS: Set<IElementType> = setOf(
+        private val TERM_TYPES: Set<IElementType> = setOf(
             Cpp2Types.IDENTIFIER_WORD,
             Cpp2Types.BOOL_LITERAL,
             Cpp2Types.INT_LITERAL,
@@ -16,8 +16,8 @@ open class Cpp2ParserUtil : com.intellij.lang.parser.GeneratedParserUtilBase() {
         )
         
         @JvmStatic
-        fun mulDerefDisambiguator(builder: PsiBuilder, level: Int): Boolean {
-            return MUL_LOOKAHEADS.contains(builder.lookAhead(1))
+        fun binaryOpTermLookhead(builder: PsiBuilder, level: Int): Boolean {
+            return TERM_TYPES.contains(builder.lookAhead(1))
         }
     }
 }

@@ -19,6 +19,8 @@
     extends(".*expr")=expr
     
     tokens=[
+        SPACESHIP           = "<=>"
+    
         ARROW               = "->"
         COLONCOLON          = "::"
         DOTDOTDOT           = "..."
@@ -32,6 +34,10 @@
         GTEQ                = ">="
         LTLT                = "<<"
         GTGT                = ">>"
+        PLUSEQ              = "+="
+        MINUSEQ             = "-="
+        ASTERISKEQ          = "*="
+        SLASHEQ             = "/="
         
         NEWLINE             = "\n"
         
@@ -55,6 +61,7 @@
         AND                 = "&"
         OR                  = "|"
         EXP                 = "^"
+        TILDE               = "~"
         DOT                 = "."
         COMMA               = ","
         EXCLAMATION         = "!"
@@ -109,7 +116,7 @@ private stmt        ::= func_decl
                         | value_decl_stmt
                         | constexpr_decl
                         | alias_decl
-                        | assign
+                        | assign | math_assign
                         | using_namespace
                         | expr_stmt
                         | if_branch
@@ -160,9 +167,8 @@ constexpr_decl          ::= IDENTIFIER_WORD ":" type_specifier? "==" expr ";" {
 // Declaration and assignment
 
 // Unsure if this is the way to handle the wildcard here
-assign                  ::= (q_identifier | "_" | subscript_expr | deref_expr | member_access_expr) "=" expr ";" {
-    pin=2
-}
+assign                  ::= (q_identifier | "_" | subscript_expr | deref_expr | member_access_expr) "=" expr ";" {pin=2}
+math_assign             ::= q_identifier ("+=" | "-=" | "*=" | "/=") expr ";" {pin=2}
 private value_decl_stmt ::= value_decl ";"
 value_decl              ::= (IDENTIFIER_WORD | "_") ":" ((type_specifier "=" expr) | type_specifier | ("=" expr)) {
     pin=3
@@ -216,7 +222,7 @@ type_decl           ::= identifier ":" template_decl? METAFUNCTION? "type" "=" "
     methods=[identifier=""]
 }
 member_decl         ::= (member_access_level? (type_decl | func_decl | (value_decl ";") | comment))
-member_access_level       ::= ("public" | "protected" | "private")
+member_access_level ::= ("public" | "protected" | "private")
 
 // Expressions and operators
 
@@ -226,44 +232,45 @@ expr ::=
     | bit_or_expr
     | bit_xor_expr
     | bit_and_expr
-    | eq_expr | neq_expr
-    | lt_expr | gt_expr | lteq_expr | gteq_expr
+    | chain_compare_expr // Correct precedence?
     | left_shift_expr | right_shift_expr
     | add_expr | sub_expr
     | mul_expr | div_expr | mod_expr
     | func_call | member_access_expr | subscript_expr
-    | deref_expr | negate_expr | address_expr
-    | q_identifier
-    | literal
-    | lambda_decl
-    | paren_expr
-    | list_expr
+    | deref_expr | not_expr | bit_not_expr | address_expr | unary_minus_expr | unary_plus_expr
+    | q_identifier | literal
+    | increment_expr | decrement_expr
+    | lambda_decl | paren_expr | list_expr
 
-paren_expr              ::= "(" expr? ")"
-list_expr               ::= "(" (expr ("," expr)* ","?)? ")"
+paren_expr          ::= "(" expr? ")"
+list_expr           ::= "(" (expr ("," expr)* ","?)? ")"
 
 or_expr             ::= expr "||"   expr    {rightAssociative=false}
 and_expr            ::= expr "&&"   expr    {rightAssociative=false}
 bit_or_expr         ::= expr "|"    expr    {rightAssociative=false}
 bit_xor_expr        ::= expr "^"    expr    {rightAssociative=false}
-bit_and_expr        ::= expr "&"    expr    {rightAssociative=false}
-eq_expr             ::= expr "=="   expr    {rightAssociative=false}
-neq_expr            ::= expr "!="   expr    {rightAssociative=false}
-lteq_expr           ::= expr "<="   expr    {rightAssociative=false}
-gteq_expr           ::= expr ">="   expr    {rightAssociative=false}
-lt_expr             ::= expr "<"    expr    {rightAssociative=false}
-gt_expr             ::= expr ">"    expr    {rightAssociative=false}
+bit_and_expr        ::= expr <<binaryOpTermLookhead>> "&" expr {rightAssociative=false}
 right_shift_expr    ::= expr ">>"   expr    {rightAssociative=false}
 left_shift_expr     ::= expr "<<"   expr    {rightAssociative=false}
 add_expr            ::= expr "+"    expr    {rightAssociative=false} // Merge with other similar math expressions? There are lots more to come (e.g. +=)
 sub_expr            ::= expr "-"    expr    {rightAssociative=false}
-mul_expr            ::= expr <<mulDerefDisambiguator>> "*" expr {rightAssociative=false}
+mul_expr            ::= expr <<binaryOpTermLookhead>> "*" expr {rightAssociative=false}
 div_expr            ::= expr "/"    expr    {rightAssociative=false}
 mod_expr            ::= expr "%"    expr    {rightAssociative=false}
+
+chain_compare_expr  ::= expr (chain_op expr)+ {rightAssociative=true}
+private chain_op    ::= "==" | "!=" | "<=" | ">=" | "<" | ">"
+
+unary_minus_expr    ::= "-" expr
+unary_plus_expr     ::= "+" expr
+bit_not_expr        ::= expr "~"
+increment_expr      ::= expr "++"
+decrement_expr      ::= expr "--"
+
 subscript_expr      ::= expr "[" (expr ("," expr)* ","?) "]"
 member_access_expr  ::= expr "." (identifier | func_call)
 deref_expr          ::= expr "*"
-negate_expr         ::= "!" expr
+not_expr            ::= "!" expr
 address_expr        ::= expr "&"
 
 // Misc fundamentals

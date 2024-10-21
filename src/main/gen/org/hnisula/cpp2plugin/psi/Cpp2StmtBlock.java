@@ -35,6 +35,9 @@ public interface Cpp2StmtBlock extends PsiElement {
   List<Cpp2IfBranch> getIfBranchList();
 
   @NotNull
+  List<Cpp2MathAssign> getMathAssignList();
+
+  @NotNull
   List<Cpp2NamespaceAliasDecl> getNamespaceAliasDeclList();
 
   @NotNull

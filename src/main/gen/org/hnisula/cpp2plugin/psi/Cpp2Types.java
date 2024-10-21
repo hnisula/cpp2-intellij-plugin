@@ -14,30 +14,30 @@ public interface Cpp2Types {
   IElementType ARG = new Cpp2ElementType("ARG");
   IElementType ASSIGN = new Cpp2ElementType("ASSIGN");
   IElementType BIT_AND_EXPR = new Cpp2ElementType("BIT_AND_EXPR");
+  IElementType BIT_NOT_EXPR = new Cpp2ElementType("BIT_NOT_EXPR");
   IElementType BIT_OR_EXPR = new Cpp2ElementType("BIT_OR_EXPR");
   IElementType BIT_XOR_EXPR = new Cpp2ElementType("BIT_XOR_EXPR");
+  IElementType CHAIN_COMPARE_EXPR = new Cpp2ElementType("CHAIN_COMPARE_EXPR");
   IElementType COMMENT = new Cpp2ElementType("COMMENT");
   IElementType CONSTEXPR_DECL = new Cpp2ElementType("CONSTEXPR_DECL");
+  IElementType DECREMENT_EXPR = new Cpp2ElementType("DECREMENT_EXPR");
   IElementType DEREF_EXPR = new Cpp2ElementType("DEREF_EXPR");
   IElementType DIV_EXPR = new Cpp2ElementType("DIV_EXPR");
   IElementType DO_WHILE_LOOP = new Cpp2ElementType("DO_WHILE_LOOP");
-  IElementType EQ_EXPR = new Cpp2ElementType("EQ_EXPR");
   IElementType EXPR = new Cpp2ElementType("EXPR");
   IElementType FILE_WRAPPER = new Cpp2ElementType("FILE_WRAPPER");
   IElementType FOR_LOOP = new Cpp2ElementType("FOR_LOOP");
   IElementType FUNC_ALIAS_DECL = new Cpp2ElementType("FUNC_ALIAS_DECL");
   IElementType FUNC_CALL = new Cpp2ElementType("FUNC_CALL");
   IElementType FUNC_DECL = new Cpp2ElementType("FUNC_DECL");
-  IElementType GTEQ_EXPR = new Cpp2ElementType("GTEQ_EXPR");
-  IElementType GT_EXPR = new Cpp2ElementType("GT_EXPR");
   IElementType IDENTIFIER = new Cpp2ElementType("IDENTIFIER");
   IElementType IF_BRANCH = new Cpp2ElementType("IF_BRANCH");
+  IElementType INCREMENT_EXPR = new Cpp2ElementType("INCREMENT_EXPR");
   IElementType LAMBDA_DECL = new Cpp2ElementType("LAMBDA_DECL");
   IElementType LEFT_SHIFT_EXPR = new Cpp2ElementType("LEFT_SHIFT_EXPR");
   IElementType LIST_EXPR = new Cpp2ElementType("LIST_EXPR");
   IElementType LITERAL = new Cpp2ElementType("LITERAL");
-  IElementType LTEQ_EXPR = new Cpp2ElementType("LTEQ_EXPR");
-  IElementType LT_EXPR = new Cpp2ElementType("LT_EXPR");
+  IElementType MATH_ASSIGN = new Cpp2ElementType("MATH_ASSIGN");
   IElementType MEMBER_ACCESS_EXPR = new Cpp2ElementType("MEMBER_ACCESS_EXPR");
   IElementType MEMBER_ACCESS_LEVEL = new Cpp2ElementType("MEMBER_ACCESS_LEVEL");
   IElementType MEMBER_DECL = new Cpp2ElementType("MEMBER_DECL");
@@ -45,9 +45,8 @@ public interface Cpp2Types {
   IElementType MUL_EXPR = new Cpp2ElementType("MUL_EXPR");
   IElementType NAMESPACE_ALIAS_DECL = new Cpp2ElementType("NAMESPACE_ALIAS_DECL");
   IElementType NAMESPACE_DECL = new Cpp2ElementType("NAMESPACE_DECL");
-  IElementType NEGATE_EXPR = new Cpp2ElementType("NEGATE_EXPR");
-  IElementType NEQ_EXPR = new Cpp2ElementType("NEQ_EXPR");
   IElementType NEXT_STMT = new Cpp2ElementType("NEXT_STMT");
+  IElementType NOT_EXPR = new Cpp2ElementType("NOT_EXPR");
   IElementType OR_EXPR = new Cpp2ElementType("OR_EXPR");
   IElementType PARAM = new Cpp2ElementType("PARAM");
   IElementType PARAM_LIST = new Cpp2ElementType("PARAM_LIST");
@@ -67,6 +66,8 @@ public interface Cpp2Types {
   IElementType TYPE_ALIAS_DECL = new Cpp2ElementType("TYPE_ALIAS_DECL");
   IElementType TYPE_DECL = new Cpp2ElementType("TYPE_DECL");
   IElementType TYPE_SPECIFIER = new Cpp2ElementType("TYPE_SPECIFIER");
+  IElementType UNARY_MINUS_EXPR = new Cpp2ElementType("UNARY_MINUS_EXPR");
+  IElementType UNARY_PLUS_EXPR = new Cpp2ElementType("UNARY_PLUS_EXPR");
   IElementType USING_NAMESPACE = new Cpp2ElementType("USING_NAMESPACE");
   IElementType VALUE_DECL = new Cpp2ElementType("VALUE_DECL");
   IElementType VARIADIC_PARAM = new Cpp2ElementType("VARIADIC_PARAM");
@@ -76,6 +77,7 @@ public interface Cpp2Types {
   IElementType ANDAND = new Cpp2TokenType("&&");
   IElementType ARROW = new Cpp2TokenType("->");
   IElementType ASTERISK = new Cpp2TokenType("*");
+  IElementType ASTERISKEQ = new Cpp2TokenType("*=");
   IElementType BLOCK_COMMENT = new Cpp2TokenType("BLOCK_COMMENT");
   IElementType BOOL_LITERAL = new Cpp2TokenType("BOOL_LITERAL");
   IElementType BREAK = new Cpp2TokenType("break");
@@ -116,6 +118,7 @@ public interface Cpp2Types {
   IElementType LTLT = new Cpp2TokenType("<<");
   IElementType METAFUNCTION = new Cpp2TokenType("METAFUNCTION");
   IElementType MINUS = new Cpp2TokenType("-");
+  IElementType MINUSEQ = new Cpp2TokenType("-=");
   IElementType MINUSMINUS = new Cpp2TokenType("--");
   IElementType MODULO = new Cpp2TokenType("%");
   IElementType MOVE = new Cpp2TokenType("move");
@@ -129,6 +132,7 @@ public interface Cpp2Types {
   IElementType OUT = new Cpp2TokenType("out");
   IElementType OVERRIDE = new Cpp2TokenType("override");
   IElementType PLUS = new Cpp2TokenType("+");
+  IElementType PLUSEQ = new Cpp2TokenType("+=");
   IElementType PLUSPLUS = new Cpp2TokenType("++");
   IElementType PRIVATE = new Cpp2TokenType("private");
   IElementType PROTECTED = new Cpp2TokenType("protected");
@@ -139,8 +143,11 @@ public interface Cpp2Types {
   IElementType RIGHT_PARENTHESIS = new Cpp2TokenType(")");
   IElementType SEMICOLON = new Cpp2TokenType(";");
   IElementType SLASH = new Cpp2TokenType("/");
+  IElementType SLASHEQ = new Cpp2TokenType("/=");
+  IElementType SPACESHIP = new Cpp2TokenType("<=>");
   IElementType STRING_LITERAL = new Cpp2TokenType("STRING_LITERAL");
   IElementType THIS = new Cpp2TokenType("this");
+  IElementType TILDE = new Cpp2TokenType("~");
   IElementType TYPE_WORD = new Cpp2TokenType("type");
   IElementType USING = new Cpp2TokenType("using");
   IElementType VIRTUAL = new Cpp2TokenType("virtual");
@@ -168,17 +175,26 @@ public interface Cpp2Types {
       else if (type == BIT_AND_EXPR) {
         return new Cpp2BitAndExprImpl(node);
       }
+      else if (type == BIT_NOT_EXPR) {
+        return new Cpp2BitNotExprImpl(node);
+      }
       else if (type == BIT_OR_EXPR) {
         return new Cpp2BitOrExprImpl(node);
       }
       else if (type == BIT_XOR_EXPR) {
         return new Cpp2BitXorExprImpl(node);
       }
+      else if (type == CHAIN_COMPARE_EXPR) {
+        return new Cpp2ChainCompareExprImpl(node);
+      }
       else if (type == COMMENT) {
         return new Cpp2CommentImpl(node);
       }
       else if (type == CONSTEXPR_DECL) {
         return new Cpp2ConstexprDeclImpl(node);
+      }
+      else if (type == DECREMENT_EXPR) {
+        return new Cpp2DecrementExprImpl(node);
       }
       else if (type == DEREF_EXPR) {
         return new Cpp2DerefExprImpl(node);
@@ -188,9 +204,6 @@ public interface Cpp2Types {
       }
       else if (type == DO_WHILE_LOOP) {
         return new Cpp2DoWhileLoopImpl(node);
-      }
-      else if (type == EQ_EXPR) {
-        return new Cpp2EqExprImpl(node);
       }
       else if (type == FILE_WRAPPER) {
         return new Cpp2FileWrapperImpl(node);
@@ -207,17 +220,14 @@ public interface Cpp2Types {
       else if (type == FUNC_DECL) {
         return new Cpp2FuncDeclImpl(node);
       }
-      else if (type == GTEQ_EXPR) {
-        return new Cpp2GteqExprImpl(node);
-      }
-      else if (type == GT_EXPR) {
-        return new Cpp2GtExprImpl(node);
-      }
       else if (type == IDENTIFIER) {
         return new Cpp2IdentifierImpl(node);
       }
       else if (type == IF_BRANCH) {
         return new Cpp2IfBranchImpl(node);
+      }
+      else if (type == INCREMENT_EXPR) {
+        return new Cpp2IncrementExprImpl(node);
       }
       else if (type == LAMBDA_DECL) {
         return new Cpp2LambdaDeclImpl(node);
@@ -231,11 +241,8 @@ public interface Cpp2Types {
       else if (type == LITERAL) {
         return new Cpp2LiteralImpl(node);
       }
-      else if (type == LTEQ_EXPR) {
-        return new Cpp2LteqExprImpl(node);
-      }
-      else if (type == LT_EXPR) {
-        return new Cpp2LtExprImpl(node);
+      else if (type == MATH_ASSIGN) {
+        return new Cpp2MathAssignImpl(node);
       }
       else if (type == MEMBER_ACCESS_EXPR) {
         return new Cpp2MemberAccessExprImpl(node);
@@ -258,14 +265,11 @@ public interface Cpp2Types {
       else if (type == NAMESPACE_DECL) {
         return new Cpp2NamespaceDeclImpl(node);
       }
-      else if (type == NEGATE_EXPR) {
-        return new Cpp2NegateExprImpl(node);
-      }
-      else if (type == NEQ_EXPR) {
-        return new Cpp2NeqExprImpl(node);
-      }
       else if (type == NEXT_STMT) {
         return new Cpp2NextStmtImpl(node);
+      }
+      else if (type == NOT_EXPR) {
+        return new Cpp2NotExprImpl(node);
       }
       else if (type == OR_EXPR) {
         return new Cpp2OrExprImpl(node);
@@ -323,6 +327,12 @@ public interface Cpp2Types {
       }
       else if (type == TYPE_SPECIFIER) {
         return new Cpp2TypeSpecifierImpl(node);
+      }
+      else if (type == UNARY_MINUS_EXPR) {
+        return new Cpp2UnaryMinusExprImpl(node);
+      }
+      else if (type == UNARY_PLUS_EXPR) {
+        return new Cpp2UnaryPlusExprImpl(node);
       }
       else if (type == USING_NAMESPACE) {
         return new Cpp2UsingNamespaceImpl(node);

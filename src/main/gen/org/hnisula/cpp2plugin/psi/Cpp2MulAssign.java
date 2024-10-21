@@ -5,10 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2NegateExpr extends Cpp2Expr {
+public interface Cpp2MulAssign extends PsiElement {
 
-  @Nullable
-  Cpp2Expr getExpr();
+  @NotNull
+  List<Cpp2Expr> getExprList();
 
   @Nullable
   PsiElement getContext();
