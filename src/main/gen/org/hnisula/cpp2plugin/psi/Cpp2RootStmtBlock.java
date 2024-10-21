@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2RootStmtBlock extends PsiElement {
 
   @NotNull
-  List<Cpp2Comment> getCommentList();
-
-  @NotNull
   List<Cpp2ConstexprDecl> getConstexprDeclList();
 
   @NotNull

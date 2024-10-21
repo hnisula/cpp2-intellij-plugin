@@ -96,6 +96,9 @@
         VIRTUAL             = "virtual"
         OVERRIDE            = "override"
         FINAL               = "final"
+        
+        LINE_COMMENT        = "regexp://.*"
+        BLOCK_COMMENT       = "regexp:/\*.*\*/"
     ]
 }
 
@@ -109,7 +112,7 @@ file_wrapper ::= root_stmts {
 
 root_stmt_block     ::= "{" root_stmt* "}"
 root_stmts          ::= root_stmt*
-private root_stmt   ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | constexpr_decl | alias_decl | comment)
+private root_stmt   ::= (type_decl | func_decl | namespace_decl | value_decl_stmt | constexpr_decl | alias_decl)
 
 stmt_block          ::= "{" stmt* "}"
 private stmt        ::= func_decl
@@ -124,7 +127,6 @@ private stmt        ::= func_decl
                         | do_while_loop
                         | while_loop
                         | return_stmt
-                        | comment
                         | stmt_block
 private expr_stmt   ::= expr ";"
 
@@ -221,7 +223,7 @@ type_decl           ::= identifier ":" template_decl? METAFUNCTION? "type" "=" "
     mixin="org.hnisula.cpp2plugin.psi.Cpp2TypeDeclMixin"
     methods=[identifier=""]
 }
-member_decl         ::= (member_access_level? (type_decl | func_decl | (value_decl ";") | comment))
+member_decl         ::= (member_access_level? (type_decl | func_decl | (value_decl ";")))
 member_access_level ::= ("public" | "protected" | "private")
 
 // Expressions and operators
@@ -292,5 +294,3 @@ literal                     ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | CHA
 private qualifier           ::= ("const" | "*")
 private this_param_kind     ::= ("virtual" | "override" | "final" | param_kind)
 private param_kind          ::= ("in" | "copy" | "inout" | "out" | "move" | "forward")
-
-comment                     ::= LINE_COMMENT | BLOCK_COMMENT
