@@ -95,6 +95,7 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       "."                   { return Cpp2Types.DOT; }
       ","                   { return Cpp2Types.COMMA; }
       "!"                   { return Cpp2Types.EXCLAMATION; }
+      "$"                   { return Cpp2Types.DOLLAR; }
       
       "type"                { return Cpp2Types.TYPE_WORD; }
       "this"                { return Cpp2Types.THIS; }

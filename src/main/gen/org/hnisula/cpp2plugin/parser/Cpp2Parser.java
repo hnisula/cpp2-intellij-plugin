@@ -37,13 +37,13 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
 
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
     create_token_set_(ADDRESS_EXPR, ADD_EXPR, AND_EXPR, BIT_AND_EXPR,
-      BIT_NOT_EXPR, BIT_OR_EXPR, BIT_XOR_EXPR, CHAIN_COMPARE_EXPR,
-      DECREMENT_EXPR, DEREF_EXPR, DIV_EXPR, EXPR,
-      FUNC_CALL, INCREMENT_EXPR, LAMBDA_DECL, LEFT_SHIFT_EXPR,
-      LIST_EXPR, LITERAL, MEMBER_ACCESS_EXPR, MOD_EXPR,
-      MUL_EXPR, NOT_EXPR, OR_EXPR, PAREN_EXPR,
-      Q_IDENTIFIER, RIGHT_SHIFT_EXPR, SUBSCRIPT_EXPR, SUB_EXPR,
-      UNARY_MINUS_EXPR, UNARY_PLUS_EXPR),
+      BIT_NOT_EXPR, BIT_OR_EXPR, BIT_XOR_EXPR, CAPTURE_EXPR,
+      CHAIN_COMPARE_EXPR, DECREMENT_EXPR, DEREF_EXPR, DIV_EXPR,
+      EXPR, FUNC_CALL, INCREMENT_EXPR, LAMBDA_DECL,
+      LEFT_SHIFT_EXPR, LIST_EXPR, LITERAL, MEMBER_ACCESS_EXPR,
+      MOD_EXPR, MUL_EXPR, NOT_EXPR, OR_EXPR,
+      PAREN_EXPR, Q_IDENTIFIER, RIGHT_SHIFT_EXPR, SUBSCRIPT_EXPR,
+      SUB_EXPR, UNARY_MINUS_EXPR, UNARY_PLUS_EXPR),
   };
 
   /* ********************************************************** */
@@ -1334,9 +1334,10 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   // 23: ATOM(literal)
   // 24: POSTFIX(increment_expr)
   // 25: POSTFIX(decrement_expr)
-  // 26: ATOM(lambda_decl)
-  // 27: ATOM(paren_expr)
-  // 28: ATOM(list_expr)
+  // 26: POSTFIX(capture_expr)
+  // 27: ATOM(lambda_decl)
+  // 28: ATOM(paren_expr)
+  // 29: ATOM(list_expr)
   public static boolean expr(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expr")) return false;
     addVariant(b, "<expr>");
@@ -1450,6 +1451,10 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
       else if (g < 25 && consumeTokenSmart(b, MINUSMINUS)) {
         r = true;
         exit_section_(b, l, m, DECREMENT_EXPR, r, true, null);
+      }
+      else if (g < 26 && consumeTokenSmart(b, DOLLAR)) {
+        r = true;
+        exit_section_(b, l, m, CAPTURE_EXPR, r, true, null);
       }
       else {
         exit_section_(b, l, m, null, false, false, null);
