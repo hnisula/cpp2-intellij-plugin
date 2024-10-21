@@ -50,10 +50,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitComment(@NotNull Cpp2Comment o) {
-    visitPsiElement(o);
-  }
-
   public void visitConstexprDecl(@NotNull Cpp2ConstexprDecl o) {
     visitPsiElement(o);
   }

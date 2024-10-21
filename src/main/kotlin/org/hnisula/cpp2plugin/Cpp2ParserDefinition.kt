@@ -26,8 +26,7 @@ class Cpp2ParserDefinition : ParserDefinition {
 
     override fun getFileNodeType(): IFileElementType = FILE
 
-//    override fun getCommentTokens(): TokenSet = Cpp2TokenSets.COMMENTS
-    override fun getCommentTokens(): TokenSet = TokenSet.create()
+    override fun getCommentTokens(): TokenSet = Cpp2TokenSets.COMMENTS
     
     override fun getStringLiteralElements(): TokenSet = Cpp2TokenSets.IDENTIFIERS
 

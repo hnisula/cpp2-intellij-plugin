@@ -119,19 +119,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINE_COMMENT | BLOCK_COMMENT
-  public static boolean comment(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "comment")) return false;
-    if (!nextTokenIs(b, "<comment>", BLOCK_COMMENT, LINE_COMMENT)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, COMMENT, "<comment>");
-    r = consumeToken(b, LINE_COMMENT);
-    if (!r) r = consumeToken(b, BLOCK_COMMENT);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // expr | "(" expr ")"
   static boolean condition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "condition")) return false;
@@ -494,7 +481,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // member_access_level? (type_decl | func_decl | (value_decl ";") | comment)
+  // member_access_level? (type_decl | func_decl | (value_decl ";"))
   public static boolean member_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "member_decl")) return false;
     boolean r;
@@ -512,7 +499,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // type_decl | func_decl | (value_decl ";") | comment
+  // type_decl | func_decl | (value_decl ";")
   private static boolean member_decl_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "member_decl_1")) return false;
     boolean r;
@@ -520,7 +507,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     r = type_decl(b, l + 1);
     if (!r) r = func_decl(b, l + 1);
     if (!r) r = member_decl_1_2(b, l + 1);
-    if (!r) r = comment(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -756,9 +742,10 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // type_decl | func_decl | namespace_decl | value_decl_stmt | constexpr_decl | alias_decl | comment
+  // type_decl | func_decl | namespace_decl | value_decl_stmt | constexpr_decl | alias_decl
   static boolean root_stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "root_stmt")) return false;
+    if (!nextTokenIs(b, "", IDENTIFIER_WORD, WILDCARD)) return false;
     boolean r;
     r = type_decl(b, l + 1);
     if (!r) r = func_decl(b, l + 1);
@@ -766,7 +753,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!r) r = value_decl_stmt(b, l + 1);
     if (!r) r = constexpr_decl(b, l + 1);
     if (!r) r = alias_decl(b, l + 1);
-    if (!r) r = comment(b, l + 1);
     return r;
   }
 
@@ -822,7 +808,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   //                         | do_while_loop
   //                         | while_loop
   //                         | return_stmt
-  //                         | comment
   //                         | stmt_block
   static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
@@ -840,7 +825,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!r) r = do_while_loop(b, l + 1);
     if (!r) r = while_loop(b, l + 1);
     if (!r) r = return_stmt(b, l + 1);
-    if (!r) r = comment(b, l + 1);
     if (!r) r = stmt_block(b, l + 1);
     return r;
   }

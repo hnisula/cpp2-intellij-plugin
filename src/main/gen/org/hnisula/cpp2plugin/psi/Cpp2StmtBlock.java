@@ -11,9 +11,6 @@ public interface Cpp2StmtBlock extends PsiElement {
   List<Cpp2Assign> getAssignList();
 
   @NotNull
-  List<Cpp2Comment> getCommentList();
-
-  @NotNull
   List<Cpp2ConstexprDecl> getConstexprDeclList();
 
   @NotNull

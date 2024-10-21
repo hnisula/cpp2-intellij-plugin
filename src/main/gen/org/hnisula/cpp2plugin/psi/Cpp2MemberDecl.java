@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface Cpp2MemberDecl extends PsiElement {
 
   @Nullable
-  Cpp2Comment getComment();
-
-  @Nullable
   Cpp2FuncDecl getFuncDecl();
 
   @Nullable

@@ -29,12 +29,6 @@ public class Cpp2RootStmtBlockImpl extends ASTWrapperPsiElement implements Cpp2R
 
   @Override
   @NotNull
-  public List<Cpp2Comment> getCommentList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Comment.class);
-  }
-
-  @Override
-  @NotNull
   public List<Cpp2ConstexprDecl> getConstexprDeclList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ConstexprDecl.class);
   }

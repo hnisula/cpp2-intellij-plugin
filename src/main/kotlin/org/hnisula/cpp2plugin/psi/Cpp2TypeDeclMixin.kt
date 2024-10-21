@@ -47,7 +47,7 @@ open class Cpp2TypeDeclMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2Na
                     memberDeclNode = memberDeclNode.treeNext
                 }
 
-                if (memberDeclNode.elementType != Cpp2Types.COMMENT && memberDeclNode.psi is Cpp2NamedDeclaration) {
+                if (memberDeclNode.psi is Cpp2NamedDeclaration) {
                     memberDecls.add(memberDeclNode.psi as PsiSymbolDeclaration)
                 }
             }
