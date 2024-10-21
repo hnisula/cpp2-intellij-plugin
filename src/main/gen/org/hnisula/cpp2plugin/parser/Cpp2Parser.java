@@ -38,30 +38,13 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
     create_token_set_(ADDRESS_EXPR, ADD_EXPR, AND_EXPR, BIT_AND_EXPR,
       BIT_NOT_EXPR, BIT_OR_EXPR, BIT_XOR_EXPR, CHAIN_COMPARE_EXPR,
-      DECREMENT_EXPR, DEREF_EXPR, DIV_EXPR, EQ_EXPR,
-      EXPR, FUNC_CALL, GTEQ_EXPR, GT_EXPR,
-      INCREMENT_EXPR, LAMBDA_DECL, LEFT_SHIFT_EXPR, LIST_EXPR,
-      LITERAL, LTEQ_EXPR, LT_EXPR, MEMBER_ACCESS_EXPR,
-      MOD_EXPR, MUL_EXPR, NEQ_EXPR, NOT_EXPR,
-      OR_EXPR, PAREN_EXPR, Q_IDENTIFIER, RIGHT_SHIFT_EXPR,
-      SUBSCRIPT_EXPR, SUB_EXPR, UNARY_MINUS_EXPR, UNARY_PLUS_EXPR),
+      DECREMENT_EXPR, DEREF_EXPR, DIV_EXPR, EXPR,
+      FUNC_CALL, INCREMENT_EXPR, LAMBDA_DECL, LEFT_SHIFT_EXPR,
+      LIST_EXPR, LITERAL, MEMBER_ACCESS_EXPR, MOD_EXPR,
+      MUL_EXPR, NOT_EXPR, OR_EXPR, PAREN_EXPR,
+      Q_IDENTIFIER, RIGHT_SHIFT_EXPR, SUBSCRIPT_EXPR, SUB_EXPR,
+      UNARY_MINUS_EXPR, UNARY_PLUS_EXPR),
   };
-
-  /* ********************************************************** */
-  // q_identifier "+=" expr ";"
-  public static boolean add_assign(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "add_assign")) return false;
-    if (!nextTokenIs(b, "<add assign>", COLONCOLON, IDENTIFIER_WORD)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ADD_ASSIGN, "<add assign>");
-    r = q_identifier(b, l + 1);
-    r = r && consumeToken(b, PLUSEQ);
-    p = r; // pin = 2
-    r = r && report_error_(b, expr(b, l + 1, -1));
-    r = p && consumeToken(b, SEMICOLON) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
 
   /* ********************************************************** */
   // func_alias_decl | type_alias_decl | namespace_alias_decl
@@ -196,22 +179,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // q_identifier "/=" expr ";"
-  public static boolean div_assign(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "div_assign")) return false;
-    if (!nextTokenIs(b, "<div assign>", COLONCOLON, IDENTIFIER_WORD)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, DIV_ASSIGN, "<div assign>");
-    r = q_identifier(b, l + 1);
-    r = r && consumeToken(b, SLASHEQ);
-    p = r; // pin = 2
-    r = r && report_error_(b, expr(b, l + 1, -1));
-    r = p && consumeToken(b, SEMICOLON) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  /* ********************************************************** */
   // "do" stmt_block next_stmt? "while" expr ";"
   public static boolean do_while_loop(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "do_while_loop")) return false;
@@ -234,19 +201,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "do_while_loop_2")) return false;
     next_stmt(b, l + 1);
     return true;
-  }
-
-  /* ********************************************************** */
-  // expr "=="   expr
-  public static boolean eq_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "eq_expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, EQ_EXPR, "<eq expr>");
-    r = expr(b, l + 1, -1);
-    r = r && consumeToken(b, EQEQ);
-    r = r && expr(b, l + 1, -1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
   }
 
   /* ********************************************************** */
@@ -430,32 +384,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expr ">"    expr
-  public static boolean gt_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "gt_expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, GT_EXPR, "<gt expr>");
-    r = expr(b, l + 1, -1);
-    r = r && consumeToken(b, GT);
-    r = r && expr(b, l + 1, -1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // expr ">="   expr
-  public static boolean gteq_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "gteq_expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, GTEQ_EXPR, "<gteq expr>");
-    r = expr(b, l + 1, -1);
-    r = r && consumeToken(b, GTEQ);
-    r = r && expr(b, l + 1, -1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // IDENTIFIER_WORD
   public static boolean identifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "identifier")) return false;
@@ -526,28 +454,29 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expr "<"    expr
-  public static boolean lt_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "lt_expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, LT_EXPR, "<lt expr>");
-    r = expr(b, l + 1, -1);
-    r = r && consumeToken(b, LT);
-    r = r && expr(b, l + 1, -1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+  // q_identifier ("+=" | "-=" | "*=" | "/=") expr ";"
+  public static boolean math_assign(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "math_assign")) return false;
+    if (!nextTokenIs(b, "<math assign>", COLONCOLON, IDENTIFIER_WORD)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, MATH_ASSIGN, "<math assign>");
+    r = q_identifier(b, l + 1);
+    r = r && math_assign_1(b, l + 1);
+    p = r; // pin = 2
+    r = r && report_error_(b, expr(b, l + 1, -1));
+    r = p && consumeToken(b, SEMICOLON) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
-  /* ********************************************************** */
-  // expr "<="   expr
-  public static boolean lteq_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "lteq_expr")) return false;
+  // "+=" | "-=" | "*=" | "/="
+  private static boolean math_assign_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "math_assign_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, LTEQ_EXPR, "<lteq expr>");
-    r = expr(b, l + 1, -1);
-    r = r && consumeToken(b, LTEQ);
-    r = r && expr(b, l + 1, -1);
-    exit_section_(b, l, m, r, false, null);
+    r = consumeToken(b, PLUSEQ);
+    if (!r) r = consumeToken(b, MINUSEQ);
+    if (!r) r = consumeToken(b, ASTERISKEQ);
+    if (!r) r = consumeToken(b, SLASHEQ);
     return r;
   }
 
@@ -608,22 +537,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // q_identifier "*=" expr ";"
-  public static boolean mul_assign(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "mul_assign")) return false;
-    if (!nextTokenIs(b, "<mul assign>", COLONCOLON, IDENTIFIER_WORD)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, MUL_ASSIGN, "<mul assign>");
-    r = q_identifier(b, l + 1);
-    r = r && consumeToken(b, ASTERISKEQ);
-    p = r; // pin = 2
-    r = r && report_error_(b, expr(b, l + 1, -1));
-    r = p && consumeToken(b, SEMICOLON) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  /* ********************************************************** */
   // IDENTIFIER_WORD ":" "namespace" "==" namespace_ref ";"
   public static boolean namespace_alias_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespace_alias_decl")) return false;
@@ -648,19 +561,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     r = r && root_stmt_block(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  /* ********************************************************** */
-  // expr "!="   expr
-  public static boolean neq_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "neq_expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, NEQ_EXPR, "<neq expr>");
-    r = expr(b, l + 1, -1);
-    r = r && consumeToken(b, NEQ);
-    r = r && expr(b, l + 1, -1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
   }
 
   /* ********************************************************** */
@@ -914,7 +814,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   //                         | value_decl_stmt
   //                         | constexpr_decl
   //                         | alias_decl
-  //                         | assign | add_assign | sub_assign | mul_assign | div_assign
+  //                         | assign | math_assign
   //                         | using_namespace
   //                         | expr_stmt
   //                         | if_branch
@@ -932,10 +832,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!r) r = constexpr_decl(b, l + 1);
     if (!r) r = alias_decl(b, l + 1);
     if (!r) r = assign(b, l + 1);
-    if (!r) r = add_assign(b, l + 1);
-    if (!r) r = sub_assign(b, l + 1);
-    if (!r) r = mul_assign(b, l + 1);
-    if (!r) r = div_assign(b, l + 1);
+    if (!r) r = math_assign(b, l + 1);
     if (!r) r = using_namespace(b, l + 1);
     if (!r) r = expr_stmt(b, l + 1);
     if (!r) r = if_branch(b, l + 1);
@@ -971,22 +868,6 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
       if (!empty_element_parsed_guard_(b, "stmt_block_1", c)) break;
     }
     return true;
-  }
-
-  /* ********************************************************** */
-  // q_identifier "-=" expr ";"
-  public static boolean sub_assign(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "sub_assign")) return false;
-    if (!nextTokenIs(b, "<sub assign>", COLONCOLON, IDENTIFIER_WORD)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, SUB_ASSIGN, "<sub assign>");
-    r = q_identifier(b, l + 1);
-    r = r && consumeToken(b, MINUSEQ);
-    p = r; // pin = 2
-    r = r && report_error_(b, expr(b, l + 1, -1));
-    r = p && consumeToken(b, SEMICOLON) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
   }
 
   /* ********************************************************** */

@@ -29,12 +29,6 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
 
   @Override
   @NotNull
-  public List<Cpp2AddAssign> getAddAssignList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2AddAssign.class);
-  }
-
-  @Override
-  @NotNull
   public List<Cpp2Assign> getAssignList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2Assign.class);
   }
@@ -49,12 +43,6 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
   @NotNull
   public List<Cpp2ConstexprDecl> getConstexprDeclList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2ConstexprDecl.class);
-  }
-
-  @Override
-  @NotNull
-  public List<Cpp2DivAssign> getDivAssignList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2DivAssign.class);
   }
 
   @Override
@@ -95,8 +83,8 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
 
   @Override
   @NotNull
-  public List<Cpp2MulAssign> getMulAssignList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2MulAssign.class);
+  public List<Cpp2MathAssign> getMathAssignList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2MathAssign.class);
   }
 
   @Override
@@ -115,12 +103,6 @@ public class Cpp2StmtBlockImpl extends ASTWrapperPsiElement implements Cpp2StmtB
   @NotNull
   public List<Cpp2StmtBlock> getStmtBlockList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2StmtBlock.class);
-  }
-
-  @Override
-  @NotNull
-  public List<Cpp2SubAssign> getSubAssignList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, Cpp2SubAssign.class);
   }
 
   @Override

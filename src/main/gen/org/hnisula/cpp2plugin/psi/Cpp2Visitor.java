@@ -10,10 +10,6 @@ import org.hnisula.cpp2plugin.Cpp2Scope;
 
 public class Cpp2Visitor extends PsiElementVisitor {
 
-  public void visitAddAssign(@NotNull Cpp2AddAssign o) {
-    visitPsiElement(o);
-  }
-
   public void visitAddExpr(@NotNull Cpp2AddExpr o) {
     visitExpr(o);
   }
@@ -70,20 +66,12 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitDivAssign(@NotNull Cpp2DivAssign o) {
-    visitPsiElement(o);
-  }
-
   public void visitDivExpr(@NotNull Cpp2DivExpr o) {
     visitExpr(o);
   }
 
   public void visitDoWhileLoop(@NotNull Cpp2DoWhileLoop o) {
     visitPsiElement(o);
-  }
-
-  public void visitEqExpr(@NotNull Cpp2EqExpr o) {
-    visitExpr(o);
   }
 
   public void visitExpr(@NotNull Cpp2Expr o) {
@@ -109,14 +97,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
   public void visitFuncDecl(@NotNull Cpp2FuncDecl o) {
     visitNamedDeclaration(o);
     // visitScope(o);
-  }
-
-  public void visitGtExpr(@NotNull Cpp2GtExpr o) {
-    visitExpr(o);
-  }
-
-  public void visitGteqExpr(@NotNull Cpp2GteqExpr o) {
-    visitExpr(o);
   }
 
   public void visitIdentifier(@NotNull Cpp2Identifier o) {
@@ -147,12 +127,8 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitLtExpr(@NotNull Cpp2LtExpr o) {
-    visitExpr(o);
-  }
-
-  public void visitLteqExpr(@NotNull Cpp2LteqExpr o) {
-    visitExpr(o);
+  public void visitMathAssign(@NotNull Cpp2MathAssign o) {
+    visitPsiElement(o);
   }
 
   public void visitMemberAccessExpr(@NotNull Cpp2MemberAccessExpr o) {
@@ -171,10 +147,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
-  public void visitMulAssign(@NotNull Cpp2MulAssign o) {
-    visitPsiElement(o);
-  }
-
   public void visitMulExpr(@NotNull Cpp2MulExpr o) {
     visitExpr(o);
   }
@@ -186,10 +158,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
   public void visitNamespaceDecl(@NotNull Cpp2NamespaceDecl o) {
     visitNamedDeclaration(o);
     // visitScope(o);
-  }
-
-  public void visitNeqExpr(@NotNull Cpp2NeqExpr o) {
-    visitExpr(o);
   }
 
   public void visitNextStmt(@NotNull Cpp2NextStmt o) {
@@ -241,10 +209,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitStmtBlock(@NotNull Cpp2StmtBlock o) {
-    visitPsiElement(o);
-  }
-
-  public void visitSubAssign(@NotNull Cpp2SubAssign o) {
     visitPsiElement(o);
   }
 
