@@ -17,6 +17,7 @@ public interface Cpp2Types {
   IElementType BIT_NOT_EXPR = new Cpp2ElementType("BIT_NOT_EXPR");
   IElementType BIT_OR_EXPR = new Cpp2ElementType("BIT_OR_EXPR");
   IElementType BIT_XOR_EXPR = new Cpp2ElementType("BIT_XOR_EXPR");
+  IElementType CAPTURE_EXPR = new Cpp2ElementType("CAPTURE_EXPR");
   IElementType CHAIN_COMPARE_EXPR = new Cpp2ElementType("CHAIN_COMPARE_EXPR");
   IElementType CONSTEXPR_DECL = new Cpp2ElementType("CONSTEXPR_DECL");
   IElementType DECREMENT_EXPR = new Cpp2ElementType("DECREMENT_EXPR");
@@ -88,6 +89,7 @@ public interface Cpp2Types {
   IElementType CONTINUE = new Cpp2TokenType("continue");
   IElementType COPY = new Cpp2TokenType("copy");
   IElementType DO = new Cpp2TokenType("do");
+  IElementType DOLLAR = new Cpp2TokenType("$");
   IElementType DOT = new Cpp2TokenType(".");
   IElementType DOTDOTDOT = new Cpp2TokenType("...");
   IElementType ELSE = new Cpp2TokenType("else");
@@ -182,6 +184,9 @@ public interface Cpp2Types {
       }
       else if (type == BIT_XOR_EXPR) {
         return new Cpp2BitXorExprImpl(node);
+      }
+      else if (type == CAPTURE_EXPR) {
+        return new Cpp2CaptureExprImpl(node);
       }
       else if (type == CHAIN_COMPARE_EXPR) {
         return new Cpp2ChainCompareExprImpl(node);

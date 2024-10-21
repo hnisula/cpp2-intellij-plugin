@@ -65,6 +65,7 @@
         DOT                 = "."
         COMMA               = ","
         EXCLAMATION         = "!"
+        DOLLAR              = "$"
         
         TYPE_WORD           = "type"
         THIS                = "this"
@@ -241,7 +242,7 @@ expr ::=
     | func_call | member_access_expr | subscript_expr
     | deref_expr | not_expr | bit_not_expr | address_expr | unary_minus_expr | unary_plus_expr
     | q_identifier | literal
-    | increment_expr | decrement_expr
+    | increment_expr | decrement_expr | capture_expr
     | lambda_decl | paren_expr | list_expr
 
 paren_expr          ::= "(" expr? ")"
@@ -274,6 +275,7 @@ member_access_expr  ::= expr "." (identifier | func_call)
 deref_expr          ::= expr "*"
 not_expr            ::= "!" expr
 address_expr        ::= expr "&"
+capture_expr        ::= expr "$"
 
 // Misc fundamentals
 
