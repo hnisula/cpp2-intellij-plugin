@@ -4,11 +4,9 @@ package org.hnisula.cpp2plugin.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.model.psi.PsiExternalReferenceHost;
 
-public interface Cpp2Literal extends Cpp2Expr {
-
-  @Nullable
-  Cpp2String getString();
+public interface Cpp2String extends PsiExternalReferenceHost {
 
   @Nullable
   PsiElement getContext();

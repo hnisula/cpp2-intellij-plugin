@@ -18,7 +18,7 @@ open class Cpp2IdentifierMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2
     }
 
     override fun resolveReference(): MutableCollection<out Symbol> {
-        val scopeInfo = getScopeInfo()
+        val scopeInfo = Cpp2PsiUtil.getScopeInfo(node.psi)
         return Cpp2PsiUtil.resolveReference(this, name, scopeInfo.scopeIdentifiers, scopeInfo.isGlobalScope)
     }
 
@@ -32,31 +32,5 @@ open class Cpp2IdentifierMixin(node: ASTNode) : ASTWrapperPsiElement(node), Cpp2
 
     override fun setName(name: String): PsiElement {
         TODO("Not yet implemented")
-    }
-
-    private data class ScopeInfo(val scopeIdentifiers: MutableList<String>, val isGlobalScope: Boolean)
-    
-    private fun getScopeInfo(): ScopeInfo {
-        if (node.treeParent.psi !is Cpp2QIdentifier) {
-            return ScopeInfo(mutableListOf(), false)
-        }
-
-        val scopeIdentifiers = mutableListOf<String>()
-        var siblingIt = node.psi.prevSibling
-        var isGlobalScope = false
-
-        while (siblingIt != null) {
-            if (siblingIt is Cpp2Identifier) {
-                scopeIdentifiers.add(0, siblingIt.text)
-            }
-
-            if (siblingIt.prevSibling == null && siblingIt.text == "::") {
-                isGlobalScope = true
-            }
-
-            siblingIt = siblingIt.prevSibling
-        }
-        
-        return ScopeInfo(scopeIdentifiers, isGlobalScope)
     }
 }

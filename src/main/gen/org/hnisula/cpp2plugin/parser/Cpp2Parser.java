@@ -855,6 +855,18 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // STRING_LITERAL
+  public static boolean string(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string")) return false;
+    if (!nextTokenIs(b, STRING_LITERAL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, STRING_LITERAL);
+    exit_section_(b, m, STRING, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // "<" (type_specifier ("," type_specifier)* ","?)? ">"
   public static boolean template(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "template")) return false;
@@ -1713,7 +1725,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | CHAR_LITERAL | STRING_LITERAL
+  // BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | CHAR_LITERAL | string
   public static boolean literal(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "literal")) return false;
     boolean r;
@@ -1722,7 +1734,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!r) r = consumeTokenSmart(b, INT_LITERAL);
     if (!r) r = consumeTokenSmart(b, FLOAT_LITERAL);
     if (!r) r = consumeTokenSmart(b, CHAR_LITERAL);
-    if (!r) r = consumeTokenSmart(b, STRING_LITERAL);
+    if (!r) r = string(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

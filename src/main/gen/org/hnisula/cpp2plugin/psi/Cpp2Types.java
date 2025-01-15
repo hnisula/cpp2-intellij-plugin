@@ -58,6 +58,7 @@ public interface Cpp2Types {
   IElementType ROOT_STMTS = new Cpp2ElementType("ROOT_STMTS");
   IElementType ROOT_STMT_BLOCK = new Cpp2ElementType("ROOT_STMT_BLOCK");
   IElementType STMT_BLOCK = new Cpp2ElementType("STMT_BLOCK");
+  IElementType STRING = new Cpp2ElementType("STRING");
   IElementType SUBSCRIPT_EXPR = new Cpp2ElementType("SUBSCRIPT_EXPR");
   IElementType SUB_EXPR = new Cpp2ElementType("SUB_EXPR");
   IElementType TEMPLATE = new Cpp2ElementType("TEMPLATE");
@@ -304,6 +305,9 @@ public interface Cpp2Types {
       }
       else if (type == STMT_BLOCK) {
         return new Cpp2StmtBlockImpl(node);
+      }
+      else if (type == STRING) {
+        return new Cpp2StringImpl(node);
       }
       else if (type == SUBSCRIPT_EXPR) {
         return new Cpp2SubscriptExprImpl(node);
