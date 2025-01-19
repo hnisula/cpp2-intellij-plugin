@@ -60,6 +60,7 @@ public interface Cpp2Types {
   IElementType STMT_BLOCK = new Cpp2ElementType("STMT_BLOCK");
   IElementType STRING = new Cpp2ElementType("STRING");
   IElementType STRING_INTERPOLATION = new Cpp2ElementType("STRING_INTERPOLATION");
+  IElementType STRING_INTERPOLATION_SUFFIX = new Cpp2ElementType("STRING_INTERPOLATION_SUFFIX");
   IElementType SUBSCRIPT_EXPR = new Cpp2ElementType("SUBSCRIPT_EXPR");
   IElementType SUB_EXPR = new Cpp2ElementType("SUB_EXPR");
   IElementType TEMPLATE = new Cpp2ElementType("TEMPLATE");
@@ -99,6 +100,7 @@ public interface Cpp2Types {
   IElementType EQEQ = new Cpp2TokenType("==");
   IElementType EXCLAMATION = new Cpp2TokenType("!");
   IElementType EXP = new Cpp2TokenType("^");
+  IElementType FILL_CHAR = new Cpp2TokenType("FILL_CHAR");
   IElementType FINAL = new Cpp2TokenType("final");
   IElementType FLOAT_LITERAL = new Cpp2TokenType("FLOAT_LITERAL");
   IElementType FOR = new Cpp2TokenType("for");
@@ -107,6 +109,7 @@ public interface Cpp2Types {
   IElementType GT = new Cpp2TokenType(">");
   IElementType GTEQ = new Cpp2TokenType(">=");
   IElementType GTGT = new Cpp2TokenType(">>");
+  IElementType HASHTAG = new Cpp2TokenType("#");
   IElementType IDENTIFIER_WORD = new Cpp2TokenType("IDENTIFIER_WORD");
   IElementType IF = new Cpp2TokenType("if");
   IElementType IN = new Cpp2TokenType("in");
@@ -128,7 +131,6 @@ public interface Cpp2Types {
   IElementType MODULO = new Cpp2TokenType("%");
   IElementType MOVE = new Cpp2TokenType("move");
   IElementType NAMESPACE = new Cpp2TokenType("namespace");
-  IElementType NAMESPACE_REF = new Cpp2TokenType("namespace_ref");
   IElementType NEQ = new Cpp2TokenType("!=");
   IElementType NEWLINE = new Cpp2TokenType("\\n");
   IElementType NEXT = new Cpp2TokenType("next");
@@ -151,15 +153,18 @@ public interface Cpp2Types {
   IElementType SLASHEQ = new Cpp2TokenType("/=");
   IElementType SPACESHIP = new Cpp2TokenType("<=>");
   IElementType STRING_END = new Cpp2TokenType("STRING_END");
+  IElementType STRING_PREFIX = new Cpp2TokenType("STRING_PREFIX");
   IElementType STRING_SEGMENT = new Cpp2TokenType("STRING_SEGMENT");
   IElementType STRING_START = new Cpp2TokenType("STRING_START");
   IElementType THIS = new Cpp2TokenType("this");
   IElementType TILDE = new Cpp2TokenType("~");
+  IElementType TYPE_CHAR = new Cpp2TokenType("TYPE_CHAR");
   IElementType TYPE_WORD = new Cpp2TokenType("type");
   IElementType USING = new Cpp2TokenType("using");
   IElementType VIRTUAL = new Cpp2TokenType("virtual");
   IElementType WHILE = new Cpp2TokenType("while");
   IElementType WILDCARD = new Cpp2TokenType("_");
+  IElementType ZERO = new Cpp2TokenType("0");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -316,6 +321,9 @@ public interface Cpp2Types {
       }
       else if (type == STRING_INTERPOLATION) {
         return new Cpp2StringInterpolationImpl(node);
+      }
+      else if (type == STRING_INTERPOLATION_SUFFIX) {
+        return new Cpp2StringInterpolationSuffixImpl(node);
       }
       else if (type == SUBSCRIPT_EXPR) {
         return new Cpp2SubscriptExprImpl(node);

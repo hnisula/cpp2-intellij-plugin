@@ -66,6 +66,9 @@
         COMMA               = ","
         EXCLAMATION         = "!"
         DOLLAR              = "$"
+        HASHTAG             = "#"
+        
+        ZERO                = "0"
         
         TYPE_WORD           = "type"
         THIS                = "this"
@@ -100,6 +103,9 @@
         
         LINE_COMMENT        = "regexp://.*"
         BLOCK_COMMENT       = "regexp:/\*.*\*/"
+        
+        FILL_CHAR           = "regexp:[^{}]"
+        TYPE_CHAR           = "regexp:[dxXfeEgaAcs]"
     ]
 }
 
@@ -154,7 +160,7 @@ private condition ::= expr | "(" expr ")"
 // Aliases
 
 private alias_decl      ::= func_alias_decl | type_alias_decl | namespace_alias_decl
-namespace_alias_decl    ::= IDENTIFIER_WORD ":" "namespace" "==" namespace_ref ";" {
+namespace_alias_decl    ::= IDENTIFIER_WORD ":" "namespace" "==" q_identifier ";" {
     pin="=="
 }
 type_alias_decl         ::= IDENTIFIER_WORD ":" "type" "==" type_specifier ";" {
@@ -292,8 +298,17 @@ identifier                  ::= IDENTIFIER_WORD {
     mixin="org.hnisula.cpp2plugin.psi.Cpp2IdentifierMixin"
 }
 literal                     ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | CHAR_LITERAL | string {extends=expr}
-string                      ::= STRING_START (STRING_SEGMENT | string_interpolation)* STRING_END
-string_interpolation        ::= INTERPOLATION_START expr INTERPOLATION_END
+string                      ::= STRING_PREFIX? STRING_START (STRING_SEGMENT | string_interpolation)* STRING_END
+string_interpolation        ::= INTERPOLATION_START expr string_interpolation_suffix? INTERPOLATION_END
+string_interpolation_suffix ::= ":"
+                                (FILL_CHAR? ("<" | ">" | "^"))?   // fill and align
+                                ("+" | "-" | " ")?                // sign
+                                "#"?                              // alternate format
+                                "0"?                              // padding with zeroes
+                                (INT_LITERAL | "{}" )?            // width
+                                ("." INT_LITERAL)?                // precision
+                                "L"?                              // locale
+                                TYPE_CHAR?                        // type
 
 private qualifier           ::= ("const" | "*")
 private this_param_kind     ::= ("virtual" | "override" | "final" | param_kind)

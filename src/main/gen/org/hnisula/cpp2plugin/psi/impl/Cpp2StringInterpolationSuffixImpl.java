@@ -11,14 +11,14 @@ import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2StringInterpolationImpl extends ASTWrapperPsiElement implements Cpp2StringInterpolation {
+public class Cpp2StringInterpolationSuffixImpl extends ASTWrapperPsiElement implements Cpp2StringInterpolationSuffix {
 
-  public Cpp2StringInterpolationImpl(@NotNull ASTNode node) {
+  public Cpp2StringInterpolationSuffixImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitStringInterpolation(this);
+    visitor.visitStringInterpolationSuffix(this);
   }
 
   @Override
@@ -28,15 +28,15 @@ public class Cpp2StringInterpolationImpl extends ASTWrapperPsiElement implements
   }
 
   @Override
-  @NotNull
-  public Cpp2Expr getExpr() {
-    return findNotNullChildByClass(Cpp2Expr.class);
+  @Nullable
+  public PsiElement getFillChar() {
+    return findChildByType(FILL_CHAR);
   }
 
   @Override
   @Nullable
-  public Cpp2StringInterpolationSuffix getStringInterpolationSuffix() {
-    return findChildByClass(Cpp2StringInterpolationSuffix.class);
+  public PsiElement getTypeChar() {
+    return findChildByType(TYPE_CHAR);
   }
 
   @Override

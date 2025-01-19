@@ -5,13 +5,13 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface Cpp2StringInterpolation extends PsiElement {
-
-  @NotNull
-  Cpp2Expr getExpr();
+public interface Cpp2StringInterpolationSuffix extends PsiElement {
 
   @Nullable
-  Cpp2StringInterpolationSuffix getStringInterpolationSuffix();
+  PsiElement getFillChar();
+
+  @Nullable
+  PsiElement getTypeChar();
 
   @Nullable
   PsiElement getContext();
