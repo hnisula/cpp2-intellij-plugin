@@ -8,17 +8,17 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.hnisula.cpp2plugin.psi.Cpp2Types.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.hnisula.cpp2plugin.psi.*;
 
-public class Cpp2LiteralImpl extends Cpp2ExprImpl implements Cpp2Literal {
+public class Cpp2StringInterpolationSuffixImpl extends ASTWrapperPsiElement implements Cpp2StringInterpolationSuffix {
 
-  public Cpp2LiteralImpl(@NotNull ASTNode node) {
+  public Cpp2StringInterpolationSuffixImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  @Override
   public void accept(@NotNull Cpp2Visitor visitor) {
-    visitor.visitLiteral(this);
+    visitor.visitStringInterpolationSuffix(this);
   }
 
   @Override
@@ -29,8 +29,14 @@ public class Cpp2LiteralImpl extends Cpp2ExprImpl implements Cpp2Literal {
 
   @Override
   @Nullable
-  public Cpp2String getString() {
-    return findChildByClass(Cpp2String.class);
+  public PsiElement getFillChar() {
+    return findChildByType(FILL_CHAR);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getTypeChar() {
+    return findChildByType(TYPE_CHAR);
   }
 
   @Override

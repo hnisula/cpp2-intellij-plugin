@@ -28,6 +28,12 @@ public class Cpp2NamespaceAliasDeclImpl extends ASTWrapperPsiElement implements 
   }
 
   @Override
+  @NotNull
+  public Cpp2QIdentifier getQIdentifier() {
+    return findNotNullChildByClass(Cpp2QIdentifier.class);
+  }
+
+  @Override
   @Nullable
   public PsiElement getContext() {
     return Cpp2PsiUtil.getContext(this);

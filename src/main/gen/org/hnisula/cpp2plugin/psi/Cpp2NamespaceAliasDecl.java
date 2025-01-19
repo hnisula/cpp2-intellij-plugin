@@ -7,6 +7,9 @@ import com.intellij.psi.PsiElement;
 
 public interface Cpp2NamespaceAliasDecl extends PsiElement {
 
+  @NotNull
+  Cpp2QIdentifier getQIdentifier();
+
   @Nullable
   PsiElement getContext();
 

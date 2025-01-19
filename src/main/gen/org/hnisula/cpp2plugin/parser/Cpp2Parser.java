@@ -523,13 +523,15 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER_WORD ":" "namespace" "==" namespace_ref ";"
+  // IDENTIFIER_WORD ":" "namespace" "==" q_identifier ";"
   public static boolean namespace_alias_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "namespace_alias_decl")) return false;
     if (!nextTokenIs(b, IDENTIFIER_WORD)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON, NAMESPACE, EQEQ, NAMESPACE_REF, SEMICOLON);
+    r = consumeTokens(b, 0, IDENTIFIER_WORD, COLON, NAMESPACE, EQEQ);
+    r = r && q_identifier(b, l + 1);
+    r = r && consumeToken(b, SEMICOLON);
     exit_section_(b, m, NAMESPACE_ALIAS_DECL, r);
     return r;
   }
@@ -851,6 +853,211 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
       if (!stmt(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "stmt_block_1", c)) break;
     }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // STRING_PREFIX? STRING_START (STRING_SEGMENT | string_interpolation)* STRING_END
+  public static boolean string(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string")) return false;
+    if (!nextTokenIs(b, "<string>", STRING_PREFIX, STRING_START)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, STRING, "<string>");
+    r = string_0(b, l + 1);
+    r = r && consumeToken(b, STRING_START);
+    r = r && string_2(b, l + 1);
+    r = r && consumeToken(b, STRING_END);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // STRING_PREFIX?
+  private static boolean string_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_0")) return false;
+    consumeToken(b, STRING_PREFIX);
+    return true;
+  }
+
+  // (STRING_SEGMENT | string_interpolation)*
+  private static boolean string_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!string_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "string_2", c)) break;
+    }
+    return true;
+  }
+
+  // STRING_SEGMENT | string_interpolation
+  private static boolean string_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_2_0")) return false;
+    boolean r;
+    r = consumeToken(b, STRING_SEGMENT);
+    if (!r) r = string_interpolation(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // INTERPOLATION_START expr string_interpolation_suffix? INTERPOLATION_END
+  public static boolean string_interpolation(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation")) return false;
+    if (!nextTokenIs(b, INTERPOLATION_START)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, INTERPOLATION_START);
+    r = r && expr(b, l + 1, -1);
+    r = r && string_interpolation_2(b, l + 1);
+    r = r && consumeToken(b, INTERPOLATION_END);
+    exit_section_(b, m, STRING_INTERPOLATION, r);
+    return r;
+  }
+
+  // string_interpolation_suffix?
+  private static boolean string_interpolation_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_2")) return false;
+    string_interpolation_suffix(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // ":"
+  //                                 (FILL_CHAR? ("<" | ">" | "^"))?   // fill and align
+  //                                 ("+" | "-" | " ")?                // sign
+  //                                 "#"?                              // alternate format
+  //                                 "0"?                              // padding with zeroes
+  //                                 (INT_LITERAL | "{}" )?            // width
+  //                                 ("." INT_LITERAL)?                // precision
+  //                                 "L"?                              // locale
+  //                                 TYPE_CHAR?
+  public static boolean string_interpolation_suffix(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix")) return false;
+    if (!nextTokenIs(b, COLON)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COLON);
+    r = r && string_interpolation_suffix_1(b, l + 1);
+    r = r && string_interpolation_suffix_2(b, l + 1);
+    r = r && string_interpolation_suffix_3(b, l + 1);
+    r = r && string_interpolation_suffix_4(b, l + 1);
+    r = r && string_interpolation_suffix_5(b, l + 1);
+    r = r && string_interpolation_suffix_6(b, l + 1);
+    r = r && string_interpolation_suffix_7(b, l + 1);
+    r = r && string_interpolation_suffix_8(b, l + 1);
+    exit_section_(b, m, STRING_INTERPOLATION_SUFFIX, r);
+    return r;
+  }
+
+  // (FILL_CHAR? ("<" | ">" | "^"))?
+  private static boolean string_interpolation_suffix_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_1")) return false;
+    string_interpolation_suffix_1_0(b, l + 1);
+    return true;
+  }
+
+  // FILL_CHAR? ("<" | ">" | "^")
+  private static boolean string_interpolation_suffix_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = string_interpolation_suffix_1_0_0(b, l + 1);
+    r = r && string_interpolation_suffix_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // FILL_CHAR?
+  private static boolean string_interpolation_suffix_1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_1_0_0")) return false;
+    consumeToken(b, FILL_CHAR);
+    return true;
+  }
+
+  // "<" | ">" | "^"
+  private static boolean string_interpolation_suffix_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_1_0_1")) return false;
+    boolean r;
+    r = consumeToken(b, LT);
+    if (!r) r = consumeToken(b, GT);
+    if (!r) r = consumeToken(b, EXP);
+    return r;
+  }
+
+  // ("+" | "-" | " ")?
+  private static boolean string_interpolation_suffix_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_2")) return false;
+    string_interpolation_suffix_2_0(b, l + 1);
+    return true;
+  }
+
+  // "+" | "-" | " "
+  private static boolean string_interpolation_suffix_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_2_0")) return false;
+    boolean r;
+    r = consumeToken(b, PLUS);
+    if (!r) r = consumeToken(b, MINUS);
+    if (!r) r = consumeToken(b, " ");
+    return r;
+  }
+
+  // "#"?
+  private static boolean string_interpolation_suffix_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_3")) return false;
+    consumeToken(b, HASHTAG);
+    return true;
+  }
+
+  // "0"?
+  private static boolean string_interpolation_suffix_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_4")) return false;
+    consumeToken(b, ZERO);
+    return true;
+  }
+
+  // (INT_LITERAL | "{}" )?
+  private static boolean string_interpolation_suffix_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_5")) return false;
+    string_interpolation_suffix_5_0(b, l + 1);
+    return true;
+  }
+
+  // INT_LITERAL | "{}"
+  private static boolean string_interpolation_suffix_5_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_5_0")) return false;
+    boolean r;
+    r = consumeToken(b, INT_LITERAL);
+    if (!r) r = consumeToken(b, "{}");
+    return r;
+  }
+
+  // ("." INT_LITERAL)?
+  private static boolean string_interpolation_suffix_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_6")) return false;
+    string_interpolation_suffix_6_0(b, l + 1);
+    return true;
+  }
+
+  // "." INT_LITERAL
+  private static boolean string_interpolation_suffix_6_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_6_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, DOT, INT_LITERAL);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // "L"?
+  private static boolean string_interpolation_suffix_7(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_7")) return false;
+    consumeToken(b, "L");
+    return true;
+  }
+
+  // TYPE_CHAR?
+  private static boolean string_interpolation_suffix_8(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation_suffix_8")) return false;
+    consumeToken(b, TYPE_CHAR);
     return true;
   }
 
@@ -1713,7 +1920,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | CHAR_LITERAL | STRING_LITERAL
+  // BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | CHAR_LITERAL | string
   public static boolean literal(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "literal")) return false;
     boolean r;
@@ -1722,7 +1929,7 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
     if (!r) r = consumeTokenSmart(b, INT_LITERAL);
     if (!r) r = consumeTokenSmart(b, FLOAT_LITERAL);
     if (!r) r = consumeTokenSmart(b, CHAR_LITERAL);
-    if (!r) r = consumeTokenSmart(b, STRING_LITERAL);
+    if (!r) r = string(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

@@ -13,6 +13,8 @@ import org.hnisula.cpp2plugin.Cpp2Reference
 import org.hnisula.cpp2plugin.Cpp2Scope
 import org.hnisula.cpp2plugin.Cpp2Symbol
 
+data class ScopeInfo(val scopeIdentifiers: MutableList<String>, val isGlobalScope: Boolean)
+
 class Cpp2PsiUtil {
     companion object {
         @JvmStatic
@@ -129,6 +131,31 @@ class Cpp2PsiUtil {
                 getParentScope(element) ?: throw IllegalStateException("Type declaration must have a parent scope")
 
             return Cpp2Symbol(element.identifier, parentScope.getGloballyScopedIdentifier(), element)
+        }
+
+        @JvmStatic
+        fun getScopeInfo(element: PsiElement): ScopeInfo {
+            if (element.parent !is Cpp2QIdentifier) {
+                return ScopeInfo(mutableListOf(), false)
+            }
+
+            val scopeIdentifiers = mutableListOf<String>()
+            var siblingIt = element.prevSibling
+            var isGlobalScope = false
+
+            while (siblingIt != null) {
+                if (siblingIt is Cpp2Identifier) {
+                    scopeIdentifiers.add(0, siblingIt.text)
+                }
+
+                if (siblingIt.prevSibling == null && siblingIt.text == "::") {
+                    isGlobalScope = true
+                }
+
+                siblingIt = siblingIt.prevSibling
+            }
+
+            return ScopeInfo(scopeIdentifiers, isGlobalScope)
         }
     }
 }

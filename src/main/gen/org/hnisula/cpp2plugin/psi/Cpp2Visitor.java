@@ -212,6 +212,18 @@ public class Cpp2Visitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitString(@NotNull Cpp2String o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStringInterpolation(@NotNull Cpp2StringInterpolation o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStringInterpolationSuffix(@NotNull Cpp2StringInterpolationSuffix o) {
+    visitPsiElement(o);
+  }
+
   public void visitSubExpr(@NotNull Cpp2SubExpr o) {
     visitExpr(o);
   }

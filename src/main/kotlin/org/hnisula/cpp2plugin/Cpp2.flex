@@ -35,7 +35,6 @@ HEX_LITERAL         = -?{HEX_PREFIX}[a-fA-F0-9']+{INT_SUFFIX}?
 INT_LITERAL         = {BIN_LITERAL} | {OCT_LITERAL} | {DEC_LITERAL} | {HEX_LITERAL}
 FLOAT_LITERAL       = -?[0-9][0-9']*("."[0-9']*)?({EXPONENT}|{BIN_EXPONENT})?{FLOAT_SUFFIX}?
 BOOL_LITERAL        = "true" | "false"
-STRING_LITERAL      = ("u8" | "u" | "U" | "L")?\" (\\\" | [^\"])* \"
 CHAR_LITERAL        = ("u8" | "u" | "U" | "L")?\' (\\\' | [^\'])* \'
 
 IDENTIFIER_WORD     = [a-zA-Z_][a-zA-Z0-9_]*
@@ -44,6 +43,16 @@ LINE_COMMENT        = "//".*
 BLOCK_COMMENT       = "/\*".*"\*/"
 
 METAFUNCTION        = "@"{IDENTIFIER_WORD}
+
+STRING_START        = ("u8" | "u" | "U" | "L")?"\""
+STRING_END          = "\""
+STRING_SEGMENT      = [^(\"]+
+INTERPOLATION_START = "("
+INTERPOLATION_END   = ")$"
+//FILL_CHAR           = [^\[\]]
+//TYPE_CHAR           = [dxXfeEgaAcs]
+
+%state IN_STRING
 
 %%
 
@@ -96,6 +105,9 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       ","                   { return Cpp2Types.COMMA; }
       "!"                   { return Cpp2Types.EXCLAMATION; }
       "$"                   { return Cpp2Types.DOLLAR; }
+      "#"                   { return Cpp2Types.HASHTAG; }
+      
+      "0"                   { return Cpp2Types.ZERO; }
       
       "type"                { return Cpp2Types.TYPE_WORD; }
       "this"                { return Cpp2Types.THIS; }
@@ -131,13 +143,23 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       
       {WHITESPACE}          { return TokenType.WHITE_SPACE; }
       
+      {STRING_START}        { yybegin(IN_STRING); return Cpp2Types.STRING_START; }
+      {INTERPOLATION_END}   { yybegin(IN_STRING); return Cpp2Types.INTERPOLATION_END; }
+      //{FILL_CHAR}           { return Cpp2Types.FILL_CHAR; }
+      //{TYPE_CHAR}           { return Cpp2Types.TYPE_CHAR; }
+      
       {INT_LITERAL}         { return Cpp2Types.INT_LITERAL; }
       {FLOAT_LITERAL}       { return Cpp2Types.FLOAT_LITERAL; }
       {BOOL_LITERAL}        { return Cpp2Types.BOOL_LITERAL; }
-      {STRING_LITERAL}      { return Cpp2Types.STRING_LITERAL; }
       {CHAR_LITERAL}        { return Cpp2Types.CHAR_LITERAL; }
       {IDENTIFIER_WORD}     { return Cpp2Types.IDENTIFIER_WORD; }
       {METAFUNCTION}        { return Cpp2Types.METAFUNCTION; }
+}
+
+<IN_STRING> {
+      {STRING_SEGMENT}      { return Cpp2Types.STRING_SEGMENT; }
+      {INTERPOLATION_START} { yybegin(YYINITIAL); return Cpp2Types.INTERPOLATION_START; }
+      {STRING_END}          { yybegin(YYINITIAL); return Cpp2Types.STRING_END; }
 }
 
 [^]                         { return TokenType.BAD_CHARACTER; }
