@@ -40,6 +40,5 @@
         <lang.commenter language="Cpp2" implementationClass="org.hnisula.cpp2plugin.Cpp2Commenter"/>
         <lang.syntaxHighlighterFactory language="Cpp2" implementationClass="org.hnisula.cpp2plugin.Cpp2SyntaxHighlighterFactory"/>
         <annotator language="Cpp2" implementationClass="org.hnisula.cpp2plugin.Cpp2IdentifierAnnotator"/>
-        <psi.symbolReferenceProvider hostElementClass="org.hnisula.cpp2plugin.psi.Cpp2String" hostLanguage="Cpp2" implementationClass="org.hnisula.cpp2plugin.Cpp2StringReferenceProvider" targetClass="com.intellij.model.Symbol" />
     </extensions>
 </idea-plugin>

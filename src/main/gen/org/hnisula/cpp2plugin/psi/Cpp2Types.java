@@ -59,6 +59,7 @@ public interface Cpp2Types {
   IElementType ROOT_STMT_BLOCK = new Cpp2ElementType("ROOT_STMT_BLOCK");
   IElementType STMT_BLOCK = new Cpp2ElementType("STMT_BLOCK");
   IElementType STRING = new Cpp2ElementType("STRING");
+  IElementType STRING_INTERPOLATION = new Cpp2ElementType("STRING_INTERPOLATION");
   IElementType SUBSCRIPT_EXPR = new Cpp2ElementType("SUBSCRIPT_EXPR");
   IElementType SUB_EXPR = new Cpp2ElementType("SUB_EXPR");
   IElementType TEMPLATE = new Cpp2ElementType("TEMPLATE");
@@ -110,6 +111,8 @@ public interface Cpp2Types {
   IElementType IF = new Cpp2TokenType("if");
   IElementType IN = new Cpp2TokenType("in");
   IElementType INOUT = new Cpp2TokenType("inout");
+  IElementType INTERPOLATION_END = new Cpp2TokenType("INTERPOLATION_END");
+  IElementType INTERPOLATION_START = new Cpp2TokenType("INTERPOLATION_START");
   IElementType INT_LITERAL = new Cpp2TokenType("INT_LITERAL");
   IElementType LEFT_BRACE = new Cpp2TokenType("{");
   IElementType LEFT_BRACKET = new Cpp2TokenType("[");
@@ -147,7 +150,9 @@ public interface Cpp2Types {
   IElementType SLASH = new Cpp2TokenType("/");
   IElementType SLASHEQ = new Cpp2TokenType("/=");
   IElementType SPACESHIP = new Cpp2TokenType("<=>");
-  IElementType STRING_LITERAL = new Cpp2TokenType("STRING_LITERAL");
+  IElementType STRING_END = new Cpp2TokenType("STRING_END");
+  IElementType STRING_SEGMENT = new Cpp2TokenType("STRING_SEGMENT");
+  IElementType STRING_START = new Cpp2TokenType("STRING_START");
   IElementType THIS = new Cpp2TokenType("this");
   IElementType TILDE = new Cpp2TokenType("~");
   IElementType TYPE_WORD = new Cpp2TokenType("type");
@@ -308,6 +313,9 @@ public interface Cpp2Types {
       }
       else if (type == STRING) {
         return new Cpp2StringImpl(node);
+      }
+      else if (type == STRING_INTERPOLATION) {
+        return new Cpp2StringInterpolationImpl(node);
       }
       else if (type == SUBSCRIPT_EXPR) {
         return new Cpp2SubscriptExprImpl(node);

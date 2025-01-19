@@ -45,6 +45,14 @@ BLOCK_COMMENT       = "/\*".*"\*/"
 
 METAFUNCTION        = "@"{IDENTIFIER_WORD}
 
+STRING_START        = "\""
+STRING_END          = "\""
+STRING_SEGMENT      = [^(\"]+
+INTERPOLATION_START = "("
+INTERPOLATION_END   = ")$"
+
+%state IN_STRING
+
 %%
 
 <YYINITIAL> {
@@ -134,10 +142,19 @@ METAFUNCTION        = "@"{IDENTIFIER_WORD}
       {INT_LITERAL}         { return Cpp2Types.INT_LITERAL; }
       {FLOAT_LITERAL}       { return Cpp2Types.FLOAT_LITERAL; }
       {BOOL_LITERAL}        { return Cpp2Types.BOOL_LITERAL; }
-      {STRING_LITERAL}      { return Cpp2Types.STRING_LITERAL; }
+      //{STRING_LITERAL}      { return Cpp2Types.STRING_LITERAL; }
       {CHAR_LITERAL}        { return Cpp2Types.CHAR_LITERAL; }
       {IDENTIFIER_WORD}     { return Cpp2Types.IDENTIFIER_WORD; }
       {METAFUNCTION}        { return Cpp2Types.METAFUNCTION; }
+      
+      {STRING_START}        { yybegin(IN_STRING); return Cpp2Types.STRING_START; }
+      {INTERPOLATION_END}   { yybegin(IN_STRING); return Cpp2Types.INTERPOLATION_END; }
+}
+
+<IN_STRING> {
+      {STRING_SEGMENT}      { return Cpp2Types.STRING_SEGMENT; }
+      {INTERPOLATION_START} { yybegin(YYINITIAL); return Cpp2Types.INTERPOLATION_START; }
+      {STRING_END}          { yybegin(YYINITIAL); return Cpp2Types.STRING_END; }
 }
 
 [^]                         { return TokenType.BAD_CHARACTER; }

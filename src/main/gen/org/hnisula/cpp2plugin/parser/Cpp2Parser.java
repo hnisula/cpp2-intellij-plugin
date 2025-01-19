@@ -855,14 +855,50 @@ public class Cpp2Parser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // STRING_LITERAL
+  // STRING_START (STRING_SEGMENT | string_interpolation)* STRING_END
   public static boolean string(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "string")) return false;
-    if (!nextTokenIs(b, STRING_LITERAL)) return false;
+    if (!nextTokenIs(b, STRING_START)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, STRING_LITERAL);
+    r = consumeToken(b, STRING_START);
+    r = r && string_1(b, l + 1);
+    r = r && consumeToken(b, STRING_END);
     exit_section_(b, m, STRING, r);
+    return r;
+  }
+
+  // (STRING_SEGMENT | string_interpolation)*
+  private static boolean string_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!string_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "string_1", c)) break;
+    }
+    return true;
+  }
+
+  // STRING_SEGMENT | string_interpolation
+  private static boolean string_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_1_0")) return false;
+    boolean r;
+    r = consumeToken(b, STRING_SEGMENT);
+    if (!r) r = string_interpolation(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // INTERPOLATION_START expr INTERPOLATION_END
+  public static boolean string_interpolation(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_interpolation")) return false;
+    if (!nextTokenIs(b, INTERPOLATION_START)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, INTERPOLATION_START);
+    r = r && expr(b, l + 1, -1);
+    r = r && consumeToken(b, INTERPOLATION_END);
+    exit_section_(b, m, STRING_INTERPOLATION, r);
     return r;
   }
 

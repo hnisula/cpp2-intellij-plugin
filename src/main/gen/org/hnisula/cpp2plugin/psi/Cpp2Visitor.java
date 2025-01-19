@@ -7,7 +7,6 @@ import com.intellij.psi.PsiElement;
 import org.hnisula.cpp2plugin.Cpp2Reference;
 import org.hnisula.cpp2plugin.Cpp2NamedDeclaration;
 import org.hnisula.cpp2plugin.Cpp2Scope;
-import com.intellij.model.psi.PsiExternalReferenceHost;
 
 public class Cpp2Visitor extends PsiElementVisitor {
 
@@ -214,7 +213,11 @@ public class Cpp2Visitor extends PsiElementVisitor {
   }
 
   public void visitString(@NotNull Cpp2String o) {
-    visitPsiExternalReferenceHost(o);
+    visitPsiElement(o);
+  }
+
+  public void visitStringInterpolation(@NotNull Cpp2StringInterpolation o) {
+    visitPsiElement(o);
   }
 
   public void visitSubExpr(@NotNull Cpp2SubExpr o) {
@@ -272,10 +275,6 @@ public class Cpp2Visitor extends PsiElementVisitor {
 
   public void visitWhileLoop(@NotNull Cpp2WhileLoop o) {
     visitPsiElement(o);
-  }
-
-  public void visitPsiExternalReferenceHost(@NotNull PsiExternalReferenceHost o) {
-    visitElement(o);
   }
 
   public void visitNamedDeclaration(@NotNull Cpp2NamedDeclaration o) {

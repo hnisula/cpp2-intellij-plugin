@@ -292,9 +292,8 @@ identifier                  ::= IDENTIFIER_WORD {
     mixin="org.hnisula.cpp2plugin.psi.Cpp2IdentifierMixin"
 }
 literal                     ::= BOOL_LITERAL | INT_LITERAL | FLOAT_LITERAL | CHAR_LITERAL | string {extends=expr}
-string                      ::= STRING_LITERAL {
-    implements="com.intellij.model.psi.PsiExternalReferenceHost"
-}
+string                      ::= STRING_START (STRING_SEGMENT | string_interpolation)* STRING_END
+string_interpolation        ::= INTERPOLATION_START expr INTERPOLATION_END
 
 private qualifier           ::= ("const" | "*")
 private this_param_kind     ::= ("virtual" | "override" | "final" | param_kind)

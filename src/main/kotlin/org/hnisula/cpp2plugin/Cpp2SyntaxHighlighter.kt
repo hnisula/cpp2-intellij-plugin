@@ -43,8 +43,8 @@ class Cpp2SyntaxHighlighter : SyntaxHighlighterBase() {
             return BOOL_LITERAL_KEYS
         } else if (tokenType == Cpp2Types.FLOAT_LITERAL || tokenType == Cpp2Types.INT_LITERAL) {
             return NUMERIC_LITERAL_EYS
-        } else if (tokenType == Cpp2Types.STRING_LITERAL) {
-            return STRING_LITERAL_KEYS
+//        } else if (tokenType == Cpp2Types.STRING_LITERAL) {
+//            return STRING_LITERAL_KEYS
         } else if (tokenType == Cpp2Types.FOR || tokenType == Cpp2Types.IF || tokenType == Cpp2Types.WHILE || tokenType == Cpp2Types.DO || tokenType == Cpp2Types.BREAK || tokenType == Cpp2Types.CONTINUE || tokenType == Cpp2Types.RETURN) {
             // Recheck these keywords later as I assume some should be contextual
             return KEYWORD_KEYS

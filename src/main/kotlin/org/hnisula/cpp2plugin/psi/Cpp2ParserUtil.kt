@@ -10,7 +10,7 @@ open class Cpp2ParserUtil : com.intellij.lang.parser.GeneratedParserUtilBase() {
             Cpp2Types.BOOL_LITERAL,
             Cpp2Types.INT_LITERAL,
             Cpp2Types.FLOAT_LITERAL,
-            Cpp2Types.STRING_LITERAL,
+//            Cpp2Types.STRING_LITERAL,
             Cpp2Types.CHAR_LITERAL,
             Cpp2Types.LEFT_PARENTHESIS
         )
